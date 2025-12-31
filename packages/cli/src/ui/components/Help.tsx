@@ -8,6 +8,7 @@ import type React from 'react';
 import { Box, Text } from 'ink';
 import { theme } from '../semantic-colors.js';
 import { type SlashCommand, CommandKind } from '../commands/types.js';
+import { strings } from '../../i18n.js';
 
 interface Help {
   commands: readonly SlashCommand[];
@@ -23,46 +24,46 @@ export const Help: React.FC<Help> = ({ commands }) => (
   >
     {/* Basics */}
     <Text bold color={theme.text.primary}>
-      Basics:
+      {strings.help.basics}
     </Text>
     <Text color={theme.text.primary}>
       <Text bold color={theme.text.accent}>
-        Add context
+        {strings.help.addContext}
       </Text>
-      : Use{' '}
+      {strings.help.addContextUsage}
       <Text bold color={theme.text.accent}>
         @
       </Text>{' '}
-      to specify files for context (e.g.,{' '}
+      {strings.help.addContextExplanation}
       <Text bold color={theme.text.accent}>
         @src/myFile.ts
       </Text>
-      ) to target specific files or folders.
+      {strings.help.addContextSuffix}
     </Text>
     <Text color={theme.text.primary}>
       <Text bold color={theme.text.accent}>
-        Shell mode
+        {strings.help.shellMode}
       </Text>
-      : Execute shell commands via{' '}
+      {strings.help.shellModeUsage}
       <Text bold color={theme.text.accent}>
         !
       </Text>{' '}
-      (e.g.,{' '}
+      {strings.help.shellModeExplanation}
       <Text bold color={theme.text.accent}>
-        !npm run start
+        {strings.help.shellModeExample1}
       </Text>
-      ) or use natural language (e.g.{' '}
+      {strings.help.shellModeOr}
       <Text bold color={theme.text.accent}>
-        start server
+        {strings.help.shellModeExample2}
       </Text>
-      ).
+      {strings.help.shellModeSuffix}
     </Text>
 
     <Box height={1} />
 
     {/* Commands */}
     <Text bold color={theme.text.primary}>
-      Commands:
+      {strings.help.commands}
     </Text>
     {commands
       .filter((command) => command.description && !command.hidden)
@@ -97,99 +98,94 @@ export const Help: React.FC<Help> = ({ commands }) => (
         {' '}
         !{' '}
       </Text>
-      - shell command
+      {strings.help.shellCommandDesc}
     </Text>
     <Text color={theme.text.primary}>
-      <Text color={theme.text.secondary}>[MCP]</Text> - Model Context Protocol
-      command (from external servers)
+      <Text color={theme.text.secondary}>[MCP]</Text>{' '}
+      {strings.help.mcpCommandDesc}
     </Text>
 
     <Box height={1} />
 
     {/* Shortcuts */}
     <Text bold color={theme.text.primary}>
-      Keyboard Shortcuts:
+      {strings.help.shortcuts}
     </Text>
     <Text color={theme.text.primary}>
       <Text bold color={theme.text.accent}>
         Alt+Left/Right
       </Text>{' '}
-      - Jump through words in the input
+      {strings.help.shortcutJumpWords}
     </Text>
     <Text color={theme.text.primary}>
       <Text bold color={theme.text.accent}>
         Ctrl+C
       </Text>{' '}
-      - Quit application
+      {strings.help.shortcutQuit}
     </Text>
     <Text color={theme.text.primary}>
       <Text bold color={theme.text.accent}>
         {process.platform === 'win32' ? 'Ctrl+Enter' : 'Ctrl+J'}
       </Text>{' '}
       {process.platform === 'linux'
-        ? '- New line (Alt+Enter works for certain linux distros)'
-        : '- New line'}
+        ? strings.help.shortcutNewLineLinux
+        : strings.help.shortcutNewLine}
     </Text>
     <Text color={theme.text.primary}>
       <Text bold color={theme.text.accent}>
         Ctrl+L
       </Text>{' '}
-      - Clear the screen
+      {strings.help.shortcutClearScreen}
     </Text>
     <Text color={theme.text.primary}>
       <Text bold color={theme.text.accent}>
         Ctrl+S
       </Text>{' '}
-      - Enter selection mode to copy text
+      {strings.help.shortcutSelectionMode}
     </Text>
     <Text color={theme.text.primary}>
       <Text bold color={theme.text.accent}>
         {process.platform === 'darwin' ? 'Ctrl+X / Meta+Enter' : 'Ctrl+X'}
       </Text>{' '}
-      - Open input in external editor
+      {strings.help.shortcutExternalEditor}
     </Text>
     <Text color={theme.text.primary}>
       <Text bold color={theme.text.accent}>
         Ctrl+Y
       </Text>{' '}
-      - Toggle YOLO mode
+      {strings.help.shortcutYoloMode}
     </Text>
     <Text color={theme.text.primary}>
       <Text bold color={theme.text.accent}>
         Enter
       </Text>{' '}
-      - Send message
+      {strings.help.shortcutSendMessage}
     </Text>
     <Text color={theme.text.primary}>
       <Text bold color={theme.text.accent}>
         Esc
       </Text>{' '}
-      - Cancel operation / Clear input (double press)
+      {strings.help.shortcutCancel}
     </Text>
     <Text color={theme.text.primary}>
       <Text bold color={theme.text.accent}>
         Page Up/Down
       </Text>{' '}
-      - Scroll page up/down
+      {strings.help.shortcutScroll}
     </Text>
     <Text color={theme.text.primary}>
       <Text bold color={theme.text.accent}>
         Shift+Tab
       </Text>{' '}
-      - Toggle auto-accepting edits
+      {strings.help.shortcutAutoAccept}
     </Text>
     <Text color={theme.text.primary}>
       <Text bold color={theme.text.accent}>
         Up/Down
       </Text>{' '}
-      - Cycle through your prompt history
+      {strings.help.shortcutHistory}
     </Text>
     <Box height={1} />
-    <Text color={theme.text.primary}>
-      For a full list of shortcuts, see{' '}
-      <Text bold color={theme.text.accent}>
-        docs/cli/keyboard-shortcuts.md
-      </Text>
-    </Text>
+    <Text color={theme.text.primary}>{strings.help.fullListLink}</Text>
   </Box>
 );
