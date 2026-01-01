@@ -17,6 +17,7 @@ import {
 } from '../utils/displayUtils.js';
 import { useSessionStats } from '../contexts/SessionContext.js';
 import type { ToolCallStats } from '@google/gemini-cli-core';
+import { strings } from '../../i18n.js';
 
 const TOOL_NAME_COL_WIDTH = 25;
 const CALLS_COL_WIDTH = 8;
@@ -67,9 +68,7 @@ export const ToolStatsDisplay: React.FC = () => {
         paddingY={1}
         paddingX={2}
       >
-        <Text color={theme.text.primary}>
-          No tool calls have been made in this session.
-        </Text>
+        <Text color={theme.text.primary}>{strings.toolStatsNoCalls}</Text>
       </Box>
     );
   }
@@ -103,7 +102,7 @@ export const ToolStatsDisplay: React.FC = () => {
       width={70}
     >
       <Text bold color={theme.text.accent}>
-        Tool Stats For Nerds
+        {strings.toolStatsTitle}
       </Text>
       <Box height={1} />
 
@@ -111,22 +110,22 @@ export const ToolStatsDisplay: React.FC = () => {
       <Box>
         <Box width={TOOL_NAME_COL_WIDTH}>
           <Text bold color={theme.text.primary}>
-            Tool Name
+            {strings.toolStatsHeaderName}
           </Text>
         </Box>
         <Box width={CALLS_COL_WIDTH} justifyContent="flex-end">
           <Text bold color={theme.text.primary}>
-            Calls
+            {strings.toolStatsHeaderCalls}
           </Text>
         </Box>
         <Box width={SUCCESS_RATE_COL_WIDTH} justifyContent="flex-end">
           <Text bold color={theme.text.primary}>
-            Success Rate
+            {strings.toolStatsHeaderSuccess}
           </Text>
         </Box>
         <Box width={AVG_DURATION_COL_WIDTH} justifyContent="flex-end">
           <Text bold color={theme.text.primary}>
-            Avg Duration
+            {strings.toolStatsHeaderDuration}
           </Text>
         </Box>
       </Box>
@@ -151,13 +150,13 @@ export const ToolStatsDisplay: React.FC = () => {
 
       {/* User Decision Summary */}
       <Text bold color={theme.text.primary}>
-        User Decision Summary
+        {strings.toolStatsUserSummary}
       </Text>
       <Box>
         <Box
           width={TOOL_NAME_COL_WIDTH + CALLS_COL_WIDTH + SUCCESS_RATE_COL_WIDTH}
         >
-          <Text color={theme.text.link}>Total Reviewed Suggestions:</Text>
+          <Text color={theme.text.link}>{strings.toolStatsTotalReviewed}</Text>
         </Box>
         <Box width={AVG_DURATION_COL_WIDTH} justifyContent="flex-end">
           <Text color={theme.text.primary}>{totalReviewed}</Text>
@@ -167,7 +166,7 @@ export const ToolStatsDisplay: React.FC = () => {
         <Box
           width={TOOL_NAME_COL_WIDTH + CALLS_COL_WIDTH + SUCCESS_RATE_COL_WIDTH}
         >
-          <Text color={theme.text.primary}> » Accepted:</Text>
+          <Text color={theme.text.primary}>{strings.toolStatsAccepted}</Text>
         </Box>
         <Box width={AVG_DURATION_COL_WIDTH} justifyContent="flex-end">
           <Text color={theme.status.success}>{totalDecisions.accept}</Text>
@@ -177,7 +176,7 @@ export const ToolStatsDisplay: React.FC = () => {
         <Box
           width={TOOL_NAME_COL_WIDTH + CALLS_COL_WIDTH + SUCCESS_RATE_COL_WIDTH}
         >
-          <Text color={theme.text.primary}> » Rejected:</Text>
+          <Text color={theme.text.primary}>{strings.toolStatsRejected}</Text>
         </Box>
         <Box width={AVG_DURATION_COL_WIDTH} justifyContent="flex-end">
           <Text color={theme.status.error}>{totalDecisions.reject}</Text>
@@ -187,7 +186,7 @@ export const ToolStatsDisplay: React.FC = () => {
         <Box
           width={TOOL_NAME_COL_WIDTH + CALLS_COL_WIDTH + SUCCESS_RATE_COL_WIDTH}
         >
-          <Text color={theme.text.primary}> » Modified:</Text>
+          <Text color={theme.text.primary}>{strings.toolStatsModified}</Text>
         </Box>
         <Box width={AVG_DURATION_COL_WIDTH} justifyContent="flex-end">
           <Text color={theme.status.warning}>{totalDecisions.modify}</Text>
@@ -209,7 +208,9 @@ export const ToolStatsDisplay: React.FC = () => {
         <Box
           width={TOOL_NAME_COL_WIDTH + CALLS_COL_WIDTH + SUCCESS_RATE_COL_WIDTH}
         >
-          <Text color={theme.text.primary}> Overall Agreement Rate:</Text>
+          <Text color={theme.text.primary}>
+            {strings.toolStatsOverallAgreement}
+          </Text>
         </Box>
         <Box width={AVG_DURATION_COL_WIDTH} justifyContent="flex-end">
           <Text bold color={totalReviewed > 0 ? agreementColor : undefined}>

@@ -199,7 +199,7 @@ export const McpStatus: React.FC<McpStatusProps> = ({
 
             {serverTools.length > 0 && (
               <Box flexDirection="column" marginLeft={2}>
-                <Text color={theme.text.primary}>{strings.mcpTools}:</Text>
+                <Text color={theme.text.primary}>{strings.mcpToolsTitle}</Text>
                 {serverTools.map((tool) => {
                   const schemaContent =
                     showSchema &&

@@ -5,6 +5,11 @@ exports[`ConfigInitDisplay > handles empty clients map 1`] = `
 Spinner Initializing..."
 `;
 
+exports[`ConfigInitDisplay > handles empty clients map 2`] = `
+"
+Spinner Ініціалізація..."
+`;
+
 exports[`ConfigInitDisplay > renders initial state 1`] = `
 "
 Spinner Initializing..."
@@ -15,7 +20,17 @@ exports[`ConfigInitDisplay > truncates list of waiting servers if too many 1`] =
 Spinner Connecting to MCP servers... (0/5) - Waiting for: s1, s2, s3, +2 more"
 `;
 
+exports[`ConfigInitDisplay > truncates list of waiting servers if too many 2`] = `
+"
+Spinner Підключення до серверів MCP... (0/5) - Очікування: s1, s2, s3, +ще 2"
+`;
+
 exports[`ConfigInitDisplay > updates message on McpClientUpdate event 1`] = `
 "
 Spinner Connecting to MCP servers... (1/2) - Waiting for: server2"
+`;
+
+exports[`ConfigInitDisplay > updates message on McpClientUpdate event 2`] = `
+"
+Spinner Підключення до серверів MCP... (1/2) - Очікування: server2"
 `;

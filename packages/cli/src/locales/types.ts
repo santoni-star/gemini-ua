@@ -69,6 +69,18 @@ export interface TranslationStrings {
   unitKB: string;
   unitMB: string;
   unitGB: string;
+  toolStatsTitle: string;
+  toolStatsNoCalls: string;
+  toolStatsHeaderName: string;
+  toolStatsHeaderCalls: string;
+  toolStatsHeaderSuccess: string;
+  toolStatsHeaderDuration: string;
+  toolStatsUserSummary: string;
+  toolStatsTotalReviewed: string;
+  toolStatsAccepted: string;
+  toolStatsRejected: string;
+  toolStatsModified: string;
+  toolStatsOverallAgreement: string;
   loadingEscToCancel: string;
   yes: string;
   no: string;
@@ -124,6 +136,7 @@ export interface TranslationStrings {
   mcpFrom: string;
   mcpTool: string;
   mcpTools: string;
+  mcpToolsTitle: string;
   mcpPrompt: string;
   mcpPrompts: string;
   mcpPromptsTitle: string;
