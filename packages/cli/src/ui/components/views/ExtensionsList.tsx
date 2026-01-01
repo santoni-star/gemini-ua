@@ -35,30 +35,50 @@ export const ExtensionsList: React.FC<ExtensionsList> = ({ extensions }) => {
           const activeColor = isActive ? 'green' : 'grey';
 
           let stateColor = 'gray';
-          const stateText = state || strings.extensionsListUnknownState;
+          let stateText = strings.extensionsListUnknownState;
 
-          switch (state) {
-            case ExtensionUpdateState.CHECKING_FOR_UPDATES:
-            case ExtensionUpdateState.UPDATING:
-              stateColor = 'cyan';
-              break;
-            case ExtensionUpdateState.UPDATE_AVAILABLE:
-            case ExtensionUpdateState.UPDATED_NEEDS_RESTART:
-              stateColor = 'yellow';
-              break;
-            case ExtensionUpdateState.ERROR:
-              stateColor = 'red';
-              break;
-            case ExtensionUpdateState.UP_TO_DATE:
-            case ExtensionUpdateState.NOT_UPDATABLE:
-            case ExtensionUpdateState.UPDATED:
-              stateColor = 'green';
-              break;
-            case undefined:
-              break;
-            default:
-              debugLogger.warn(`Unhandled ExtensionUpdateState ${state}`);
-              break;
+          if (state) {
+            switch (state) {
+              case ExtensionUpdateState.CHECKING_FOR_UPDATES:
+                stateText = strings.extensionsListStatusChecking;
+                stateColor = 'cyan';
+                break;
+              case ExtensionUpdateState.UPDATING:
+                stateText = strings.extensionsListStatusUpdating;
+                stateColor = 'cyan';
+                break;
+              case ExtensionUpdateState.UPDATE_AVAILABLE:
+                stateText = strings.extensionsListStatusUpdateAvailable;
+                stateColor = 'yellow';
+                break;
+              case ExtensionUpdateState.UPDATED_NEEDS_RESTART:
+                stateText = strings.extensionsListStatusUpdatedRestart;
+                stateColor = 'yellow';
+                break;
+              case ExtensionUpdateState.ERROR:
+                stateText = strings.extensionsListStatusError;
+                stateColor = 'red';
+                break;
+              case ExtensionUpdateState.UP_TO_DATE:
+                stateText = strings.extensionsListStatusUpToDate;
+                stateColor = 'green';
+                break;
+              case ExtensionUpdateState.NOT_UPDATABLE:
+                stateText = strings.extensionsListStatusNotUpdatable;
+                stateColor = 'green';
+                break;
+              case ExtensionUpdateState.UPDATED:
+                stateText = strings.extensionsListStatusUpdated;
+                stateColor = 'green';
+                break;
+              case ExtensionUpdateState.UNKNOWN:
+                stateText = strings.extensionsListUnknownState;
+                break;
+              default:
+                stateText = state;
+                debugLogger.warn(`Unhandled ExtensionUpdateState ${state}`);
+                break;
+            }
           }
 
           return (

@@ -309,8 +309,7 @@ describe('useSlashCompletion', () => {
           {
             label: 'stats',
             value: 'stats',
-            description:
-              'Статистика використання',
+            description: 'Статистика використання',
             commandKind: CommandKind.BUILT_IN,
           },
         ]);
@@ -602,8 +601,14 @@ describe('useSlashCompletion', () => {
           name: 'memory',
           description: "Команди для роботи з пам'яттю",
           subCommands: [
-            createTestCommand({ name: 'show', description: "Показати поточний вміст пам'яти" }),
-            createTestCommand({ name: 'add', description: "Додати вміст до пам'яти" }),
+            createTestCommand({
+              name: 'show',
+              description: "Показати поточний вміст пам'яти",
+            }),
+            createTestCommand({
+              name: 'add',
+              description: "Додати вміст до пам'яти",
+            }),
           ],
         }),
       ];
@@ -645,7 +650,10 @@ describe('useSlashCompletion', () => {
           name: 'memory',
           description: "Команди для роботи з пам'яттю",
           subCommands: [
-            createTestCommand({ name: 'show', description: "Показати поточний вміст пам'яти" }),
+            createTestCommand({
+              name: 'show',
+              description: "Показати поточний вміст пам'яти",
+            }),
           ],
         }),
         createTestCommand({
@@ -691,8 +699,14 @@ describe('useSlashCompletion', () => {
           name: 'memory',
           description: "Команди для роботи з пам'яттю",
           subCommands: [
-            createTestCommand({ name: 'show', description: "Показати поточний вміст пам'яти" }),
-            createTestCommand({ name: 'add', description: "Додати вміст до пам'яти" }),
+            createTestCommand({
+              name: 'show',
+              description: "Показати поточний вміст пам'яти",
+            }),
+            createTestCommand({
+              name: 'add',
+              description: "Додати вміст до пам'яти",
+            }),
           ],
         }),
       ];
@@ -733,8 +747,14 @@ describe('useSlashCompletion', () => {
           name: 'memory',
           description: "Команди для роботи з пам'яттю",
           subCommands: [
-            createTestCommand({ name: 'show', description: "Показати поточний вміст пам'яти" }),
-            createTestCommand({ name: 'add', description: "Додати вміст до пам'яти" }),
+            createTestCommand({
+              name: 'show',
+              description: "Показати поточний вміст пам'яти",
+            }),
+            createTestCommand({
+              name: 'add',
+              description: "Додати вміст до пам'яти",
+            }),
           ],
         }),
       ];
@@ -973,7 +993,7 @@ describe('useSlashCompletion', () => {
             {
               label: 'help',
               value: 'help',
-              description: 'Show help',
+              description: 'Довідка по командам Gemini CLI',
               commandKind: CommandKind.BUILT_IN,
             },
           ]),
@@ -1059,13 +1079,13 @@ describe('useSlashCompletion', () => {
             {
               label: 'show',
               value: 'show',
-              description: 'Show memory',
+              description: "Показати поточний вміст пам'яти",
               commandKind: CommandKind.BUILT_IN,
             },
             {
               label: 'add',
               value: 'add',
-              description: 'Add to memory',
+              description: "Додати вміст до пам'яти",
               commandKind: CommandKind.MCP_PROMPT,
             },
           ]),

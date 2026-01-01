@@ -16,6 +16,11 @@ describe('ShellConfirmationDialog', () => {
     onConfirm,
   };
 
+  const baseProps = {
+    request,
+    onConfirm,
+  };
+
   it('renders correctly', () => {
     const { lastFrame } = renderWithProviders(
       <ShellConfirmationDialog request={request} />,
@@ -26,30 +31,31 @@ describe('ShellConfirmationDialog', () => {
 
   it('calls onConfirm with ProceedOnce when "Allow once" is selected', () => {
     const { lastFrame } = renderWithProviders(
-      <ShellConfirmationDialog request={request} />,
+      <ShellConfirmationDialog {...baseProps} />,
     );
     const select = lastFrame()!.toString();
     // Simulate selecting the first option
     // This is a simplified way to test the selection
-    expect(select).toContain('Allow once');
+    expect(select).toContain('Дозволити один раз');
   });
 
   it('calls onConfirm with ProceedAlways when "Allow for this session" is selected', () => {
+    const onConfirm = vi.fn();
     const { lastFrame } = renderWithProviders(
-      <ShellConfirmationDialog request={request} />,
+      <ShellConfirmationDialog {...baseProps} onConfirm={onConfirm} />,
     );
     const select = lastFrame()!.toString();
     // Simulate selecting the second option
-    expect(select).toContain('Allow for this session');
+    expect(select).toContain('Дозволити для цієї сесії');
   });
 
   it('calls onConfirm with Cancel when "No (esc)" is selected', () => {
+    const onConfirm = vi.fn();
     const { lastFrame } = renderWithProviders(
-      <ShellConfirmationDialog request={request} />,
-      { width: 100 },
+      <ShellConfirmationDialog {...baseProps} onConfirm={onConfirm} />,
     );
     const select = lastFrame()!.toString();
     // Simulate selecting the third option
-    expect(select).toContain('No (esc)');
+    expect(select).toContain('Ні (esc)');
   });
 });

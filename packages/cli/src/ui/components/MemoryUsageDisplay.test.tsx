@@ -31,12 +31,12 @@ describe('MemoryUsageDisplay', () => {
 
   it('renders memory usage', () => {
     const { lastFrame } = render(<MemoryUsageDisplay />);
-    expect(lastFrame()).toContain('50.0 MB');
+    expect(lastFrame()).toContain('50.0 МБ');
   });
 
   it('updates memory usage over time', async () => {
     const { lastFrame } = render(<MemoryUsageDisplay />);
-    expect(lastFrame()).toContain('50.0 MB');
+    expect(lastFrame()).toContain('50.0 МБ');
 
     vi.mocked(process.memoryUsage).mockReturnValue({
       rss: 1024 * 1024 * 100, // 100MB

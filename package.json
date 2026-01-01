@@ -1,5 +1,5 @@
 {
-  "name": "@google/gemini-cli",
+  "name": "@santoni/gemini-ua",
   "version": "0.24.0-ua.2",
   "engines": {
     "node": ">=20.0.0"

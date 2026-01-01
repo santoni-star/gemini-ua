@@ -15,8 +15,8 @@ describe('AutoAcceptIndicator', () => {
       <AutoAcceptIndicator approvalMode={ApprovalMode.AUTO_EDIT} />,
     );
     const output = lastFrame();
-    expect(output).toContain('accepting edits');
-    expect(output).toContain('(shift + tab to toggle)');
+    expect(output).toContain('авто-прийняття правок');
+    expect(output).toContain('(shift + tab для перемикання)');
   });
 
   it('renders correctly for YOLO mode', () => {
@@ -24,8 +24,8 @@ describe('AutoAcceptIndicator', () => {
       <AutoAcceptIndicator approvalMode={ApprovalMode.YOLO} />,
     );
     const output = lastFrame();
-    expect(output).toContain('YOLO mode');
-    expect(output).toContain('(ctrl + y to toggle)');
+    expect(output).toContain('режим YOLO');
+    expect(output).toContain('(ctrl + y для перемикання)');
   });
 
   it('renders nothing for DEFAULT mode', () => {

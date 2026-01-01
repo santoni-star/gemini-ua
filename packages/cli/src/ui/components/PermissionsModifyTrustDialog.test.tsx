@@ -70,9 +70,9 @@ describe('PermissionsModifyTrustDialog', () => {
     );
 
     await waitFor(() => {
-      expect(lastFrame()).toContain('Modify Trust Level');
-      expect(lastFrame()).toContain('Folder: /test/dir');
-      expect(lastFrame()).toContain('Current Level: DO_NOT_TRUST');
+      expect(lastFrame()).toContain('Змінити рівень довіри');
+      expect(lastFrame()).toContain('Папка: /test/dir');
+      expect(lastFrame()).toContain('Поточний рівень: DO_NOT_TRUST');
     });
   });
 
@@ -93,7 +93,7 @@ describe('PermissionsModifyTrustDialog', () => {
 
     await waitFor(() => {
       expect(lastFrame()).toContain(
-        'Note: This folder behaves as a trusted folder because one of the parent folders is trusted.',
+        'Примітка: ця папка вважається довіреною, оскільки одна з батьківських папок є довіреною.',
       );
     });
   });
@@ -115,7 +115,7 @@ describe('PermissionsModifyTrustDialog', () => {
 
     await waitFor(() => {
       expect(lastFrame()).toContain(
-        'Note: This folder behaves as a trusted folder because the connected IDE workspace is trusted.',
+        'Примітка: ця папка вважається довіреною, оскільки робочий простір підключеної IDE є довіреним.',
       );
     });
   });
@@ -126,8 +126,8 @@ describe('PermissionsModifyTrustDialog', () => {
     );
 
     await waitFor(() => {
-      expect(lastFrame()).toContain('Trust this folder (dir)');
-      expect(lastFrame()).toContain('Trust parent folder (test)');
+      expect(lastFrame()).toContain('Довіряти папці (dir)');
+      expect(lastFrame()).toContain('Довіряти батьківській папці (test)');
     });
   });
 

@@ -31,7 +31,7 @@ describe('ContextUsageDisplay', () => {
       />,
     );
     const output = lastFrame();
-    expect(output).toContain('50% context left');
+    expect(output).toContain('50% вікна контексту залишилося');
   });
 
   it('renders short label when terminal width is small', () => {
@@ -44,7 +44,7 @@ describe('ContextUsageDisplay', () => {
     );
     const output = lastFrame();
     expect(output).toContain('80%');
-    expect(output).not.toContain('context left');
+    expect(output).not.toContain('вікна контексту залишилося');
   });
 
   it('renders 0% when full', () => {
@@ -56,6 +56,6 @@ describe('ContextUsageDisplay', () => {
       />,
     );
     const output = lastFrame();
-    expect(output).toContain('0% context left');
+    expect(output).toContain('0% вікна контексту залишилося');
   });
 });

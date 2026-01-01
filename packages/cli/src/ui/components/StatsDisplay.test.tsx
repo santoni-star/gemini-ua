@@ -114,8 +114,8 @@ describe('<StatsDisplay />', () => {
 
     expect(output).toContain('gemini-2.5-pro');
     expect(output).toContain('gemini-2.5-flash');
-    expect(output).toContain('15,000');
-    expect(output).toContain('10,000');
+    expect(output).toContain('15\u00A0000');
+    expect(output).toContain('10\u00A0000');
     expect(output).toMatchSnapshot();
   });
 
@@ -446,7 +446,7 @@ describe('<StatsDisplay />', () => {
 
       expect(output).toContain('Залишок ліміту');
       expect(output).toContain('75.0%');
-      expect(output).toContain('(Скидання через 1г 30хв)');
+      expect(output).toContain('(Скидання через 1год 30хв)');
       expect(output).toMatchSnapshot();
 
       vi.useRealTimers();
@@ -492,7 +492,7 @@ describe('<StatsDisplay />', () => {
       expect(output).toContain('gemini-2.5-flash');
       expect(output).toContain('-'); // for requests
       expect(output).toContain('50.0%');
-      expect(output).toContain('(Скидання через 2г)');
+      expect(output).toContain('(Скидання через 2год)');
       expect(output).toMatchSnapshot();
 
       vi.useRealTimers();

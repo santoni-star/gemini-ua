@@ -47,8 +47,6 @@ describe('modelCommand', () => {
 
   it('should have the correct name and description', () => {
     expect(modelCommand.name).toBe('model');
-    expect(modelCommand.description).toBe(
-      'Opens a dialog to configure the model',
-    );
+    expect(modelCommand.description).toBe('Вибрати модель Gemini');
   });
 });

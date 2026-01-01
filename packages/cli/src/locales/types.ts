@@ -95,6 +95,14 @@ export interface TranslationStrings {
   extensionsListActive: string;
   extensionsListDisabled: string;
   extensionsListUnknownState: string;
+  extensionsListStatusChecking: string;
+  extensionsListStatusUpdating: string;
+  extensionsListStatusUpdateAvailable: string;
+  extensionsListStatusUpdatedRestart: string;
+  extensionsListStatusUpdated: string;
+  extensionsListStatusError: string;
+  extensionsListStatusUpToDate: string;
+  extensionsListStatusNotUpdatable: string;
   extensionsListSettings: string;
   hooksListDescription: string;
   hooksListSecurityWarningTitle: string;

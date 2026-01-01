@@ -401,7 +401,7 @@ describe('<ToolGroupMessage />', () => {
         <ToolGroupMessage {...baseProps} toolCalls={toolCalls} />,
         { settings },
       );
-      expect(lastFrame()).toContain('Allow for all future sessions');
+      expect(lastFrame()).toContain('Дозволити для всіх наступних сесій');
       expect(lastFrame()).toMatchSnapshot();
       unmount();
     });

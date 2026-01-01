@@ -27,9 +27,9 @@ describe('LogoutConfirmationDialog', () => {
       <LogoutConfirmationDialog onSelect={vi.fn()} />,
     );
 
-    expect(lastFrame()).toContain('You are now logged out.');
+    expect(lastFrame()).toContain('Ви вийшли з системи.');
     expect(lastFrame()).toContain(
-      'Login again to continue using Gemini CLI, or exit the application.',
+      'Увійдіть знову, щоб продовжити використання Gemini CLI, або вийдіть із програми.',
     );
     expect(lastFrame()).toContain('(Use Enter to select, Esc to close)');
   });
@@ -40,8 +40,8 @@ describe('LogoutConfirmationDialog', () => {
     expect(RadioButtonSelect).toHaveBeenCalled();
     const mockCall = vi.mocked(RadioButtonSelect).mock.calls[0][0];
     expect(mockCall.items).toEqual([
-      { label: 'Login', value: LogoutChoice.LOGIN, key: 'login' },
-      { label: 'Exit', value: LogoutChoice.EXIT, key: 'exit' },
+      { label: 'Увійти', value: LogoutChoice.LOGIN, key: 'login' },
+      { label: 'Вийти', value: LogoutChoice.EXIT, key: 'exit' },
     ]);
     expect(mockCall.isFocused).toBe(true);
   });

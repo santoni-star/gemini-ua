@@ -11,7 +11,7 @@ import { describe, it, expect } from 'vitest';
 describe('ShellModeIndicator', () => {
   it('renders correctly', () => {
     const { lastFrame } = render(<ShellModeIndicator />);
-    expect(lastFrame()).toContain('shell mode enabled');
-    expect(lastFrame()).toContain('esc to disable');
+    expect(lastFrame()).toContain('режим оболонки увімкнено');
+    expect(lastFrame()).toContain('esc для виходу');
   });
 });

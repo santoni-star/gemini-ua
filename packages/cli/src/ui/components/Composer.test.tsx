@@ -339,30 +339,27 @@ describe('Composer', () => {
       const uiState = createMockUIState({
         ctrlCPressedOnce: true,
       });
-
       const { lastFrame } = renderComposer(uiState);
 
-      expect(lastFrame()).toContain('Press Ctrl+C again to exit');
+      expect(lastFrame()).toContain('Натисніть Ctrl+C ще раз, щоб вийти.');
     });
 
     it('shows Ctrl+D exit prompt when ctrlDPressedOnce is true', () => {
       const uiState = createMockUIState({
         ctrlDPressedOnce: true,
       });
-
       const { lastFrame } = renderComposer(uiState);
 
-      expect(lastFrame()).toContain('Press Ctrl+D again to exit');
+      expect(lastFrame()).toContain('Натисніть Ctrl+D ще раз, щоб вийти.');
     });
 
     it('shows escape prompt when showEscapePrompt is true', () => {
       const uiState = createMockUIState({
         showEscapePrompt: true,
       });
-
       const { lastFrame } = renderComposer(uiState);
 
-      expect(lastFrame()).toContain('Press Esc again to clear');
+      expect(lastFrame()).toContain('Натисніть Esc ще раз, щоб очистити.');
     });
   });
 

@@ -42,7 +42,7 @@ describe('mcp command', () => {
       consoleLogMock.mock.calls.join('\n') +
       consoleErrorMock.mock.calls.join('\n');
     expect(helpOutput).toContain('Manage MCP servers');
-    expect(helpOutput).toContain('Commands:');
+    expect(helpOutput).toContain('Команди:');
     expect(helpOutput).toContain('add');
     expect(helpOutput).toContain('remove');
     expect(helpOutput).toContain('list');

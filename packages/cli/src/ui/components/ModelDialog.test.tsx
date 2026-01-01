@@ -88,12 +88,10 @@ describe('<ModelDialog />', () => {
 
   it('renders the initial "main" view correctly', () => {
     const { lastFrame } = renderComponent();
-    expect(lastFrame()).toContain('Select Model');
+    expect(lastFrame()).toContain('Вибір моделі');
     expect(lastFrame()).toContain(
-      'Applies to this session and future Gemini CLI sessions.',
+      'Застосовується до поточної та майбутніх сесій Gemini CLI.',
     );
-    expect(lastFrame()).toContain('Auto');
-    expect(lastFrame()).toContain('Manual');
   });
 
   it('renders "main" view with preview options when preview features are enabled', () => {

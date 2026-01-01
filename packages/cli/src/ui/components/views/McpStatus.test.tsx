@@ -195,7 +195,7 @@ describe('McpStatus', () => {
     const { lastFrame, unmount } = render(
       <McpStatus {...baseProps} resources={manyResources} />,
     );
-    expect(lastFrame()).toContain('15 resources hidden');
+    expect(lastFrame()).toContain('15 ресурсів приховано');
     unmount();
   });
 });

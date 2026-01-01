@@ -35,17 +35,16 @@ describe('ExitWarning', () => {
       ctrlDPressedOnce: false,
     } as unknown as UIState);
     const { lastFrame } = render(<ExitWarning />);
-    expect(lastFrame()).toContain('Press Ctrl+C again to exit');
+    expect(lastFrame()).toContain('Натисніть Ctrl+C ще раз, щоб вийти.');
   });
 
   it('renders Ctrl+D warning when pressed once and dialogs visible', () => {
-    mockUseUIState.mockReturnValue({
-      dialogsVisible: true,
-      ctrlCPressedOnce: false,
+    mockUseUIState({
       ctrlDPressedOnce: true,
+      isAnyDialogOpen: true,
     } as unknown as UIState);
     const { lastFrame } = render(<ExitWarning />);
-    expect(lastFrame()).toContain('Press Ctrl+D again to exit');
+    expect(lastFrame()).toContain('Натисніть Ctrl+D ще раз, щоб вийти.');
   });
 
   it('renders nothing if dialogs are not visible', () => {

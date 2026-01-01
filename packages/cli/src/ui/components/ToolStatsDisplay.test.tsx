@@ -62,9 +62,7 @@ describe('<ToolStatsDisplay />', () => {
       },
     });
 
-    expect(lastFrame()).toContain(
-      'No tool calls have been made in this session.',
-    );
+    expect(lastFrame()).toContain('У цій сесії викликів інструментів не було.');
     expect(lastFrame()).toMatchSnapshot();
   });
 
@@ -235,9 +233,9 @@ describe('<ToolStatsDisplay />', () => {
     });
 
     const output = lastFrame();
-    expect(output).toContain('Total Reviewed Suggestions:');
+    expect(output).toContain('Всього переглянутих пропозицій:');
     expect(output).toContain('0');
-    expect(output).toContain('Overall Agreement Rate:');
+    expect(output).toContain('Загальний показник згоди:');
     expect(output).toContain('--');
     expect(output).toMatchSnapshot();
   });

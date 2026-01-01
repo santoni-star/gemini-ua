@@ -65,7 +65,7 @@ describe('Help Component', () => {
     const { lastFrame, unmount } = render(<Help commands={mockCommands} />);
     const output = lastFrame();
 
-    expect(output).toContain('Keyboard Shortcuts:');
+    expect(output).toContain('Клавіатурні скорочення:');
     expect(output).toContain('Ctrl+C');
     expect(output).toContain('Ctrl+S');
     expect(output).toContain('Page Up/Down');

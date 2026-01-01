@@ -15,13 +15,13 @@ describe('ConsoleSummaryDisplay', () => {
   });
 
   it.each([
-    [1, '1 error'],
-    [5, '5 errors'],
+    [1, '1 помилка'],
+    [5, '5 помилок'],
   ])('renders correct message for %i errors', (count, expectedText) => {
     const { lastFrame } = render(<ConsoleSummaryDisplay errorCount={count} />);
     const output = lastFrame();
     expect(output).toContain(expectedText);
     expect(output).toContain('✖');
-    expect(output).toContain('(F12 for details)');
+    expect(output).toContain('(F12 для деталей)');
   });
 });

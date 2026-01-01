@@ -56,7 +56,9 @@ describe('authCommand', () => {
 
   it('should have the correct name and description', () => {
     expect(authCommand.name).toBe('auth');
-    expect(authCommand.description).toBe('Manage authentication');
+    expect(authCommand.description).toBe(
+      'Змінити метод аутентифікації або вийти',
+    );
   });
 
   describe('auth login subcommand', () => {
