@@ -1,3 +1,12 @@
+# Gemini CLI (Українська версія 🇺🇦)
+
+> **Примітка:** Це українізована версія оригінального
+> [Gemini CLI](https://github.com/google-gemini/gemini-cli). Тут додано повний
+> переклад інтерфейсу, порад та описів команд для зручної роботи українською
+> мовою.
+
+---
+
 # Gemini CLI
 
 [![Gemini CLI CI](https://github.com/google-gemini/gemini-cli/actions/workflows/ci.yml/badge.svg)](https://github.com/google-gemini/gemini-cli/actions/workflows/ci.yml)
@@ -6,7 +15,7 @@
 [![License](https://img.shields.io/github/license/google-gemini/gemini-cli)](https://github.com/google-gemini/gemini-cli/blob/main/LICENSE)
 [![View Code Wiki](https://www.gstatic.com/_/boq-sdlc-agents-ui/_/r/YUi5dj2UWvE.svg)](https://codewiki.google/github.com/google-gemini/gemini-cli)
 
-![Gemini CLI Screenshot](./docs/assets/gemini-screenshot.png)
+![Gemini CLI Screenshot (UK)](./docs/assets/gemin_uk.jpg)
 
 Gemini CLI is an open-source AI agent that brings the power of Gemini directly
 into your terminal. It provides lightweight access to Gemini, giving you the
