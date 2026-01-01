@@ -4,6 +4,8 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+import { strings } from '../../i18n.js';
+
 export const formatMemoryUsage = (bytes: number): string => {
   const gb = bytes / (1024 * 1024 * 1024);
   if (bytes < 1024 * 1024) {
@@ -23,17 +25,17 @@ export const formatMemoryUsage = (bytes: number): string => {
  */
 export const formatDuration = (milliseconds: number): string => {
   if (milliseconds <= 0) {
-    return '0s';
+    return `0${strings.unitSecond}`;
   }
 
   if (milliseconds < 1000) {
-    return `${Math.round(milliseconds)}ms`;
+    return `${Math.round(milliseconds)}${strings.unitMillisecond}`;
   }
 
   const totalSeconds = milliseconds / 1000;
 
   if (totalSeconds < 60) {
-    return `${totalSeconds.toFixed(1)}s`;
+    return `${totalSeconds.toFixed(1)}${strings.unitSecond}`;
   }
 
   const hours = Math.floor(totalSeconds / 3600);
@@ -43,20 +45,20 @@ export const formatDuration = (milliseconds: number): string => {
   const parts: string[] = [];
 
   if (hours > 0) {
-    parts.push(`${hours}h`);
+    parts.push(`${hours}${strings.unitHour}`);
   }
   if (minutes > 0) {
-    parts.push(`${minutes}m`);
+    parts.push(`${minutes}${strings.unitMinute}`);
   }
   if (seconds > 0) {
-    parts.push(`${seconds}s`);
+    parts.push(`${seconds}${strings.unitSecond}`);
   }
 
   // If all parts are zero (e.g., exactly 1 hour), return the largest unit.
   if (parts.length === 0) {
-    if (hours > 0) return `${hours}h`;
-    if (minutes > 0) return `${minutes}m`;
-    return `${seconds}s`;
+    if (hours > 0) return `${hours}${strings.unitHour}`;
+    if (minutes > 0) return `${minutes}${strings.unitMinute}`;
+    return `${seconds}${strings.unitSecond}`;
   }
 
   return parts.join(' ');

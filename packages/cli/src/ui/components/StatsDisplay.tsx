@@ -25,6 +25,7 @@ import {
   type RetrieveUserQuotaResponse,
   VALID_GEMINI_MODELS,
 } from '@google/gemini-cli-core';
+import { strings } from '../../i18n.js';
 
 // A more flexible and powerful StatRow component
 interface StatRowProps {
@@ -136,13 +137,22 @@ const formatResetTime = (resetTime: string): string => {
       unitDisplay: 'narrow',
     }).format(val);
 
+  let timeString = '';
   if (hours > 0 && minutes > 0) {
-    return `(Resets in ${fmt(hours, 'hour')} ${fmt(minutes, 'minute')})`;
+    timeString = `${fmt(hours, 'hour')} ${fmt(minutes, 'minute')}`;
   } else if (hours > 0) {
-    return `(Resets in ${fmt(hours, 'hour')})`;
+    timeString = `${fmt(hours, 'hour')}`;
+  } else {
+    timeString = `${fmt(minutes, 'minute')}`;
   }
 
-  return `(Resets in ${fmt(minutes, 'minute')})`;
+  // Basic string replacement for unit labels to match Ukrainian locale if needed
+  // Note: Intl.NumberFormat with 'en' is used above, we can refine this
+  const localizedTime = timeString
+    .replace('hr', strings.statsHour)
+    .replace('min', strings.statsMinute);
+
+  return strings.statsResetsIn.replace('{time}', localizedTime);
 };
 
 const ModelUsageTable: React.FC<{
@@ -184,7 +194,7 @@ const ModelUsageTable: React.FC<{
       <Box alignItems="flex-end">
         <Box width={nameWidth}>
           <Text bold color={theme.text.primary} wrap="truncate-end">
-            Model Usage
+            {strings.statsModelUsage}
           </Text>
         </Box>
         <Box
@@ -194,7 +204,7 @@ const ModelUsageTable: React.FC<{
           flexShrink={0}
         >
           <Text bold color={theme.text.primary}>
-            Reqs
+            {strings.statsReqs}
           </Text>
         </Box>
         {!showQuotaColumn && (
@@ -206,7 +216,7 @@ const ModelUsageTable: React.FC<{
               flexShrink={0}
             >
               <Text bold color={theme.text.primary}>
-                Input Tokens
+                {strings.statsInputTokens}
               </Text>
             </Box>
             <Box
@@ -216,7 +226,7 @@ const ModelUsageTable: React.FC<{
               flexShrink={0}
             >
               <Text bold color={theme.text.primary}>
-                Cache Reads
+                {strings.statsCacheReads}
               </Text>
             </Box>
             <Box
@@ -226,7 +236,7 @@ const ModelUsageTable: React.FC<{
               flexShrink={0}
             >
               <Text bold color={theme.text.primary}>
-                Output Tokens
+                {strings.statsOutputTokens}
               </Text>
             </Box>
           </>
@@ -238,7 +248,7 @@ const ModelUsageTable: React.FC<{
             alignItems="flex-end"
           >
             <Text bold color={theme.text.primary}>
-              Usage left
+              {strings.statsUsageLeft}
             </Text>
           </Box>
         )}
@@ -334,12 +344,15 @@ const ModelUsageTable: React.FC<{
       {cacheEfficiency > 0 && !showQuotaColumn && (
         <Box flexDirection="column" marginTop={1}>
           <Text color={theme.text.primary}>
-            <Text color={theme.status.success}>Savings Highlight:</Text>{' '}
-            {totalCachedTokens.toLocaleString()} (
-            <Text color={cacheEfficiencyColor}>
-              {cacheEfficiency.toFixed(1)}%
-            </Text>
-            ) of input tokens were served from the cache, reducing costs.
+            <Text color={theme.status.success}>
+              {strings.statsSavingsHighlight}
+            </Text>{' '}
+            {strings.statsCacheSavings
+              .replace('{tokens}', totalCachedTokens.toLocaleString())
+              .replace(
+                '{percent}',
+                chalk.hex(cacheEfficiencyColor)(cacheEfficiency.toFixed(1)),
+              )}
           </Text>
         </Box>
       )}
@@ -347,13 +360,9 @@ const ModelUsageTable: React.FC<{
       {showQuotaColumn && (
         <>
           <Box marginTop={1} marginBottom={2}>
-            <Text color={theme.text.primary}>
-              {`Usage limits span all sessions and reset daily.\n/auth to upgrade or switch to API key.`}
-            </Text>
+            <Text color={theme.text.primary}>{strings.statsUsageLimits}</Text>
           </Box>
-          <Text color={theme.text.secondary}>
-            » Tip: For a full token breakdown, run `/stats model`.
-          </Text>
+          <Text color={theme.text.secondary}>» {strings.statsTipModel}</Text>
         </>
       )}
     </Box>
@@ -413,33 +422,33 @@ export const StatsDisplay: React.FC<StatsDisplayProps> = ({
       {renderTitle()}
       <Box height={1} />
 
-      <Section title="Interaction Summary">
-        <StatRow title="Session ID:">
+      <Section title={strings.statsInteractionSummary}>
+        <StatRow title={strings.statsSessionID}>
           <Text color={theme.text.primary}>{stats.sessionId}</Text>
         </StatRow>
-        <StatRow title="Tool Calls:">
+        <StatRow title={strings.statsToolCalls}>
           <Text color={theme.text.primary}>
             {tools.totalCalls} ({' '}
             <Text color={theme.status.success}>✓ {tools.totalSuccess}</Text>{' '}
             <Text color={theme.status.error}>x {tools.totalFail}</Text> )
           </Text>
         </StatRow>
-        <StatRow title="Success Rate:">
+        <StatRow title={strings.statsSuccessRate}>
           <Text color={successColor}>{computed.successRate.toFixed(1)}%</Text>
         </StatRow>
         {computed.totalDecisions > 0 && (
-          <StatRow title="User Agreement:">
+          <StatRow title={strings.statsUserAgreement}>
             <Text color={agreementColor}>
               {computed.agreementRate.toFixed(1)}%{' '}
               <Text color={theme.text.secondary}>
-                ({computed.totalDecisions} reviewed)
+                ({computed.totalDecisions} {strings.statsReviewed})
               </Text>
             </Text>
           </StatRow>
         )}
         {files &&
           (files.totalLinesAdded > 0 || files.totalLinesRemoved > 0) && (
-            <StatRow title="Code Changes:">
+            <StatRow title={strings.statsCodeChanges}>
               <Text color={theme.text.primary}>
                 <Text color={theme.status.success}>
                   +{files.totalLinesAdded}
@@ -452,16 +461,16 @@ export const StatsDisplay: React.FC<StatsDisplayProps> = ({
           )}
       </Section>
 
-      <Section title="Performance">
-        <StatRow title="Wall Time:">
+      <Section title={strings.statsPerformance}>
+        <StatRow title={strings.statsWallTime}>
           <Text color={theme.text.primary}>{duration}</Text>
         </StatRow>
-        <StatRow title="Agent Active:">
+        <StatRow title={strings.statsAgentActive}>
           <Text color={theme.text.primary}>
             {formatDuration(computed.agentActiveTime)}
           </Text>
         </StatRow>
-        <SubStatRow title="API Time:">
+        <SubStatRow title={strings.statsApiTime}>
           <Text color={theme.text.primary}>
             {formatDuration(computed.totalApiTime)}{' '}
             <Text color={theme.text.secondary}>
@@ -469,7 +478,7 @@ export const StatsDisplay: React.FC<StatsDisplayProps> = ({
             </Text>
           </Text>
         </SubStatRow>
-        <SubStatRow title="Tool Time:">
+        <SubStatRow title={strings.statsToolTime}>
           <Text color={theme.text.primary}>
             {formatDuration(computed.totalToolTime)}{' '}
             <Text color={theme.text.secondary}>

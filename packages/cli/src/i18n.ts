@@ -10,18 +10,23 @@ import type { TranslationStrings } from './locales/types.js';
 
 const getLocale = (): string => {
   if (typeof process === 'undefined' || !process.env) {
-    return 'en';
+    return 'uk';
   }
+
   const lang = (
     process.env.GEMINI_CLI_LANG ||
     process.env.LANG ||
     process.env.LC_ALL ||
     ''
   ).toLowerCase();
-  if (lang.includes('uk')) {
-    return 'uk';
+
+  // Default to 'uk' unless English is explicitly requested
+
+  if (lang.includes('en')) {
+    return 'en';
   }
-  return 'en';
+
+  return 'uk';
 };
 
 const translations: Record<string, TranslationStrings> = {
