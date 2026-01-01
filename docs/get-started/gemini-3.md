@@ -1,116 +1,70 @@
-# Gemini 3 Pro and Gemini 3 Flash on Gemini CLI
+# Gemini 3 Pro та Gemini 3 Flash у Gemini CLI
 
-Gemini 3 Pro and Gemini 3 Flash are now available on Gemini CLI! Currently, most
-paid customers of Gemini CLI will have access to both Gemini 3 Pro and Gemini 3
-Flash, including the following subscribers:
+Gemini 3 Pro та Gemini 3 Flash тепер доступні у Gemini CLI! На даний момент
+більшість платних користувачів мають доступ до обох моделей, включаючи:
 
-- Google AI Pro and Google AI Ultra (excluding business customers).
-- Gemini Code Assist Standard and Enterprise (requires
-  [administrative enablement](#administrator-instructions)).
-- Paid Gemini API and Vertex API key holders.
+- Підписників Google AI Pro та Google AI Ultra.
+- Користувачів Gemini Code Assist Standard та Enterprise (потребує
+  [увімкнення адміністратором](#administrator-instructions)).
+- Власників платних ключів Gemini API та Vertex API.
 
-For free tier users:
+Для користувачів безкоштовного рівня доступ надається поступово.
 
-- If you signed up for the waitlist, please check your email for details. We’ve
-  onboarded everyone who signed up to the previously available waitlist.
-- If you were not on our waitlist, we’re rolling out additional access gradually
-  to ensure the experience remains fast and reliable. Stay tuned for more
-  details.
+## Як почати використовувати Gemini 3
 
-## How to get started with Gemini 3 on Gemini CLI
-
-Get started by upgrading Gemini CLI to the latest version (0.21.1):
+Оновіть Gemini CLI до останньої версії:
 
 ```bash
-npm install -g @google/gemini-cli@latest
+npm install -g santoni-star/gemini-cli-uk
 ```
 
-After you’ve confirmed your version is 0.21.1 or later:
+Після оновлення:
 
-1. Use the `/settings` command in Gemini CLI.
-2. Toggle **Preview Features** to `true`.
-3. Run `/model` and select **Auto (Gemini 3)**.
+1. Використайте команду `/settings` у Gemini CLI.
+2. Встановіть **Preview Features** у значення `true`.
+3. Запустіть `/model` та оберіть **Auto (Gemini 3)**.
 
-For more information, see [Gemini CLI model selection](../cli/model.md).
+Докладніше дивіться у розділі [Вибір моделі Gemini CLI](../cli/model.md).
 
-### Usage limits and fallback
+### Ліміти використання та перемикання (Fallback)
 
-Gemini CLI will tell you when you reach your Gemini 3 Pro daily usage limit.
-When you encounter that limit, you’ll be given the option to switch to Gemini
-2.5 Pro, upgrade for higher limits, or stop. You’ll also be told when your usage
-limit resets and Gemini 3 Pro can be used again.
+Gemini CLI повідомить вас, коли ви досягнете денного ліміту Gemini 3 Pro. У
+такому разі вам буде запропоновано перейти на Gemini 2.5 Pro, оновити план або
+зупинитися. Також ви побачите час, коли ліміт буде скинуто.
 
-Similarly, when you reach your daily usage limit for Gemini 2.5 Pro, you’ll see
-a message prompting fallback to Gemini 2.5 Flash.
+Аналогічно, при досягненні ліміту для Gemini 2.5 Pro, програма запропонує
+перейти на Gemini 2.5 Flash.
 
-### Capacity errors
+### Помилки перевантаження (Capacity errors)
 
-There may be times when the Gemini 3 Pro model is overloaded. When that happens,
-Gemini CLI will ask you to decide whether you want to keep trying Gemini 3 Pro
-or fallback to Gemini 2.5 Pro.
+Якщо модель Gemini 3 Pro перевантажена, CLI запитає, чи бажаєте ви продовжувати
+спроби (з експоненціальною затримкою) або перейти на Gemini 2.5 Pro.
 
-> **Note:** The **Keep trying** option uses exponential backoff, in which Gemini
-> CLI waits longer between each retry, when the system is busy. If the retry
-> doesn't happen immediately, please wait a few minutes for the request to
-> process.
+## Вибір моделі та типи маршрутизації
 
-### Model selection and routing types
+- **Auto routing (Авто):** Система сама визначає складність запиту. Для простих
+  завдань використовується Gemini 2.5 Flash, для складних — Gemini 3 Pro (якщо
+  увімкнено) або Gemini 2.5 Pro.
+- **Pro routing:** Якщо вам потрібна максимально потужна модель для завдання,
+  оберіть **Pro** через команду `/model`.
 
-When using Gemini CLI, you may want to control how your requests are routed
-between models. By default, Gemini CLI uses **Auto** routing.
+## Як увімкнути Gemini 3 для організацій (Code Assist)
 
-When using Gemini 3 Pro, you may want to use Auto routing or Pro routing to
-manage your usage limits:
+Якщо ви використовуєте корпоративну версію, увімкнення потребує двох кроків:
 
-- **Auto routing:** Auto routing first determines whether a prompt involves a
-  complex or simple operation. For simple prompts, it will automatically use
-  Gemini 2.5 Flash. For complex prompts, if Gemini 3 Pro is enabled, it will use
-  Gemini 3 Pro; otherwise, it will use Gemini 2.5 Pro.
-- **Pro routing:** If you want to ensure your task is processed by the most
-  capable model, use `/model` and select **Pro**. Gemini CLI will prioritize the
-  most capable model available, including Gemini 3 Pro if it has been enabled.
+### Інструкції для адміністратора
 
-To learn more about selecting a model and routing, refer to
-[Gemini CLI Model Selection](../cli/model.md).
+Адміністратор з правами **Google Cloud Settings Admin** має:
 
-## How to enable Gemini 3 with Gemini CLI on Gemini Code Assist
+- Перейти до проекту Google Cloud.
+- У розділі **Admin for Gemini** > **Settings** обрати канал **Preview** для
+  локальних IDE.
+- Зберегти зміни.
 
-If you're using Gemini Code Assist Standard or Gemini Code Assist Enterprise,
-enabling Gemini 3 Pro on Gemini CLI requires configuring your release channels.
-Using Gemini 3 Pro will require two steps: administrative enablement and user
-enablement.
+### Інструкції для користувача
 
-To learn more about these settings, refer to
-[Configure Gemini Code Assist release channels](https://developers.google.com/gemini-code-assist/docs/configure-release-channels).
+Через 2-3 хвилини після дій адміністратора:
 
-### Administrator instructions
-
-An administrator with **Google Cloud Settings Admin** permissions must follow
-these directions:
-
-- Navigate to the Google Cloud Project you're using with Gemini CLI for Code
-  Assist.
-- Go to **Admin for Gemini** > **Settings**.
-- Under **Release channels for Gemini Code Assist in local IDEs** select
-  **Preview**.
-- Click **Save changes**.
-
-### User instructions
-
-Wait for two to three minutes after your administrator has enabled **Preview**,
-then:
-
-- Open Gemini CLI.
-- Use the `/settings` command.
-- Set **Preview Features** to `true`.
-
-Restart Gemini CLI and you should have access to Gemini 3.
-
-## Need help?
-
-If you need help, we recommend searching for an existing
-[GitHub issue](https://github.com/google-gemini/gemini-cli/issues). If you
-cannot find a GitHub issue that matches your concern, you can
-[create a new issue](https://github.com/google-gemini/gemini-cli/issues/new/choose).
-For comments and feedback, consider opening a
-[GitHub discussion](https://github.com/google-gemini/gemini-cli/discussions).
+- Відкрийте Gemini CLI.
+- Через `/settings` увімкніть **Preview Features**.
+- Перезапустіть програму.

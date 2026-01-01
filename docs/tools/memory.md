@@ -1,54 +1,42 @@
-# Memory tool (`save_memory`)
+# Інструмент пам'яті (`save_memory`)
 
-This document describes the `save_memory` tool for the Gemini CLI.
+Цей документ описує інструмент `save_memory` для Gemini CLI.
 
-## Description
+## Опис
 
-Use `save_memory` to save and recall information across your Gemini CLI
-sessions. With `save_memory`, you can direct the CLI to remember key details
-across sessions, providing personalized and directed assistance.
+Використовуйте `save_memory`, щоб зберігати та згадувати інформацію між сесіями
+Gemini CLI. Цей інструмент дозволяє надавати персоналізовану допомогу,
+пам'ятаючи ключові деталі про ваші вподобання чи проекти.
 
-### Arguments
+### Аргументи
 
-`save_memory` takes one argument:
+- `fact` (рядок, обов'язково): Конкретний факт або частина інформації, яку слід
+  запам'ятати. Це має бути чітке, самодостатнє твердження природною мовою.
 
-- `fact` (string, required): The specific fact or piece of information to
-  remember. This should be a clear, self-contained statement written in natural
-  language.
+## Як працює `save_memory`
 
-## How to use `save_memory` with the Gemini CLI
+Інструмент додає вказаний факт у спеціальний файл `GEMINI.md`, розташований у
+вашому домашньому каталозі (`~/.gemini/GEMINI.md`). Факти зберігаються в розділі
+`## Gemini Added Memories`. Цей файл завантажується як контекст у всіх наступних
+сесіях.
 
-The tool appends the provided `fact` to a special `GEMINI.md` file located in
-the user's home directory (`~/.gemini/GEMINI.md`). This file can be configured
-to have a different name.
+## Приклади
 
-Once added, the facts are stored under a `## Gemini Added Memories` section.
-This file is loaded as context in subsequent sessions, allowing the CLI to
-recall the saved information.
+**Запам'ятати вподобання користувача:**
 
-Usage:
-
-```
-save_memory(fact="Your fact here.")
+```text
+save_memory(fact="Моя улюблена мова програмування — Python.")
 ```
 
-### `save_memory` examples
+**Зберегти деталь про проект:**
 
-Remember a user preference:
-
-```
-save_memory(fact="My preferred programming language is Python.")
+```text
+save_memory(fact="Проект, над яким я зараз працюю, називається 'gemini-cli-uk'.")
 ```
 
-Store a project-specific detail:
+## Важливі зауваження
 
-```
-save_memory(fact="The project I'm currently working on is called 'gemini-cli'.")
-```
-
-## Important notes
-
-- **General usage:** This tool should be used for concise, important facts. It
-  is not intended for storing large amounts of data or conversational history.
-- **Memory file:** The memory file is a plain text Markdown file, so you can
-  view and edit it manually if needed.
+- **Використання:** Цей інструмент призначений для коротких, важливих фактів.
+  Він не підходить для зберігання великих обсягів даних.
+- **Файл пам'яті:** Це звичайний Markdown-файл, тому ви можете переглядати та
+  редагувати його вручну.

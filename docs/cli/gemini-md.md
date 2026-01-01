@@ -1,103 +1,104 @@
-# Provide context with GEMINI.md files
+# Надання контексту через файли GEMINI.md
 
-Context files, which use the default name `GEMINI.md`, are a powerful feature
-for providing instructional context to the Gemini model. You can use these files
-to give project-specific instructions, define a persona, or provide coding style
-guides to make the AI's responses more accurate and tailored to your needs.
+Файли контексту (типова назва `GEMINI.md`) — це потужна функція для надання
+інструкцій моделі Gemini. Ви можете використовувати ці файли, щоб дати
+специфічні для проекту інструкції, визначити роль (persona) або надати посібники
+зі стилю кодування, щоб зробити відповіді ШІ точнішими та адаптованими до ваших
+потреб.
 
-Instead of repeating instructions in every prompt, you can define them once in a
-context file.
+Замість того, щоб повторювати інструкції в кожному запиті, ви можете визначити
+їх один раз у файлі контексту.
 
-## Understand the context hierarchy
+## Розуміння ієрархії контексту
 
-The CLI uses a hierarchical system to source context. It loads various context
-files from several locations, concatenates the contents of all found files, and
-sends them to the model with every prompt. The CLI loads files in the following
-order:
+CLI використовує ієрархічну систему для збору контексту. Він завантажує файли з
+різних місць, об'єднує їхній вміст і надсилає моделі з кожним запитом. CLI
+завантажує файли у такому порядку:
 
-1.  **Global context file:**
-    - **Location:** `~/.gemini/GEMINI.md` (in your user home directory).
-    - **Scope:** Provides default instructions for all your projects.
+1.  **Глобальний файл контексту:**
+    - **Місце:** `~/.gemini/GEMINI.md` (у вашому домашньому каталозі).
+    - **Область дії:** Надає інструкції за замовчуванням для всіх ваших
+      проектів.
 
-2.  **Project root and ancestor context files:**
-    - **Location:** The CLI searches for a `GEMINI.md` file in your current
-      working directory and then in each parent directory up to the project root
-      (identified by a `.git` folder).
-    - **Scope:** Provides context relevant to the entire project.
+2.  **Файли контексту кореня проекту та батьківських каталогів:**
+    - **Місце:** CLI шукає файл `GEMINI.md` у поточному робочому каталозі, а
+      потім у кожному батьківському каталозі до кореня проекту (визначається за
+      папкою `.git`).
+    - **Область дії:** Надає контекст, релевантний для всього проекту.
 
-3.  **Sub-directory context files:**
-    - **Location:** The CLI also scans for `GEMINI.md` files in subdirectories
-      below your current working directory. It respects rules in `.gitignore`
-      and `.geminiignore`.
-    - **Scope:** Lets you write highly specific instructions for a particular
-      component or module.
+3.  **Файли контексту підкаталогів:**
+    - **Місце:** CLI також сканує підкаталоги нижче вашого поточного робочого
+      каталогу на наявність файлів `GEMINI.md`. Він враховує правила у
+      `.gitignore` та `.geminiignore`.
+    - **Область дії:** Дозволяє писати дуже специфічні інструкції для
+      конкретного компонента або модуля.
 
-The CLI footer displays the number of loaded context files, which gives you a
-quick visual cue of the active instructional context.
+У футері CLI відображається кількість завантажених файлів контексту, що дає вам
+швидку візуальну підказку про активні інструкції.
 
-### Example `GEMINI.md` file
+### Приклад файлу `GEMINI.md`
 
-Here is an example of what you can include in a `GEMINI.md` file at the root of
-a TypeScript project:
+Ось приклад того, що можна включити у файл `GEMINI.md` у корені
+TypeScript-проекту:
 
 ```markdown
-# Project: My TypeScript Library
+# Проект: Моя бібліотека TypeScript
 
-## General Instructions
+## Загальні інструкції
 
-- When you generate new TypeScript code, follow the existing coding style.
-- Ensure all new functions and classes have JSDoc comments.
-- Prefer functional programming paradigms where appropriate.
+- Коли генеруєш новий код TypeScript, дотримуйся існуючого стилю кодування.
+- Переконайся, що всі нові функції та класи мають JSDoc-коментарі.
+- Надавай перевагу парадигмам функціонального програмування, де це доречно.
 
-## Coding Style
+## Стиль кодування
 
-- Use 2 spaces for indentation.
-- Prefix interface names with `I` (for example, `IUserService`).
-- Always use strict equality (`===` and `!==`).
+- Використовуй 2 пробіли для відступу.
+- Додавай префікс `I` до назв інтерфейсів (наприклад, `IUserService`).
+- Завжди використовуй сувору рівність (`===` та `!==`).
 ```
 
-## Manage context with the `/memory` command
+## Керування контекстом за допомогою команди `/memory`
 
-You can interact with the loaded context files by using the `/memory` command.
+Ви можете взаємодіяти із завантаженими файлами контексту за допомогою команди
+`/memory`.
 
-- **`/memory show`**: Displays the full, concatenated content of the current
-  hierarchical memory. This lets you inspect the exact instructional context
-  being provided to the model.
-- **`/memory refresh`**: Forces a re-scan and reload of all `GEMINI.md` files
-  from all configured locations.
-- **`/memory add <text>`**: Appends your text to your global
-  `~/.gemini/GEMINI.md` file. This lets you add persistent memories on the fly.
+- **`/memory show`**: Відображає повний, об'єднаний вміст поточної ієрархічної
+  пам'яті. Це дозволяє перевірити точний контекст, що надається моделі.
+- **`/memory refresh`**: Примусово перескановує та перезавантажує всі файли
+  `GEMINI.md` з усіх налаштованих місць.
+- **`/memory add <текст>`**: Додає вказаний текст у ваш глобальний файл
+  `~/.gemini/GEMINI.md`. Це дозволяє додавати стійкі спогади "на льоту".
 
-## Modularize context with imports
+## Модуляризація контексту через імпорт
 
-You can break down large `GEMINI.md` files into smaller, more manageable
-components by importing content from other files using the `@file.md` syntax.
-This feature supports both relative and absolute paths.
+Ви можете розбивати великі файли `GEMINI.md` на менші компоненти, імпортуючи
+вміст з інших файлів за допомогою синтаксису `@file.md`. Ця функція підтримує як
+відносні, так і абсолютні шляхи.
 
-**Example `GEMINI.md` with imports:**
+**Приклад `GEMINI.md` з імпортом:**
 
 ```markdown
-# Main GEMINI.md file
+# Головний файл GEMINI.md
 
-This is the main content.
+Це основний вміст.
 
 @./components/instructions.md
 
-More content here.
+Більше контенту тут.
 
 @../shared/style-guide.md
 ```
 
-For more details, see the [Memory Import Processor](../core/memport.md)
-documentation.
+Докладніше дивіться у документації
+[Memory Import Processor](../core/memport.md).
 
-## Customize the context file name
+## Зміна назви файлу контексту
 
-While `GEMINI.md` is the default filename, you can configure this in your
-`settings.json` file. To specify a different name or a list of names, use the
-`context.fileName` property.
+Хоча `GEMINI.md` є назвою за замовчуванням, ви можете змінити її у файлі
+`settings.json`. Щоб вказати іншу назву або список назв, використовуйте параметр
+`context.fileName`.
 
-**Example `settings.json`:**
+**Приклад `settings.json`:**
 
 ```json
 {

@@ -1,38 +1,35 @@
-# Tutorials
+# Навчальні посібники (Tutorials)
 
-This page contains tutorials for interacting with Gemini CLI.
+Ця сторінка містить покрокові інструкції для роботи з Gemini CLI.
 
-## Setting up a Model Context Protocol (MCP) server
+## Налаштування сервера Model Context Protocol (MCP)
 
-> [!CAUTION] Before using a third-party MCP server, ensure you trust its source
-> and understand the tools it provides. Your use of third-party servers is at
-> your own risk.
+> [!CAUTION] Перед використанням стороннього сервера MCP переконайтеся, що ви
+> довіряєте його джерелу та розумієте інструменти, які він надає. Ви
+> використовуєте сторонні сервери на свій власний страх і ризик.
 
-This tutorial demonstrates how to set up an MCP server, using the
-[GitHub MCP server](https://github.com/github/github-mcp-server) as an example.
-The GitHub MCP server provides tools for interacting with GitHub repositories,
-such as creating issues and commenting on pull requests.
+Цей посібник демонструє, як налаштувати сервер MCP на прикладі
+[сервера GitHub MCP](https://github.com/github/github-mcp-server). Він надає
+інструменти для роботи з репозиторіями GitHub, як-от створення issue або
+коментування PR.
 
-### Prerequisites
+### Попередні вимоги
 
-Before you begin, ensure you have the following installed and configured:
+Перед початком переконайтеся, що у вас встановлено:
 
-- **Docker:** Install and run [Docker].
-- **GitHub Personal Access Token (PAT):** Create a new [classic] or
-  [fine-grained] PAT with the necessary scopes.
+- **Docker:** Встановіть та запустіть [Docker](https://www.docker.com/).
+- **GitHub Personal Access Token (PAT):** Створіть новий
+  [classic](https://github.com/settings/tokens/new) або
+  [fine-grained](https://github.com/settings/personal-access-tokens/new) токен з
+  необхідними правами доступу.
 
-[Docker]: https://www.docker.com/
-[classic]: https://github.com/settings/tokens/new
-[fine-grained]: https://github.com/settings/personal-access-tokens/new
+### Посібник
 
-### Guide
+#### 1. Налаштуйте сервер MCP у `settings.json`
 
-#### Configure the MCP server in `settings.json`
-
-In your project's root directory, create or open the
-[`.gemini/settings.json` file](../get-started/configuration.md). Within the
-file, add the `mcpServers` configuration block, which provides instructions for
-how to launch the GitHub MCP server.
+У кореневому каталозі вашого проекту відкрийте файл
+[`.gemini/settings.json`](../get-started/configuration.md). Додайте блок
+конфігурації `mcpServers`:
 
 ```json
 {
@@ -55,29 +52,23 @@ how to launch the GitHub MCP server.
 }
 ```
 
-#### Set your GitHub token
+#### 2. Встановіть ваш токен GitHub
 
-> [!CAUTION] Using a broadly scoped personal access token that has access to
-> personal and private repositories can lead to information from the private
-> repository being leaked into the public repository. We recommend using a
-> fine-grained access token that doesn't share access to both public and private
-> repositories.
+> [!CAUTION] Використання токена з широкими правами доступу до приватних
+> репозиторіїв може призвести до витоку інформації. Рекомендуємо використовувати
+> "fine-grained" токени з обмеженим доступом.
 
-Use an environment variable to store your GitHub PAT:
+Збережіть токен у змінну середовища:
 
 ```bash
-GITHUB_PERSONAL_ACCESS_TOKEN="pat_YourActualGitHubTokenHere"
+export GITHUB_PERSONAL_ACCESS_TOKEN="ваш_реальний_токен_тут"
 ```
 
-Gemini CLI uses this value in the `mcpServers` configuration that you defined in
-the `settings.json` file.
+#### 3. Запустіть Gemini CLI та перевірте з'єднання
 
-#### Launch Gemini CLI and verify the connection
+При запуску Gemini CLI автоматично запустить сервер GitHub MCP у фоновому
+режимі. Тепер ви можете використовувати звичайну мову для запитів:
 
-When you launch Gemini CLI, it automatically reads your configuration and
-launches the GitHub MCP server in the background. You can then use natural
-language prompts to ask Gemini CLI to perform GitHub actions. For example:
-
-```bash
-"get all open issues assigned to me in the 'foo/bar' repo and prioritize them"
+```text
+> "знайди всі відкриті issue, призначені на мене в репозиторії 'foo/bar', і розстав їх за пріоритетом"
 ```

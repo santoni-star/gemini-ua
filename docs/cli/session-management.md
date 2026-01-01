@@ -1,145 +1,142 @@
-# Session Management
+# Керування сесіями (Session Management)
 
-Gemini CLI includes robust session management features that automatically save
-your conversation history. This allows you to interrupt your work and resume
-exactly where you left off, review past interactions, and manage your
-conversation history effectively.
+Gemini CLI включає надійні функції керування сесіями, які автоматично зберігають
+історію ваших розмов. Це дозволяє переривати роботу та відновлювати її саме з
+того місця, де ви зупинилися, переглядати минулі взаємодії та ефективно керувати
+історією.
 
-## Automatic Saving
+## Автоматичне збереження
 
-Every time you interact with Gemini CLI, your session is automatically saved.
-This happens in the background without any manual intervention.
+Щоразу, коли ви взаємодієте з Gemini CLI, ваша сесія автоматично зберігається.
+Це відбувається у фоновому режимі без жодного ручного втручання.
 
-- **What is saved:** The complete conversation history, including:
-  - Your prompts and the model's responses.
-  - All tool executions (inputs and outputs).
-  - Token usage statistics (input/output/cached, etc.).
-  - Assistant thoughts/reasoning summaries (when available).
-- **Location:** Sessions are stored in `~/.gemini/tmp/<project_hash>/chats/`.
-- **Scope:** Sessions are project-specific. Switching directories to a different
-  project will switch to that project's session history.
+- **Що зберігається:** Повна історія розмови, включаючи:
+  - Ваші підказки та відповіді моделі.
+  - Усі виконання інструментів (вхідні та вихідні дані).
+  - Статистика використання токенів (вхідні/вихідні/кешовані тощо).
+  - Підсумки міркувань асистента (якщо доступні).
+- **Місце зберігання:** Сесії зберігаються у
+  `~/.gemini/tmp/<project_hash>/chats/`.
+- **Область дії:** Сесії прив'язані до проекту. Зміна каталогу на інший проект
+  автоматично перемкне вас на історію сесій цього проекту.
 
-## Resuming Sessions
+## Відновлення сесій
 
-You can resume a previous session to continue the conversation with all prior
-context restored.
+Ви можете відновити попередню сесію, щоб продовжити розмову зі збереженням
+усього попереднього контексту.
 
-### From the Command Line
+### З командного рядка
 
-When starting the CLI, you can use the `--resume` (or `-r`) flag:
+При запуску CLI ви можете використовувати прапорець `--resume` (або `-r`):
 
-- **Resume latest:**
-
-  ```bash
-  gemini --resume
-  ```
-
-  This immediately loads the most recent session.
-
-- **Resume by index:** First, list available sessions (see
-  [Listing Sessions](#listing-sessions)), then use the index number:
+- **Відновити останню:**
 
   ```bash
-  gemini --resume 1
+  gemini-uk --resume
   ```
 
-- **Resume by ID:** You can also provide the full session UUID:
+  Це негайно завантажить найсвіжішу сесію.
+
+- **Відновити за індексом:** Спочатку перегляньте список доступних сесій (див.
+  [Список сесій](#listing-sessions)), а потім використовуйте номер індексу:
+
   ```bash
-  gemini --resume a1b2c3d4-e5f6-7890-abcd-ef1234567890
+  gemini-uk --resume 1
   ```
 
-### From the Interactive Interface
+- **Відновити за ID:** Ви також можете вказати повний UUID сесії:
+  ```bash
+  gemini-uk --resume a1b2c3d4-e5f6-7890-abcd-ef1234567890
+  ```
 
-While the CLI is running, you can use the `/resume` slash command to open the
-**Session Browser**:
+### Через інтерактивний інтерфейс
+
+Під час роботи CLI ви можете використати команду `/resume`, щоб відкрити
+**Браузер сесій**:
 
 ```text
 /resume
 ```
 
-This opens an interactive interface where you can:
+Це відкриє інтерактивний інтерфейс, де ви можете:
 
-- **Browse:** Scroll through a list of your past sessions.
-- **Preview:** See details like the session date, message count, and the first
-  user prompt.
-- **Search:** Press `/` to enter search mode, then type to filter sessions by ID
-  or content.
-- **Select:** Press `Enter` to resume the selected session.
+- **Переглядати:** Прокручувати список ваших минулих сесій.
+- **Попередній перегляд:** Бачити деталі, такі як дата сесії, кількість
+  повідомлень та перша підказка користувача.
+- **Пошук:** Натисніть `/`, щоб увійти в режим пошуку, а потім введіть текст для
+  фільтрації сесій за ID або вмістом.
+- **Вибір:** Натисніть `Enter`, щоб відновити вибрану сесію.
 
-## Managing Sessions
+## Керування сесіями
 
-### Listing Sessions
+### Список сесій
 
-To see a list of all available sessions for the current project from the command
-line:
+Щоб побачити список усіх доступних сесій для поточного проекту з командного
+рядка:
 
 ```bash
-gemini --list-sessions
+gemini-uk --list-sessions
 ```
 
-Output example:
+Приклад виводу:
 
 ```text
 Available sessions for this project (3):
 
-  1. Fix bug in auth (2 days ago) [a1b2c3d4]
-  2. Refactor database schema (5 hours ago) [e5f67890]
-  3. Update documentation (Just now) [abcd1234]
+  1. Виправлення багу в auth (2 дні тому) [a1b2c3d4]
+  2. Рефакторинг схеми БД (5 годин тому) [e5f67890]
+  3. Оновлення документації (Щойно) [abcd1234]
 ```
 
-### Deleting Sessions
+### Видалення сесій
 
-You can remove old or unwanted sessions to free up space or declutter your
-history.
+Ви можете видаляти старі або непотрібні сесії, щоб звільнити місце або очистити
+історію.
 
-**From the Command Line:** Use the `--delete-session` flag with an index or ID:
+**З командного рядка:** Використовуйте прапорець `--delete-session` з індексом
+або ID:
 
 ```bash
-gemini --delete-session 2
+gemini-uk --delete-session 2
 ```
 
-**From the Session Browser:**
+**З браузера сесій:**
 
-1.  Open the browser with `/resume`.
-2.  Navigate to the session you want to remove.
-3.  Press `x`.
+1.  Відкрийте браузер командою `/resume`.
+2.  Перейдіть до сесії, яку хочете видалити.
+3.  Натисніть `x`.
 
-## Configuration
+## Конфігурація
 
-You can configure how Gemini CLI manages your session history in your
-`settings.json` file.
+Ви можете налаштувати спосіб керування історією сесій у файлі `settings.json`.
 
-### Session Retention
+### Очищення сесій (Retention)
 
-To prevent your history from growing indefinitely, you can enable automatic
-cleanup policies.
+Щоб запобігти нескінченному зростанню історії, ви можете увімкнути політику
+автоматичного очищення.
 
 ```json
 {
   "general": {
     "sessionRetention": {
       "enabled": true,
-      "maxAge": "30d", // Keep sessions for 30 days
-      "maxCount": 50 // Keep the 50 most recent sessions
+      "maxAge": "30d", // Зберігати сесії протягом 30 днів
+      "maxCount": 50 // Зберігати 50 останніх сесій
     }
   }
 }
 ```
 
-- **`enabled`**: (boolean) Master switch for session cleanup. Default is
-  `false`.
-- **`maxAge`**: (string) Duration to keep sessions (e.g., "24h", "7d", "4w").
-  Sessions older than this will be deleted.
-- **`maxCount`**: (number) Maximum number of sessions to retain. The oldest
-  sessions exceeding this count will be deleted.
-- **`minRetention`**: (string) Minimum retention period (safety limit). Defaults
-  to `"1d"`; sessions newer than this period are never deleted by automatic
-  cleanup.
+- **`enabled`**: (boolean) Головний перемикач очищення сесій. Типово — `false`.
+- **`maxAge`**: (string) Термін зберігання сесій (наприклад, "24h", "7d", "4w").
+  Сесії, старіші за цей термін, будуть видалені.
+- **`maxCount`**: (number) Максимальна кількість сесій для збереження.
+  Найстаріші сесії, що перевищують цю кількість, будуть видалені.
 
-### Session Limits
+### Ліміти сесій
 
-You can also limit the length of individual sessions to prevent context windows
-from becoming too large and expensive.
+Ви також можете обмежити довжину окремих сесій, щоб вікна контексту не ставали
+занадто великими та дорогими.
 
 ```json
 {
@@ -149,10 +146,6 @@ from becoming too large and expensive.
 }
 ```
 
-- **`maxSessionTurns`**: (number) The maximum number of turns (user + model
-  exchanges) allowed in a single session. Set to `-1` for unlimited (default).
-
-  **Behavior when limit is reached:**
-  - **Interactive Mode:** The CLI shows an informational message and stops
-    sending requests to the model. You must manually start a new session.
-  - **Non-Interactive Mode:** The CLI exits with an error.
+- **`maxSessionTurns`**: (number) Максимальна кількість обмінів повідомленнями
+  (користувач + модель), дозволена в одній сесії. Встановіть `-1` для
+  безлімітного режиму (типово).

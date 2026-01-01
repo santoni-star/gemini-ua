@@ -1,143 +1,140 @@
-# Gemini CLI keyboard shortcuts
+# Гарячі клавіші Gemini CLI
 
-Gemini CLI ships with a set of default keyboard shortcuts for editing input,
-navigating history, and controlling the UI. Use this reference to learn the
-available combinations.
+Gemini CLI постачається з набором стандартних гарячих клавіш для редагування
+введення, навігації по історії та керування інтерфейсом. Використовуйте цей
+довідник, щоб дізнатися про доступні комбінації.
 
 <!-- KEYBINDINGS-AUTOGEN:START -->
 
-#### Basic Controls
+#### Основні елементи керування
 
-| Action                                       | Keys    |
+| Дія                                          | Клавіші |
 | -------------------------------------------- | ------- |
-| Confirm the current selection or choice.     | `Enter` |
-| Dismiss dialogs or cancel the current focus. | `Esc`   |
+| Підтвердити поточний вибір.                  | `Enter` |
+| Закрити діалогові вікна або скасувати фокус. | `Esc`   |
 
-#### Cursor Movement
+#### Переміщення курсору
 
-| Action                                    | Keys                   |
-| ----------------------------------------- | ---------------------- |
-| Move the cursor to the start of the line. | `Ctrl + A`<br />`Home` |
-| Move the cursor to the end of the line.   | `Ctrl + E`<br />`End`  |
+| Дія                                  | Клавіші                |
+| ------------------------------------ | ---------------------- |
+| Перемістити курсор на початок рядка. | `Ctrl + A`<br />`Home` |
+| Перемістити курсор у кінець рядка.   | `Ctrl + E`<br />`End`  |
 
-#### Editing
+#### Редагування
 
-| Action                                           | Keys                                      |
-| ------------------------------------------------ | ----------------------------------------- |
-| Delete from the cursor to the end of the line.   | `Ctrl + K`                                |
-| Delete from the cursor to the start of the line. | `Ctrl + U`                                |
-| Clear all text in the input field.               | `Ctrl + C`                                |
-| Delete the previous word.                        | `Ctrl + Backspace`<br />`Cmd + Backspace` |
+| Дія                                    | Клавіші                                   |
+| -------------------------------------- | ----------------------------------------- |
+| Видалити від курсору до кінця рядка.   | `Ctrl + K`                                |
+| Видалити від курсору до початку рядка. | `Ctrl + U`                                |
+| Очистити весь текст у полі введення.   | `Ctrl + C`                                |
+| Видалити попереднє слово.              | `Ctrl + Backspace`<br />`Cmd + Backspace` |
 
-#### Screen Control
+#### Керування екраном
 
-| Action                                       | Keys       |
+| Дія                                          | Клавіші    |
 | -------------------------------------------- | ---------- |
-| Clear the terminal screen and redraw the UI. | `Ctrl + L` |
+| Очистити екран терміналу та перемалювати UI. | `Ctrl + L` |
 
-#### Scrolling
+#### Прокрутка
 
-| Action                   | Keys                 |
-| ------------------------ | -------------------- |
-| Scroll content up.       | `Shift + Up Arrow`   |
-| Scroll content down.     | `Shift + Down Arrow` |
-| Scroll to the top.       | `Home`               |
-| Scroll to the bottom.    | `End`                |
-| Scroll up by one page.   | `Page Up`            |
-| Scroll down by one page. | `Page Down`          |
+| Дія                                | Клавіші              |
+| ---------------------------------- | -------------------- |
+| Прокрутити вміст вгору.            | `Shift + Up Arrow`   |
+| Прокрутити вміст вниз.             | `Shift + Down Arrow` |
+| Прокрутити в самий верх.           | `Home`               |
+| Прокрутити в самий низ.            | `End`                |
+| Прокрутити вгору на одну сторінку. | `Page Up`            |
+| Прокрутити вниз на одну сторінку.  | `Page Down`          |
 
-#### History & Search
+#### Історія та пошук
 
-| Action                                       | Keys                  |
-| -------------------------------------------- | --------------------- |
-| Show the previous entry in history.          | `Ctrl + P (no Shift)` |
-| Show the next entry in history.              | `Ctrl + N (no Shift)` |
-| Start reverse search through history.        | `Ctrl + R`            |
-| Insert the selected reverse-search match.    | `Enter (no Ctrl)`     |
-| Accept a suggestion while reverse searching. | `Tab`                 |
+| Дія                                            | Клавіші                |
+| ---------------------------------------------- | ---------------------- |
+| Показати попередній запис в історії.           | `Ctrl + P (без Shift)` |
+| Показати наступний запис в історії.            | `Ctrl + N (без Shift)` |
+| Почати зворотний пошук по історії.             | `Ctrl + R`             |
+| Вставити вибраний збіг зворотного пошуку.      | `Enter (без Ctrl)`     |
+| Прийняти пропозицію під час зворотного пошуку. | `Tab`                  |
 
-#### Navigation
+#### Навігація
 
-| Action                           | Keys                                        |
-| -------------------------------- | ------------------------------------------- |
-| Move selection up in lists.      | `Up Arrow (no Shift)`                       |
-| Move selection down in lists.    | `Down Arrow (no Shift)`                     |
-| Move up within dialog options.   | `Up Arrow (no Shift)`<br />`K (no Shift)`   |
-| Move down within dialog options. | `Down Arrow (no Shift)`<br />`J (no Shift)` |
+| Дія                                | Клавіші                                       |
+| ---------------------------------- | --------------------------------------------- |
+| Перейти вгору у списках.           | `Up Arrow (без Shift)`                        |
+| Перейти вниз у списках.            | `Down Arrow (без Shift)`                      |
+| Перейти вгору у варіантах діалогу. | `Up Arrow (без Shift)`<br />`K (без Shift)`   |
+| Перейти вниз у варіантах діалогу.  | `Down Arrow (без Shift)`<br />`J (без Shift)` |
 
-#### Suggestions & Completions
+#### Пропозиції та доповнення
 
-| Action                                  | Keys                                               |
-| --------------------------------------- | -------------------------------------------------- |
-| Accept the inline suggestion.           | `Tab`<br />`Enter (no Ctrl)`                       |
-| Move to the previous completion option. | `Up Arrow (no Shift)`<br />`Ctrl + P (no Shift)`   |
-| Move to the next completion option.     | `Down Arrow (no Shift)`<br />`Ctrl + N (no Shift)` |
-| Expand an inline suggestion.            | `Right Arrow`                                      |
-| Collapse an inline suggestion.          | `Left Arrow`                                       |
+| Дія                                          | Клавіші                                              |
+| -------------------------------------------- | ---------------------------------------------------- |
+| Прийняти вбудовану пропозицію.               | `Tab`<br />`Enter (без Ctrl)`                        |
+| Перейти до попереднього варіанту доповнення. | `Up Arrow (без Shift)`<br />`Ctrl + P (без Shift)`   |
+| Перейти до наступного варіанту доповнення.   | `Down Arrow (без Shift)`<br />`Ctrl + N (без Shift)` |
+| Розгорнути вбудовану пропозицію.             | `Right Arrow`                                        |
+| Згорнути вбудовану пропозицію.               | `Left Arrow`                                         |
 
-#### Text Input
+#### Введення тексту
 
-| Action                               | Keys                                                                                        |
+| Дія                                  | Клавіші                                                                                     |
 | ------------------------------------ | ------------------------------------------------------------------------------------------- |
-| Submit the current prompt.           | `Enter (no Ctrl, no Shift, no Cmd, not Paste)`                                              |
-| Insert a newline without submitting. | `Ctrl + Enter`<br />`Cmd + Enter`<br />`Paste + Enter`<br />`Shift + Enter`<br />`Ctrl + J` |
+| Надіслати поточний запит.            | `Enter (без Ctrl, Shift, Cmd або вставки)`                                                  |
+| Вставити новий рядок без надсилання. | `Ctrl + Enter`<br />`Cmd + Enter`<br />`Paste + Enter`<br />`Shift + Enter`<br />`Ctrl + J` |
 
-#### External Tools
+#### Зовнішні інструменти
 
-| Action                                         | Keys                      |
-| ---------------------------------------------- | ------------------------- |
-| Open the current prompt in an external editor. | `Ctrl + X`                |
-| Paste from the clipboard.                      | `Ctrl + V`<br />`Cmd + V` |
+| Дія                                              | Клавіші                   |
+| ------------------------------------------------ | ------------------------- |
+| Відкрити поточний запит у зовнішньому редакторі. | `Ctrl + X`                |
+| Вставити з буфера обміну.                        | `Ctrl + V`<br />`Cmd + V` |
 
-#### App Controls
+#### Керування програмою
 
-| Action                                                            | Keys       |
-| ----------------------------------------------------------------- | ---------- |
-| Toggle detailed error information.                                | `F12`      |
-| Toggle the full TODO list.                                        | `Ctrl + T` |
-| Toggle IDE context details.                                       | `Ctrl + G` |
-| Toggle Markdown rendering.                                        | `Cmd + M`  |
-| Toggle copy mode when the terminal is using the alternate buffer. | `Ctrl + S` |
-| Expand a height-constrained response to show additional lines.    | `Ctrl + S` |
-| Toggle focus between the shell and Gemini input.                  | `Ctrl + F` |
+| Дія                                                                 | Клавіші    |
+| ------------------------------------------------------------------- | ---------- |
+| Перемкнути детальну інформацію про помилки.                         | `F12`      |
+| Перемкнути повний список завдань (TODO).                            | `Ctrl + T` |
+| Перемкнути деталі контексту IDE.                                    | `Ctrl + G` |
+| Перемкнути рендеринг Markdown.                                      | `Cmd + M`  |
+| Перемкнути режим копіювання (в альтернативному буфері терміналу).   | `Ctrl + S` |
+| Розгорнути відповідь обмеженої висоти для показу додаткових рядків. | `Ctrl + S` |
+| Перемкнути фокус між оболонкою (shell) та вводом Gemini.            | `Ctrl + F` |
 
-#### Session Control
+#### Керування сесією
 
-| Action                                       | Keys       |
-| -------------------------------------------- | ---------- |
-| Cancel the current request or quit the CLI.  | `Ctrl + C` |
-| Exit the CLI when the input buffer is empty. | `Ctrl + D` |
+| Дія                                        | Клавіші    |
+| ------------------------------------------ | ---------- |
+| Скасувати поточний запит або вийти з CLI.  | `Ctrl + C` |
+| Вийти з CLI, коли буфер введення порожній. | `Ctrl + D` |
 
 <!-- KEYBINDINGS-AUTOGEN:END -->
 
-## Additional context-specific shortcuts
+## Додаткові контекстні скорочення
 
-- `Ctrl+Y`: Toggle YOLO (auto-approval) mode for tool calls.
-- `Shift+Tab`: Toggle Auto Edit (auto-accept edits) mode.
-- `Option+M` (macOS): Entering `µ` with Option+M also toggles Markdown
-  rendering, matching `Cmd+M`.
-- `!` on an empty prompt: Enter or exit shell mode.
-- `\` (at end of a line) + `Enter`: Insert a newline without leaving single-line
-  mode.
-- `Ctrl+Delete` / `Meta+Delete`: Delete the word to the right of the cursor.
-- `Ctrl+B` or `Left Arrow`: Move the cursor one character to the left while
-  editing text.
-- `Ctrl+F` or `Right Arrow`: Move the cursor one character to the right; with an
-  embedded shell attached, `Ctrl+F` still toggles focus.
-- `Ctrl+D` or `Delete`: Remove the character immediately to the right of the
-  cursor.
-- `Ctrl+H` or `Backspace`: Remove the character immediately to the left of the
-  cursor.
-- `Ctrl+Left Arrow` / `Meta+Left Arrow` / `Meta+B`: Move one word to the left.
-- `Ctrl+Right Arrow` / `Meta+Right Arrow` / `Meta+F`: Move one word to the
-  right.
-- `Ctrl+W`: Delete the word to the left of the cursor (in addition to
-  `Ctrl+Backspace` / `Cmd+Backspace`).
-- `Ctrl+Z` / `Ctrl+Shift+Z`: Undo or redo the most recent text edit.
-- `Meta+Enter`: Open the current input in an external editor (alias for
+- `Ctrl+Y`: Перемкнути режим YOLO (автоматичне схвалення викликів інструментів).
+- `Shift+Tab`: Перемкнути режим Auto Edit (автоматичне прийняття правок).
+- `Option+M` (macOS): Введення `µ` через Option+M також перемикає рендеринг
+  Markdown (аналог `Cmd+M`).
+- `!` у порожньому рядку: Увійти або вийти з режиму оболонки.
+- `\` (в кінці рядка) + `Enter`: Вставити новий рядок без виходу з однорядкового
+  режиму.
+- `Ctrl+Delete` / `Meta+Delete`: Видалити слово праворуч від курсору.
+- `Ctrl+B` або `Left Arrow`: Перемістити курсор на один символ ліворуч.
+- `Ctrl+F` або `Right Arrow`: Перемістити курсор на один символ праворуч; якщо
+  підключена вбудована оболонка, `Ctrl+F` перемикає фокус.
+- `Ctrl+D` або `Delete`: Видалити символ безпосередньо праворуч від курсору.
+- `Ctrl+H` або `Backspace`: Видалити символ безпосередньо ліворуч від курсору.
+- `Ctrl+Left Arrow` / `Meta+Left Arrow` / `Meta+B`: Переміститися на одне слово
+  ліворуч.
+- `Ctrl+Right Arrow` / `Meta+Right Arrow` / `Meta+F`: Переміститися на одне
+  слово праворуч.
+- `Ctrl+W`: Видалити слово ліворуч від курсору (додатково до `Ctrl+Backspace`).
+- `Ctrl+Z` / `Ctrl+Shift+Z`: Скасувати або повернути останню правку тексту.
+- `Meta+Enter`: Відкрити поточний ввід у зовнішньому редакторі (аналог
   `Ctrl+X`).
-- `Esc` pressed twice quickly: Clear the current input buffer.
-- `Up Arrow` / `Down Arrow`: When the cursor is at the top or bottom of a
-  single-line input, navigate backward or forward through prompt history.
-- `Number keys (1-9, multi-digit)` inside selection dialogs: Jump directly to
-  the numbered radio option and confirm when the full number is entered.
+- `Esc` натиснутий двічі швидко: Очистити поточний буфер введення.
+- `Up Arrow` / `Down Arrow`: Коли курсор знаходиться вгорі або внизу
+  однорядкового вводу, навігація назад або вперед по історії підказок.
+- `Цифрові клавіші (1-9)` у діалогах вибору: Прямий перехід до пронумерованого
+  пункту та підтвердження.

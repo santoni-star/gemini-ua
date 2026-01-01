@@ -1,57 +1,39 @@
-# Todo tool (`write_todos`)
+# Інструмент завдань (`write_todos`)
 
-This document describes the `write_todos` tool for the Gemini CLI.
+Цей документ описує інструмент `write_todos` для Gemini CLI.
 
-## Description
+## Опис
 
-The `write_todos` tool allows the Gemini agent to create and manage a list of
-subtasks for complex user requests. This provides you, the user, with greater
-visibility into the agent's plan and its current progress. It also helps with
-alignment where the agent is less likely to lose track of its current goal.
+Інструмент `write_todos` дозволяє агенту Gemini створювати та керувати списком
+підзавдань для складних запитів. Це дає вам змогу бачити план агента та його
+поточний прогрес, а також допомагає самому ШІ не втрачати фокус на меті.
 
-### Arguments
+### Аргументи
 
-`write_todos` takes one argument:
+- `todos` (масив об'єктів, обов'язково): Повний список завдань. Кожне завдання
+  містить:
+  - `description` (рядок): Опис завдання.
+  - `status` (рядок): Поточний статус (`pending`, `in_progress`, `completed` або
+    `cancelled`).
 
-- `todos` (array of objects, required): The complete list of todo items. This
-  replaces the existing list. Each item includes:
-  - `description` (string): The task description.
-  - `status` (string): The current status (`pending`, `in_progress`,
-    `completed`, or `cancelled`).
+## Поведінка
 
-## Behavior
+Агент використовує цей інструмент для розбиття складних багатоетапних запитів на
+чіткий план.
 
-The agent uses this tool to break down complex multi-step requests into a clear
-plan.
+- **Відстеження прогресу:** Агент оновлює список у міру виконання, позначаючи
+  завдання як `completed`.
+- **Фокус на одному завданні:** Одночасно лише одне завдання може бути у статусі
+  `in_progress`.
+- **Динамічні оновлення:** План може змінюватися в процесі роботи (додавання
+  нових завдань або скасування непотрібних).
 
-- **Progress tracking:** The agent updates this list as it works, marking tasks
-  as `completed` when done.
-- **Single focus:** Only one task will be marked `in_progress` at a time,
-  indicating exactly what the agent is currently working on.
-- **Dynamic updates:** The plan may evolve as the agent discovers new
-  information, leading to new tasks being added or unnecessary ones being
-  cancelled.
+Поточне завдання (`in_progress`) відображається над полем введення. Ви можете
+переглянути повний список завдань у будь-який час, натиснувши **Ctrl+T**.
 
-When active, the current `in_progress` task is displayed above the input box,
-keeping you informed of the immediate action. You can toggle the full view of
-the todo list at any time by pressing `Ctrl+T`.
+## Важливі зауваження
 
-Usage example (internal representation):
-
-```javascript
-write_todos({
-  todos: [
-    { description: 'Initialize new React project', status: 'completed' },
-    { description: 'Implement state management', status: 'in_progress' },
-    { description: 'Create API service', status: 'pending' },
-  ],
-});
-```
-
-## Important notes
-
-- **Enabling:** This tool is enabled by default. You can disable it in your
-  `settings.json` file by setting `"useWriteTodos": false`.
-
-- **Intended use:** This tool is primarily used by the agent for complex,
-  multi-turn tasks. It is generally not used for simple, single-turn questions.
+- **Увімкнення:** Цей інструмент увімкнено за замовчуванням. Ви можете вимкнути
+  його у `settings.json`, встановивши `"useWriteTodos": false`.
+- **Призначення:** Використовується переважно для складних завдань, що
+  потребують кількох кроків.

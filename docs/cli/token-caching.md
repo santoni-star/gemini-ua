@@ -1,20 +1,20 @@
-# Token caching and cost optimization
+# Кешування токенів та оптимізація витрат
 
-Gemini CLI automatically optimizes API costs through token caching when using
-API key authentication (Gemini API key or Vertex AI). This feature reuses
-previous system instructions and context to reduce the number of tokens
-processed in subsequent requests.
+Gemini CLI автоматично оптимізує витрати на API за допомогою кешування токенів
+при використанні аутентифікації через ключ API (Gemini API key або Vertex AI).
+Ця функція повторно використовує попередні системні інструкції та контекст, щоб
+зменшити кількість токенів, що обробляються в наступних запитах.
 
-**Token caching is available for:**
+**Кешування токенів доступне для:**
 
-- API key users (Gemini API key)
-- Vertex AI users (with project and location setup)
+- Користувачів ключів API (Gemini API key).
+- Користувачів Vertex AI (з налаштованим проектом та локацією).
 
-**Token caching is not available for:**
+**Кешування токенів недоступне для:**
 
-- OAuth users (Google Personal/Enterprise accounts) - the Code Assist API does
-  not support cached content creation at this time
+- Користувачів OAuth (особисті або корпоративні акаунти Google) — на даний
+  момент Code Assist API не підтримує створення кешованого вмісту.
 
-You can view your token usage and cached token savings using the `/stats`
-command. When cached tokens are available, they will be displayed in the stats
-output.
+Ви можете переглянути використання токенів та економію завдяки кешуванню за
+допомогою команди `/stats`. Коли кешовані токени використовуються, вони
+відображаються у виводі статистики.

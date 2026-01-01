@@ -1,16 +1,17 @@
-# Trusted Folders
+# Довірені папки (Trusted Folders)
 
-The Trusted Folders feature is a security setting that gives you control over
-which projects can use the full capabilities of the Gemini CLI. It prevents
-potentially malicious code from running by asking you to approve a folder before
-the CLI loads any project-specific configurations from it.
+Функція "Довірені папки" — це налаштування безпеки, яке дає вам контроль над
+тим, які проекти можуть використовувати повні можливості Gemini CLI. Вона
+запобігає виконанню потенційно шкідливого коду, запитуючи ваше схвалення папки
+перед тим, як CLI завантажить будь-які специфічні для проекту конфігурації з
+неї.
 
-## Enabling the feature
+## Увімкнення функції
 
-The Trusted Folders feature is **disabled by default**. To use it, you must
-first enable it in your settings.
+Функція "Довірені папки" **вимкнена за замовчуванням**. Щоб скористатися нею, ви
+повинні спочатку увімкнути її в налаштуваннях.
 
-Add the following to your user `settings.json` file:
+Додайте наступне до вашого файлу `settings.json` користувача:
 
 ```json
 {
@@ -22,74 +23,75 @@ Add the following to your user `settings.json` file:
 }
 ```
 
-## How it works: The trust dialog
+## Як це працює: Діалог довіри
 
-Once the feature is enabled, the first time you run the Gemini CLI from a
-folder, a dialog will automatically appear, prompting you to make a choice:
+Після увімкнення функції, при першому запуску Gemini CLI з нової папки
+автоматично з'явиться діалогове вікно з пропозицією зробити вибір:
 
-- **Trust folder**: Grants full trust to the current folder (e.g.,
-  `my-project`).
-- **Trust parent folder**: Grants trust to the parent directory (e.g.,
-  `safe-projects`), which automatically trusts all of its subdirectories as
-  well. This is useful if you keep all your safe projects in one place.
-- **Don't trust**: Marks the folder as untrusted. The CLI will operate in a
-  restricted "safe mode."
+- **Trust folder (Довіряти папці)**: Надає повну довіру поточній папці
+  (наприклад, `my-project`).
+- **Trust parent folder (Довіряти батьківській папці)**: Надає довіру
+  батьківському каталогу (наприклад, `safe-projects`), що автоматично робить
+  довіреними і всі його підкаталоги. Це корисно, якщо ви тримаєте всі свої
+  безпечні проекти в одному місці.
+- **Don't trust (Не довіряти)**: Позначає папку як недовірену. CLI працюватиме в
+  обмеженому "безпечному режимі".
 
-Your choice is saved in a central file (`~/.gemini/trustedFolders.json`), so you
-will only be asked once per folder.
+Ваш вибір зберігається в центральному файлі (`~/.gemini/trustedFolders.json`),
+тому запитання з'явиться лише один раз для кожної папки.
 
-## Why trust matters: The impact of an untrusted workspace
+## Чому довіра важлива: Наслідки недовіреного робочого простору
 
-When a folder is **untrusted**, the Gemini CLI runs in a restricted "safe mode"
-to protect you. In this mode, the following features are disabled:
+Коли папка є **недовіреною**, Gemini CLI запускається в обмеженому "безпечному
+режимі", щоб захистити вас. У цьому режимі вимкнено наступні можливості:
 
-1.  **Workspace settings are ignored**: The CLI will **not** load the
-    `.gemini/settings.json` file from the project. This prevents the loading of
-    custom tools and other potentially dangerous configurations.
+1.  **Налаштування робочого простору ігноруються**: CLI **не** завантажуватиме
+    файл `.gemini/settings.json` з проекту. Це запобігає завантаженню власних
+    інструментів та інших потенційно небезпечних конфігурацій.
 
-2.  **Environment variables are ignored**: The CLI will **not** load any `.env`
-    files from the project.
+2.  **Змінні середовища ігноруються**: CLI **не** завантажуватиме файли `.env` з
+    проекту.
 
-3.  **Extension management is restricted**: You **cannot install, update, or
-    uninstall** extensions.
+3.  **Керування розширеннями обмежено**: Ви **не можете встановлювати,
+    оновлювати або видаляти** розширення.
 
-4.  **Tool auto-acceptance is disabled**: You will always be prompted before any
-    tool is run, even if you have auto-acceptance enabled globally.
+4.  **Автоматичне прийняття інструментів вимкнено**: Вас завжди запитуватимуть
+    перед запуском будь-якого інструменту, навіть якщо автоприйняття увімкнено
+    глобально.
 
-5.  **Automatic memory loading is disabled**: The CLI will not automatically
-    load files into context from directories specified in local settings.
+5.  **Автоматичне завантаження пам'яті вимкнено**: CLI не буде автоматично
+    завантажувати файли в контекст із каталогів, указаних у локальних
+    налаштуваннях.
 
-6.  **MCP servers do not connect**: The CLI will not attempt to connect to any
-    [Model Context Protocol (MCP)](../tools/mcp-server.md) servers.
+6.  **Сервери MCP не підключаються**: CLI не намагатиметься підключитися до
+    жодного сервера [Model Context Protocol (MCP)](../tools/mcp-server.md).
 
-7.  **Custom commands are not loaded**: The CLI will not load any custom
-    commands from .toml files, including both project-specific and global user
-    commands.
+7.  **Власні команди не завантажуються**: CLI не завантажуватиме власні команди
+    з файлів .toml, включаючи як специфічні для проекту, так і глобальні команди
+    користувача.
 
-Granting trust to a folder unlocks the full functionality of the Gemini CLI for
-that workspace.
+Надання довіри папці відкриває повну функціональність Gemini CLI для цього
+робочого простору.
 
-## Managing your trust settings
+## Керування налаштуваннями довіри
 
-If you need to change a decision or see all your settings, you have a couple of
-options:
+Якщо вам потрібно змінити рішення або переглянути всі налаштування, у вас є
+кілька варіантів:
 
-- **Change the current folder's trust**: Run the `/permissions` command from
-  within the CLI. This will bring up the same interactive dialog, allowing you
-  to change the trust level for the current folder.
+- **Змінити довіру до поточної папки**: Запустіть команду `/permissions`
+  всередині CLI. Це викличе той самий інтерактивний діалог.
 
-- **View all trust rules**: To see a complete list of all your trusted and
-  untrusted folder rules, you can inspect the contents of the
-  `~/.gemini/trustedFolders.json` file in your home directory.
+- **Переглянути всі правила довіри**: Щоб побачити повний список усіх правил для
+  довірених і недовірених папок, ви можете переглянути вміст файлу
+  `~/.gemini/trustedFolders.json` у вашому домашньому каталозі.
 
-## The trust check process (advanced)
+## Процес перевірки довіри (для просунутих користувачів)
 
-For advanced users, it's helpful to know the exact order of operations for how
-trust is determined:
+Корисно знати точний порядок визначення довіри:
 
-1.  **IDE trust signal**: If you are using the
-    [IDE Integration](../ide-integration/index.md), the CLI first asks the IDE
-    if the workspace is trusted. The IDE's response takes highest priority.
+1.  **Сигнал довіри IDE**: Якщо ви використовуєте
+    [інтеграцію з IDE](../ide-integration/index.md), CLI спочатку запитує IDE,
+    чи є робочий простір довіреним. Відповідь IDE має найвищий пріоритет.
 
-2.  **Local trust file**: If the IDE is not connected, the CLI checks the
-    central `~/.gemini/trustedFolders.json` file.
+2.  **Локальний файл довіри**: Якщо IDE не підключено, CLI перевіряє центральний
+    файл `~/.gemini/trustedFolders.json`.

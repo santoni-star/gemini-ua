@@ -1,66 +1,66 @@
-# Sandboxing in the Gemini CLI
+# Пісочниця (Sandboxing) у Gemini CLI
 
-This document provides a guide to sandboxing in the Gemini CLI, including
-prerequisites, quickstart, and configuration.
+Цей документ містить посібник із використання пісочниці в Gemini CLI, включаючи
+вимоги, швидкий старт та налаштування.
 
-## Prerequisites
+## Попередні вимоги
 
-Before using sandboxing, you need to install and set up the Gemini CLI:
+Перед використанням пісочниці вам потрібно встановити Gemini CLI:
 
 ```bash
-npm install -g @google/gemini-cli
+npm install -g santoni-star/gemini-cli-uk
 ```
 
-To verify the installation
+Щоб перевірити встановлення:
 
 ```bash
-gemini --version
+gemini-uk --version
 ```
 
-## Overview of sandboxing
+## Огляд пісочниці
 
-Sandboxing isolates potentially dangerous operations (such as shell commands or
-file modifications) from your host system, providing a security barrier between
-AI operations and your environment.
+Пісочниця ізолює потенційно небезпечні операції (такі як команди оболонки або
+зміна файлів) від вашої хост-системи, створюючи бар'єр безпеки між операціями ШІ
+та вашим середовищем.
 
-The benefits of sandboxing include:
+Переваги пісочниці включають:
 
-- **Security**: Prevent accidental system damage or data loss.
-- **Isolation**: Limit file system access to project directory.
-- **Consistency**: Ensure reproducible environments across different systems.
-- **Safety**: Reduce risk when working with untrusted code or experimental
-  commands.
+- **Безпека**: Запобігання випадковому пошкодженню системи або втраті даних.
+- **Ізоляція**: Обмеження доступу до файлової системи лише каталогом проекту.
+- **Узгодженість**: Гарантія відтворюваності середовища на різних системах.
+- **Захист**: Зниження ризику при роботі з ненадійним кодом або
+  експериментальними командами.
 
-## Sandboxing methods
+## Методи пісочниці
 
-Your ideal method of sandboxing may differ depending on your platform and your
-preferred container solution.
+Ваш ідеальний метод пісочниці може відрізнятися залежно від платформи та
+бажаного рішення для контейнеризації.
 
-### 1. macOS Seatbelt (macOS only)
+### 1. macOS Seatbelt (тільки для macOS)
 
-Lightweight, built-in sandboxing using `sandbox-exec`.
+Легка, вбудована пісочниця з використанням `sandbox-exec`.
 
-**Default profile**: `permissive-open` - restricts writes outside project
-directory but allows most other operations.
+**Профіль за замовчуванням**: `permissive-open` — обмежує запис за межами
+каталогу проекту, але дозволяє більшість інших операцій.
 
-### 2. Container-based (Docker/Podman)
+### 2. На основі контейнерів (Docker/Podman)
 
-Cross-platform sandboxing with complete process isolation.
+Кросплатформна пісочниця з повною ізоляцією процесів.
 
-**Note**: Requires building the sandbox image locally or using a published image
-from your organization's registry.
+**Примітка**: Потрібна локальна збірка образу пісочниці або використання
+опублікованого образу.
 
-## Quickstart
+## Швидкий старт
 
 ```bash
-# Enable sandboxing with command flag
-gemini -s -p "analyze the code structure"
+# Увімкнути пісочницю за допомогою прапорця команди
+gemini-uk -s -p "проаналізуй структуру коду"
 
-# Use environment variable
+# Використовувати змінну середовища
 export GEMINI_SANDBOX=true
-gemini -p "run the test suite"
+gemini-uk -p "запусти тести"
 
-# Configure in settings.json
+# Налаштувати в settings.json
 {
   "tools": {
     "sandbox": "docker"
@@ -68,104 +68,85 @@ gemini -p "run the test suite"
 }
 ```
 
-## Configuration
+## Налаштування
 
-### Enable sandboxing (in order of precedence)
+### Увімкнення пісочниці (у порядку пріоритету)
 
-1. **Command flag**: `-s` or `--sandbox`
-2. **Environment variable**: `GEMINI_SANDBOX=true|docker|podman|sandbox-exec`
-3. **Settings file**: `"sandbox": true` in the `tools` object of your
-   `settings.json` file (e.g., `{"tools": {"sandbox": true}}`).
+1. **Прапорець команди**: `-s` або `--sandbox`
+2. **Змінна середовища**: `GEMINI_SANDBOX=true|docker|podman|sandbox-exec`
+3. **Файл налаштувань**: `"sandbox": true` в об'єкті `tools` вашого файлу
+   `settings.json`.
 
-### macOS Seatbelt profiles
+### Профілі macOS Seatbelt
 
-Built-in profiles (set via `SEATBELT_PROFILE` env var):
+Вбудовані профілі (встановлюються через змінну `SEATBELT_PROFILE`):
 
-- `permissive-open` (default): Write restrictions, network allowed
-- `permissive-closed`: Write restrictions, no network
-- `permissive-proxied`: Write restrictions, network via proxy
-- `restrictive-open`: Strict restrictions, network allowed
-- `restrictive-closed`: Maximum restrictions
+- `permissive-open` (типово): Обмеження запису, мережа дозволена.
+- `permissive-closed`: Обмеження запису, без мережі.
+- `permissive-proxied`: Обмеження запису, мережа через проксі.
+- `restrictive-open`: Суворі обмеження, мережа дозволена.
+- `restrictive-closed`: Максимальні обмеження.
 
-### Custom sandbox flags
+### Власні прапорці пісочниці
 
-For container-based sandboxing, you can inject custom flags into the `docker` or
-`podman` command using the `SANDBOX_FLAGS` environment variable. This is useful
-for advanced configurations, such as disabling security features for specific
-use cases.
+Для пісочниці на основі контейнерів ви можете додати власні прапорці до команди
+`docker` або `podman`, використовуючи змінну середовища `SANDBOX_FLAGS`. Це
+корисно для складних конфігурацій, наприклад, вимкнення функцій безпеки для
+специфічних випадків.
 
-**Example (Podman)**:
+**Приклад (Podman)**:
 
-To disable SELinux labeling for volume mounts, you can set the following:
+Щоб вимкнути маркування SELinux для монтування томів:
 
 ```bash
 export SANDBOX_FLAGS="--security-opt label=disable"
 ```
 
-Multiple flags can be provided as a space-separated string:
+### Обробка UID/GID у Linux
+
+Пісочниця автоматично керує правами користувача в Linux. Ви можете змінити цю
+поведінку:
 
 ```bash
-export SANDBOX_FLAGS="--flag1 --flag2=value"
+export SANDBOX_SET_UID_GID=true   # Примусово використовувати UID/GID хоста
+export SANDBOX_SET_UID_GID=false  # Вимкнути мапінг UID/GID
 ```
 
-## Linux UID/GID handling
+## Усунення несправностей
 
-The sandbox automatically handles user permissions on Linux. Override these
-permissions with:
-
-```bash
-export SANDBOX_SET_UID_GID=true   # Force host UID/GID
-export SANDBOX_SET_UID_GID=false  # Disable UID/GID mapping
-```
-
-## Troubleshooting
-
-### Common issues
+### Поширені проблеми
 
 **"Operation not permitted"**
 
-- Operation requires access outside sandbox.
-- Try more permissive profile or add mount points.
+- Операція потребує доступу за межами пісочниці.
+- Спробуйте більш вільний профіль або додайте точки монтування.
 
-**Missing commands**
+**Відсутні команди**
 
-- Add to custom Dockerfile.
-- Install via `sandbox.bashrc`.
+- Додайте їх у власний Dockerfile.
+- Встановіть через `sandbox.bashrc`.
 
-**Network issues**
+**Проблеми з мережею**
 
-- Check sandbox profile allows network.
-- Verify proxy configuration.
+- Перевірте, чи дозволяє профіль пісочниці доступ до мережі.
+- Перевірте конфігурацію проксі.
 
-### Debug mode
-
-```bash
-DEBUG=1 gemini -s -p "debug command"
-```
-
-**Note:** If you have `DEBUG=true` in a project's `.env` file, it won't affect
-gemini-cli due to automatic exclusion. Use `.gemini/.env` files for gemini-cli
-specific debug settings.
-
-### Inspect sandbox
+### Режим налагодження
 
 ```bash
-# Check environment
-gemini -s -p "run shell command: env | grep SANDBOX"
-
-# List mounts
-gemini -s -p "run shell command: mount | grep workspace"
+DEBUG=1 gemini-uk -s -p "команда для налагодження"
 ```
 
-## Security notes
+## Нотатки щодо безпеки
 
-- Sandboxing reduces but doesn't eliminate all risks.
-- Use the most restrictive profile that allows your work.
-- Container overhead is minimal after first build.
-- GUI applications may not work in sandboxes.
+- Пісочниця знижує, але не усуває всі ризики.
+- Використовуйте найбільш обмежений профіль, який дозволяє виконувати вашу
+  роботу.
+- Накладні витрати контейнера мінімальні після першої збірки.
+- GUI-програми можуть не працювати в пісочницях.
 
-## Related documentation
+## Пов'язана документація
 
-- [Configuration](../get-started/configuration.md): Full configuration options.
-- [Commands](./commands.md): Available commands.
-- [Troubleshooting](../troubleshooting.md): General troubleshooting.
+- [Налаштування](../get-started/configuration.md): Повний список параметрів.
+- [Команди](./commands.md): Доступні команди.
+- [Усунення несправностей](../troubleshooting.md): Загальні поради.

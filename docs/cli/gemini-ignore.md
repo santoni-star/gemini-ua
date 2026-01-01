@@ -1,71 +1,68 @@
-# Ignoring files
+# Ігнорування файлів (.geminiignore)
 
-This document provides an overview of the Gemini Ignore (`.geminiignore`)
-feature of the Gemini CLI.
+Цей документ містить огляд функції Gemini Ignore (`.geminiignore`) у Gemini CLI.
 
-The Gemini CLI includes the ability to automatically ignore files, similar to
-`.gitignore` (used by Git) and `.aiexclude` (used by Gemini Code Assist). Adding
-paths to your `.geminiignore` file will exclude them from tools that support
-this feature, although they will still be visible to other services (such as
-Git).
+Gemini CLI дозволяє автоматично ігнорувати файли, подібно до `.gitignore` (у
+Git) або `.aiexclude` (у Gemini Code Assist). Додавання шляхів у файл
+`.geminiignore` виключить їх з роботи інструментів, які підтримують цю функцію,
+хоча вони залишаться видимими для інших сервісів (наприклад, Git).
 
-## How it works
+## Як це працює
 
-When you add a path to your `.geminiignore` file, tools that respect this file
-will exclude matching files and directories from their operations. For example,
-when you use the `@` command to share files, any paths in your `.geminiignore`
-file will be automatically excluded.
+Коли ви додаєте шлях у файл `.geminiignore`, інструменти, що підтримують цей
+файл, виключатимуть відповідні файли та каталоги зі своїх операцій. Наприклад,
+коли ви використовуєте команду `@` для надання файлів, будь-які шляхи у вашому
+`.geminiignore` будуть автоматично пропущені.
 
-For the most part, `.geminiignore` follows the conventions of `.gitignore`
-files:
+Здебільшого `.geminiignore` дотримується конвенцій файлів `.gitignore`:
 
-- Blank lines and lines starting with `#` are ignored.
-- Standard glob patterns are supported (such as `*`, `?`, and `[]`).
-- Putting a `/` at the end will only match directories.
-- Putting a `/` at the beginning anchors the path relative to the
-  `.geminiignore` file.
-- `!` negates a pattern.
+- Порожні рядки та рядки, що починаються з `#`, ігноруються.
+- Підтримуються стандартні шаблони glob (наприклад, `*`, `?` та `[]`).
+- Символ `/` в кінці відповідає лише каталогам.
+- Символ `/` на початку прив'язує шлях відносно розташування файлу
+  `.geminiignore`.
+- `!` заперечує шаблон.
 
-You can update your `.geminiignore` file at any time. To apply the changes, you
-must restart your Gemini CLI session.
+Ви можете оновити файл `.geminiignore` у будь-який час. Щоб зміни набули
+чинності, ви повинні перезапустити сесію Gemini CLI.
 
-## How to use `.geminiignore`
+## Як використовувати `.geminiignore`
 
-To enable `.geminiignore`:
+Щоб увімкнути `.geminiignore`:
 
-1. Create a file named `.geminiignore` in the root of your project directory.
+1. Створіть файл з назвою `.geminiignore` у корені каталогу вашого проекту.
 
-To add a file or directory to `.geminiignore`:
+Щоб додати файл або каталог до ігнорування:
 
-1. Open your `.geminiignore` file.
-2. Add the path or file you want to ignore, for example: `/archive/` or
+1. Відкрийте файл `.geminiignore`.
+2. Додайте шлях або файл, який хочете ігнорувати, наприклад: `/archive/` або
    `apikeys.txt`.
 
-### `.geminiignore` examples
+### Приклади `.geminiignore`
 
-You can use `.geminiignore` to ignore directories and files:
+Ви можете ігнорувати каталоги та окремі файли:
 
 ```
-# Exclude your /packages/ directory and all subdirectories
+# Виключити каталог /packages/ та всі його підкаталоги
 /packages/
 
-# Exclude your apikeys.txt file
+# Виключити файл apikeys.txt
 apikeys.txt
 ```
 
-You can use wildcards in your `.geminiignore` file with `*`:
+Ви можете використовувати символи підстановки:
 
 ```
-# Exclude all .md files
+# Виключити всі .md файли
 *.md
 ```
 
-Finally, you can exclude files and directories from exclusion with `!`:
+Ви також можете виключити файли з ігнорування за допомогою `!`:
 
 ```
-# Exclude all .md files except README.md
+# Виключити всі .md файли, окрім README.md
 *.md
 !README.md
 ```
 
-To remove paths from your `.geminiignore` file, delete the relevant lines.
+Щоб видалити шлях із `.geminiignore`, просто видаліть відповідний рядок.
