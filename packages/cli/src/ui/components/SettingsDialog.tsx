@@ -436,10 +436,21 @@ export function SettingsDialog({
   };
 
   // Scope selector items
-  const scopeItems = getScopeItems().map((item) => ({
-    ...item,
-    key: item.value,
-  }));
+  const scopeItems = getScopeItems().map((item) => {
+    let label = item.label;
+    if (item.value === SettingScope.User) label = strings.settingsScopeUser;
+    if (item.value === SettingScope.Workspace)
+      label = strings.settingsScopeWorkspace;
+    if (item.value === SettingScope.System) label = strings.settingsScopeSystem;
+    if (item.value === SettingScope.Session)
+      label = strings.settingsScopeSession;
+
+    return {
+      ...item,
+      label,
+      key: item.value,
+    };
+  });
 
   const handleScopeHighlight = (scope: LoadableSettingScope) => {
     setSelectedScope(scope);
@@ -861,7 +872,8 @@ export function SettingsDialog({
             bold={focusSection === 'settings' && !editingKey}
             wrap="truncate"
           >
-            {focusSection === 'settings' ? '> ' : '  '}Settings{' '}
+            {focusSection === 'settings' ? '> ' : '  '}
+            {strings.settingsTitle}{' '}
           </Text>
         </Box>
         <Box
@@ -880,13 +892,15 @@ export function SettingsDialog({
           <TextInput
             focus={focusSection === 'settings' && !editingKey}
             buffer={buffer}
-            placeholder="Search to filter"
+            placeholder={strings.settingsSearchPlaceholder}
           />
         </Box>
         <Box height={1} />
         {visibleItems.length === 0 ? (
           <Box marginX={1} height={1} flexDirection="column">
-            <Text color={theme.text.secondary}>No matches found.</Text>
+            <Text color={theme.text.secondary}>
+              {strings.settingsNoMatches}
+            </Text>
           </Box>
         ) : (
           <>
@@ -1035,7 +1049,8 @@ export function SettingsDialog({
         {showScopeSelection && (
           <Box marginX={1} flexDirection="column">
             <Text bold={focusSection === 'scope'} wrap="truncate">
-              {focusSection === 'scope' ? '> ' : '  '}Apply To
+              {focusSection === 'scope' ? '> ' : '  '}
+              {strings.settingsApplyTo}
             </Text>
             <RadioButtonSelect
               items={scopeItems}
@@ -1053,15 +1068,19 @@ export function SettingsDialog({
         <Box height={1} />
         <Box marginX={1}>
           <Text color={theme.text.secondary}>
-            (Use Enter to select
-            {showScopeSelection ? ', Tab to change focus' : ''}, Esc to close)
+            {strings.settingsControls
+              .replace('(Use Enter to select', '(Enter — вибрати')
+              .replace(
+                ', Tab to change focus',
+                showScopeSelection ? ', Tab — змінити фокус' : '',
+              )
+              .replace(', Esc to close)', ', Esc — закрити)')}
           </Text>
         </Box>
         {showRestartPrompt && (
           <Box marginX={1}>
             <Text color={theme.status.warning}>
-              To see changes, Gemini CLI must be restarted. Press r to exit and
-              apply changes now.
+              {strings.settingsRestartRequired}
             </Text>
           </Box>
         )}

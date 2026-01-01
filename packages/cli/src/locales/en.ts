@@ -69,6 +69,158 @@ export const en: TranslationStrings = {
   unitMinute: 'm',
   unitSecond: 's',
   unitMillisecond: 'ms',
+  settingsTitle: 'Settings',
+  settingsSearchPlaceholder: 'Search to filter',
+  settingsNoMatches: 'No matches found.',
+  settingsApplyTo: 'Apply To',
+  settingsControls: '(Use Enter to select, Tab to change focus, Esc to close)',
+  settingsRestartRequired:
+    'To see changes, Gemini CLI must be restarted. Press r to exit and apply changes now.',
+  settingsScopeUser: 'User Settings',
+  settingsScopeWorkspace: 'Workspace Settings',
+  settingsScopeSystem: 'System Settings',
+  settingsScopeSession: 'Session Settings',
+  settingsLabelPreviewFeatures: 'Preview Features (e.g., models)',
+  settingsDescPreviewFeatures:
+    'Enable preview features (e.g., preview models).',
+  settingsLabelVimMode: 'Vim Mode',
+  settingsDescVimMode: 'Enable Vim keybindings',
+  settingsLabelDisableAutoUpdate: 'Disable Auto Update',
+  settingsDescDisableAutoUpdate: 'Disable automatic updates',
+  settingsLabelCommandName: 'Command Name',
+  settingsDescCommandName:
+    'The command name to use for the CLI (requires manual terminal setup).',
+  settingsLabelEnablePromptCompletion: 'Enable Prompt Completion',
+  settingsDescEnablePromptCompletion:
+    'Enable AI-powered prompt completion suggestions while typing.',
+  settingsLabelDebugKeystrokeLogging: 'Debug Keystroke Logging',
+  settingsDescDebugKeystrokeLogging:
+    'Enable debug logging of keystrokes to the console.',
+  settingsLabelEnableSessionCleanup: 'Enable Session Cleanup',
+  settingsDescEnableSessionCleanup: 'Enable automatic session cleanup',
+  settingsLabelOutputFormat: 'Output Format',
+  settingsDescOutputFormat: 'The format of the CLI output.',
+  settingsLabelHideWindowTitle: 'Hide Window Title',
+  settingsDescHideWindowTitle: 'Hide the window title bar',
+  settingsLabelShowStatusInTitle: 'Show Status in Title',
+  settingsDescShowStatusInTitle:
+    'Show Gemini CLI status and thoughts in the terminal window title',
+  settingsLabelHideTips: 'Hide Tips',
+  settingsDescHideTips: 'Hide helpful tips in the UI',
+  settingsLabelHideBanner: 'Hide Banner',
+  settingsDescHideBanner: 'Hide the application banner',
+  settingsLabelHideContextSummary: 'Hide Context Summary',
+  settingsDescHideContextSummary:
+    'Hide the context summary (GEMINI.md, MCP servers) above the input.',
+  settingsLabelHideCWD: 'Hide CWD',
+  settingsDescHideCWD: 'Hide the current working directory path in the footer.',
+  settingsLabelHideSandboxStatus: 'Hide Sandbox Status',
+  settingsDescHideSandboxStatus:
+    'Hide the sandbox status indicator in the footer.',
+  settingsLabelHideModelInfo: 'Hide Model Info',
+  settingsDescHideModelInfo:
+    'Hide the model name and context usage in the footer.',
+  settingsLabelHideContextPercentage: 'Hide Context Window Percentage',
+  settingsDescHideContextPercentage:
+    'Hides the context window remaining percentage.',
+  settingsLabelHideFooter: 'Hide Footer',
+  settingsDescHideFooter: 'Hide the footer from the UI',
+  settingsLabelShowMemoryUsage: 'Show Memory Usage',
+  settingsDescShowMemoryUsage: 'Display memory usage information in the UI',
+  settingsLabelShowLineNumbers: 'Show Line Numbers',
+  settingsDescShowLineNumbers: 'Show line numbers in the chat.',
+  settingsLabelShowCitations: 'Show Citations',
+  settingsDescShowCitations: 'Show citations for generated text in the chat.',
+  settingsLabelShowModelInfoInChat: 'Show Model Info In Chat',
+  settingsDescShowModelInfoInChat:
+    'Show the model name in the chat for each model turn.',
+  settingsLabelUseFullWidth: 'Use Full Width',
+  settingsDescUseFullWidth: 'Use the entire width of the terminal for output.',
+  settingsLabelUseAlternateBuffer: 'Use Alternate Screen Buffer',
+  settingsDescUseAlternateBuffer:
+    'Use an alternate screen buffer for the UI, preserving shell history.',
+  settingsLabelIncrementalRendering: 'Incremental Rendering',
+  settingsDescIncrementalRendering:
+    'Enable incremental rendering for the UI. This option will reduce flickering but may cause rendering artifacts. Only supported when useAlternateBuffer is enabled.',
+  settingsLabelDisableLoadingPhrases: 'Disable Loading Phrases',
+  settingsDescDisableLoadingPhrases:
+    'Disable loading phrases for accessibility',
+  settingsLabelScreenReader: 'Screen Reader Mode',
+  settingsDescScreenReader:
+    'Render output in plain-text to be more screen reader accessible',
+  settingsLabelIdeEnabled: 'IDE Mode',
+  settingsDescIdeEnabled: 'Enable IDE integration mode',
+  settingsLabelUsageStatisticsEnabled: 'Enable Usage Statistics',
+  settingsDescUsageStatisticsEnabled: 'Enable collection of usage statistics',
+  settingsLabelMaxSessionTurns: 'Max Session Turns',
+  settingsDescMaxSessionTurns:
+    'Maximum number of user/model/tool turns to keep in a session. -1 means unlimited.',
+  settingsLabelCompressionThreshold: 'Compression Threshold',
+  settingsDescCompressionThreshold:
+    'The fraction of context usage at which to trigger context compression (e.g. 0.2, 0.3).',
+  settingsLabelSkipNextSpeakerCheck: 'Skip Next Speaker Check',
+  settingsDescSkipNextSpeakerCheck: 'Skip the next speaker check.',
+  settingsLabelDiscoveryMaxDirs: 'Memory Discovery Max Dirs',
+  settingsDescDiscoveryMaxDirs:
+    'Maximum number of directories to search for memory.',
+  settingsLabelLoadMemoryFromIncludeDirectories:
+    'Load Memory From Include Directories',
+  settingsDescLoadMemoryFromIncludeDirectories:
+    'Controls how /memory refresh loads GEMINI.md files. When true, include directories are scanned; when false, only the current directory is used.',
+  settingsLabelRespectGitIgnore: 'Respect .gitignore',
+  settingsDescRespectGitIgnore: 'Respect .gitignore files when searching',
+  settingsLabelRespectGeminiIgnore: 'Respect .geminiignore',
+  settingsDescRespectGeminiIgnore: 'Respect .geminiignore files when searching',
+  settingsLabelEnableRecursiveFileSearch: 'Enable Recursive File Search',
+  settingsDescEnableRecursiveFileSearch:
+    'Enable recursive file search functionality when completing @ references in the prompt.',
+  settingsLabelDisableFuzzySearch: 'Disable Fuzzy Search',
+  settingsDescDisableFuzzySearch:
+    'Disable fuzzy search when searching for files.',
+  settingsLabelEnableInteractiveShell: 'Enable Interactive Shell',
+  settingsDescEnableInteractiveShell:
+    'Use node-pty for an interactive shell experience. Fallback to child_process still applies.',
+  settingsLabelShowColor: 'Show Color',
+  settingsDescShowColor: 'Show color in shell output.',
+  settingsLabelAutoAccept: 'Auto Accept',
+  settingsDescAutoAccept:
+    'Automatically accept and execute tool calls that are considered safe (e.g., read-only operations).',
+  settingsLabelUseRipgrep: 'Use Ripgrep',
+  settingsDescUseRipgrep:
+    'Use ripgrep for file content search instead of the fallback implementation. Provides faster search performance.',
+  settingsLabelEnableToolOutputTruncation: 'Enable Tool Output Truncation',
+  settingsDescEnableToolOutputTruncation:
+    'Enable truncation of large tool outputs.',
+  settingsLabelTruncateToolOutputThreshold: 'Tool Output Truncation Threshold',
+  settingsDescTruncateToolOutputThreshold:
+    'Truncate tool output if it is larger than this many characters. Set to -1 to disable.',
+  settingsLabelTruncateToolOutputLines: 'Tool Output Truncation Lines',
+  settingsDescTruncateToolOutputLines:
+    'The number of lines to keep when truncating tool output.',
+  settingsLabelDisableYoloMode: 'Disable YOLO Mode',
+  settingsDescDisableYoloMode: 'Disable YOLO mode, even if enabled by a flag.',
+  settingsLabelEnablePermanentToolApproval: 'Allow Permanent Tool Approval',
+  settingsDescEnablePermanentToolApproval:
+    'Enable the "Allow for all future sessions" option in tool confirmation dialogs.',
+  settingsLabelBlockGitExtensions: 'Blocks extensions from Git',
+  settingsDescBlockGitExtensions:
+    'Blocks installing and loading extensions from Git.',
+  settingsLabelFolderTrustEnabled: 'Folder Trust',
+  settingsDescFolderTrustEnabled:
+    'Setting to track whether Folder trust is enabled.',
+  settingsLabelEnvironmentVariableRedactionEnabled:
+    'Enable Environment Variable Redaction',
+  settingsDescEnvironmentVariableRedactionEnabled:
+    'Enable redaction of environment variables that may contain secrets.',
+  settingsLabelCodebaseInvestigatorEnabled: 'Enable Codebase Investigator',
+  settingsDescCodebaseInvestigatorEnabled:
+    'Enable the Codebase Investigator agent.',
+  settingsLabelCodebaseInvestigatorMaxNumTurns:
+    'Codebase Investigator Max Num Turns',
+  settingsDescCodebaseInvestigatorMaxNumTurns:
+    'Maximum number of turns for the Codebase Investigator agent.',
+  settingsLabelIntrospectionAgentEnabled: 'Enable Introspection Agent',
+  settingsDescIntrospectionAgentEnabled: 'Enable the Introspection Agent.',
   authGetStarted: 'Get started',
   authHowToAuthenticate: 'How would you like to authenticate for this project?',
   authLoginGoogle: 'Login with Google',

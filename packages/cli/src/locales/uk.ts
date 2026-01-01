@@ -72,6 +72,166 @@ export const uk: TranslationStrings = {
   unitMinute: 'хв',
   unitSecond: 'с',
   unitMillisecond: 'мс',
+  settingsTitle: 'Налаштування',
+  settingsSearchPlaceholder: 'Пошук для фільтрації',
+  settingsNoMatches: 'Нічого не знайдено.',
+  settingsApplyTo: 'Застосувати до',
+  settingsControls: '(Enter — вибрати, Tab — змінити фокус, Esc — закрити)',
+  settingsRestartRequired:
+    'Для застосування змін необхідно перезапустити Gemini CLI. Натисніть r, щоб вийти та застосувати зміни зараз.',
+  settingsScopeUser: 'Налаштування користувача',
+  settingsScopeWorkspace: 'Налаштування робочого простору',
+  settingsScopeSystem: 'Системні налаштування',
+  settingsScopeSession: 'Налаштування сесії',
+  settingsLabelPreviewFeatures: 'Попередні функції (наприклад, моделі)',
+  settingsDescPreviewFeatures:
+    'Увімкнути попередні функції (наприклад, моделі в попередньому перегляді).',
+  settingsLabelVimMode: 'Режим Vim',
+  settingsDescVimMode: 'Увімкнути клавіші Vim',
+  settingsLabelDisableAutoUpdate: 'Вимкнути автоматичне оновлення',
+  settingsDescDisableAutoUpdate: 'Вимкнути автоматичні оновлення',
+  settingsLabelCommandName: 'Назва команди',
+  settingsDescCommandName:
+    'Назва команди для запуску CLI (потребує ручного налаштування терміналу).',
+  settingsLabelEnablePromptCompletion: 'Увімкнути автодоповнення підказок',
+  settingsDescEnablePromptCompletion:
+    'Увімкнути пропозиції автодоповнення підказок на основі ШІ під час введення.',
+  settingsLabelDebugKeystrokeLogging: 'Логування натискань клавіш',
+  settingsDescDebugKeystrokeLogging:
+    'Увімкнути налагоджувальний журнал натискань клавіш у консоль.',
+  settingsLabelEnableSessionCleanup: 'Увімкнути очищення сесій',
+  settingsDescEnableSessionCleanup:
+    'Увімкнути автоматичне очищення старих сесій',
+  settingsLabelOutputFormat: 'Формат виводу',
+  settingsDescOutputFormat: 'Формат виводу результатів у CLI.',
+  settingsLabelHideWindowTitle: 'Приховати заголовок вікна',
+  settingsDescHideWindowTitle: 'Приховати рядок заголовка вікна терміналу',
+  settingsLabelShowStatusInTitle: 'Показувати статус у заголовку',
+  settingsDescShowStatusInTitle:
+    'Показувати статус та міркування Gemini CLI у заголовку вікна терміналу',
+  settingsLabelHideTips: 'Приховати поради',
+  settingsDescHideTips: 'Приховати корисні поради в інтерфейсі',
+  settingsLabelHideBanner: 'Приховати банер',
+  settingsDescHideBanner: 'Приховати вітальний банер програми',
+  settingsLabelHideContextSummary: 'Приховати підсумок контексту',
+  settingsDescHideContextSummary:
+    'Приховати підсумок контексту (GEMINI.md, сервери MCP) над полем введення.',
+  settingsLabelHideCWD: 'Приховати шлях каталогу (CWD)',
+  settingsDescHideCWD:
+    'Приховати шлях до поточної робочої директорії у футері.',
+  settingsLabelHideSandboxStatus: 'Приховати статус пісочниці',
+  settingsDescHideSandboxStatus:
+    'Приховати індикатор статусу пісочниці у футері.',
+  settingsLabelHideModelInfo: 'Приховати інформацію про модель',
+  settingsDescHideModelInfo:
+    'Приховати назву моделі та використання контексту у футері.',
+  settingsLabelHideContextPercentage: 'Приховати відсоток контексту',
+  settingsDescHideContextPercentage:
+    'Приховує відсоток залишку вікна контексту.',
+  settingsLabelHideFooter: 'Приховати футер',
+  settingsDescHideFooter: 'Повністю приховати нижній колонтитул (футер).',
+  settingsLabelShowMemoryUsage: "Показувати використання пам'яті",
+  settingsDescShowMemoryUsage:
+    "Відображати інформацію про використання оперативної пам'яті.",
+  settingsLabelShowLineNumbers: 'Показувати номери рядків',
+  settingsDescShowLineNumbers: 'Показувати номери рядків у чаті.',
+  settingsLabelShowCitations: 'Показувати цитати',
+  settingsDescShowCitations:
+    'Показувати джерела (цитати) для згенерованого тексту.',
+  settingsLabelShowModelInfoInChat: 'Показувати модель у чаті',
+  settingsDescShowModelInfoInChat:
+    'Показувати назву моделі для кожної відповіді.',
+  settingsLabelUseFullWidth: 'Використовувати всю ширину',
+  settingsDescUseFullWidth:
+    'Використовувати всю ширину терміналу для виводу тексту.',
+  settingsLabelUseAlternateBuffer: 'Альтернативний буфер екрана',
+  settingsDescUseAlternateBuffer:
+    'Використовувати альтернативний буфер екрана для збереження історії команд терміналу.',
+  settingsLabelIncrementalRendering: 'Інкрементальний рендеринг',
+  settingsDescIncrementalRendering:
+    'Увімкнути інкрементальний рендеринг (зменшує мерехтіння, але може створювати артефакти).',
+  settingsLabelDisableLoadingPhrases: 'Вимкнути фрази завантаження',
+  settingsDescDisableLoadingPhrases:
+    'Вимкнути дотепні фрази під час очікування відповіді.',
+  settingsLabelScreenReader: 'Режим зчитування екрана',
+  settingsDescScreenReader:
+    'Виводити текст у форматі, зручному для зчитувачів екрана.',
+  settingsLabelIdeEnabled: 'Режим інтеграції з IDE',
+  settingsDescIdeEnabled: 'Увімкнути режим взаємодії з редактором коду.',
+  settingsLabelUsageStatisticsEnabled: 'Дозволити збір статистики',
+  settingsDescUsageStatisticsEnabled:
+    'Дозволити анонімний збір статистики використання для покращення програми.',
+  settingsLabelMaxSessionTurns: 'Макс. кількість обмінів',
+  settingsDescMaxSessionTurns:
+    'Максимальна кількість повідомлень у сесії. -1 — без обмежень.',
+  settingsLabelCompressionThreshold: 'Поріг стиснення',
+  settingsDescCompressionThreshold:
+    'Частка заповнення контексту, при якій запускається стиснення (наприклад, 0.2).',
+  settingsLabelSkipNextSpeakerCheck: 'Пропустити перевірку мовця',
+  settingsDescSkipNextSpeakerCheck:
+    'Пришвидшити відповіді, пропускаючи перевірку наступного мовця.',
+  settingsLabelDiscoveryMaxDirs: "Макс. каталогів для пошуку пам'яті",
+  settingsDescDiscoveryMaxDirs:
+    'Максимальна кількість папок для пошуку файлів GEMINI.md.',
+  settingsLabelLoadMemoryFromIncludeDirectories:
+    "Завантажувати пам'ять із включених папок",
+  settingsDescLoadMemoryFromIncludeDirectories:
+    "Чи сканувати додаткові папки при оновленні пам'яті.",
+  settingsLabelRespectGitIgnore: 'Враховувати .gitignore',
+  settingsDescRespectGitIgnore: 'Пропускати заігнорені файли при пошуку.',
+  settingsLabelRespectGeminiIgnore: 'Враховувати .geminiignore',
+  settingsDescRespectGeminiIgnore: 'Пропускати файли, вказані у .geminiignore.',
+  settingsLabelEnableRecursiveFileSearch: 'Рекурсивний пошук файлів',
+  settingsDescEnableRecursiveFileSearch:
+    'Увімкнути пошук у підпапках для автодоповнення файлів через @.',
+  settingsLabelDisableFuzzySearch: 'Вимкнути нечіткий пошук',
+  settingsDescDisableFuzzySearch: 'Вимкнути нечіткий пошук при виборі файлів.',
+  settingsLabelEnableInteractiveShell: 'Інтерактивна оболонка',
+  settingsDescEnableInteractiveShell:
+    'Використовувати повноцінний термінал для команд оболонки.',
+  settingsLabelShowColor: 'Показувати кольори',
+  settingsDescShowColor: 'Зберігати кольори у виводі команд оболонки.',
+  settingsLabelAutoAccept: 'Автоматичне прийняття',
+  settingsDescAutoAccept:
+    'Автоматично виконувати безпечні операції (наприклад, тільки для читання).',
+  settingsLabelUseRipgrep: 'Використовувати ripgrep',
+  settingsDescUseRipgrep:
+    'Використовувати утиліту ripgrep для миттєвого пошуку у файлах.',
+  settingsLabelEnableToolOutputTruncation: 'Обрізати вивід інструментів',
+  settingsDescEnableToolOutputTruncation:
+    'Увімкнути обмеження довжини виводу інструментів.',
+  settingsLabelTruncateToolOutputThreshold: 'Поріг обрізання виводу',
+  settingsDescTruncateToolOutputThreshold:
+    'Обрізати вивід, якщо він більший за вказану кількість символів.',
+  settingsLabelTruncateToolOutputLines: 'Кількість рядків після обрізання',
+  settingsDescTruncateToolOutputLines:
+    'Скільки рядків залишати при обрізанні довгого виводу.',
+  settingsLabelDisableYoloMode: 'Вимкнути режим YOLO',
+  settingsDescDisableYoloMode:
+    'Заборонити режим автоматичного схвалення всіх дій.',
+  settingsLabelEnablePermanentToolApproval: 'Дозволити постійне схвалення',
+  settingsDescEnablePermanentToolApproval:
+    'Дозволити запам\'ятовувати вибір "Довіряти завжди" для інструментів.',
+  settingsLabelBlockGitExtensions: 'Блокувати розширення з Git',
+  settingsDescBlockGitExtensions:
+    'Заборонити встановлення та завантаження розширень безпосередньо з Git.',
+  settingsLabelFolderTrustEnabled: 'Довіра до папок',
+  settingsDescFolderTrustEnabled:
+    'Увімкнути механізм перевірки довіри до каталогів.',
+  settingsLabelEnvironmentVariableRedactionEnabled:
+    'Приховувати секрети в змінних',
+  settingsDescEnvironmentVariableRedactionEnabled:
+    'Автоматично приховувати потенційні паролі та ключі у змінних середовища.',
+  settingsLabelCodebaseInvestigatorEnabled: 'Увімкнути Codebase Investigator',
+  settingsDescCodebaseInvestigatorEnabled:
+    'Увімкнути спеціалізованого агента для аналізу коду.',
+  settingsLabelCodebaseInvestigatorMaxNumTurns:
+    'Макс. кроків Codebase Investigator',
+  settingsDescCodebaseInvestigatorMaxNumTurns:
+    'Обмеження кількості кроків для агента аналізу коду.',
+  settingsLabelIntrospectionAgentEnabled: 'Увімкнути Introspection Agent',
+  settingsDescIntrospectionAgentEnabled:
+    'Увімкнути агента для самоаналізу дій.',
   authGetStarted: 'Початок роботи',
   authHowToAuthenticate:
     'Як ви бажаєте пройти аутентифікацію для цього проекту?',
