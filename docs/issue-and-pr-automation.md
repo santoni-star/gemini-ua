@@ -1,134 +1,66 @@
-# Automation and triage processes
+# Процеси автоматизації та сортування
 
-This document provides a detailed overview of the automated processes we use to
-manage and triage issues and pull requests. Our goal is to provide prompt
-feedback and ensure that contributions are reviewed and integrated efficiently.
-Understanding this automation will help you as a contributor know what to expect
-and how to best interact with our repository bots.
+Цей документ надає детальний огляд автоматизованих процесів, які ми
+використовуємо для керування та сортування проблем (issues) та запитів на злиття
+(pull requests). Наша мета — забезпечити швидкий зворотний зв'язок та ефективну
+інтеграцію внесків.
 
-## Guiding principle: Issues and pull requests
+## Керівний принцип: Issues та Pull Requests
 
-First and foremost, almost every Pull Request (PR) should be linked to a
-corresponding Issue. The issue describes the "what" and the "why" (the bug or
-feature), while the PR is the "how" (the implementation). This separation helps
-us track work, prioritize features, and maintain clear historical context. Our
-automation is built around this principle.
+Майже кожен запит на злиття (PR) має бути пов'язаний із відповідною проблемою
+(Issue). Issue описує "що" і "чому" (баг або функція), тоді як PR описує "як"
+(реалізація). Цей поділ допомагає нам відстежувати роботу та зберігати історію
+змін.
 
-> **Note:** Issues tagged as "🔒Maintainers only" are reserved for project
-> maintainers. We will not accept pull requests related to these issues.
+> **Примітка:** Issues з тегом "🔒Maintainers only" зарезервовані для
+> розробників проекту.
 
----
+## Робочі процеси автоматизації
 
-## Detailed automation workflows
+Ось огляд ботів та автоматизацій, що працюють у нашому репозиторії.
 
-Here is a breakdown of the specific automation workflows that run in our
-repository.
+### 1. Сортування нових Issue: `Automated Issue Triage`
 
-### 1. When you open an issue: `Automated Issue Triage`
+Цей бот першим аналізує створену вами проблему та призначає відповідні мітки.
 
-This is the first bot you will interact with when you create an issue. Its job
-is to perform an initial analysis and apply the correct labels.
+- **Коли запускається:** Одразу після створення або відновлення issue.
+- **Що робить:**
+  - Використовує модель Gemini для аналізу назви та опису проблеми.
+  - **Призначає мітку `area/*`**: Категоризує проблему за функціональною областю
+    (наприклад, `area/ux`, `area/platform`).
+  - **Призначає мітку `kind/*`**: Визначає тип (баг, покращення, запитання).
+  - **Призначає пріоритет `priority/*`**: Від P0 (критичний) до P3 (низький).
+  - **Може додати `status/need-information`**: Якщо в описі не вистачає деталей
+    (логів, кроків відтворення).
 
-- **Workflow File**: `.github/workflows/gemini-automated-issue-triage.yml`
-- **When it runs**: Immediately after an issue is created or reopened.
-- **What it does**:
-  - It uses a Gemini model to analyze the issue's title and body against a
-    detailed set of guidelines.
-  - **Applies one `area/*` label**: Categorizes the issue into a functional area
-    of the project (e.g., `area/ux`, `area/models`, `area/platform`).
-  - **Applies one `kind/*` label**: Identifies the type of issue (e.g.,
-    `kind/bug`, `kind/enhancement`, `kind/question`).
-  - **Applies one `priority/*` label**: Assigns a priority from P0 (critical) to
-    P3 (low) based on the described impact.
-  - **May apply `status/need-information`**: If the issue lacks critical details
-    (like logs or reproduction steps), it will be flagged for more information.
-  - **May apply `status/need-retesting`**: If the issue references a CLI version
-    that is more than six versions old, it will be flagged for retesting on a
-    current version.
-- **What you should do**:
-  - Fill out the issue template as completely as possible. The more detail you
-    provide, the more accurate the triage will be.
-  - If the `status/need-information` label is added, please provide the
-    requested details in a comment.
+### 2. Перевірка Pull Request: `Continuous Integration (CI)`
 
-### 2. When you open a pull request: `Continuous Integration (CI)`
+Цей процес гарантує, що всі зміни відповідають нашим стандартам якості перед
+злиттям.
 
-This workflow ensures that all changes meet our quality standards before they
-can be merged.
+- **Коли запускається:** При кожному оновленні PR.
+- **Що робить:**
+  - **Lint**: Перевіряє дотримання стилю коду.
+  - **Test**: Запускає повний набір автоматичних тестів на macOS, Windows та
+    Linux.
+  - **Coverage**: Публікує коментар із підсумком покриття вашого коду тестами.
 
-- **Workflow File**: `.github/workflows/ci.yml`
-- **When it runs**: On every push to a pull request.
-- **What it does**:
-  - **Lint**: Checks that your code adheres to our project's formatting and
-    style rules.
-  - **Test**: Runs our full suite of automated tests across macOS, Windows, and
-    Linux, and on multiple Node.js versions. This is the most time-consuming
-    part of the CI process.
-  - **Post Coverage Comment**: After all tests have successfully passed, a bot
-    will post a comment on your PR. This comment provides a summary of how well
-    your changes are covered by tests.
-- **What you should do**:
-  - Ensure all CI checks pass. A green checkmark ✅ will appear next to your
-    commit when everything is successful.
-  - If a check fails (a red "X" ❌), click the "Details" link next to the failed
-    check to view the logs, identify the problem, and push a fix.
+### 3. Аудит PR та синхронізація міток
 
-### 3. Ongoing triage for pull requests: `PR Auditing and Label Sync`
+Запускається кожні 15 хвилин для перевірки всіх відкритих PR.
 
-This workflow runs periodically to ensure all open PRs are correctly linked to
-issues and have consistent labels.
+- **Що робить:**
+  - **Шукає зв'язок з issue**: Перевіряє опис PR на наявність ключових слів,
+    як-от `Fixes #123`.
+  - **Додає `status/need-issue`**: Якщо зв'язок не знайдено.
+  - **Синхронізує мітки**: Копіює мітки з пов'язаної issue до PR.
 
-- **Workflow File**: `.github/workflows/gemini-scheduled-pr-triage.yml`
-- **When it runs**: Every 15 minutes on all open pull requests.
-- **What it does**:
-  - **Checks for a linked issue**: The bot scans your PR description for a
-    keyword that links it to an issue (e.g., `Fixes #123`, `Closes #456`).
-  - **Adds `status/need-issue`**: If no linked issue is found, the bot will add
-    the `status/need-issue` label to your PR. This is a clear signal that an
-    issue needs to be created and linked.
-  - **Synchronizes labels**: If an issue _is_ linked, the bot ensures the PR's
-    labels perfectly match the issue's labels. It will add any missing labels
-    and remove any that don't belong, and it will remove the `status/need-issue`
-    label if it was present.
-- **What you should do**:
-  - **Always link your PR to an issue.** This is the most important step. Add a
-    line like `Resolves #<issue-number>` to your PR description.
-  - This will ensure your PR is correctly categorized and moves through the
-    review process smoothly.
+### 4. Автоматизація релізів
 
-### 4. Ongoing triage for issues: `Scheduled Issue Triage`
+Цей процес відповідає за пакування та публікацію нових версій.
 
-This is a fallback workflow to ensure that no issue gets missed by the triage
-process.
-
-- **Workflow File**: `.github/workflows/gemini-scheduled-issue-triage.yml`
-- **When it runs**: Every hour on all open issues.
-- **What it does**:
-  - It actively seeks out issues that either have no labels at all or still have
-    the `status/need-triage` label.
-  - It then triggers the same powerful Gemini-based analysis as the initial
-    triage bot to apply the correct labels.
-- **What you should do**:
-  - You typically don't need to do anything. This workflow is a safety net to
-    ensure every issue is eventually categorized, even if the initial triage
-    fails.
-
-### 5. Release automation
-
-This workflow handles the process of packaging and publishing new versions of
-the Gemini CLI.
-
-- **Workflow File**: `.github/workflows/release-manual.yml`
-- **When it runs**: On a daily schedule for "nightly" releases, and manually for
-  official patch/minor releases.
-- **What it does**:
-  - Automatically builds the project, bumps the version numbers, and publishes
-    the packages to npm.
-  - Creates a corresponding release on GitHub with generated release notes.
-- **What you should do**:
-  - As a contributor, you don't need to do anything for this process. You can be
-    confident that once your PR is merged into the `main` branch, your changes
-    will be included in the very next nightly release.
-
-We hope this detailed overview is helpful. If you have any questions about our
-automation or processes, please don't hesitate to ask!
+- **Що робить:**
+  - Автоматично збирає проект, оновлює версії та публікує пакети в npm.
+  - Створює реліз на GitHub з автоматично згенерованими нотатками (release
+    notes).
+  - Код з гілки `main` потрапляє у "нічні" (nightly) збірки наступного дня.

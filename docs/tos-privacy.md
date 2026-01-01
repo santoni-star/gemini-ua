@@ -1,96 +1,61 @@
-# Gemini CLI: License, Terms of Service, and Privacy Notices
+# Gemini CLI: Ліцензія, Умови використання та Повідомлення про конфіденційність
 
-Gemini CLI is an open-source tool that lets you interact with Google's powerful
-AI services directly from your command-line interface. The Gemini CLI software
-is licensed under the
-[Apache 2.0 license](https://github.com/google-gemini/gemini-cli/blob/main/LICENSE).
-When you use Gemini CLI to access or use Google’s services, the Terms of Service
-and Privacy Notices applicable to those services apply to such access and use.
+Gemini CLI — це інструмент із відкритим вихідним кодом, який дозволяє
+взаємодіяти з потужними сервісами ШІ від Google безпосередньо через інтерфейс
+командного рядка. Програмне забезпечення Gemini CLI поширюється за ліцензією
+[Apache 2.0](https://github.com/google-gemini/gemini-cli/blob/main/LICENSE).
+Коли ви використовуєте Gemini CLI для доступу до сервісів Google, застосовуються
+Умови використання та Повідомлення про конфіденційність відповідних сервісів.
 
-Your Gemini CLI Usage Statistics are handled in accordance with Google's Privacy
-Policy.
+Ваша статистика використання Gemini CLI обробляється відповідно до Політики
+конфіденційності Google.
 
-**Note:** See [quotas and pricing](/docs/quota-and-pricing.md) for the quota and
-pricing details that apply to your usage of the Gemini CLI.
+**Примітка:** Деталі щодо квот дивіться у розділі
+[Квоти та ціни](/docs/quota-and-pricing.md).
 
-## Supported authentication methods
+## Підтримувані методи аутентифікації
 
-Your authentication method refers to the method you use to log into and access
-Google’s services with Gemini CLI. Supported authentication methods include:
+Ваш метод аутентифікації визначає умови, які застосовуються до вашої роботи:
 
-- Logging in with your Google account to Gemini Code Assist.
-- Using an API key with Gemini Developer API.
-- Using an API key with Vertex AI GenAI API.
+| Метод аутентифікації       | Сервіс(и)                   | Умови використання                                                                               | Повідомлення про конфіденційність                                                                               |
+| :------------------------- | :-------------------------- | :----------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------- |
+| Обліковий запис Google     | Сервіси Gemini Code Assist  | [Умови використання](https://developers.google.com/gemini-code-assist/resources/privacy-notices) | [Повідомлення про конфіденційність](https://developers.google.com/gemini-code-assist/resources/privacy-notices) |
+| Ключ Gemini API (безкошт.) | Gemini API - Безкоштовно    | [Умови Gemini API - Безкоштовно](https://ai.google.dev/gemini-api/terms#unpaid-services)         | [Політика конфіденційності Google](https://policies.google.com/privacy)                                         |
+| Ключ Gemini API (платно)   | Gemini API - Платні сервіси | [Умови Gemini API - Платні сервіси](https://ai.google.dev/gemini-api/terms#paid-services)        | [Політика конфіденційності Google](https://policies.google.com/privacy)                                         |
+| Ключ Vertex AI API         | Vertex AI GenAI API         | [Умови Google Cloud Platform](https://cloud.google.com/terms/service-terms/)                     | [Конфіденційність Google Cloud](https://cloud.google.com/terms/cloud-privacy-notice)                            |
 
-The Terms of Service and Privacy Notices applicable to the aforementioned Google
-services are set forth in the table below.
+## 1. Якщо ви увійшли через обліковий запис Google до Gemini Code Assist
 
-If you log in with your Google account and you do not already have a Gemini Code
-Assist account associated with your Google account, you will be directed to the
-sign up flow for Gemini Code Assist for individuals. If your Google account is
-managed by your organization, your administrator may not permit access to Gemini
-Code Assist for individuals. Please see the
-[Gemini Code Assist for individuals FAQs](https://developers.google.com/gemini-code-assist/resources/faqs)
-for further information.
+Для користувачів, які використовують свій обліковий запис Google для доступу до
+[Gemini Code Assist](https://codeassist.google), застосовуються такі документи:
 
-| Authentication Method    | Service(s)                   | Terms of Service                                                                                        | Privacy Notice                                                                                |
-| :----------------------- | :--------------------------- | :------------------------------------------------------------------------------------------------------ | :-------------------------------------------------------------------------------------------- |
-| Google Account           | Gemini Code Assist services  | [Terms of Service](https://developers.google.com/gemini-code-assist/resources/privacy-notices)          | [Privacy Notices](https://developers.google.com/gemini-code-assist/resources/privacy-notices) |
-| Gemini Developer API Key | Gemini API - Unpaid Services | [Gemini API Terms of Service - Unpaid Services](https://ai.google.dev/gemini-api/terms#unpaid-services) | [Google Privacy Policy](https://policies.google.com/privacy)                                  |
-| Gemini Developer API Key | Gemini API - Paid Services   | [Gemini API Terms of Service - Paid Services](https://ai.google.dev/gemini-api/terms#paid-services)     | [Google Privacy Policy](https://policies.google.com/privacy)                                  |
-| Vertex AI GenAI API Key  | Vertex AI GenAI API          | [Google Cloud Platform Terms of Service](https://cloud.google.com/terms/service-terms/)                 | [Google Cloud Privacy Notice](https://cloud.google.com/terms/cloud-privacy-notice)            |
+- **Gemini Code Assist для фізичних осіб:**
+  [Умови використання Google](https://policies.google.com/terms) та
+  [Повідомлення про конфіденційність Gemini Code Assist для фізичних осіб](https://developers.google.com/gemini-code-assist/resources/privacy-notice-gemini-code-assist-individuals).
+- **Gemini Code Assist з підпискою Google AI Pro або Ultra:**
+  [Умови використання Google](https://policies.google.com/terms),
+  [Додаткові умови Google One](https://one.google.com/terms-of-service) та
+  [Політика конфіденційності Google](https://policies.google.com/privacy).
+- **Gemini Code Assist Standard та Enterprise:**
+  [Умови Google Cloud Platform](https://cloud.google.com/terms) та
+  [Повідомлення про конфіденційність Google Cloud](https://cloud.google.com/terms/cloud-privacy-notice).
 
-## 1. If you have logged in with your Google account to Gemini Code Assist
+## 2. Якщо ви використовуєте ключ Gemini API
 
-For users who use their Google account to access
-[Gemini Code Assist](https://codeassist.google), these Terms of Service and
-Privacy Notice documents apply:
+Ваше використання Gemini CLI регулюється
+[Умовами використання Gemini API](https://ai.google.dev/gemini-api/terms). Збір
+даних описано в
+[Політиці конфіденційності Google](https://policies.google.com/privacy).
 
-- Gemini Code Assist for individuals:
-  [Google Terms of Service](https://policies.google.com/terms) and
-  [Gemini Code Assist for individuals Privacy Notice](https://developers.google.com/gemini-code-assist/resources/privacy-notice-gemini-code-assist-individuals).
-- Gemini Code Assist with Google AI Pro or Ultra subscription:
-  [Google Terms of Service](https://policies.google.com/terms),
-  [Google One Additional Terms of Service](https://one.google.com/terms-of-service)
-  and [Google Privacy Policy\*](https://policies.google.com/privacy).
-- Gemini Code Assist Standard and Enterprise editions:
-  [Google Cloud Platform Terms of Service](https://cloud.google.com/terms) and
-  [Google Cloud Privacy Notice](https://cloud.google.com/terms/cloud-privacy-notice).
+## 3. Якщо ви використовуєте ключ Vertex AI API
 
-_\* If your account is also associated with an active subscription to Gemini
-Code Assist Standard or Enterprise edition, the terms and privacy policy of
-Gemini Code Assist Standard or Enterprise edition will apply to all your use of
-Gemini Code Assist._
+Ваше використання Gemini CLI регулюється
+[Умовами надання послуг Google Cloud Platform](https://cloud.google.com/terms/service-terms/).
+Збір даних описано в
+[Повідомленні про конфіденційність Google Cloud](https://cloud.google.com/terms/cloud-privacy-notice).
 
-## 2. If you have logged in with a Gemini API key to the Gemini Developer API
+## Відмова від збору статистики використання
 
-If you are using a Gemini API key for authentication with the
-[Gemini Developer API](https://ai.google.dev/gemini-api/docs), these Terms of
-Service and Privacy Notice documents apply:
-
-- Terms of Service: Your use of the Gemini CLI is governed by the
-  [Gemini API Terms of Service](https://ai.google.dev/gemini-api/terms). These
-  terms may differ depending on whether you are using an unpaid or paid service:
-  - For unpaid services, refer to the
-    [Gemini API Terms of Service - Unpaid Services](https://ai.google.dev/gemini-api/terms#unpaid-services).
-  - For paid services, refer to the
-    [Gemini API Terms of Service - Paid Services](https://ai.google.dev/gemini-api/terms#paid-services).
-- Privacy Notice: The collection and use of your data is described in the
-  [Google Privacy Policy](https://policies.google.com/privacy).
-
-## 3. If you have logged in with a Gemini API key to the Vertex AI GenAI API
-
-If you are using a Gemini API key for authentication with a
-[Vertex AI GenAI API](https://cloud.google.com/vertex-ai/generative-ai/docs/reference/rest)
-backend, these Terms of Service and Privacy Notice documents apply:
-
-- Terms of Service: Your use of the Gemini CLI is governed by the
-  [Google Cloud Platform Service Terms](https://cloud.google.com/terms/service-terms/).
-- Privacy Notice: The collection and use of your data is described in the
-  [Google Cloud Privacy Notice](https://cloud.google.com/terms/cloud-privacy-notice).
-
-## Usage statistics opt-out
-
-You may opt-out from sending Gemini CLI Usage Statistics to Google by following
-the instructions available here:
-[Usage Statistics Configuration](https://github.com/google-gemini/gemini-cli/blob/main/docs/get-started/configuration.md#usage-statistics).
+Ви можете відмовитися від надсилання статистики використання Gemini CLI до
+Google, дотримуючись інструкцій тут:
+[Налаштування статистики використання](https://github.com/google-gemini/gemini-cli/blob/main/docs/get-started/configuration.md#usage-statistics).

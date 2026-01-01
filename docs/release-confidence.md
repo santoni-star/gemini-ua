@@ -1,164 +1,71 @@
-# Release confidence strategy
+# Стратегія перевірки якості релізу
 
-This document outlines the strategy for gaining confidence in every release of
-the Gemini CLI. It serves as a checklist and quality gate for release manager to
-ensure we are shipping a high-quality product.
+Цей документ описує стратегію перевірки якості кожного релізу Gemini CLI. Він
+слугує чек-листом для реліз-менеджера, щоб гарантувати випуск якісного продукту.
 
-## The goal
+## Мета
 
-To answer the question, "Is this release _truly_ ready for our users?" with a
-high degree of confidence, based on a holistic evaluation of automated signals,
-manual verification, and data.
+Впевнено відповісти на запитання: "Чи справді цей реліз готовий для наших
+користувачів?", ґрунтуючись на автоматичних сигналах, ручній перевірці та даних.
 
-## Level 1: Automated gates (must pass)
+## Рівень 1: Автоматичні перевірки (обов'язково)
 
-These are the baseline requirements. If any of these fail, the release is a
-no-go.
+Це базові вимоги. Якщо будь-яка з них не виконується — реліз не випускається.
 
-### 1. CI/CD health
+### 1. Стан CI/CD
 
-All workflows in `.github/workflows/ci.yml` must pass on the `main` branch (for
-nightly) or the release branch (for preview/stable).
+Усі процеси в `.github/workflows/ci.yml` мають бути "зеленими" (пройденими) для
+гілки `main` (нічні збірки) або релізної гілки.
 
-- **Platforms:** Tests must pass on **Linux and macOS**.
-  - _Note:_ Windows tests currently run with `continue-on-error: true`. While a
-    failure here doesn't block the release technically, it should be
-    investigated.
-- **Checks:**
-  - **Linting:** No linting errors (ESLint, Prettier, etc.).
-  - **Typechecking:** No TypeScript errors.
-  - **Unit Tests:** All unit tests in `packages/core` and `packages/cli` must
-    pass.
-  - **Build:** The project must build and bundle successfully.
+- **Платформи:** Тести мають проходити на **Linux та macOS**.
+- **Перевірки:** Лінтер (ESLint, Prettier), типізація (TypeScript), юніт-тести
+  та збірка проекту.
 
-### 2. End-to-end (E2E) tests
+### 2. End-to-end (E2E) тести
 
-All workflows in `.github/workflows/chained_e2e.yml` must pass.
+Усі процеси в `.github/workflows/chained_e2e.yml` мають бути пройденими на
+Linux, macOS та Windows.
 
-- **Platforms:** **Linux, macOS and Windows**.
-- **Sandboxing:** Tests must pass with both `sandbox:none` and `sandbox:docker`
-  on Linux.
+### 3. Smoke-тести після деплою
 
-### 3. Post-deployment smoke tests
+Після публікації в npm запускається `smoke-test.yml`. Команда
+`npx -y @google/gemini-cli@<tag> --version` має повернути правильну версію без
+помилок.
 
-After a release is published to npm, the `smoke-test.yml` workflow runs. This
-must pass to confirm the package is installable and the binary is executable.
+## Рівень 2: Ручна перевірка та внутрішнє тестування
 
-- **Command:** `npx -y @google/gemini-cli@<tag> --version` must return the
-  correct version without error.
-- **Platform:** Currently runs on `ubuntu-latest`.
+Автоматичні тести не можуть зловити все, особливо проблеми зі зручністю (UX).
 
-## Level 2: Manual verification and dogfooding
+### 1. Використання `preview` версії
 
-Automated tests cannot catch everything, especially UX issues.
+Тижневий цикл релізів передбачає, що код знаходиться у каналі `preview`
+принаймні **один тиждень** перед переходом у `stable`. Розробники мають
+використовувати цю версію у своїй щоденній роботі.
 
-### 1. Dogfooding via `preview` tag
+### 2. Чек-лист критичних сценаріїв (CUJ)
 
-The weekly release cadence promotes code from `main` -> `nightly` -> `preview`
--> `stable`.
+Реліз-менеджер має вручну перевірити:
 
-- **Requirement:** The `preview` release must be used by maintainers for at
-  least **one week** before being promoted to `stable`.
-- **Action:** Maintainers should install the preview version locally:
-  ```bash
-  npm install -g @google/gemini-cli@preview
-  ```
-- **Goal:** To catch regressions and UX issues in day-to-day usage before they
-  reach the broad user base.
+- [ ] **Аутентифікація:** Команда `/auth` (Вхід через Google, Ключ API, Vertex
+      AI).
+- [ ] **Базові запити:** Простий промпт та уточнююче запитання (тест контексту).
+- [ ] **Ввід через конвеєр:** `echo "текст" | gemini`.
+- [ ] **Керування контекстом:** Використання `@файл` у чаті.
+- [ ] **Налаштування:** Зміна параметрів через `/settings`.
+- [ ] **Виклик інструментів:** Наприклад, "створи файл hello.md з текстом
+      'привіт'".
 
-### 2. Critical user journey (CUJ) checklist
+## Рівень 3: Телеметрія та дані
 
-Before promoting a `preview` release to `stable`, a release manager must
-manually run through this checklist.
+- **Здоров'я панелі керування:** Перевірка відсутності стрибків помилок у новій
+  версії.
+- **Оцінка моделей:** Порівняння результатів оцінки (evaluation) з середніми
+  показниками попередніх версій.
 
-- **Setup:**
-  - [ ] Uninstall any existing global version:
-        `npm uninstall -g @google/gemini-cli`
-  - [ ] Clear npx cache (optional but recommended): `npm cache clean --force`
-  - [ ] Install the preview version: `npm install -g @google/gemini-cli@preview`
-  - [ ] Verify version: `gemini --version`
+## Рішення про випуск (Go/No-Go)
 
-- **Authentication:**
-  - [ ] In interactive mode run `/auth` and verify all login flows work:
-    - [ ] Login With Google
-    - [ ] API Key
-    - [ ] Vertex AI
+Перед просуванням версії з `preview` у `stable`:
 
-- **Basic prompting:**
-  - [ ] Run `gemini "Tell me a joke"` and verify a sensible response.
-  - [ ] Run in interactive mode: `gemini`. Ask a follow-up question to test
-        context.
-
-- **Piped input:**
-  - [ ] Run `echo "Summarize this" | gemini` and verify it processes stdin.
-
-- **Context management:**
-  - [ ] In interactive mode, use `@file` to add a local file to context. Ask a
-        question about it.
-
-- **Settings:**
-  - [ ] In interactive mode run `/settings` and make modifications
-  - [ ] Validate that setting is changed
-
-- **Function calling:**
-  - [ ] In interactive mode, ask gemini to "create a file named hello.md with
-        the content 'hello world'" and verify the file is created correctly.
-
-If any of these CUJs fail, the release is a no-go until a patch is applied to
-the `preview` channel.
-
-### 3. Pre-Launch bug bash (tier 1 and 2 launches)
-
-For high-impact releases, an organized bug bash is required to ensure a higher
-level of quality and to catch issues across a wider range of environments and
-use cases.
-
-**Definition of tiers:**
-
-- **Tier 1:** Industry-Moving News 🚀
-- **Tier 2:** Important News for Our Users 📣
-- **Tier 3:** Relevant, but Not Life-Changing 💡
-- **Tier 4:** Bug Fixes ⚒️
-
-**Requirement:**
-
-A bug bash must be scheduled at least **72 hours in advance** of any Tier 1 or
-Tier 2 launch.
-
-**Rule of thumb:**
-
-A bug bash should be considered for any release that involves:
-
-- A blog post
-- Coordinated social media announcements
-- Media relations or press outreach
-- A "Turbo" launch event
-
-## Level 3: Telemetry and data review
-
-### Dashboard health
-
-- [ ] Go to `go/gemini-cli-dash`.
-- [ ] Navigate to the "Tool Call" tab.
-- [ ] Validate that there are no spikes in errors for the release you would like
-      to promote.
-
-### Model evaluation
-
-- [ ] Navigate to `go/gemini-cli-offline-evals-dash`.
-- [ ] Make sure that the release you want to promote's recurring run is within
-      average eval runs.
-
-## The "go/no-go" decision
-
-Before triggering the `Release: Promote` workflow to move `preview` to `stable`:
-
-1.  [ ] **Level 1:** CI and E2E workflows are green for the commit corresponding
-        to the current `preview` tag.
-2.  [ ] **Level 2:** The `preview` version has been out for one week, and the
-        CUJ checklist has been completed successfully by a release manager. No
-        blocking issues have been reported.
-3.  [ ] **Level 3:** Dashboard Health and Model Evaluation checks have been
-        completed and show no regressions.
-
-If all checks pass, proceed with the promotion.
+1. Рівень 1 (Автоматизація) пройдено.
+2. Рівень 2 (Ручна перевірка) пройдено, критичних багів не виявлено.
+3. Рівень 3 (Дані) показує стабільність без регресій.
