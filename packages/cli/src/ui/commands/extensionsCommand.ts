@@ -18,6 +18,7 @@ import {
   type SlashCommand,
   CommandKind,
 } from './types.js';
+import { strings } from '../../i18n.js';
 import open from 'open';
 import process from 'node:process';
 import {
@@ -604,7 +605,7 @@ export function completeExtensionsAndScopes(
 
 const listExtensionsCommand: SlashCommand = {
   name: 'list',
-  description: 'List active extensions',
+  description: strings.commandDescriptions['extensions list'],
   kind: CommandKind.BUILT_IN,
   autoExecute: true,
   action: listAction,
@@ -612,7 +613,7 @@ const listExtensionsCommand: SlashCommand = {
 
 const updateExtensionsCommand: SlashCommand = {
   name: 'update',
-  description: 'Update extensions. Usage: update <extension-names>|--all',
+  description: strings.commandDescriptions['extensions update'],
   kind: CommandKind.BUILT_IN,
   autoExecute: false,
   action: updateAction,
@@ -621,7 +622,7 @@ const updateExtensionsCommand: SlashCommand = {
 
 const disableCommand: SlashCommand = {
   name: 'disable',
-  description: 'Disable an extension',
+  description: strings.commandDescriptions['extensions disable'],
   kind: CommandKind.BUILT_IN,
   autoExecute: false,
   action: disableAction,
@@ -630,7 +631,7 @@ const disableCommand: SlashCommand = {
 
 const enableCommand: SlashCommand = {
   name: 'enable',
-  description: 'Enable an extension',
+  description: strings.commandDescriptions['extensions enable'],
   kind: CommandKind.BUILT_IN,
   autoExecute: false,
   action: enableAction,
@@ -639,7 +640,7 @@ const enableCommand: SlashCommand = {
 
 const installCommand: SlashCommand = {
   name: 'install',
-  description: 'Install an extension from a git repo or local path',
+  description: strings.commandDescriptions['extensions install'],
   kind: CommandKind.BUILT_IN,
   autoExecute: false,
   action: installAction,
@@ -647,7 +648,7 @@ const installCommand: SlashCommand = {
 
 const uninstallCommand: SlashCommand = {
   name: 'uninstall',
-  description: 'Uninstall an extension',
+  description: strings.commandDescriptions['extensions uninstall'],
   kind: CommandKind.BUILT_IN,
   autoExecute: false,
   action: uninstallAction,
@@ -656,7 +657,7 @@ const uninstallCommand: SlashCommand = {
 
 const exploreExtensionsCommand: SlashCommand = {
   name: 'explore',
-  description: 'Open extensions page in your browser',
+  description: strings.commandDescriptions['extensions explore'],
   kind: CommandKind.BUILT_IN,
   autoExecute: true,
   action: exploreAction,
@@ -664,7 +665,7 @@ const exploreExtensionsCommand: SlashCommand = {
 
 const restartCommand: SlashCommand = {
   name: 'restart',
-  description: 'Restart all extensions',
+  description: strings.commandDescriptions['extensions restart'],
   kind: CommandKind.BUILT_IN,
   autoExecute: false,
   action: restartAction,
@@ -679,7 +680,7 @@ export function extensionsCommand(
     : [];
   return {
     name: 'extensions',
-    description: 'Manage extensions',
+    description: strings.commandDescriptions['extensions'],
     kind: CommandKind.BUILT_IN,
     autoExecute: false,
     subCommands: [

@@ -23,10 +23,11 @@ import {
 } from '@google/gemini-cli-core';
 import { appEvents, AppEvent } from '../../utils/events.js';
 import { MessageType, type HistoryItemMcpStatus } from '../types.js';
+import { strings } from '../../i18n.js';
 
 const authCommand: SlashCommand = {
   name: 'auth',
-  description: 'Authenticate with an OAuth-enabled MCP server',
+  description: strings.commandDescriptions['mcp auth'],
   kind: CommandKind.BUILT_IN,
   autoExecute: true,
   action: async (
@@ -285,7 +286,7 @@ const listAction = async (
 const listCommand: SlashCommand = {
   name: 'list',
   altNames: ['ls', 'nodesc', 'nodescription'],
-  description: 'List configured MCP servers and tools',
+  description: strings.commandDescriptions['mcp list'],
   kind: CommandKind.BUILT_IN,
   autoExecute: true,
   action: (context) => listAction(context),
@@ -294,7 +295,7 @@ const listCommand: SlashCommand = {
 const descCommand: SlashCommand = {
   name: 'desc',
   altNames: ['description'],
-  description: 'List configured MCP servers and tools with descriptions',
+  description: strings.commandDescriptions['mcp desc'],
   kind: CommandKind.BUILT_IN,
   autoExecute: true,
   action: (context) => listAction(context, true),
@@ -302,8 +303,7 @@ const descCommand: SlashCommand = {
 
 const schemaCommand: SlashCommand = {
   name: 'schema',
-  description:
-    'List configured MCP servers and tools with descriptions and schemas',
+  description: strings.commandDescriptions['mcp schema'],
   kind: CommandKind.BUILT_IN,
   autoExecute: true,
   action: (context) => listAction(context, true, true),
@@ -311,7 +311,7 @@ const schemaCommand: SlashCommand = {
 
 const refreshCommand: SlashCommand = {
   name: 'refresh',
-  description: 'Restarts MCP servers',
+  description: strings.commandDescriptions['mcp refresh'],
   kind: CommandKind.BUILT_IN,
   autoExecute: true,
   action: async (
@@ -360,7 +360,7 @@ const refreshCommand: SlashCommand = {
 
 export const mcpCommand: SlashCommand = {
   name: 'mcp',
-  description: 'Manage configured Model Context Protocol (MCP) servers',
+  description: strings.commandDescriptions['mcp'],
   kind: CommandKind.BUILT_IN,
   autoExecute: false,
   subCommands: [

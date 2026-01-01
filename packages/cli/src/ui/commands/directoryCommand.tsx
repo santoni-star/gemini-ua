@@ -16,6 +16,7 @@ import { MessageType, type HistoryItem } from '../types.js';
 import { refreshServerHierarchicalMemory } from '@google/gemini-cli-core';
 import { expandHomeDir } from '../utils/directoryUtils.js';
 import type { Config } from '@google/gemini-cli-core';
+import { strings } from '../../i18n.js';
 
 async function finishAddingDirectories(
   config: Config,
@@ -71,13 +72,12 @@ async function finishAddingDirectories(
 export const directoryCommand: SlashCommand = {
   name: 'directory',
   altNames: ['dir'],
-  description: 'Manage workspace directories',
+  description: strings.commandDescriptions['directory'],
   kind: CommandKind.BUILT_IN,
   subCommands: [
     {
       name: 'add',
-      description:
-        'Add directories to the workspace. Use comma to separate multiple paths',
+      description: strings.commandDescriptions['directory add'],
       kind: CommandKind.BUILT_IN,
       autoExecute: false,
       action: async (context: CommandContext, args: string) => {
@@ -230,7 +230,7 @@ export const directoryCommand: SlashCommand = {
     },
     {
       name: 'show',
-      description: 'Show all directories in the workspace',
+      description: strings.commandDescriptions['directory show'],
       kind: CommandKind.BUILT_IN,
       action: async (context: CommandContext) => {
         const {

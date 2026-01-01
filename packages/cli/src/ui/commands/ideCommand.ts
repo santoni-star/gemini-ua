@@ -26,6 +26,7 @@ import type {
 } from './types.js';
 import { CommandKind } from './types.js';
 import { SettingScope } from '../../config/settings.js';
+import { strings } from '../../i18n.js';
 
 function getIdeStatusMessage(ideClient: IdeClient): {
   messageType: 'info' | 'error';
@@ -139,7 +140,7 @@ export const ideCommand = async (): Promise<SlashCommand> => {
   if (!currentIDE) {
     return {
       name: 'ide',
-      description: 'Manage IDE integration',
+      description: strings.commandDescriptions['ide'],
       kind: CommandKind.BUILT_IN,
       autoExecute: false,
       action: (): SlashCommandActionReturn =>
@@ -153,7 +154,7 @@ export const ideCommand = async (): Promise<SlashCommand> => {
 
   const ideSlashCommand: SlashCommand = {
     name: 'ide',
-    description: 'Manage IDE integration',
+    description: strings.commandDescriptions['ide'],
     kind: CommandKind.BUILT_IN,
     autoExecute: false,
     subCommands: [],
@@ -161,7 +162,7 @@ export const ideCommand = async (): Promise<SlashCommand> => {
 
   const statusCommand: SlashCommand = {
     name: 'status',
-    description: 'Check status of IDE integration',
+    description: strings.commandDescriptions['ide status'],
     kind: CommandKind.BUILT_IN,
     autoExecute: true,
     action: async (): Promise<SlashCommandActionReturn> => {
@@ -177,7 +178,7 @@ export const ideCommand = async (): Promise<SlashCommand> => {
 
   const installCommand: SlashCommand = {
     name: 'install',
-    description: `Install required IDE companion for ${ideClient.getDetectedIdeDisplayName()}`,
+    description: strings.commandDescriptions['ide install'],
     kind: CommandKind.BUILT_IN,
     autoExecute: true,
     action: async (context) => {
@@ -253,7 +254,7 @@ export const ideCommand = async (): Promise<SlashCommand> => {
 
   const enableCommand: SlashCommand = {
     name: 'enable',
-    description: 'Enable IDE integration',
+    description: strings.commandDescriptions['ide enable'],
     kind: CommandKind.BUILT_IN,
     autoExecute: true,
     action: async (context: CommandContext) => {
@@ -276,7 +277,7 @@ export const ideCommand = async (): Promise<SlashCommand> => {
 
   const disableCommand: SlashCommand = {
     name: 'disable',
-    description: 'Disable IDE integration',
+    description: strings.commandDescriptions['ide disable'],
     kind: CommandKind.BUILT_IN,
     autoExecute: true,
     action: async (context: CommandContext) => {

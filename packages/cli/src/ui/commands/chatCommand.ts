@@ -27,6 +27,7 @@ import type {
 } from '../types.js';
 import { MessageType } from '../types.js';
 import type { Content } from '@google/genai';
+import { strings } from '../../i18n.js';
 
 const getSavedChatTags = async (
   context: CommandContext,
@@ -69,7 +70,7 @@ const getSavedChatTags = async (
 
 const listCommand: SlashCommand = {
   name: 'list',
-  description: 'List saved conversation checkpoints',
+  description: strings.commandDescriptions['chat list'],
   kind: CommandKind.BUILT_IN,
   autoExecute: true,
   action: async (context): Promise<void> => {
@@ -86,8 +87,7 @@ const listCommand: SlashCommand = {
 
 const saveCommand: SlashCommand = {
   name: 'save',
-  description:
-    'Save the current conversation as a checkpoint. Usage: /chat save <tag>',
+  description: strings.commandDescriptions['chat save'],
   kind: CommandKind.BUILT_IN,
   autoExecute: false,
   action: async (context, args): Promise<SlashCommandActionReturn | void> => {
@@ -155,8 +155,7 @@ const saveCommand: SlashCommand = {
 const resumeCommand: SlashCommand = {
   name: 'resume',
   altNames: ['load'],
-  description:
-    'Resume a conversation from a checkpoint. Usage: /chat resume <tag>',
+  description: strings.commandDescriptions['chat resume'],
   kind: CommandKind.BUILT_IN,
   autoExecute: true,
   action: async (context, args) => {
@@ -233,7 +232,7 @@ const resumeCommand: SlashCommand = {
 
 const deleteCommand: SlashCommand = {
   name: 'delete',
-  description: 'Delete a conversation checkpoint. Usage: /chat delete <tag>',
+  description: strings.commandDescriptions['chat delete'],
   kind: CommandKind.BUILT_IN,
   autoExecute: true,
   action: async (context, args): Promise<MessageActionReturn> => {
@@ -306,8 +305,7 @@ export function serializeHistoryToMarkdown(history: Content[]): string {
 
 const shareCommand: SlashCommand = {
   name: 'share',
-  description:
-    'Share the current conversation to a markdown or json file. Usage: /chat share <file>',
+  description: strings.commandDescriptions['chat share'],
   kind: CommandKind.BUILT_IN,
   autoExecute: false,
   action: async (context, args): Promise<MessageActionReturn> => {
@@ -375,7 +373,7 @@ const shareCommand: SlashCommand = {
 
 export const chatCommand: SlashCommand = {
   name: 'chat',
-  description: 'Manage conversation history',
+  description: strings.commandDescriptions['chat'],
   kind: CommandKind.BUILT_IN,
   autoExecute: false,
   subCommands: [
