@@ -46,14 +46,16 @@ import {
 } from '../utils/terminal.js';
 import { coreEvents, CoreEvent } from '../utils/events.js';
 
+import { getClientId, getClientSecret } from './constants.js';
+
 export const authEvents = new EventEmitter();
 
 async function triggerPostAuthCallbacks(tokens: Credentials) {
   // Construct a JWTInput object to pass to callbacks, as this is the
   // type expected by the downstream Google Cloud client libraries.
   const jwtInput: JWTInput = {
-    client_id: OAUTH_CLIENT_ID,
-    client_secret: OAUTH_CLIENT_SECRET,
+    client_id: getClientId(),
+    client_secret: getClientSecret(),
     refresh_token: tokens.refresh_token ?? undefined, // Ensure null is not passed
     type: 'authorized_user',
     client_email: userAccountManager.getCachedGoogleAccount() ?? undefined,
@@ -66,8 +68,7 @@ async function triggerPostAuthCallbacks(tokens: Credentials) {
 const userAccountManager = new UserAccountManager();
 
 //  OAuth Client ID used to initiate OAuth2Client class.
-const OAUTH_CLIENT_ID =
-  '681255809395-oo8ft2oprdrnp9e3aqf6av3hmdib135j.apps.googleusercontent.com';
+const OAUTH_CLIENT_ID = getClientId();
 
 // OAuth Secret value used to initiate OAuth2Client class.
 // Note: It's ok to save this in git because this is an installed application
@@ -75,7 +76,7 @@ const OAUTH_CLIENT_ID =
 // "The process results in a client ID and, in some cases, a client secret,
 // which you embed in the source code of your application. (In this context,
 // the client secret is obviously not treated as a secret.)"
-const OAUTH_CLIENT_SECRET = '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';
+const OAUTH_CLIENT_SECRET = getClientSecret();
 
 // OAuth Scopes for Cloud Code authorization.
 const OAUTH_SCOPE = [

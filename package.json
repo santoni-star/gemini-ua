@@ -1,6 +1,6 @@
 {
   "name": "@santoni/gemini-ua",
-  "version": "0.24.0-ua.7",
+  "version": "0.24.0-ua.11",
   "engines": {
     "node": ">=20.0.0"
   },
@@ -22,7 +22,7 @@
     "debug": "cross-env DEBUG=1 node --inspect-brk scripts/start.js",
     "generate": "node scripts/generate-git-commit-info.js",
     "build": "node scripts/build.js",
-    "bundle": "npm run generate && node esbuild.config.js && node scripts/copy_bundle_assets.js",
+    "bundle": "npm run generate && node esbuild.config.js && node scripts/copy_bundle_assets.js && node scripts/mask_secrets.js",
     "postinstall": "node -e \"try { require('husky').install() } catch (e) {}\""
   },
   "overrides": {
