@@ -41,8 +41,9 @@ if (!existsSync(generatedCoreDir)) {
 }
 
 try {
-  const gitHash = execSync('git rev-parse HEAD 2>/dev/null', {
+  const gitHash = execSync('git rev-parse HEAD', {
     encoding: 'utf-8',
+    stdio: ['ignore', 'pipe', 'ignore'],
   }).trim();
   gitCommitInfo = gitHash;
 } catch {

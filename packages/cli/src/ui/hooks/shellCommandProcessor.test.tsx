@@ -371,7 +371,7 @@ describe('useShellCommandProcessor', () => {
         expect.objectContaining({
           tools: [
             expect.objectContaining({
-              resultDisplay: '[Receiving binary output... 2.0 KB received]',
+              resultDisplay: '[Receiving binary output... 2.0 КБ received]',
             }),
           ],
         }),

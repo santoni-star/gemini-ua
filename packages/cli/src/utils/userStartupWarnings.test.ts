@@ -39,7 +39,9 @@ describe('getUserStartupWarnings', () => {
     it('should return a warning when running in home directory', async () => {
       const warnings = await getUserStartupWarnings(homeDir);
       expect(warnings).toContainEqual(
-        expect.stringContaining('home directory'),
+        expect.stringContaining(
+          'Ви запускаєте Gemini CLI у домашньому каталозі',
+        ),
       );
     });
 
@@ -58,10 +60,14 @@ describe('getUserStartupWarnings', () => {
       const rootDir = path.parse(testRootDir).root;
       const warnings = await getUserStartupWarnings(rootDir);
       expect(warnings).toContainEqual(
-        expect.stringContaining('root directory'),
+        expect.stringContaining(
+          'Ви запускаєте Gemini CLI у кореневому каталозі',
+        ),
       );
       expect(warnings).toContainEqual(
-        expect.stringContaining('folder structure will be used'),
+        expect.stringContaining(
+          'Весь ваш дерево каталогів буде використано для контексту',
+        ),
       );
     });
 
@@ -80,7 +86,7 @@ describe('getUserStartupWarnings', () => {
       const nonExistentPath = path.join(testRootDir, 'non-existent');
       const warnings = await getUserStartupWarnings(nonExistentPath);
       const expectedWarning =
-        'Could not verify the current directory due to a file system error.';
+        'Не вдалося перевірити поточний каталог через помилку файлової системи.';
       expect(warnings).toEqual([expectedWarning, expectedWarning]);
     });
   });

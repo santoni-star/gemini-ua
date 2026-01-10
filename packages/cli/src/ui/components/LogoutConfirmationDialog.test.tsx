@@ -31,7 +31,9 @@ describe('LogoutConfirmationDialog', () => {
     expect(lastFrame()).toContain(
       'Увійдіть знову, щоб продовжити використання Gemini CLI, або вийдіть із програми.',
     );
-    expect(lastFrame()).toContain('(Use Enter to select, Esc to close)');
+    expect(lastFrame()).toContain(
+      '(Enter — вибрати, Tab — змінити фокус, Esc — закрити)',
+    );
   });
 
   it('should render RadioButtonSelect with Login and Exit options', () => {

@@ -45,12 +45,12 @@ describe('ProQuotaDialog', () => {
         expect.objectContaining({
           items: [
             {
-              label: 'Keep trying',
+              label: 'Спробувати ще раз',
               value: 'retry_once',
               key: 'retry_once',
             },
             {
-              label: 'Stop',
+              label: 'Зупинити',
               value: 'retry_later',
               key: 'retry_later',
             },
@@ -81,12 +81,12 @@ describe('ProQuotaDialog', () => {
           expect.objectContaining({
             items: [
               {
-                label: 'Switch to gemini-2.5-flash',
+          "label": "Переключитися на gemini-2.5-flash",
                 value: 'retry_always',
                 key: 'retry_always',
               },
               {
-                label: 'Stop',
+                label: 'Зупинити',
                 value: 'retry_later',
                 key: 'retry_later',
               },
@@ -113,12 +113,12 @@ describe('ProQuotaDialog', () => {
           expect.objectContaining({
             items: [
               {
-                label: 'Keep trying',
+                label: 'Спробувати ще раз',
                 value: 'retry_once',
                 key: 'retry_once',
               },
               {
-                label: 'Stop',
+                label: 'Зупинити',
                 value: 'retry_later',
                 key: 'retry_later',
               },
@@ -146,17 +146,17 @@ describe('ProQuotaDialog', () => {
           expect.objectContaining({
             items: [
               {
-                label: 'Switch to gemini-2.5-flash',
+          "label": "Переключитися на gemini-2.5-flash",
                 value: 'retry_always',
                 key: 'retry_always',
               },
               {
-                label: 'Upgrade for higher limits',
+                label: 'Підвищити рівень для більших лімітів',
                 value: 'upgrade',
                 key: 'upgrade',
               },
               {
-                label: 'Stop',
+                label: 'Зупинити',
                 value: 'retry_later',
                 key: 'retry_later',
               },
@@ -186,7 +186,7 @@ describe('ProQuotaDialog', () => {
           expect.objectContaining({
             items: [
               {
-                label: 'Keep trying',
+                label: 'Спробувати ще раз',
                 value: 'retry_once',
                 key: 'retry_once',
               },
@@ -217,12 +217,12 @@ describe('ProQuotaDialog', () => {
           expect.objectContaining({
             items: [
               {
-                label: 'Switch to gemini-2.5-pro',
+          "label": "Переключитися на gemini-2.5-pro",
                 value: 'retry_always',
                 key: 'retry_always',
               },
               {
-                label: 'Stop',
+                label: 'Зупинити',
                 value: 'retry_later',
                 key: 'retry_later',
               },
@@ -250,12 +250,12 @@ describe('ProQuotaDialog', () => {
           expect.objectContaining({
             items: [
               {
-                label: 'Switch to gemini-2.5-pro',
+          "label": "Переключитися на gemini-2.5-pro",
                 value: 'retry_always',
                 key: 'retry_always',
               },
               {
-                label: 'Stop',
+                label: 'Зупинити',
                 value: 'retry_later',
                 key: 'retry_later',
               },

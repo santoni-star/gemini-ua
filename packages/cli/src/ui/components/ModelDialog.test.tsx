@@ -193,7 +193,7 @@ describe('<ModelDialog />', () => {
 
     expect(mockOnClose).not.toHaveBeenCalled();
     // Should be back to main view (Manual option visible)
-    expect(lastFrame()).toContain('Manual');
+    expect(lastFrame()).toContain('Вручну');
   });
 
   describe('Preview Logic', () => {
@@ -222,7 +222,7 @@ describe('<ModelDialog />', () => {
       mockGetHasAccessToPreviewModel.mockReturnValue(true);
       mockGetPreviewFeatures.mockReturnValue(false);
       const { lastFrame } = renderComponent();
-      expect(lastFrame()).toContain('Gemini 3 is now available.');
+      expect(lastFrame()).toContain('Gemini 3 тепер доступна.');
       expect(lastFrame()).toContain('Enable "Preview features" in /settings');
     });
 
@@ -230,7 +230,7 @@ describe('<ModelDialog />', () => {
       mockGetHasAccessToPreviewModel.mockReturnValue(false);
       mockGetPreviewFeatures.mockReturnValue(false);
       const { lastFrame } = renderComponent();
-      expect(lastFrame()).toContain('Gemini 3 is coming soon.');
+      expect(lastFrame()).toContain("Gemini 3 з'явиться незабаром.");
     });
 
     it('should NOT show header/subheader if preview options are shown', () => {

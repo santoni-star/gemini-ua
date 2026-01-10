@@ -30,7 +30,7 @@ describe('LoopDetectionConfirmation', () => {
     expect(output).toContain('Залишити виявлення зациклення увімкненим (esc)');
     expect(output).toContain('Вимкнути виявлення зациклення для цієї сесії');
     expect(output).toContain(
-      'This can happen due to repetitive tool calls or other model behavior',
+      'Це може статися через повторювані виклики інструментів або іншу поведінку моделі.',
     );
   });
 });

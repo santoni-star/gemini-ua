@@ -77,7 +77,7 @@ describe('MultiFolderTrustDialog', () => {
     );
 
     expect(lastFrame()).toContain(
-      'Do you trust the following folders being added to this workspace?',
+      'Ви довіряєте наступним папкам, що додаються до цього робочого простору?',
     );
     expect(lastFrame()).toContain('- /path/to/folder1');
     expect(lastFrame()).toContain('- /path/to/folder2');
@@ -195,7 +195,7 @@ describe('MultiFolderTrustDialog', () => {
       onSelect(MultiFolderTrustChoice.NO);
     });
 
-    expect(lastFrame()).toContain('Applying trust settings...');
+    expect(lastFrame()).toContain('Застосування налаштувань довіри...');
   });
 
   it('shows an error message and completes when config is missing', async () => {

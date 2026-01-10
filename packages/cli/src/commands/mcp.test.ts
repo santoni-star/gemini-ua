@@ -12,13 +12,15 @@ import yargs from 'yargs';
 describe('mcp command', () => {
   it('should have correct command definition', () => {
     expect(mcpCommand.command).toBe('mcp');
-    expect(mcpCommand.describe).toBe('Manage MCP servers');
+    expect(mcpCommand.describe).toBe('Керування серверами MCP');
     expect(typeof mcpCommand.builder).toBe('function');
     expect(typeof mcpCommand.handler).toBe('function');
   });
 
   it('should show help when no subcommand is provided', async () => {
     const yargsInstance = yargs();
+    // Force locale to 'uk' for this test to match the app configuration
+    yargsInstance.locale('uk');
     (mcpCommand.builder as (y: Argv) => Argv)(yargsInstance);
 
     const parser = yargsInstance.command(mcpCommand).help();
@@ -41,7 +43,8 @@ describe('mcp command', () => {
     const helpOutput =
       consoleLogMock.mock.calls.join('\n') +
       consoleErrorMock.mock.calls.join('\n');
-    expect(helpOutput).toContain('Manage MCP servers');
+    expect(helpOutput).toContain('Керування серверами MCP');
+    // yargs 'uk' locale uses 'Команди:'
     expect(helpOutput).toContain('Команди:');
     expect(helpOutput).toContain('add');
     expect(helpOutput).toContain('remove');
@@ -73,7 +76,7 @@ describe('mcp command', () => {
 
     expect(mockYargs.demandCommand).toHaveBeenCalledWith(
       1,
-      'You need at least one command before continuing.',
+      'Необхідно вказати хоча б одну команду для продовження.',
     );
   });
 });

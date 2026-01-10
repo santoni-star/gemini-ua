@@ -204,7 +204,7 @@ describe('<CompressionMessage />', () => {
         );
         const output = lastFrame();
 
-        expect(output).toContain('стиснення історії чату не зменшило об’єм');
+        expect(output).toContain('Стиснення історії чату не зменшило об’єм');
         expect(output).not.toContain('стиснуто з');
         expect(output).not.toContain('Стиснення не було корисним');
         unmount();

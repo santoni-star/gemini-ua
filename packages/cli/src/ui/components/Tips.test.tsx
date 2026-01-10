@@ -20,6 +20,6 @@ describe('Tips', () => {
 
     const { lastFrame } = render(<Tips config={config} />);
     const output = lastFrame();
-    expect(output).toContain(expectedText);
+    expect(output).toContain('3. /help для отримання додаткової інформації.');
   });
 });

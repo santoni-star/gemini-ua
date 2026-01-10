@@ -77,7 +77,7 @@ describe('<SessionSummaryDisplay />', () => {
     const { lastFrame } = renderWithMockedStats(metrics);
     const output = lastFrame();
 
-    expect(output).toContain('Agent powering down. Goodbye!');
+    expect(output).toContain('Агент вимикається. Бувайте!');
     expect(output).toMatchSnapshot();
   });
 });

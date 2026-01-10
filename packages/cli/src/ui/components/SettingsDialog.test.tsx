@@ -270,7 +270,7 @@ describe('SettingsDialog', () => {
       const { lastFrame } = renderDialog(settings, onSelect);
 
       const output = lastFrame();
-      expect(output).toContain('Settings');
+      expect(output).toContain('Налаштування');
       expect(output).toContain('Apply To');
       // Use regex for more flexible help text matching
       expect(output).toMatch(/Enter.*select.*Esc.*close/);
@@ -286,7 +286,7 @@ describe('SettingsDialog', () => {
 
       const output = lastFrame();
       // Should still render properly with the height prop
-      expect(output).toContain('Settings');
+      expect(output).toContain('Налаштування');
       // Use regex for more flexible help text matching
       expect(output).toMatch(/Enter.*select.*Esc.*close/);
     });
@@ -513,7 +513,7 @@ describe('SettingsDialog', () => {
 
       // The UI should show the settings section is active and scope section is inactive
       expect(lastFrame()).toContain('Vim Mode'); // Settings section active
-      expect(lastFrame()).toContain('Apply To'); // Scope section (don't rely on exact spacing)
+      expect(lastFrame()).toContain('Застосувати до'); // Scope section (don't rely on exact spacing)
 
       // This test validates the initial state - scope selection behavior
       // is complex due to keypress handling, so we focus on state validation
@@ -569,7 +569,7 @@ describe('SettingsDialog', () => {
 
       // Verify the dialog is rendered properly
       expect(lastFrame()).toContain('Settings');
-      expect(lastFrame()).toContain('Apply To');
+      expect(lastFrame()).toContain('Застосувати до');
 
       // This test validates rendering - escape key behavior depends on complex
       // keypress handling that's difficult to test reliably in this environment
@@ -607,7 +607,7 @@ describe('SettingsDialog', () => {
 
       // Should show user scope values initially
       const output = lastFrame();
-      expect(output).toContain('Settings');
+      expect(output).toContain('Налаштування');
     });
   });
 
@@ -701,7 +701,7 @@ describe('SettingsDialog', () => {
 
       const output = lastFrame();
       // Should contain settings labels
-      expect(output).toContain('Settings');
+      expect(output).toContain('Налаштування');
     });
 
     it('should handle immediate settings save for non-restart-required settings', async () => {
@@ -762,7 +762,7 @@ describe('SettingsDialog', () => {
 
       const output = lastFrame();
       // Settings should show inherited values
-      expect(output).toContain('Settings');
+      expect(output).toContain('Налаштування');
     });
 
     it('should show override indicator for overridden settings', () => {
@@ -777,7 +777,7 @@ describe('SettingsDialog', () => {
 
       const output = lastFrame();
       // Should show settings with override indicators
-      expect(output).toContain('Settings');
+      expect(output).toContain('Налаштування');
     });
   });
 
@@ -928,7 +928,7 @@ describe('SettingsDialog', () => {
 
       // Verify initial state: settings section active, scope section inactive
       expect(lastFrame()).toContain('Vim Mode'); // Settings section active
-      expect(lastFrame()).toContain('Apply To'); // Scope section (don't rely on exact spacing)
+      expect(lastFrame()).toContain('Застосувати до'); // Scope section (don't rely on exact spacing)
 
       // This test validates the rendered UI structure for tab navigation
       // Actual tab behavior testing is complex due to keypress handling
@@ -979,7 +979,7 @@ describe('SettingsDialog', () => {
       // Verify the complete UI is rendered with all necessary sections
       expect(lastFrame()).toContain('Settings'); // Title
       expect(lastFrame()).toContain('Vim Mode'); // Active setting
-      expect(lastFrame()).toContain('Apply To'); // Scope section
+      expect(lastFrame()).toContain('Застосувати до'); // Scope section
       expect(lastFrame()).toContain('User Settings'); // Scope options (no numbers when settings focused)
       // Use regex for more flexible help text matching
       expect(lastFrame()).toMatch(/Enter.*select.*Tab.*focus.*Esc.*close/);
@@ -1109,7 +1109,7 @@ describe('SettingsDialog', () => {
       await waitFor(() => {
         expect(lastFrame()).not.toContain('> Search:');
       });
-      expect(lastFrame()).toContain('Search to filter');
+      expect(lastFrame()).toContain('Пошук для фільтрації');
 
       // Press '/' to enter search mode
       act(() => {

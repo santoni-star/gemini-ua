@@ -82,7 +82,7 @@ describe('<HistoryItemDisplay />', () => {
         <HistoryItemDisplay {...baseItem} item={item} />
       </SessionStatsProvider>,
     );
-    expect(lastFrame()).toContain('Stats');
+    expect(lastFrame()).toContain('Статистика сесії');
   });
 
   it('renders AboutBox for "about" type', () => {
@@ -100,7 +100,7 @@ describe('<HistoryItemDisplay />', () => {
     const { lastFrame } = renderWithProviders(
       <HistoryItemDisplay {...baseItem} item={item} />,
     );
-    expect(lastFrame()).toContain('About Gemini CLI');
+    expect(lastFrame()).toContain('Про Gemini CLI');
   });
 
   it('renders ModelStatsDisplay for "model_stats" type', () => {
@@ -129,7 +129,7 @@ describe('<HistoryItemDisplay />', () => {
       </SessionStatsProvider>,
     );
     expect(lastFrame()).toContain(
-      'No tool calls have been made in this session.',
+      'У цій сесії викликів інструментів не було.',
     );
   });
 
@@ -144,7 +144,7 @@ describe('<HistoryItemDisplay />', () => {
         <HistoryItemDisplay {...baseItem} item={item} />
       </SessionStatsProvider>,
     );
-    expect(lastFrame()).toContain('Agent powering down. Goodbye!');
+    expect(lastFrame()).toContain('Агент вимикається. Бувайте!');
   });
 
   it('should escape ANSI codes in text content', () => {

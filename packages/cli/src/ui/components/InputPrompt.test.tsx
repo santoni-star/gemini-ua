@@ -2703,14 +2703,14 @@ describe('InputPrompt', () => {
         bufferText: '/help',
         shellMode: false,
         shouldSubmit: false,
-        errorMessage: 'Slash commands cannot be queued',
+        errorMessage: 'Слеш-команди не можна ставити в чергу',
       },
       {
         name: 'should prevent shell commands',
         bufferText: 'ls',
         shellMode: true,
         shouldSubmit: false,
-        errorMessage: 'Shell commands cannot be queued',
+        errorMessage: 'Команди оболонки не можна ставити в чергу',
       },
       {
         name: 'should allow regular messages',

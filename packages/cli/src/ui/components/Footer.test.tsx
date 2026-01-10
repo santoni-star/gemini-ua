@@ -130,7 +130,7 @@ describe('<Footer />', () => {
       }),
     });
     expect(lastFrame()).toContain(defaultProps.model);
-    expect(lastFrame()).toMatch(/\(\d+% context left\)/);
+    expect(lastFrame()).toMatch(/\(\d+% вікна контексту залишилося\)/);
   });
 
   it('displays the model name and abbreviated context percentage', () => {
@@ -155,7 +155,7 @@ describe('<Footer />', () => {
         width: 120,
         uiState: { isTrustedFolder: false, sessionStats: mockSessionStats },
       });
-      expect(lastFrame()).toContain('untrusted');
+      expect(lastFrame()).toContain('Недовірена');
     });
 
     it('should display custom sandbox info when SANDBOX env is set', () => {
@@ -186,7 +186,7 @@ describe('<Footer />', () => {
         width: 120,
         uiState: { isTrustedFolder: true, sessionStats: mockSessionStats },
       });
-      expect(lastFrame()).toContain('no sandbox');
+      expect(lastFrame()).toContain('Без пісочниці');
       vi.unstubAllEnvs();
     });
 
@@ -196,7 +196,7 @@ describe('<Footer />', () => {
         width: 120,
         uiState: { isTrustedFolder: false, sessionStats: mockSessionStats },
       });
-      expect(lastFrame()).toContain('untrusted');
+      expect(lastFrame()).toContain('Недовірена');
       expect(lastFrame()).not.toMatch(/test-sandbox/s);
       vi.unstubAllEnvs();
     });
@@ -298,7 +298,7 @@ describe('<Footer />', () => {
         }),
       });
       expect(lastFrame()).toContain(defaultProps.model);
-      expect(lastFrame()).toMatch(/\(\d+% context left\)/);
+      expect(lastFrame()).toMatch(/\(\d+% вікна контексту залишилося\)/);
     });
 
     it('renders complete footer in narrow terminal (baseline narrow)', () => {

@@ -329,7 +329,7 @@ describe('AuthDialog', () => {
         },
         expectations: (p: typeof props) => {
           expect(p.onAuthError).toHaveBeenCalledWith(
-            'You must select an auth method to proceed. Press Ctrl+C twice to exit.',
+            'Ви повинні обрати метод аутентифікації, щоб продовжити. Натисніть Ctrl+C двічі для виходу.',
           );
         },
       },

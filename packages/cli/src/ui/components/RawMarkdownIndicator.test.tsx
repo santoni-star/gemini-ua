@@ -22,7 +22,7 @@ describe('RawMarkdownIndicator', () => {
       value: 'darwin',
     });
     const { lastFrame } = render(<RawMarkdownIndicator />);
-    expect(lastFrame()).toContain('raw markdown mode');
+    expect(lastFrame()).toContain('режим сирого markdown');
     expect(lastFrame()).toContain('option+m to toggle');
   });
 
@@ -31,7 +31,7 @@ describe('RawMarkdownIndicator', () => {
       value: 'linux',
     });
     const { lastFrame } = render(<RawMarkdownIndicator />);
-    expect(lastFrame()).toContain('raw markdown mode');
+    expect(lastFrame()).toContain('режим сирого markdown');
     expect(lastFrame()).toContain('alt+m to toggle');
   });
 });

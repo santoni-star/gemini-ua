@@ -50,6 +50,6 @@ describe('MemoryUsageDisplay', () => {
       vi.advanceTimersByTime(2000);
     });
 
-    expect(lastFrame()).toContain('100.0 MB');
+    expect(lastFrame()).toContain('100.0 МБ');
   });
 });
