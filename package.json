@@ -1,6 +1,6 @@
 {
   "name": "@santoni/gemini-ua",
-  "version": "0.24.0-ua.13",
+  "version": "0.24.0-ua.14",
   "engines": {
     "node": ">=20.0.0"
   },
@@ -23,6 +23,7 @@
     "generate": "node scripts/generate-git-commit-info.js",
     "build": "node scripts/build.js",
     "bundle": "npm run generate && node esbuild.config.js && node scripts/copy_bundle_assets.js && node scripts/mask_secrets.js",
+    "prepare": "npm run bundle",
     "postinstall": "node -e \"try { require('husky').install() } catch (e) {}\""
   },
   "overrides": {
@@ -33,15 +34,16 @@
     }
   },
   "bin": {
-    "gemini-ua": "gemini-ua.js"
+    "gemini-ua": "bundle/gemini.js"
   },
   "files": [
     "bundle/",
-    "gemini-ua.js",
     "README.md",
     "LICENSE"
   ],
   "dependencies": {
+    "esbuild": "^0.25.0",
+    "esbuild-plugin-wasm": "^1.1.0",
     "ink": "npm:@jrichman/ink@6.4.6",
     "latest-version": "^9.0.0",
     "simple-git": "^3.28.0",
@@ -49,12 +51,10 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "@types/react": "^19.0.0",
-    "@types/react-dom": "^19.0.0"
+    "@types/react-dom": "^19.0.0",
+    "cross-env": "^7.0.3"
   },
   "devDependencies": {
-    "esbuild": "^0.25.0",
-    "esbuild-plugin-wasm": "^1.1.0",
-    "cross-env": "^7.0.3",
     "tsx": "^4.20.3",
     "react-devtools-core": "^6.1.2",
     "@octokit/rest": "^22.0.0",
