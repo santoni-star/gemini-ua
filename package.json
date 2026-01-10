@@ -1,6 +1,6 @@
 {
   "name": "@santoni/gemini-ua",
-  "version": "0.24.0-ua.12",
+  "version": "0.24.0-ua.13",
   "engines": {
     "node": ">=20.0.0"
   },
@@ -8,7 +8,7 @@
   "workspaces": [
     "packages/*"
   ],
-  "private": "true",
+  "private": false,
   "repository": {
     "type": "git",
     "url": "git+https://github.com/santoni-star/gemini-ua.git"
