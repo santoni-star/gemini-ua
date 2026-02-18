@@ -8,19 +8,7 @@
 import React, { useMemo } from 'react';
 import { Text, Box } from 'ink';
 // @ts-expect-error: These exports are from a custom Ink fork
-import type { StyledChar } from 'ink';
-// @ts-expect-error: These exports are from a custom Ink fork
-import { toStyledCharacters } from 'ink';
-// @ts-expect-error: These exports are from a custom Ink fork
-import { styledCharsToString } from 'ink';
-// @ts-expect-error: These exports are from a custom Ink fork
-import { styledCharsWidth } from 'ink';
-// @ts-expect-error: These exports are from a custom Ink fork
-import { wordBreakStyledChars } from 'ink';
-// @ts-expect-error: These exports are from a custom Ink fork
-import { wrapStyledChars } from 'ink';
-// @ts-expect-error: These exports are from a custom Ink fork
-import { widestLineFromStyledChars } from 'ink';
+import * as inkModule from 'ink';
 import { theme } from '../semantic-colors.js';
 import { RenderInline } from './InlineMarkdownRenderer.js';
 
@@ -34,11 +22,11 @@ const MIN_COLUMN_WIDTH = 5;
 const COLUMN_PADDING = 2;
 const TABLE_MARGIN = 2;
 
-const calculateWidths = (styledChars: StyledChar[]) => {
-  const contentWidth = styledCharsWidth(styledChars);
+const calculateWidths = (styledChars: any[]) => {
+  const contentWidth = (inkModule as any).styledCharsWidth(styledChars);
 
-  const words: StyledChar[][] = wordBreakStyledChars(styledChars);
-  const maxWordWidth = widestLineFromStyledChars(words);
+  const words: any[][] = (inkModule as any).wordBreakStyledChars(styledChars);
+  const maxWordWidth = (inkModule as any).widestLineFromStyledChars(words);
 
   return { contentWidth, maxWordWidth };
 };
@@ -66,12 +54,12 @@ export const TableRenderer: React.FC<TableRendererProps> = ({
   );
 
   const styledHeaders = useMemo(
-    () => cleanedHeaders.map((header) => toStyledCharacters(header)),
+    () => cleanedHeaders.map((header) => (inkModule as any).toStyledCharacters(header)),
     [cleanedHeaders],
   );
 
   const styledRows = useMemo(
-    () => rows.map((row) => row.map((cell) => toStyledCharacters(cell))),
+    () => rows.map((row) => row.map((cell) => (inkModule as any).toStyledCharacters(cell))),
     [rows],
   );
 
@@ -179,9 +167,9 @@ export const TableRenderer: React.FC<TableRendererProps> = ({
           maxLineWidth,
         );
 
-        const lines = wrappedStyledLines.map((line: StyledChar[]) => ({
-          text: styledCharsToString(line),
-          width: styledCharsWidth(line),
+        const lines = wrappedStyledLines.map((line: any[]) => ({
+          text: (inkModule as any).styledCharsToString(line),
+          width: (inkModule as any).styledCharsWidth(line),
         }));
         rowResult.push(lines);
       }
