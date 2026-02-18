@@ -65,10 +65,14 @@ export function TextInput({
     return (
       <Box>
         {focus ? (
-          <Text terminalCursorFocus={focus} terminalCursorPosition={0}>
+          // terminalCursorFocus and terminalCursorPosition are from custom Ink fork
+          (<Text
+            // @ts-ignore
+            terminalCursorFocus={focus}
+            terminalCursorPosition={0}>
             {chalk.inverse(placeholder[0] || ' ')}
             <Text color={theme.text.secondary}>{placeholder.slice(1)}</Text>
-          </Text>
+          </Text>)
         ) : (
           <Text color={theme.text.secondary}>{placeholder}</Text>
         )}
@@ -97,15 +101,18 @@ export function TextInput({
 
         return (
           <Box key={idx} height={1}>
-            <Text
-              terminalCursorFocus={isCursorLine}
-              terminalCursorPosition={cpIndexToOffset(
-                lineText,
-                cursorVisualColAbsolute,
-              )}
-            >
-              {lineDisplay}
-            </Text>
+            {
+              // terminalCursorFocus and terminalCursorPosition are from custom Ink fork
+              (<Text
+            // @ts-ignore
+                terminalCursorFocus={isCursorLine}
+                terminalCursorPosition={cpIndexToOffset(
+                  lineText,
+                  cursorVisualColAbsolute,
+                )}>
+                {lineDisplay}
+              </Text>)
+            }
           </Box>
         );
       })}

@@ -26,6 +26,7 @@ Learn all about Gemini CLI in our [documentation](https://geminicli.com/docs/).
   integrations.
 - **💻 Terminal-first**: Designed for developers who live in the command line.
 - **🛡️ Open source**: Apache 2.0 licensed.
+- **🇺🇦 Ukrainian Localization**: Fully localized UI and messages for Ukrainian users.
 
 ## 📦 Installation
 
@@ -39,13 +40,13 @@ for recommended system specifications and a detailed installation guide.
 
 ```bash
 # Using npx (no installation required)
-npx @google/gemini-cli
+npx @santoni/gemini-ua
 ```
 
 #### Install globally with npm
 
 ```bash
-npm install -g @google/gemini-cli
+npm install -g @santoni/gemini-ua
 ```
 
 #### Install globally with Homebrew (macOS/Linux)

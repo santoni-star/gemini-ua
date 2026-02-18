@@ -1,5 +1,5 @@
 {
-  "name": "@google/gemini-cli",
+  "name": "@santoni/gemini-ua",
   "version": "0.30.0-nightly.20260210.a2174751d",
   "description": "Gemini CLI",
   "license": "Apache-2.0",
@@ -10,7 +10,7 @@
   "type": "module",
   "main": "dist/index.js",
   "bin": {
-    "gemini": "dist/index.js"
+    "gemini-ua": "dist/index.js"
   },
   "scripts": {
     "build": "node ../../scripts/build_package.js",

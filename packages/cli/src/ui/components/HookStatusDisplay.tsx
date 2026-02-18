@@ -8,6 +8,7 @@ import type React from 'react';
 import { Text } from 'ink';
 import { theme } from '../semantic-colors.js';
 import { type ActiveHook } from '../types.js';
+import { strings } from '../../i18n.js';
 
 interface HookStatusDisplayProps {
   activeHooks: ActiveHook[];
@@ -20,7 +21,10 @@ export const HookStatusDisplay: React.FC<HookStatusDisplayProps> = ({
     return null;
   }
 
-  const label = activeHooks.length > 1 ? 'Executing Hooks' : 'Executing Hook';
+  const label =
+    activeHooks.length > 1
+      ? strings.hookExecutingHooks
+      : strings.hookExecuting;
   const displayNames = activeHooks.map((hook) => {
     let name = hook.name;
     if (hook.index && hook.total && hook.total > 1) {

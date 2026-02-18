@@ -11,6 +11,7 @@ import {
   checkExhaustive,
   CoreToolCallStatus,
 } from '@google/gemini-cli-core';
+import { strings } from '../../i18n.js';
 import { LoadingIndicator } from './LoadingIndicator.js';
 import { StatusDisplay } from './StatusDisplay.js';
 import { ToastDisplay, shouldShowToast } from './ToastDisplay.js';
@@ -47,7 +48,7 @@ export const Composer = ({ isFocused = true }: { isFocused?: boolean }) => {
   const isScreenReaderEnabled = useIsScreenReaderEnabled();
   const uiState = useUIState();
   const uiActions = useUIActions();
-  const { vimEnabled, vimMode } = useVimMode();
+  const { vimEnabled } = useVimMode();
   const inlineThinkingMode = getInlineThinkingMode(settings);
   const terminalWidth = uiState.terminalWidth;
   const isNarrow = isNarrowWidth(terminalWidth);
@@ -181,7 +182,7 @@ export const Composer = ({ isFocused = true }: { isFocused?: boolean }) => {
         !uiState.isConfigInitialized ||
         uiState.isResuming) && (
         <ConfigInitDisplay
-          message={uiState.isResuming ? 'Resuming session...' : undefined}
+          message={uiState.isResuming ? strings.resumingSession : undefined}
         />
       )}
 
@@ -221,7 +222,7 @@ export const Composer = ({ isFocused = true }: { isFocused?: boolean }) => {
                     : uiState.currentLoadingPhrase
                 }
                 thoughtLabel={
-                  inlineThinkingMode === 'full' ? 'Thinking ...' : undefined
+                  inlineThinkingMode === 'full' ? strings.thinkingLabel : undefined
                 }
                 elapsedTime={uiState.elapsedTime}
               />
@@ -265,7 +266,7 @@ export const Composer = ({ isFocused = true }: { isFocused?: boolean }) => {
                       : uiState.currentLoadingPhrase
                   }
                   thoughtLabel={
-                    inlineThinkingMode === 'full' ? 'Thinking ...' : undefined
+                    inlineThinkingMode === 'full' ? strings.thinkingLabel : undefined
                   }
                   elapsedTime={uiState.elapsedTime}
                 />
@@ -438,12 +439,10 @@ export const Composer = ({ isFocused = true }: { isFocused?: boolean }) => {
           popAllMessages={uiActions.popAllMessages}
           placeholder={
             vimEnabled
-              ? vimMode === 'INSERT'
-                ? "  Press 'Esc' for NORMAL mode."
-                : "  Press 'i' for INSERT mode."
+              ? strings.placeholderVim
               : uiState.shellModeActive
-                ? '  Type your shell command'
-                : '  Type your message or @path/to/file'
+                ? strings.placeholderShell
+                : strings.placeholder
           }
           setQueueErrorMessage={uiActions.setQueueErrorMessage}
           streamingState={uiState.streamingState}

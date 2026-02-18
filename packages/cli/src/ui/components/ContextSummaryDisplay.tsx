@@ -10,6 +10,7 @@ import { theme } from '../semantic-colors.js';
 import { type IdeContext, type MCPServerConfig } from '@google/gemini-cli-core';
 import { useTerminalSize } from '../hooks/useTerminalSize.js';
 import { isNarrowWidth } from '../utils/isNarrowWidth.js';
+import { strings } from '../../i18n.js';
 
 interface ContextSummaryDisplayProps {
   geminiMdFileCount: number;
@@ -51,9 +52,9 @@ export const ContextSummaryDisplay: React.FC<ContextSummaryDisplayProps> = ({
     if (openFileCount === 0) {
       return '';
     }
-    return `${openFileCount} open file${
-      openFileCount > 1 ? 's' : ''
-    } (ctrl+g to view)`;
+    const label =
+      openFileCount === 1 ? strings.summaryOpenFile : strings.summaryOpenFiles;
+    return `${openFileCount} ${label} ${strings.summaryCtrlG}`;
   })();
 
   const geminiMdText = (() => {
@@ -61,10 +62,10 @@ export const ContextSummaryDisplay: React.FC<ContextSummaryDisplayProps> = ({
       return '';
     }
     const allNamesTheSame = new Set(contextFileNames).size < 2;
-    const name = allNamesTheSame ? contextFileNames[0] : 'context';
-    return `${geminiMdFileCount} ${name} file${
-      geminiMdFileCount > 1 ? 's' : ''
-    }`;
+    const name = allNamesTheSame ? contextFileNames[0] : strings.summaryFile;
+    const label =
+      geminiMdFileCount === 1 ? strings.summaryFile : strings.summaryFiles;
+    return `${geminiMdFileCount} ${name} ${label}`;
   })();
 
   const mcpText = (() => {
@@ -74,15 +75,21 @@ export const ContextSummaryDisplay: React.FC<ContextSummaryDisplayProps> = ({
 
     const parts = [];
     if (mcpServerCount > 0) {
-      parts.push(
-        `${mcpServerCount} MCP server${mcpServerCount > 1 ? 's' : ''}`,
-      );
+      const label =
+        mcpServerCount === 1
+          ? strings.summaryMcpServer
+          : strings.summaryMcpServers;
+      parts.push(`${mcpServerCount} ${label}`);
     }
 
     if (blockedMcpServerCount > 0) {
-      let blockedText = `${blockedMcpServerCount} Blocked`;
+      let blockedText = `${blockedMcpServerCount} ${strings.summaryBlocked}`;
       if (mcpServerCount === 0) {
-        blockedText += ` MCP server${blockedMcpServerCount > 1 ? 's' : ''}`;
+        const label =
+          blockedMcpServerCount === 1
+            ? strings.summaryMcpServer
+            : strings.summaryMcpServers;
+        blockedText += ` ${label}`;
       }
       parts.push(blockedText);
     }
@@ -93,16 +100,20 @@ export const ContextSummaryDisplay: React.FC<ContextSummaryDisplayProps> = ({
     if (skillCount === 0) {
       return '';
     }
-    return `${skillCount} skill${skillCount > 1 ? 's' : ''}`;
+    const label =
+      skillCount === 1 ? strings.summarySkill : strings.summarySkills;
+    return `${skillCount} ${label}`;
   })();
 
   const backgroundText = (() => {
     if (backgroundProcessCount === 0) {
       return '';
     }
-    return `${backgroundProcessCount} Background process${
-      backgroundProcessCount > 1 ? 'es' : ''
-    }`;
+    const label =
+      backgroundProcessCount === 1
+        ? strings.summaryBackgroundProcess
+        : strings.summaryBackgroundProcesses;
+    return `${backgroundProcessCount} ${label}`;
   })();
 
   const summaryParts = [

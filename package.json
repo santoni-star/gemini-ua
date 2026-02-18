@@ -1,6 +1,6 @@
 {
-  "name": "@google/gemini-cli",
-  "version": "0.30.0-nightly.20260210.a2174751d",
+  "name": "@santoni/gemini-ua",
+  "version": "0.30.0-ua.1",
   "engines": {
     "node": ">=20.0.0"
   },
@@ -71,7 +71,7 @@
     }
   },
   "bin": {
-    "gemini": "bundle/gemini.js"
+    "gemini-ua": "bundle/gemini.js"
   },
   "files": [
     "bundle/",

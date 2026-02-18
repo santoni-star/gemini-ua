@@ -191,6 +191,19 @@ const SETTINGS_SCHEMA = {
         description: 'Enable Vim keybindings',
         showInDialog: true,
       },
+      language: {
+        type: 'enum',
+        label: 'Language',
+        category: 'General',
+        requiresRestart: true,
+        default: 'en',
+        description: 'The language for the UI.',
+        showInDialog: true,
+        options: [
+          { value: 'en', label: 'English' },
+          { value: 'ua', label: 'Ukrainian (Українська)' },
+        ],
+      },
       defaultApprovalMode: {
         type: 'enum',
         label: 'Default Approval Mode',

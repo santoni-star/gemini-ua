@@ -77,6 +77,7 @@ import { useUIActions } from '../contexts/UIActionsContext.js';
 import { useAlternateBuffer } from '../hooks/useAlternateBuffer.js';
 import { shouldDismissShortcutsHelpOnHotkey } from '../utils/shortcutsHelp.js';
 import { useRepeatedKeyPress } from '../hooks/useRepeatedKeyPress.js';
+import { strings } from '../../i18n.js';
 
 /**
  * Returns if the terminal can be trusted to handle paste events atomically
@@ -179,7 +180,7 @@ export function tryTogglePasteExpansion(buffer: TextBuffer): boolean {
 
   // 3. Placeholders exist but cursor isn't on one — show hint
   appEvents.emit(AppEvent.TransientMessage, {
-    message: 'Move cursor within placeholder to expand',
+    message: strings.hintMoveCursorToExpand,
     type: TransientMessageType.Hint,
   });
   return true;
@@ -247,7 +248,7 @@ export const InputPrompt: React.FC<InputPromptProps> = ({
           } else if (history.length > 0) {
             onSubmit('/rewind');
           } else {
-            coreEvents.emitFeedback('info', 'Nothing to rewind to');
+            coreEvents.emitFeedback('info', strings.feedbackNothingToRewind);
           }
         }
       },
@@ -475,7 +476,7 @@ export const InputPrompt: React.FC<InputPromptProps> = ({
         buffer.insert(textToInsert, { paste: true });
         if (isLargePaste(textToInsert)) {
           appEvents.emit(AppEvent.TransientMessage, {
-            message: 'Press Ctrl+O to expand pasted text',
+            message: strings.hintPressCtrlOToExpand,
             type: TransientMessageType.Hint,
           });
         }
@@ -692,7 +693,7 @@ export const InputPrompt: React.FC<InputPromptProps> = ({
         buffer.handleInput(key);
         if (key.sequence && isLargePaste(key.sequence)) {
           appEvents.emit(AppEvent.TransientMessage, {
-            message: 'Press Ctrl+O to expand pasted text',
+            message: strings.hintPressCtrlOToExpand,
             type: TransientMessageType.Hint,
           });
         }
@@ -1362,16 +1363,16 @@ export const InputPrompt: React.FC<InputPromptProps> = ({
   let statusText = '';
   if (shellModeActive) {
     statusColor = theme.ui.symbol;
-    statusText = 'Shell mode';
+    statusText = strings.statusShellMode;
   } else if (showYoloStyling) {
     statusColor = theme.status.error;
-    statusText = 'YOLO mode';
+    statusText = strings.statusYoloMode;
   } else if (showPlanStyling) {
     statusColor = theme.status.success;
-    statusText = 'Plan mode';
+    statusText = strings.statusPlanMode;
   } else if (showAutoAcceptStyling) {
     statusColor = theme.status.warning;
-    statusText = 'Accepting edits';
+    statusText = strings.statusAcceptingEdits;
   }
 
   const suggestionsNode = shouldShowSuggestions ? (
@@ -1465,10 +1466,11 @@ export const InputPrompt: React.FC<InputPromptProps> = ({
           <Box flexGrow={1} flexDirection="column" ref={innerBoxRef}>
             {buffer.text.length === 0 && placeholder ? (
               showCursor ? (
+                // terminalCursorFocus and terminalCursorPosition are from custom Ink fork
                 <Text
+                // @ts-ignore
                   terminalCursorFocus={showCursor}
-                  terminalCursorPosition={0}
-                >
+                  terminalCursorPosition={0}>
                   {chalk.inverse(placeholder.slice(0, 1))}
                   <Text color={theme.text.secondary}>
                     {placeholder.slice(1)}
@@ -1589,22 +1591,26 @@ export const InputPrompt: React.FC<InputPromptProps> = ({
 
                   return (
                     <Box key={`line-${visualIdxInRenderedSet}`} height={1}>
-                      <Text
-                        terminalCursorFocus={showCursor && isOnCursorLine}
-                        terminalCursorPosition={cpIndexToOffset(
-                          lineText,
-                          cursorVisualColAbsolute,
-                        )}
-                      >
-                        {renderedLine}
-                        {showCursorBeforeGhost &&
-                          (showCursor ? chalk.inverse(' ') : ' ')}
-                        {currentLineGhost && (
-                          <Text color={theme.text.secondary}>
-                            {currentLineGhost}
-                          </Text>
-                        )}
-                      </Text>
+                      {
+                        // terminalCursorFocus and terminalCursorPosition are from custom Ink fork
+                        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                        (<Text
+                // @ts-ignore
+                          terminalCursorFocus={showCursor && isOnCursorLine}
+                          terminalCursorPosition={cpIndexToOffset(
+                            lineText,
+                            cursorVisualColAbsolute,
+                          )}>
+                          {renderedLine}
+                          {showCursorBeforeGhost &&
+                            (showCursor ? chalk.inverse(' ') : ' ')}
+                          {currentLineGhost && (
+                            <Text color={theme.text.secondary}>
+                              {currentLineGhost}
+                            </Text>
+                          )}
+                        </Text>) as React.ReactNode
+                      }
                     </Box>
                   );
                 })

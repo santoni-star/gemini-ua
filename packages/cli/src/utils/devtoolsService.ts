@@ -6,6 +6,7 @@
 
 import { debugLogger } from '@google/gemini-cli-core';
 import type { Config } from '@google/gemini-cli-core';
+// @ts-ignore
 import WebSocket from 'ws';
 import {
   initActivityLogger,

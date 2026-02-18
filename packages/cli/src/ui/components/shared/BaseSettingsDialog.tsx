@@ -564,14 +564,14 @@ export function BaseSettingsDialog({
                                 ? theme.text.secondary
                                 : theme.text.primary
                           }
+                // @ts-ignore
                           terminalCursorFocus={
                             editingKey === item.key && cursorVisible
                           }
                           terminalCursorPosition={cpIndexToOffset(
                             editBuffer,
                             editCursorPos,
-                          )}
-                        >
+                          )}>
                           {displayValue}
                         </Text>
                       </Box>

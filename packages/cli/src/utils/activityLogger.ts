@@ -17,6 +17,7 @@ import {
   type ConsoleLogPayload,
   type Config,
 } from '@google/gemini-cli-core';
+// @ts-ignore
 import WebSocket from 'ws';
 
 const ACTIVITY_ID_HEADER = 'x-activity-request-id';
@@ -670,7 +671,7 @@ function setupNetworkLogging(
         scheduleReconnect();
       });
 
-      ws.on('error', (err) => {
+      ws.on('error', (err: any) => {
         debugLogger.debug(`WebSocket error:`, err);
       });
     } catch (err) {
