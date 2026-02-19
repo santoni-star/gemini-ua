@@ -4,9 +4,11 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-export const SHELL_COMMAND_NAME = 'Shell Command';
+import { strings } from '../i18n.js';
 
-export const SHELL_NAME = 'Shell';
+export const SHELL_COMMAND_NAME = strings.statusShellMode;
+
+export const SHELL_NAME = strings.shellMode;
 
 // Limit Gemini messages to a very high number of lines to mitigate performance
 // issues in the worst case if we somehow get an enormous response from Gemini.

@@ -56,6 +56,7 @@ import {
   SessionSelector,
   convertSessionToHistoryFormats,
 } from '../utils/sessionUtils.js';
+import { strings } from '../i18n.js';
 
 export async function runZedIntegration(
   config: Config,
@@ -1183,12 +1184,12 @@ function toToolCallContent(toolResult: ToolResult): acp.ToolCallContent | null {
 const basicPermissionOptions = [
   {
     optionId: ToolConfirmationOutcome.ProceedOnce,
-    name: 'Allow',
+    name: strings.acp.allow,
     kind: 'allow_once',
   },
   {
     optionId: ToolConfirmationOutcome.Cancel,
-    name: 'Reject',
+    name: strings.acp.reject,
     kind: 'reject_once',
   },
 ] as const;
@@ -1201,7 +1202,7 @@ function toPermissionOptions(
       return [
         {
           optionId: ToolConfirmationOutcome.ProceedAlways,
-          name: 'Allow All Edits',
+          name: strings.acp.allowAllEdits,
           kind: 'allow_always',
         },
         ...basicPermissionOptions,
@@ -1210,7 +1211,7 @@ function toPermissionOptions(
       return [
         {
           optionId: ToolConfirmationOutcome.ProceedAlways,
-          name: `Always Allow ${confirmation.rootCommand}`,
+          name: strings.acp.alwaysAllowCommand.replace('{command}', confirmation.rootCommand),
           kind: 'allow_always',
         },
         ...basicPermissionOptions,
@@ -1219,12 +1220,12 @@ function toPermissionOptions(
       return [
         {
           optionId: ToolConfirmationOutcome.ProceedAlwaysServer,
-          name: `Always Allow ${confirmation.serverName}`,
+          name: strings.acp.alwaysAllowServer.replace('{server}', confirmation.serverName),
           kind: 'allow_always',
         },
         {
           optionId: ToolConfirmationOutcome.ProceedAlwaysTool,
-          name: `Always Allow ${confirmation.toolName}`,
+          name: strings.acp.alwaysAllowTool.replace('{tool}', confirmation.toolName),
           kind: 'allow_always',
         },
         ...basicPermissionOptions,
@@ -1233,7 +1234,7 @@ function toPermissionOptions(
       return [
         {
           optionId: ToolConfirmationOutcome.ProceedAlways,
-          name: `Always Allow`,
+          name: strings.acp.alwaysAllow,
           kind: 'allow_always',
         },
         ...basicPermissionOptions,

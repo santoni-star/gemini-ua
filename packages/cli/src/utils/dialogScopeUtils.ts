@@ -10,14 +10,15 @@ import type {
 } from '../config/settings.js';
 import { isLoadableSettingScope, SettingScope } from '../config/settings.js';
 import { settingExistsInScope } from './settingsUtils.js';
+import { strings } from '../i18n.js';
 
 /**
  * Shared scope labels for dialog components that need to display setting scopes
  */
 export const SCOPE_LABELS = {
-  [SettingScope.User]: 'User Settings',
-  [SettingScope.Workspace]: 'Workspace Settings',
-  [SettingScope.System]: 'System Settings',
+  [SettingScope.User]: strings.settingsScopeUser,
+  [SettingScope.Workspace]: strings.settingsScopeWorkspace,
+  [SettingScope.System]: strings.settingsScopeSystem,
 } as const;
 
 /**
@@ -58,7 +59,9 @@ export function getScopeMessageForSetting(
     return '';
   }
 
-  const modifiedScopesStr = modifiedInOtherScopes.join(', ');
+  const modifiedScopesStr = modifiedInOtherScopes
+    .map((s) => SCOPE_LABELS[s])
+    .join(', ');
   const currentScopeSettings = settings.forScope(selectedScope).settings;
   const existsInCurrentScope = settingExistsInScope(
     settingKey,
@@ -66,6 +69,6 @@ export function getScopeMessageForSetting(
   );
 
   return existsInCurrentScope
-    ? `(Also modified in ${modifiedScopesStr})`
-    : `(Modified in ${modifiedScopesStr})`;
+    ? strings.editorAlsoModifiedIn.replace('{scope}', modifiedScopesStr)
+    : strings.editorModifiedIn.replace('{scope}', modifiedScopesStr);
 }

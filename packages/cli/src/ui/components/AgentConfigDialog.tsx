@@ -19,6 +19,7 @@ import {
   BaseSettingsDialog,
   type SettingsDialogItem,
 } from './shared/BaseSettingsDialog.js';
+import { strings } from '../../i18n.js';
 
 /**
  * Configuration field definition for agent settings
@@ -38,64 +39,64 @@ interface AgentConfigField {
 const AGENT_CONFIG_FIELDS: AgentConfigField[] = [
   {
     key: 'enabled',
-    label: 'Enabled',
-    description: 'Enable or disable this agent',
+    label: strings.agentConfig.enabledLabel,
+    description: strings.agentConfig.enabledDesc,
     type: 'boolean',
     path: ['enabled'],
     defaultValue: true,
   },
   {
     key: 'model',
-    label: 'Model',
-    description: "Model to use (e.g., 'gemini-2.0-flash' or 'inherit')",
+    label: strings.agentConfig.modelLabel,
+    description: strings.agentConfig.modelDesc,
     type: 'string',
     path: ['modelConfig', 'model'],
     defaultValue: 'inherit',
   },
   {
     key: 'temperature',
-    label: 'Temperature',
-    description: 'Sampling temperature (0.0 to 2.0)',
+    label: strings.agentConfig.temperatureLabel,
+    description: strings.agentConfig.temperatureDesc,
     type: 'number',
     path: ['modelConfig', 'generateContentConfig', 'temperature'],
     defaultValue: undefined,
   },
   {
     key: 'topP',
-    label: 'Top P',
-    description: 'Nucleus sampling parameter (0.0 to 1.0)',
+    label: strings.agentConfig.topPLabel,
+    description: strings.agentConfig.topPDesc,
     type: 'number',
     path: ['modelConfig', 'generateContentConfig', 'topP'],
     defaultValue: undefined,
   },
   {
     key: 'topK',
-    label: 'Top K',
-    description: 'Top-K sampling parameter',
+    label: strings.agentConfig.topKLabel,
+    description: strings.agentConfig.topKDesc,
     type: 'number',
     path: ['modelConfig', 'generateContentConfig', 'topK'],
     defaultValue: undefined,
   },
   {
     key: 'maxOutputTokens',
-    label: 'Max Output Tokens',
-    description: 'Maximum number of tokens to generate',
+    label: strings.agentConfig.maxOutputTokensLabel,
+    description: strings.agentConfig.maxOutputTokensDesc,
     type: 'number',
     path: ['modelConfig', 'generateContentConfig', 'maxOutputTokens'],
     defaultValue: undefined,
   },
   {
     key: 'maxTimeMinutes',
-    label: 'Max Time (minutes)',
-    description: 'Maximum execution time in minutes',
+    label: strings.agentConfig.maxTimeMinutesLabel,
+    description: strings.agentConfig.maxTimeMinutesDesc,
     type: 'number',
     path: ['runConfig', 'maxTimeMinutes'],
     defaultValue: undefined,
   },
   {
     key: 'maxTurns',
-    label: 'Max Turns',
-    description: 'Maximum number of conversational turns',
+    label: strings.agentConfig.maxTurnsLabel,
+    description: strings.agentConfig.maxTurnsDesc,
     type: 'number',
     path: ['runConfig', 'maxTurns'],
     defaultValue: undefined,
@@ -282,7 +283,7 @@ export function AgentConfigDialog({
         } else if (effectiveValue !== undefined && effectiveValue !== null) {
           displayValue = String(effectiveValue);
         } else {
-          displayValue = '(default)';
+          displayValue = `(${strings.settingsLabelDefault})`;
         }
 
         // Add * if modified
@@ -421,12 +422,12 @@ export function AgentConfigDialog({
   // Footer content
   const footerContent =
     modifiedFields.size > 0 ? (
-      <Text color={theme.text.secondary}>Changes saved automatically.</Text>
+      <Text color={theme.text.secondary}>{strings.agentConfig.changesSaved}</Text>
     ) : null;
 
   return (
     <BaseSettingsDialog
-      title={`Configure: ${displayName}`}
+      title={strings.agentConfig.title.replace('{name}', displayName)}
       searchEnabled={false}
       items={items}
       showScopeSelector={true}

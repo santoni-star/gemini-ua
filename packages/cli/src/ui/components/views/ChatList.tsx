@@ -8,6 +8,7 @@ import type React from 'react';
 import { Box, Text } from 'ink';
 import { theme } from '../../semantic-colors.js';
 import type { ChatDetail } from '../../types.js';
+import { strings } from '../../../i18n.js';
 
 interface ChatListProps {
   chats: readonly ChatDetail[];
@@ -15,12 +16,12 @@ interface ChatListProps {
 
 export const ChatList: React.FC<ChatListProps> = ({ chats }) => {
   if (chats.length === 0) {
-    return <Text>No saved conversation checkpoints found.</Text>;
+    return <Text>{strings.chatListNoCheckpoints}</Text>;
   }
 
   return (
     <Box flexDirection="column">
-      <Text>List of saved conversations:</Text>
+      <Text>{strings.chatListTitle}</Text>
       <Box height={1} />
       {chats.map((chat) => {
         const isoString = chat.mtime;
@@ -29,7 +30,7 @@ export const ChatList: React.FC<ChatListProps> = ({ chats }) => {
         );
         const formattedDate = match
           ? `${match[1]} ${match[2]}`
-          : 'Invalid Date';
+          : strings.chatListInvalidDate;
         return (
           <Box key={chat.name} flexDirection="row">
             <Text>
@@ -40,7 +41,7 @@ export const ChatList: React.FC<ChatListProps> = ({ chats }) => {
         );
       })}
       <Box height={1} />
-      <Text color={theme.text.secondary}>Note: Newest last, oldest first</Text>
+      <Text color={theme.text.secondary}>{strings.chatListNoteOrder}</Text>
     </Box>
   );
 };

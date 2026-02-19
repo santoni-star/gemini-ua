@@ -14,6 +14,7 @@ import type { FileChangeStats } from '../utils/rewindFileOps.js';
 import { useKeypress } from '../hooks/useKeypress.js';
 import { formatTimeAgo } from '../utils/formatters.js';
 import { keyMatchers, Command } from '../keyMatchers.js';
+import { strings } from '../../i18n.js';
 
 export enum RewindOutcome {
   RewindAndRevert = 'rewind_and_revert',
@@ -22,26 +23,26 @@ export enum RewindOutcome {
   Cancel = 'cancel',
 }
 
-const REWIND_OPTIONS: Array<RadioSelectItem<RewindOutcome>> = [
+const getRewindOptions = (): Array<RadioSelectItem<RewindOutcome>> => [
   {
-    label: 'Rewind conversation and revert code changes',
+    label: strings.rewind.optionRewindAndRevert,
     value: RewindOutcome.RewindAndRevert,
-    key: 'Rewind conversation and revert code changes',
+    key: strings.rewind.optionRewindAndRevert,
   },
   {
-    label: 'Rewind conversation',
+    label: strings.rewind.optionRewindOnly,
     value: RewindOutcome.RewindOnly,
-    key: 'Rewind conversation',
+    key: strings.rewind.optionRewindOnly,
   },
   {
-    label: 'Revert code changes',
+    label: strings.rewind.optionRevertOnly,
     value: RewindOutcome.RevertOnly,
-    key: 'Revert code changes',
+    key: strings.rewind.optionRevertOnly,
   },
   {
-    label: 'Do nothing (esc)',
+    label: strings.rewind.optionDoNothing,
     value: RewindOutcome.Cancel,
-    key: 'Do nothing (esc)',
+    key: strings.rewind.optionDoNothing,
   },
 ];
 
@@ -74,10 +75,11 @@ export const RewindConfirmation: React.FC<RewindConfirmationProps> = ({
   };
 
   const options = useMemo(() => {
+    const allOptions = getRewindOptions();
     if (stats) {
-      return REWIND_OPTIONS;
+      return allOptions;
     }
-    return REWIND_OPTIONS.filter(
+    return allOptions.filter(
       (option) =>
         option.value !== RewindOutcome.RewindAndRevert &&
         option.value !== RewindOutcome.RevertOnly,
@@ -93,7 +95,7 @@ export const RewindConfirmation: React.FC<RewindConfirmationProps> = ({
       width={terminalWidth}
     >
       <Box marginBottom={1}>
-        <Text bold>Confirm Rewind</Text>
+        <Text bold>{strings.rewind.confirmTitle}</Text>
       </Box>
 
       {stats && (
@@ -106,15 +108,15 @@ export const RewindConfirmation: React.FC<RewindConfirmationProps> = ({
         >
           <Text color={theme.text.primary}>
             {stats.fileCount === 1
-              ? `File: ${stats.details?.at(0)?.fileName}`
-              : `${stats.fileCount} files affected`}
+              ? `${strings.summaryFile}: ${stats.details?.at(0)?.fileName}`
+              : strings.rewind.filesAffected.replace('{count}', String(stats.fileCount))}
           </Text>
           <Box flexDirection="row">
             <Text color={theme.status.success}>
-              Lines added: {stats.addedLines}{' '}
+              {strings.rewind.linesAdded.replace('{count}', String(stats.addedLines))}{' '}
             </Text>
             <Text color={theme.status.error}>
-              Lines removed: {stats.removedLines}
+              {strings.rewind.linesRemoved.replace('{count}', String(stats.removedLines))}
             </Text>
             {timestamp && (
               <Text color={theme.text.secondary}>
@@ -125,8 +127,7 @@ export const RewindConfirmation: React.FC<RewindConfirmationProps> = ({
           </Box>
           <Box marginTop={1}>
             <Text color={theme.status.warning}>
-              ℹ Rewinding does not affect files edited manually or by the shell
-              tool.
+              ℹ {strings.rewind.warningManualEdits}
             </Text>
           </Box>
         </Box>
@@ -134,7 +135,7 @@ export const RewindConfirmation: React.FC<RewindConfirmationProps> = ({
 
       {!stats && (
         <Box marginBottom={1}>
-          <Text color={theme.text.secondary}>No code changes to revert.</Text>
+          <Text color={theme.text.secondary}>{strings.rewind.noChangesToRevert}</Text>
           {timestamp && (
             <Text color={theme.text.secondary}>
               {' '}
@@ -145,7 +146,7 @@ export const RewindConfirmation: React.FC<RewindConfirmationProps> = ({
       )}
 
       <Box marginBottom={1}>
-        <Text>Select an action:</Text>
+        <Text>{strings.rewind.selectAction}</Text>
       </Box>
 
       <RadioButtonSelect

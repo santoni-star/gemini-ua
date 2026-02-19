@@ -30,6 +30,7 @@ import {
 import { useSettings } from '../contexts/SettingsContext.js';
 import type { QuotaStats } from '../types.js';
 import { QuotaStatsInfo } from './QuotaStatsInfo.js';
+import { strings } from '../../i18n.js';
 
 // A more flexible and powerful StatRow component
 interface StatRowProps {
@@ -174,8 +175,8 @@ const ModelUsageTable: React.FC<{
 
   const isAuto = currentModel && isAutoModel(currentModel);
   const modelUsageTitle = isAuto
-    ? `${getDisplayString(currentModel)} Usage`
-    : `Model Usage`;
+    ? `${getDisplayString(currentModel)} ${strings.statsModelUsage.toLowerCase()}`
+    : strings.statsModelUsage;
 
   return (
     <Box flexDirection="column" marginTop={1}>
@@ -200,7 +201,7 @@ const ModelUsageTable: React.FC<{
               resetTime={pooledResetTime}
             />
             <Text color={theme.text.primary}>
-              For a full token breakdown, run `/stats model`.
+              {strings.statsTipModel}
             </Text>
           </Box>
         )}
@@ -208,7 +209,7 @@ const ModelUsageTable: React.FC<{
       <Box alignItems="flex-end">
         <Box width={nameWidth}>
           <Text bold color={theme.text.primary}>
-            Model
+            {strings.aboutModel}
           </Text>
         </Box>
         <Box
@@ -218,7 +219,7 @@ const ModelUsageTable: React.FC<{
           flexShrink={0}
         >
           <Text bold color={theme.text.primary}>
-            Reqs
+            {strings.statsReqs}
           </Text>
         </Box>
 
@@ -231,7 +232,7 @@ const ModelUsageTable: React.FC<{
               flexShrink={0}
             >
               <Text bold color={theme.text.primary}>
-                Input Tokens
+                {strings.statsInputTokens}
               </Text>
             </Box>
             <Box
@@ -241,7 +242,7 @@ const ModelUsageTable: React.FC<{
               flexShrink={0}
             >
               <Text bold color={theme.text.primary}>
-                Cache Reads
+                {strings.statsCacheReads}
               </Text>
             </Box>
             <Box
@@ -251,7 +252,7 @@ const ModelUsageTable: React.FC<{
               flexShrink={0}
             >
               <Text bold color={theme.text.primary}>
-                Output Tokens
+                {strings.statsOutputTokens}
               </Text>
             </Box>
           </>
@@ -263,7 +264,7 @@ const ModelUsageTable: React.FC<{
             alignItems="flex-end"
           >
             <Text bold color={theme.text.primary}>
-              Usage remaining
+              {strings.statsUsageLeft}
             </Text>
           </Box>
         )}
@@ -428,7 +429,7 @@ export const StatsDisplay: React.FC<StatsDisplayProps> = ({
     }
     return (
       <Text bold color={theme.text.accent}>
-        Session Stats
+        {strings.statsSessionStats}
       </Text>
     );
   };
@@ -445,12 +446,12 @@ export const StatsDisplay: React.FC<StatsDisplayProps> = ({
       {renderTitle()}
       <Box height={1} />
 
-      <Section title="Interaction Summary">
-        <StatRow title="Session ID:">
+      <Section title={strings.statsInteractionSummary}>
+        <StatRow title={strings.statsSessionID}>
           <Text color={theme.text.primary}>{stats.sessionId}</Text>
         </StatRow>
         {showUserIdentity && selectedAuthType && (
-          <StatRow title="Auth Method:">
+          <StatRow title={strings.aboutAuthMethod + ':'}>
             <Text color={theme.text.primary}>
               {selectedAuthType.startsWith('oauth')
                 ? userEmail
@@ -461,33 +462,33 @@ export const StatsDisplay: React.FC<StatsDisplayProps> = ({
           </StatRow>
         )}
         {showUserIdentity && tier && (
-          <StatRow title="Tier:">
+          <StatRow title={strings.userIdentity.authPlanLabel}>
             <Text color={theme.text.primary}>{tier}</Text>
           </StatRow>
         )}
-        <StatRow title="Tool Calls:">
+        <StatRow title={strings.statsToolCalls}>
           <Text color={theme.text.primary}>
             {tools.totalCalls} ({' '}
             <Text color={theme.status.success}>✓ {tools.totalSuccess}</Text>{' '}
             <Text color={theme.status.error}>x {tools.totalFail}</Text> )
           </Text>
         </StatRow>
-        <StatRow title="Success Rate:">
+        <StatRow title={strings.statsSuccessRate}>
           <Text color={successColor}>{computed.successRate.toFixed(1)}%</Text>
         </StatRow>
         {computed.totalDecisions > 0 && (
-          <StatRow title="User Agreement:">
+          <StatRow title={strings.statsUserAgreement}>
             <Text color={agreementColor}>
               {computed.agreementRate.toFixed(1)}%{' '}
               <Text color={theme.text.secondary}>
-                ({computed.totalDecisions} reviewed)
+                ({computed.totalDecisions} {strings.statsReviewed})
               </Text>
             </Text>
           </StatRow>
         )}
         {files &&
           (files.totalLinesAdded > 0 || files.totalLinesRemoved > 0) && (
-            <StatRow title="Code Changes:">
+            <StatRow title={strings.statsCodeChanges}>
               <Text color={theme.text.primary}>
                 <Text color={theme.status.success}>
                   +{files.totalLinesAdded}
@@ -500,16 +501,16 @@ export const StatsDisplay: React.FC<StatsDisplayProps> = ({
           )}
       </Section>
 
-      <Section title="Performance">
-        <StatRow title="Wall Time:">
+      <Section title={strings.statsPerformance}>
+        <StatRow title={strings.statsWallTime}>
           <Text color={theme.text.primary}>{duration}</Text>
         </StatRow>
-        <StatRow title="Agent Active:">
+        <StatRow title={strings.statsAgentActive}>
           <Text color={theme.text.primary}>
             {formatDuration(computed.agentActiveTime)}
           </Text>
         </StatRow>
-        <SubStatRow title="API Time:">
+        <SubStatRow title={strings.statsApiTime}>
           <Text color={theme.text.primary}>
             {formatDuration(computed.totalApiTime)}{' '}
             <Text color={theme.text.secondary}>
@@ -517,7 +518,7 @@ export const StatsDisplay: React.FC<StatsDisplayProps> = ({
             </Text>
           </Text>
         </SubStatRow>
-        <SubStatRow title="Tool Time:">
+        <SubStatRow title={strings.statsToolTime}>
           <Text color={theme.text.primary}>
             {formatDuration(computed.totalToolTime)}{' '}
             <Text color={theme.text.secondary}>

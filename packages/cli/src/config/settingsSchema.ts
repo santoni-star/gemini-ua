@@ -21,6 +21,7 @@ import {
 } from '@google/gemini-cli-core';
 import type { SessionRetentionSettings } from './settings.js';
 import { DEFAULT_MIN_RETENTION } from '../utils/sessionCleanup.js';
+import { getStrings } from '../i18n.js';
 
 export type SettingsType =
   | 'boolean'
@@ -51,17 +52,6 @@ export const TOGGLE_TYPES: ReadonlySet<SettingsType | undefined> = new Set([
 export interface SettingEnumOption {
   value: string | number;
   label: string;
-}
-
-function oneLine(strings: TemplateStringsArray, ...values: unknown[]): string {
-  let result = '';
-  for (let i = 0; i < strings.length; i++) {
-    result += strings[i];
-    if (i < values.length) {
-      result += String(values[i]);
-    }
-  }
-  return result.replace(/\s+/g, ' ').trim();
 }
 
 export interface SettingCollectionDefinition {
@@ -138,574 +128,819 @@ export type DnsResolutionOrder = 'ipv4first' | 'verbatim';
 const SETTINGS_SCHEMA = {
   // Maintained for compatibility/criticality
   mcpServers: {
-    type: 'object',
-    label: 'MCP Servers',
-    category: 'Advanced',
-    requiresRestart: true,
+    type: 'object' as const,
+    get label() {
+      return getStrings().settingsLabelMcpServers;
+    },
+    get category() { return getStrings().settingsLabelCategoryAdvanced; },
+    requiresRestart: true as const,
     default: {} as Record<string, MCPServerConfig>,
-    description: 'Configuration for MCP servers.',
-    showInDialog: false,
+    get description() {
+      return getStrings().settingsDescMcpServers;
+    },
+    showInDialog: false as const,
     mergeStrategy: MergeStrategy.SHALLOW_MERGE,
     additionalProperties: {
-      type: 'object',
-      ref: 'MCPServerConfig',
+      type: 'object' as const,
+      ref: 'MCPServerConfig' as const,
     },
   },
 
   policyPaths: {
-    type: 'array',
-    label: 'Policy Paths',
-    category: 'Advanced',
-    requiresRestart: true,
+    type: 'array' as const,
+    get label() {
+      return getStrings().settingsLabelPolicyPaths;
+    },
+    get category() { return getStrings().settingsLabelCategoryAdvanced; },
+    requiresRestart: true as const,
     default: [] as string[],
-    description: 'Additional policy files or directories to load.',
-    showInDialog: false,
-    items: { type: 'string' },
+    get description() {
+      return getStrings().settingsDescPolicyPaths;
+    },
+    showInDialog: false as const,
+    items: { type: 'string' as const },
     mergeStrategy: MergeStrategy.UNION,
   },
 
   general: {
-    type: 'object',
-    label: 'General',
-    category: 'General',
-    requiresRestart: false,
+    type: 'object' as const,
+    get label() {
+      return getStrings().settingsLabelGeneral;
+    },
+    get category() { return getStrings().settingsLabelCategoryGeneral; },
+    requiresRestart: false as const,
     default: {},
-    description: 'General application settings.',
-    showInDialog: false,
+    get description() {
+      return getStrings().settingsDescGeneral;
+    },
+    showInDialog: false as const,
     properties: {
       preferredEditor: {
-        type: 'string',
-        label: 'Preferred Editor',
-        category: 'General',
-        requiresRestart: false,
+        type: 'string' as const,
+        get label() {
+          return getStrings().settingsLabelPreferredEditor;
+        },
+        get category() { return getStrings().settingsLabelCategoryGeneral; },
+        requiresRestart: false as const,
         default: undefined as string | undefined,
-        description: 'The preferred editor to open files in.',
-        showInDialog: false,
+        get description() {
+          return getStrings().settingsDescThePreferredEditorToOpenF;
+        },
+        showInDialog: false as const,
       },
       vimMode: {
-        type: 'boolean',
-        label: 'Vim Mode',
-        category: 'General',
-        requiresRestart: false,
+        type: 'boolean' as const,
+        get label() {
+          return getStrings().settingsLabelVimMode;
+        },
+        get category() { return getStrings().settingsLabelCategoryGeneral; },
+        requiresRestart: false as const,
         default: false,
-        description: 'Enable Vim keybindings',
-        showInDialog: true,
+        get description() {
+          return getStrings().settingsDescEnableVimKeybindings;
+        },
+        showInDialog: true as const,
       },
       language: {
-        type: 'enum',
-        label: 'Language',
-        category: 'General',
-        requiresRestart: true,
+        type: 'enum' as const,
+        get label() {
+          return getStrings().settingsLabelLanguage;
+        },
+        get category() { return getStrings().settingsLabelCategoryGeneral; },
+        requiresRestart: true as const,
         default: 'en',
-        description: 'The language for the UI.',
-        showInDialog: true,
+        get description() {
+          return getStrings().settingsDescTheLanguageForTheUi;
+        },
+        showInDialog: true as const,
         options: [
-          { value: 'en', label: 'English' },
-          { value: 'ua', label: 'Ukrainian (Українська)' },
+          {
+            value: 'en' as const,
+            get label() {
+              return getStrings().settingsLabelEnglish;
+            },
+          },
+          {
+            value: 'ua' as const,
+            get label() {
+              return getStrings().settingsLabelUkrainian;
+            },
+          },
         ],
       },
       defaultApprovalMode: {
-        type: 'enum',
-        label: 'Default Approval Mode',
-        category: 'General',
-        requiresRestart: false,
-        default: 'default',
-        description: oneLine`
-          The default approval mode for tool execution.
-          'default' prompts for approval, 'auto_edit' auto-approves edit tools,
-          and 'plan' is read-only mode. 'yolo' is not supported yet.
-        `,
-        showInDialog: true,
+        type: 'enum' as const,
+        get label() {
+          return getStrings().settingsLabelDefaultApprovalMode;
+        },
+        get category() { return getStrings().settingsLabelCategoryGeneral; },
+        requiresRestart: false as const,
+        default: 'default' as const,
+        get description() {
+          return getStrings().settingsDescTheDefaultApprovalModeFor;
+        },
+        showInDialog: true as const,
         options: [
-          { value: 'default', label: 'Default' },
-          { value: 'auto_edit', label: 'Auto Edit' },
-          { value: 'plan', label: 'Plan' },
+          {
+            value: 'default' as const,
+            get label() {
+              return getStrings().settingsLabelDefault;
+            },
+          },
+          {
+            value: 'auto_edit' as const,
+            get label() {
+              return getStrings().settingsLabelAutoEdit;
+            },
+          },
+          {
+            value: 'plan' as const,
+            get label() {
+              return getStrings().settingsLabelPlan;
+            },
+          },
         ],
       },
       devtools: {
-        type: 'boolean',
-        label: 'DevTools',
-        category: 'General',
-        requiresRestart: false,
+        type: 'boolean' as const,
+        get label() {
+          return getStrings().settingsLabelDevtools;
+        },
+        get category() { return getStrings().settingsLabelCategoryGeneral; },
+        requiresRestart: false as const,
         default: false,
-        description: 'Enable DevTools inspector on launch.',
-        showInDialog: false,
+        get description() {
+          return getStrings().settingsDescEnableDevtoolsInspectorOnL;
+        },
+        showInDialog: false as const,
       },
       enableAutoUpdate: {
-        type: 'boolean',
-        label: 'Enable Auto Update',
-        category: 'General',
-        requiresRestart: false,
+        type: 'boolean' as const,
+        get label() {
+          return getStrings().settingsLabelEnableAutoUpdate;
+        },
+        get category() { return getStrings().settingsLabelCategoryGeneral; },
+        requiresRestart: false as const,
         default: true,
-        description: 'Enable automatic updates.',
-        showInDialog: true,
+        get description() {
+          return getStrings().settingsDescEnableAutomaticUpdates;
+        },
+        showInDialog: true as const,
       },
       enableAutoUpdateNotification: {
-        type: 'boolean',
-        label: 'Enable Auto Update Notification',
-        category: 'General',
-        requiresRestart: false,
+        type: 'boolean' as const,
+        get label() {
+          return getStrings().settingsLabelEnableAutoUpdateNotification;
+        },
+        get category() { return getStrings().settingsLabelCategoryGeneral; },
+        requiresRestart: false as const,
         default: true,
-        description: 'Enable update notification prompts.',
-        showInDialog: false,
+        get description() {
+          return getStrings().settingsDescEnableUpdateNotificationPro;
+        },
+        showInDialog: false as const,
       },
       checkpointing: {
-        type: 'object',
-        label: 'Checkpointing',
-        category: 'General',
-        requiresRestart: true,
+        type: 'object' as const,
+        get label() {
+          return getStrings().settingsLabelCheckpointing;
+        },
+        get category() { return getStrings().settingsLabelCategoryGeneral; },
+        requiresRestart: true as const,
         default: {},
-        description: 'Session checkpointing settings.',
-        showInDialog: false,
+        get description() {
+          return getStrings().settingsDescSessionCheckpointingSettings;
+        },
+        showInDialog: false as const,
         properties: {
           enabled: {
-            type: 'boolean',
-            label: 'Enable Checkpointing',
-            category: 'General',
-            requiresRestart: true,
+            type: 'boolean' as const,
+            get label() {
+              return getStrings().settingsLabelEnableCheckpointing;
+            },
+            get category() { return getStrings().settingsLabelCategoryGeneral; },
+            requiresRestart: true as const,
             default: false,
-            description: 'Enable session checkpointing for recovery',
-            showInDialog: false,
+            get description() {
+              return getStrings().settingsDescEnableSessionCheckpointingF;
+            },
+            showInDialog: false as const,
           },
         },
       },
       enablePromptCompletion: {
-        type: 'boolean',
-        label: 'Enable Prompt Completion',
-        category: 'General',
-        requiresRestart: true,
+        type: 'boolean' as const,
+        get label() {
+          return getStrings().settingsLabelEnablePromptCompletion;
+        },
+        get category() { return getStrings().settingsLabelCategoryGeneral; },
+        requiresRestart: true as const,
         default: false,
-        description:
-          'Enable AI-powered prompt completion suggestions while typing.',
-        showInDialog: true,
+        get description() {
+          return getStrings().settingsDescEnablePromptCompletion;
+        },
+        showInDialog: true as const,
       },
       retryFetchErrors: {
-        type: 'boolean',
-        label: 'Retry Fetch Errors',
-        category: 'General',
-        requiresRestart: false,
+        type: 'boolean' as const,
+        get label() {
+          return getStrings().settingsLabelRetryFetchErrors;
+        },
+        get category() { return getStrings().settingsLabelCategoryGeneral; },
+        requiresRestart: false as const,
         default: false,
-        description:
-          'Retry on "exception TypeError: fetch failed sending request" errors.',
-        showInDialog: false,
+        get description() {
+          return getStrings().settingsDescTheFormatToUseWhenImporti;
+        },
+        showInDialog: false as const,
       },
       debugKeystrokeLogging: {
-        type: 'boolean',
-        label: 'Debug Keystroke Logging',
-        category: 'General',
-        requiresRestart: false,
+        type: 'boolean' as const,
+        get label() {
+          return getStrings().settingsLabelDebugKeystrokeLogging;
+        },
+        get category() { return getStrings().settingsLabelCategoryGeneral; },
+        requiresRestart: false as const,
         default: false,
-        description: 'Enable debug logging of keystrokes to the console.',
-        showInDialog: true,
+        get description() {
+          return getStrings().settingsDescEnableDebugLoggingOfKeystr;
+        },
+        showInDialog: true as const,
       },
       sessionRetention: {
-        type: 'object',
-        label: 'Session Retention',
-        category: 'General',
-        requiresRestart: false,
+        type: 'object' as const,
+        get label() {
+          return getStrings().settingsLabelSessionRetention;
+        },
+        get category() { return getStrings().settingsLabelCategoryGeneral; },
+        requiresRestart: false as const,
         default: undefined as SessionRetentionSettings | undefined,
-        showInDialog: false,
+        showInDialog: false as const,
         properties: {
           enabled: {
-            type: 'boolean',
-            label: 'Enable Session Cleanup',
-            category: 'General',
-            requiresRestart: false,
+            type: 'boolean' as const,
+            get label() {
+              return getStrings().settingsLabelEnableSessionCleanup;
+            },
+            get category() { return getStrings().settingsLabelCategoryGeneral; },
+            requiresRestart: false as const,
             default: false,
-            description: 'Enable automatic session cleanup',
-            showInDialog: true,
+            get description() {
+              return getStrings().settingsDescEnableAutomaticSessionClean;
+            },
+            showInDialog: true as const,
           },
           maxAge: {
-            type: 'string',
-            label: 'Keep chat history',
-            category: 'General',
-            requiresRestart: false,
+            type: 'string' as const,
+            get label() {
+              return getStrings().settingsLabelKeepChatHistory;
+            },
+            get category() { return getStrings().settingsLabelCategoryGeneral; },
+            requiresRestart: false as const,
             default: undefined as string | undefined,
-            description:
-              'Automatically delete chats older than this time period (e.g., "30d", "7d", "24h", "1w")',
-            showInDialog: true,
+            get description() {
+              return getStrings().settingsDescSettingsForAutomaticSession;
+            },
+            showInDialog: true as const,
           },
           maxCount: {
-            type: 'number',
-            label: 'Max Session Count',
-            category: 'General',
-            requiresRestart: false,
+            type: 'number' as const,
+            get label() {
+              return getStrings().settingsLabelMaxSessionCount;
+            },
+            get category() { return getStrings().settingsLabelCategoryGeneral; },
+            requiresRestart: false as const,
             default: undefined as number | undefined,
-            description:
-              'Alternative: Maximum number of sessions to keep (most recent)',
-            showInDialog: false,
+            get description() {
+              return getStrings().settingsDescListOfDisabledExtensions;
+            },
+            showInDialog: false as const,
           },
           minRetention: {
-            type: 'string',
-            label: 'Min Retention Period',
-            category: 'General',
-            requiresRestart: false,
+            type: 'string' as const,
+            get label() {
+              return getStrings().settingsLabelMinRetentionPeriod;
+            },
+            get category() { return getStrings().settingsLabelCategoryGeneral; },
+            requiresRestart: false as const,
             default: DEFAULT_MIN_RETENTION,
-            description: `Minimum retention period (safety limit, defaults to "${DEFAULT_MIN_RETENTION}")`,
-            showInDialog: false,
+            get description() {
+              return getStrings().settingsDescTimeoutInMillisecondsForHo;
+            },
+            showInDialog: false as const,
           },
           warningAcknowledged: {
-            type: 'boolean',
-            label: 'Warning Acknowledged',
-            category: 'General',
-            requiresRestart: false,
+            type: 'boolean' as const,
+            get label() {
+              return getStrings().settingsLabelWarningAcknowledged;
+            },
+            get category() { return getStrings().settingsLabelCategoryGeneral; },
+            requiresRestart: false as const,
             default: false,
-            showInDialog: false,
-            description:
-              'INTERNAL: Whether the user has acknowledged the session retention warning',
+            showInDialog: false as const,
+            get description() {
+              return getStrings().settingsDescIfTrue;
+            },
           },
         },
-        description: 'Settings for automatic session cleanup.',
+        get description() {
+          return getStrings().settingsDescSettingsForAutomaticSession;
+        },
       },
     },
   },
   output: {
-    type: 'object',
-    label: 'Output',
-    category: 'General',
-    requiresRestart: false,
+    type: 'object' as const,
+    get label() {
+      return getStrings().settingsLabelOutput;
+    },
+    get category() { return getStrings().settingsLabelCategoryGeneral; },
+    requiresRestart: false as const,
     default: {},
-    description: 'Settings for the CLI output.',
-    showInDialog: false,
+    get description() {
+      return getStrings().settingsDescSettingsForTheCliOutput;
+    },
+    showInDialog: false as const,
     properties: {
       format: {
-        type: 'enum',
-        label: 'Output Format',
-        category: 'General',
-        requiresRestart: false,
-        default: 'text',
-        description: 'The format of the CLI output. Can be `text` or `json`.',
-        showInDialog: true,
+        type: 'enum' as const,
+        get label() {
+          return getStrings().settingsLabelOutputFormat;
+        },
+        get category() { return getStrings().settingsLabelCategoryGeneral; },
+        requiresRestart: false as const,
+        default: 'text' as const,
+        get description() {
+          return getStrings().settingsDescTheFormatOfTheCliOutput;
+        },
+        showInDialog: true as const,
         options: [
-          { value: 'text', label: 'Text' },
-          { value: 'json', label: 'JSON' },
+          {
+            value: 'text' as const,
+            get label() {
+              return getStrings().settingsLabelText;
+            },
+          },
+          {
+            value: 'json' as const,
+            get label() {
+              return getStrings().settingsLabelJson;
+            },
+          },
         ],
       },
     },
   },
 
   ui: {
-    type: 'object',
-    label: 'UI',
-    category: 'UI',
-    requiresRestart: false,
+    type: 'object' as const,
+    get label() {
+      return getStrings().settingsLabelUi;
+    },
+    get category() { return getStrings().settingsLabelCategoryUI; },
+    requiresRestart: false as const,
     default: {},
-    description: 'User interface settings.',
-    showInDialog: false,
+    get description() {
+      return getStrings().settingsDescUserInterfaceSettings;
+    },
+    showInDialog: false as const,
     properties: {
       theme: {
-        type: 'string',
-        label: 'Theme',
-        category: 'UI',
-        requiresRestart: false,
+        type: 'string' as const,
+        get label() {
+          return getStrings().settingsLabelTheme;
+        },
+        get category() { return getStrings().settingsLabelCategoryUI; },
+        requiresRestart: false as const,
         default: undefined as string | undefined,
-        description:
-          'The color theme for the UI. See the CLI themes guide for available options.',
-        showInDialog: false,
+        get description() {
+          return getStrings().settingsDescTheGeminiModelToUseForCo;
+        },
+        showInDialog: false as const,
       },
       autoThemeSwitching: {
-        type: 'boolean',
-        label: 'Auto Theme Switching',
-        category: 'UI',
-        requiresRestart: false,
+        type: 'boolean' as const,
+        get label() {
+          return getStrings().settingsLabelAutoThemeSwitching;
+        },
+        get category() { return getStrings().settingsLabelCategoryUI; },
+        requiresRestart: false as const,
         default: true,
-        description:
-          'Automatically switch between default light and dark themes based on terminal background color.',
-        showInDialog: true,
+        get description() {
+          return getStrings().settingsDescAutomaticallyConfigureNode;
+        },
+        showInDialog: true as const,
       },
       terminalBackgroundPollingInterval: {
-        type: 'number',
-        label: 'Terminal Background Polling Interval',
-        category: 'UI',
-        requiresRestart: false,
+        type: 'number' as const,
+        get label() {
+          return getStrings().settingsLabelTerminalBackgroundPollingInterval;
+        },
+        get category() { return getStrings().settingsLabelCategoryUI; },
+        requiresRestart: false as const,
         default: 60,
-        description:
-          'Interval in seconds to poll the terminal background color.',
-        showInDialog: true,
+        get description() {
+          return getStrings().settingsDescTimeoutInMillisecondsForMc;
+        },
+        showInDialog: true as const,
       },
       customThemes: {
-        type: 'object',
-        label: 'Custom Themes',
-        category: 'UI',
-        requiresRestart: false,
+        type: 'object' as const,
+        get label() {
+          return getStrings().settingsLabelCustomThemes;
+        },
+        get category() { return getStrings().settingsLabelCategoryUI; },
+        requiresRestart: false as const,
         default: {} as Record<string, CustomTheme>,
-        description: 'Custom theme definitions.',
-        showInDialog: false,
+        get description() {
+          return getStrings().settingsDescCustomThemeDefinitions;
+        },
+        showInDialog: false as const,
         additionalProperties: {
-          type: 'object',
-          ref: 'CustomTheme',
+          type: 'object' as const,
+          ref: 'CustomTheme' as const,
         },
       },
       hideWindowTitle: {
-        type: 'boolean',
-        label: 'Hide Window Title',
-        category: 'UI',
-        requiresRestart: true,
+        type: 'boolean' as const,
+        get label() {
+          return getStrings().settingsLabelHideWindowTitle;
+        },
+        get category() { return getStrings().settingsLabelCategoryUI; },
+        requiresRestart: true as const,
         default: false,
-        description: 'Hide the window title bar',
-        showInDialog: true,
+        get description() {
+          return getStrings().settingsDescHideTheWindowTitleBar;
+        },
+        showInDialog: true as const,
       },
       inlineThinkingMode: {
-        type: 'enum',
-        label: 'Inline Thinking',
-        category: 'UI',
-        requiresRestart: false,
-        default: 'off',
-        description: 'Display model thinking inline: off or full.',
-        showInDialog: true,
+        type: 'enum' as const,
+        get label() {
+          return getStrings().settingsLabelInlineThinking;
+        },
+        get category() { return getStrings().settingsLabelCategoryUI; },
+        requiresRestart: false as const,
+        default: 'off' as const,
+        get description() {
+          return getStrings().settingsDescDisplayModelThinkingInline;
+        },
+        showInDialog: true as const,
         options: [
-          { value: 'off', label: 'Off' },
-          { value: 'full', label: 'Full' },
+          {
+            value: 'off' as const,
+            get label() {
+              return getStrings().settingsLabelOff;
+            },
+          },
+          {
+            value: 'full' as const,
+            get label() {
+              return getStrings().settingsLabelFull;
+            },
+          },
         ],
       },
       showStatusInTitle: {
-        type: 'boolean',
-        label: 'Show Thoughts in Title',
-        category: 'UI',
-        requiresRestart: false,
+        type: 'boolean' as const,
+        get label() {
+          return getStrings().settingsLabelShowThoughtsInTitle;
+        },
+        get category() { return getStrings().settingsLabelCategoryUI; },
+        requiresRestart: false as const,
         default: false,
-        description:
-          'Show Gemini CLI model thoughts in the terminal window title during the working phase',
-        showInDialog: true,
+        get description() {
+          return getStrings().settingsDescShowStatusInTitle;
+        },
+        showInDialog: true as const,
       },
       dynamicWindowTitle: {
-        type: 'boolean',
-        label: 'Dynamic Window Title',
-        category: 'UI',
-        requiresRestart: false,
+        type: 'boolean' as const,
+        get label() {
+          return getStrings().settingsLabelDynamicWindowTitle;
+        },
+        get category() { return getStrings().settingsLabelCategoryUI; },
+        requiresRestart: false as const,
         default: true,
-        description:
-          'Update the terminal window title with current status icons (Ready: ◇, Action Required: ✋, Working: ✦)',
-        showInDialog: true,
+        get description() {
+          return getStrings().settingsDescDynamicWindowTitle;
+        },
+        showInDialog: true as const,
       },
       showHomeDirectoryWarning: {
-        type: 'boolean',
-        label: 'Show Home Directory Warning',
-        category: 'UI',
-        requiresRestart: true,
+        type: 'boolean' as const,
+        get label() {
+          return getStrings().settingsLabelShowHomeDirectoryWarning;
+        },
+        get category() { return getStrings().settingsLabelCategoryUI; },
+        requiresRestart: true as const,
         default: true,
-        description:
-          'Show a warning when running Gemini CLI in the home directory.',
-        showInDialog: true,
+        get description() {
+          return getStrings().settingsDescShowHomeDirectoryWarning;
+        },
+        showInDialog: true as const,
       },
       hideTips: {
-        type: 'boolean',
-        label: 'Hide Tips',
-        category: 'UI',
-        requiresRestart: false,
+        type: 'boolean' as const,
+        get label() {
+          return getStrings().settingsLabelHideTips;
+        },
+        get category() { return getStrings().settingsLabelCategoryUI; },
+        requiresRestart: false as const,
         default: false,
-        description: 'Hide helpful tips in the UI',
-        showInDialog: true,
+        get description() {
+          return getStrings().settingsDescHideHelpfulTipsInTheUi;
+        },
+        showInDialog: true as const,
       },
       showShortcutsHint: {
-        type: 'boolean',
-        label: 'Show Shortcuts Hint',
-        category: 'UI',
-        requiresRestart: false,
+        type: 'boolean' as const,
+        get label() {
+          return getStrings().settingsLabelShowShortcutsHint;
+        },
+        get category() { return getStrings().settingsLabelCategoryUI; },
+        requiresRestart: false as const,
         default: true,
-        description: 'Show the "? for shortcuts" hint above the input.',
-        showInDialog: true,
+        get description() {
+          return getStrings().settingsDescShowShortcutsHint;
+        },
+        showInDialog: true as const,
       },
       hideBanner: {
-        type: 'boolean',
-        label: 'Hide Banner',
-        category: 'UI',
-        requiresRestart: false,
+        type: 'boolean' as const,
+        get label() {
+          return getStrings().settingsLabelHideBanner;
+        },
+        get category() { return getStrings().settingsLabelCategoryUI; },
+        requiresRestart: false as const,
         default: false,
-        description: 'Hide the application banner',
-        showInDialog: true,
+        get description() {
+          return getStrings().settingsDescHideTheApplicationBanner;
+        },
+        showInDialog: true as const,
       },
       hideContextSummary: {
-        type: 'boolean',
-        label: 'Hide Context Summary',
-        category: 'UI',
-        requiresRestart: false,
+        type: 'boolean' as const,
+        get label() {
+          return getStrings().settingsLabelHideContextSummary;
+        },
+        get category() { return getStrings().settingsLabelCategoryUI; },
+        requiresRestart: false as const,
         default: false,
-        description:
-          'Hide the context summary (GEMINI.md, MCP servers) above the input.',
-        showInDialog: true,
+        get description() {
+          return getStrings().settingsDescHideContextSummary;
+        },
+        showInDialog: true as const,
       },
       footer: {
-        type: 'object',
-        label: 'Footer',
-        category: 'UI',
-        requiresRestart: false,
+        type: 'object' as const,
+        get label() {
+          return getStrings().settingsLabelFooter;
+        },
+        get category() { return getStrings().settingsLabelCategoryUI; },
+        requiresRestart: false as const,
         default: {},
-        description: 'Settings for the footer.',
-        showInDialog: false,
+        get description() {
+          return getStrings().settingsDescSettingsForTheFooter;
+        },
+        showInDialog: false as const,
         properties: {
           hideCWD: {
-            type: 'boolean',
-            label: 'Hide CWD',
-            category: 'UI',
-            requiresRestart: false,
+            type: 'boolean' as const,
+            get label() {
+              return getStrings().settingsLabelHideCwd;
+            },
+            get category() { return getStrings().settingsLabelCategoryUI; },
+            requiresRestart: false as const,
             default: false,
-            description:
-              'Hide the current working directory path in the footer.',
-            showInDialog: true,
+            get description() {
+              return getStrings().settingsDescHideCWD;
+            },
+            showInDialog: true as const,
           },
           hideSandboxStatus: {
-            type: 'boolean',
-            label: 'Hide Sandbox Status',
-            category: 'UI',
-            requiresRestart: false,
+            type: 'boolean' as const,
+            get label() {
+              return getStrings().settingsLabelHideSandboxStatus;
+            },
+            get category() { return getStrings().settingsLabelCategoryUI; },
+            requiresRestart: false as const,
             default: false,
-            description: 'Hide the sandbox status indicator in the footer.',
-            showInDialog: true,
+            get description() {
+              return getStrings().settingsDescHideTheSandboxStatusIndica;
+            },
+            showInDialog: true as const,
           },
           hideModelInfo: {
-            type: 'boolean',
-            label: 'Hide Model Info',
-            category: 'UI',
-            requiresRestart: false,
+            type: 'boolean' as const,
+            get label() {
+              return getStrings().settingsLabelHideModelInfo;
+            },
+            get category() { return getStrings().settingsLabelCategoryUI; },
+            requiresRestart: false as const,
             default: false,
-            description: 'Hide the model name and context usage in the footer.',
-            showInDialog: true,
+            get description() {
+              return getStrings().settingsDescHideTheModelNameAndContex;
+            },
+            showInDialog: true as const,
           },
           hideContextPercentage: {
-            type: 'boolean',
-            label: 'Hide Context Window Percentage',
-            category: 'UI',
-            requiresRestart: false,
+            type: 'boolean' as const,
+            get label() {
+              return getStrings().settingsLabelHideContextWindowPercentage;
+            },
+            get category() { return getStrings().settingsLabelCategoryUI; },
+            requiresRestart: false as const,
             default: true,
-            description: 'Hides the context window remaining percentage.',
-            showInDialog: true,
+            get description() {
+              return getStrings().settingsDescHidesTheContextWindowRemai;
+            },
+            showInDialog: true as const,
           },
         },
       },
       hideFooter: {
-        type: 'boolean',
-        label: 'Hide Footer',
-        category: 'UI',
-        requiresRestart: false,
+        type: 'boolean' as const,
+        get label() {
+          return getStrings().settingsLabelHideFooter;
+        },
+        get category() { return getStrings().settingsLabelCategoryUI; },
+        requiresRestart: false as const,
         default: false,
-        description: 'Hide the footer from the UI',
-        showInDialog: true,
+        get description() {
+          return getStrings().settingsDescHideTheFooterFromTheUi;
+        },
+        showInDialog: true as const,
       },
       showMemoryUsage: {
-        type: 'boolean',
-        label: 'Show Memory Usage',
-        category: 'UI',
-        requiresRestart: false,
+        type: 'boolean' as const,
+        get label() {
+          return getStrings().settingsLabelShowMemoryUsage;
+        },
+        get category() { return getStrings().settingsLabelCategoryUI; },
+        requiresRestart: false as const,
         default: false,
-        description: 'Display memory usage information in the UI',
-        showInDialog: true,
+        get description() {
+          return getStrings().settingsDescDisplayMemoryUsageInformati;
+        },
+        showInDialog: true as const,
       },
       showLineNumbers: {
-        type: 'boolean',
-        label: 'Show Line Numbers',
-        category: 'UI',
-        requiresRestart: false,
+        type: 'boolean' as const,
+        get label() {
+          return getStrings().settingsLabelShowLineNumbers;
+        },
+        get category() { return getStrings().settingsLabelCategoryUI; },
+        requiresRestart: false as const,
         default: true,
-        description: 'Show line numbers in the chat.',
-        showInDialog: true,
+        get description() {
+          return getStrings().settingsDescShowLineNumbersInTheChat;
+        },
+        showInDialog: true as const,
       },
       showCitations: {
-        type: 'boolean',
-        label: 'Show Citations',
-        category: 'UI',
-        requiresRestart: false,
+        type: 'boolean' as const,
+        get label() {
+          return getStrings().settingsLabelShowCitations;
+        },
+        get category() { return getStrings().settingsLabelCategoryUI; },
+        requiresRestart: false as const,
         default: false,
-        description: 'Show citations for generated text in the chat.',
-        showInDialog: true,
+        get description() {
+          return getStrings().settingsDescShowCitationsForGeneratedT;
+        },
+        showInDialog: true as const,
       },
       showModelInfoInChat: {
-        type: 'boolean',
-        label: 'Show Model Info In Chat',
-        category: 'UI',
-        requiresRestart: false,
+        type: 'boolean' as const,
+        get label() {
+          return getStrings().settingsLabelShowModelInfoInChat;
+        },
+        get category() { return getStrings().settingsLabelCategoryUI; },
+        requiresRestart: false as const,
         default: false,
-        description: 'Show the model name in the chat for each model turn.',
-        showInDialog: true,
+        get description() {
+          return getStrings().settingsDescShowTheModelNameInTheCha;
+        },
+        showInDialog: true as const,
       },
       showUserIdentity: {
-        type: 'boolean',
-        label: 'Show User Identity',
-        category: 'UI',
-        requiresRestart: false,
+        type: 'boolean' as const,
+        get label() {
+          return getStrings().settingsLabelShowUserIdentity;
+        },
+        get category() { return getStrings().settingsLabelCategoryUI; },
+        requiresRestart: false as const,
         default: true,
-        description:
-          "Show the logged-in user's identity (e.g. email) in the UI.",
-        showInDialog: true,
+        get description() {
+          return getStrings().settingsDescShowUserIdentity;
+        },
+        showInDialog: true as const,
       },
       useAlternateBuffer: {
-        type: 'boolean',
-        label: 'Use Alternate Screen Buffer',
-        category: 'UI',
-        requiresRestart: true,
+        type: 'boolean' as const,
+        get label() {
+          return getStrings().settingsLabelUseAlternateScreenBuffer;
+        },
+        get category() { return getStrings().settingsLabelCategoryUI; },
+        requiresRestart: true as const,
         default: false,
-        description:
-          'Use an alternate screen buffer for the UI, preserving shell history.',
-        showInDialog: true,
+        get description() {
+          return getStrings().settingsDescUseNodePtyForAnInteractiv;
+        },
+        showInDialog: true as const,
       },
       useBackgroundColor: {
-        type: 'boolean',
-        label: 'Use Background Color',
-        category: 'UI',
-        requiresRestart: false,
+        type: 'boolean' as const,
+        get label() {
+          return getStrings().settingsLabelUseBackgroundColor;
+        },
+        get category() { return getStrings().settingsLabelCategoryUI; },
+        requiresRestart: false as const,
         default: true,
-        description: 'Whether to use background colors in the UI.',
-        showInDialog: true,
+        get description() {
+          return getStrings().settingsDescWhetherToUseBackgroundColo;
+        },
+        showInDialog: true as const,
       },
       incrementalRendering: {
-        type: 'boolean',
-        label: 'Incremental Rendering',
-        category: 'UI',
-        requiresRestart: true,
+        type: 'boolean' as const,
+        get label() {
+          return getStrings().settingsLabelIncrementalRendering;
+        },
+        get category() { return getStrings().settingsLabelCategoryUI; },
+        requiresRestart: true as const,
         default: true,
-        description:
-          'Enable incremental rendering for the UI. This option will reduce flickering but may cause rendering artifacts. Only supported when useAlternateBuffer is enabled.',
-        showInDialog: true,
+        get description() {
+          return getStrings().settingsDescEnablesToolOutputMaskingTo;
+        },
+        showInDialog: true as const,
       },
       showSpinner: {
-        type: 'boolean',
-        label: 'Show Spinner',
-        category: 'UI',
-        requiresRestart: false,
+        type: 'boolean' as const,
+        get label() {
+          return getStrings().settingsLabelShowSpinner;
+        },
+        get category() { return getStrings().settingsLabelCategoryUI; },
+        requiresRestart: false as const,
         default: true,
-        description: 'Show the spinner during operations.',
-        showInDialog: true,
+        get description() {
+          return getStrings().settingsDescShowTheSpinnerDuringOperat;
+        },
+        showInDialog: true as const,
       },
       customWittyPhrases: {
-        type: 'array',
-        label: 'Custom Witty Phrases',
-        category: 'UI',
-        requiresRestart: false,
+        type: 'array' as const,
+        get label() {
+          return getStrings().settingsLabelCustomWittyPhrases;
+        },
+        get category() { return getStrings().settingsLabelCategoryUI; },
+        requiresRestart: false as const,
         default: [] as string[],
-        description: oneLine`
-          Custom witty phrases to display during loading.
-          When provided, the CLI cycles through these instead of the defaults.
-        `,
-        showInDialog: false,
-        items: { type: 'string' },
+        get description() {
+          return getStrings().settingsDescCustomWittyPhrasesToDispla;
+        },
+        showInDialog: false as const,
+        items: { type: 'string' as const },
       },
       accessibility: {
-        type: 'object',
-        label: 'Accessibility',
-        category: 'UI',
-        requiresRestart: true,
+        type: 'object' as const,
+        get label() {
+          return getStrings().settingsLabelAccessibility;
+        },
+        get category() { return getStrings().settingsLabelCategoryUI; },
+        requiresRestart: true as const,
         default: {},
-        description: 'Accessibility settings.',
-        showInDialog: false,
+        get description() {
+          return getStrings().settingsDescAccessibilitySettings;
+        },
+        showInDialog: false as const,
         properties: {
           enableLoadingPhrases: {
-            type: 'boolean',
-            label: 'Enable Loading Phrases',
-            category: 'UI',
-            requiresRestart: true,
+            type: 'boolean' as const,
+            get label() {
+              return getStrings().settingsLabelEnableLoadingPhrases;
+            },
+            get category() { return getStrings().settingsLabelCategoryUI; },
+            requiresRestart: true as const,
             default: true,
-            description: 'Enable loading phrases during operations.',
-            showInDialog: true,
+            get description() {
+              return getStrings().settingsDescEnableLoadingPhrasesDuring;
+            },
+            showInDialog: true as const,
           },
           screenReader: {
-            type: 'boolean',
-            label: 'Screen Reader Mode',
-            category: 'UI',
-            requiresRestart: true,
+            type: 'boolean' as const,
+            get label() {
+              return getStrings().settingsLabelScreenReaderMode;
+            },
+            get category() { return getStrings().settingsLabelCategoryUI; },
+            requiresRestart: true as const,
             default: false,
-            description:
-              'Render output in plain-text to be more screen reader accessible',
-            showInDialog: true,
+            get description() {
+              return getStrings().settingsDescDisplayMemoryUsageInformati;
+            },
+            showInDialog: true as const,
           },
         },
       },
@@ -713,357 +948,467 @@ const SETTINGS_SCHEMA = {
   },
 
   ide: {
-    type: 'object',
-    label: 'IDE',
-    category: 'IDE',
-    requiresRestart: true,
+    type: 'object' as const,
+    get label() {
+      return getStrings().settingsLabelIde;
+    },
+    category: 'IDE' as const,
+    requiresRestart: true as const,
     default: {},
-    description: 'IDE integration settings.',
-    showInDialog: false,
+    get description() {
+      return getStrings().settingsDescIdeIntegrationSettings;
+    },
+    showInDialog: false as const,
     properties: {
       enabled: {
-        type: 'boolean',
-        label: 'IDE Mode',
-        category: 'IDE',
-        requiresRestart: true,
+        type: 'boolean' as const,
+        get label() {
+          return getStrings().settingsLabelIdeMode;
+        },
+        category: 'IDE' as const,
+        requiresRestart: true as const,
         default: false,
-        description: 'Enable IDE integration mode.',
-        showInDialog: true,
+        get description() {
+          return getStrings().settingsDescEnableIdeIntegrationMode;
+        },
+        showInDialog: true as const,
       },
       hasSeenNudge: {
-        type: 'boolean',
-        label: 'Has Seen IDE Integration Nudge',
-        category: 'IDE',
-        requiresRestart: false,
+        type: 'boolean' as const,
+        get label() {
+          return getStrings().settingsLabelHasSeenIdeIntegrationNudge;
+        },
+        category: 'IDE' as const,
+        requiresRestart: false as const,
         default: false,
-        description: 'Whether the user has seen the IDE integration nudge.',
-        showInDialog: false,
+        get description() {
+          return getStrings().settingsDescWhetherTheUserHasSeenThe;
+        },
+        showInDialog: false as const,
       },
     },
   },
 
   privacy: {
-    type: 'object',
-    label: 'Privacy',
-    category: 'Privacy',
-    requiresRestart: true,
+    type: 'object' as const,
+    get label() {
+      return getStrings().settingsLabelPrivacy;
+    },
+    category: 'Privacy' as const,
+    requiresRestart: true as const,
     default: {},
-    description: 'Privacy-related settings.',
-    showInDialog: false,
+    get description() {
+      return getStrings().settingsDescPrivacyRelatedSettings;
+    },
+    showInDialog: false as const,
     properties: {
       usageStatisticsEnabled: {
-        type: 'boolean',
-        label: 'Enable Usage Statistics',
-        category: 'Privacy',
-        requiresRestart: true,
+        type: 'boolean' as const,
+        get label() {
+          return getStrings().settingsLabelEnableUsageStatistics;
+        },
+        category: 'Privacy' as const,
+        requiresRestart: true as const,
         default: true,
-        description: 'Enable collection of usage statistics',
-        showInDialog: false,
+        get description() {
+          return getStrings().settingsDescEnableCollectionOfUsageSta;
+        },
+        showInDialog: false as const,
       },
     },
   },
 
   telemetry: {
-    type: 'object',
-    label: 'Telemetry',
-    category: 'Advanced',
-    requiresRestart: true,
+    type: 'object' as const,
+    get label() {
+      return getStrings().settingsLabelTelemetry;
+    },
+    get category() { return getStrings().settingsLabelCategoryAdvanced; },
+    requiresRestart: true as const,
     default: undefined as TelemetrySettings | undefined,
-    description: 'Telemetry configuration.',
-    showInDialog: false,
-    ref: 'TelemetrySettings',
+    get description() {
+      return getStrings().settingsDescTelemetryConfiguration;
+    },
+    showInDialog: false as const,
+    ref: 'TelemetrySettings' as const,
   },
 
   model: {
-    type: 'object',
-    label: 'Model',
-    category: 'Model',
-    requiresRestart: false,
+    type: 'object' as const,
+    get label() {
+      return getStrings().settingsLabelModel;
+    },
+    get category() { return getStrings().settingsLabelCategoryModel; },
+    requiresRestart: false as const,
     default: {},
-    description: 'Settings related to the generative model.',
-    showInDialog: false,
+    get description() {
+      return getStrings().settingsDescSettingsRelatedToTheGenera;
+    },
+    showInDialog: false as const,
     properties: {
       name: {
-        type: 'string',
-        label: 'Model',
-        category: 'Model',
-        requiresRestart: false,
+        type: 'string' as const,
+        get label() {
+          return getStrings().settingsLabelModelName;
+        },
+        get category() { return getStrings().settingsLabelCategoryModel; },
+        requiresRestart: false as const,
         default: undefined as string | undefined,
-        description: 'The Gemini model to use for conversations.',
-        showInDialog: false,
+        get description() {
+          return getStrings().settingsDescTheGeminiModelToUseForCo;
+        },
+        showInDialog: false as const,
       },
       maxSessionTurns: {
-        type: 'number',
-        label: 'Max Session Turns',
-        category: 'Model',
-        requiresRestart: false,
+        type: 'number' as const,
+        get label() {
+          return getStrings().settingsLabelMaxSessionTurns;
+        },
+        get category() { return getStrings().settingsLabelCategoryModel; },
+        requiresRestart: false as const,
         default: -1,
-        description:
-          'Maximum number of user/model/tool turns to keep in a session. -1 means unlimited.',
-        showInDialog: true,
+        get description() {
+          return getStrings().settingsDescTheMaximumNumberOfConversa;
+        },
+        showInDialog: true as const,
       },
       summarizeToolOutput: {
-        type: 'object',
-        label: 'Summarize Tool Output',
-        category: 'Model',
-        requiresRestart: false,
+        type: 'object' as const,
+        get label() {
+          return getStrings().settingsLabelSummarizeToolOutput;
+        },
+        get category() { return getStrings().settingsLabelCategoryModel; },
+        requiresRestart: false as const,
         default: undefined as
           | Record<string, { tokenBudget?: number }>
           | undefined,
-        description: oneLine`
-          Enables or disables summarization of tool output.
-          Configure per-tool token budgets (for example {"run_shell_command": {"tokenBudget": 2000}}).
-          Currently only the run_shell_command tool supports summarization.
-        `,
-        showInDialog: false,
+        get description() {
+          return getStrings().settingsDescEnablesOrDisablesSummarizat;
+        },
+        showInDialog: false as const,
         additionalProperties: {
-          type: 'object',
-          description:
-            'Per-tool summarization settings with an optional tokenBudget.',
-          ref: 'SummarizeToolOutputSettings',
+          type: 'object' as const,
+          get description() {
+            return getStrings().settingsDescIndividualHookConfiguration;
+          },
+          ref: 'SummarizeToolOutputSettings' as const,
         },
       },
       compressionThreshold: {
-        type: 'number',
-        label: 'Compression Threshold',
-        category: 'Model',
-        requiresRestart: true,
+        type: 'number' as const,
+        get label() {
+          return getStrings().settingsLabelCompressionThreshold;
+        },
+        get category() { return getStrings().settingsLabelCategoryModel; },
+        requiresRestart: true as const,
         default: 0.5 as number,
-        description:
-          'The fraction of context usage at which to trigger context compression (e.g. 0.2, 0.3).',
-        showInDialog: true,
+        get description() {
+          return getStrings().settingsDescTheFormatToUseWhenImporti;
+        },
+        showInDialog: true as const,
       },
       disableLoopDetection: {
-        type: 'boolean',
-        label: 'Disable Loop Detection',
-        category: 'Model',
-        requiresRestart: true,
+        type: 'boolean' as const,
+        get label() {
+          return getStrings().settingsLabelDisableLoopDetection;
+        },
+        get category() { return getStrings().settingsLabelCategoryModel; },
+        requiresRestart: true as const,
         default: false,
-        description:
-          'Disable automatic detection and prevention of infinite loops.',
-        showInDialog: true,
+        get description() {
+          return getStrings().settingsDescDisableLlmBasedErrorCorrec;
+        },
+        showInDialog: true as const,
       },
       skipNextSpeakerCheck: {
-        type: 'boolean',
-        label: 'Skip Next Speaker Check',
-        category: 'Model',
-        requiresRestart: false,
+        type: 'boolean' as const,
+        get label() {
+          return getStrings().settingsLabelSkipNextSpeakerCheck;
+        },
+        get category() { return getStrings().settingsLabelCategoryModel; },
+        requiresRestart: false as const,
         default: true,
-        description: 'Skip the next speaker check.',
-        showInDialog: true,
+        get description() {
+          return getStrings().settingsDescSkipTheNextSpeakerCheck;
+        },
+        showInDialog: true as const,
       },
     },
   },
 
   modelConfigs: {
-    type: 'object',
-    label: 'Model Configs',
-    category: 'Model',
-    requiresRestart: false,
+    type: 'object' as const,
+    get label() {
+      return getStrings().settingsLabelModelConfigs;
+    },
+    get category() { return getStrings().settingsLabelCategoryModel; },
+    requiresRestart: false as const,
     default: DEFAULT_MODEL_CONFIGS,
-    description: 'Model configurations.',
-    showInDialog: false,
+    get description() {
+      return getStrings().settingsDescModelConfigurations;
+    },
+    showInDialog: false as const,
     properties: {
       aliases: {
-        type: 'object',
-        label: 'Model Config Aliases',
-        category: 'Model',
-        requiresRestart: false,
+        type: 'object' as const,
+        get label() {
+          return getStrings().settingsLabelModelConfigAliases;
+        },
+        get category() { return getStrings().settingsLabelCategoryModel; },
+        requiresRestart: false as const,
         default: DEFAULT_MODEL_CONFIGS.aliases,
-        description:
-          'Named presets for model configs. Can be used in place of a model name and can inherit from other aliases using an `extends` property.',
-        showInDialog: false,
+        get description() {
+          return getStrings().settingsDescModelConfigurations;
+        },
+        showInDialog: false as const,
       },
       customAliases: {
-        type: 'object',
-        label: 'Custom Model Config Aliases',
-        category: 'Model',
-        requiresRestart: false,
+        type: 'object' as const,
+        get label() {
+          return getStrings().settingsLabelCustomModelConfigAliases;
+        },
+        get category() { return getStrings().settingsLabelCategoryModel; },
+        requiresRestart: false as const,
         default: {},
-        description:
-          'Custom named presets for model configs. These are merged with (and override) the built-in aliases.',
-        showInDialog: false,
+        get description() {
+          return getStrings().settingsDescModelConfigurations;
+        },
+        showInDialog: false as const,
       },
       customOverrides: {
-        type: 'array',
-        label: 'Custom Model Config Overrides',
-        category: 'Model',
-        requiresRestart: false,
+        type: 'array' as const,
+        get label() {
+          return getStrings().settingsLabelCustomModelConfigOverrides;
+        },
+        get category() { return getStrings().settingsLabelCategoryModel; },
+        requiresRestart: false as const,
         default: [],
-        description:
-          'Custom model config overrides. These are merged with (and added to) the built-in overrides.',
-        showInDialog: false,
+        get description() {
+          return getStrings().settingsDescModelConfigurations;
+        },
+        showInDialog: false as const,
       },
       overrides: {
-        type: 'array',
-        label: 'Model Config Overrides',
-        category: 'Model',
-        requiresRestart: false,
+        type: 'array' as const,
+        get label() {
+          return getStrings().settingsLabelModelConfigOverrides;
+        },
+        get category() { return getStrings().settingsLabelCategoryModel; },
+        requiresRestart: false as const,
         default: [],
-        description:
-          'Apply specific configuration overrides based on matches, with a primary key of model (or alias). The most specific match will be used.',
-        showInDialog: false,
+        get description() {
+          return getStrings().settingsDescModelConfigurations;
+        },
+        showInDialog: false as const,
       },
     },
   },
 
   agents: {
-    type: 'object',
-    label: 'Agents',
-    category: 'Advanced',
-    requiresRestart: true,
+    type: 'object' as const,
+    get label() {
+      return getStrings().settingsLabelAgents;
+    },
+    get category() { return getStrings().settingsLabelCategoryAdvanced; },
+    requiresRestart: true as const,
     default: {},
-    description: 'Settings for subagents.',
-    showInDialog: false,
+    get description() {
+      return getStrings().settingsDescSettingsForSubagents;
+    },
+    showInDialog: false as const,
     properties: {
       overrides: {
-        type: 'object',
-        label: 'Agent Overrides',
-        category: 'Advanced',
-        requiresRestart: true,
+        type: 'object' as const,
+        get label() {
+          return getStrings().settingsLabelAgentOverrides;
+        },
+        get category() { return getStrings().settingsLabelCategoryAdvanced; },
+        requiresRestart: true as const,
         default: {} as Record<string, AgentOverride>,
-        description:
-          'Override settings for specific agents, e.g. to disable the agent, set a custom model config, or run config.',
-        showInDialog: false,
+        get description() {
+          return getStrings().settingsDescOverrideSettingsForASpecif;
+        },
+        showInDialog: false as const,
         additionalProperties: {
-          type: 'object',
-          ref: 'AgentOverride',
+          type: 'object' as const,
+          ref: 'AgentOverride' as const,
         },
       },
     },
   },
 
   context: {
-    type: 'object',
-    label: 'Context',
-    category: 'Context',
-    requiresRestart: false,
+    type: 'object' as const,
+    get label() {
+      return getStrings().settingsLabelContext;
+    },
+    get category() { return getStrings().settingsLabelCategoryContext; },
+    requiresRestart: false as const,
     default: {},
-    description: 'Settings for managing context provided to the model.',
-    showInDialog: false,
+    get description() {
+      return getStrings().settingsDescSettingsForManagingContext;
+    },
+    showInDialog: false as const,
     properties: {
       fileName: {
-        type: 'string',
-        label: 'Context File Name',
-        category: 'Context',
-        requiresRestart: false,
+        type: 'string' as const,
+        get label() {
+          return getStrings().settingsLabelContextFileName;
+        },
+        get category() { return getStrings().settingsLabelCategoryContext; },
+        requiresRestart: false as const,
         default: undefined as string | string[] | undefined,
-        ref: 'StringOrStringArray',
-        description:
-          'The name of the context file or files to load into memory. Accepts either a single string or an array of strings.',
-        showInDialog: false,
+        ref: 'StringOrStringArray' as const,
+        get description() {
+          return getStrings().settingsDescSettingsForManagingContext;
+        },
+        showInDialog: false as const,
       },
       importFormat: {
-        type: 'string',
-        label: 'Memory Import Format',
-        category: 'Context',
-        requiresRestart: false,
+        type: 'string' as const,
+        get label() {
+          return getStrings().settingsLabelMemoryImportFormat;
+        },
+        get category() { return getStrings().settingsLabelCategoryContext; },
+        requiresRestart: false as const,
         default: undefined as MemoryImportFormat | undefined,
-        description: 'The format to use when importing memory.',
-        showInDialog: false,
+        get description() {
+          return getStrings().settingsDescTheFormatToUseWhenImporti;
+        },
+        showInDialog: false as const,
       },
       includeDirectoryTree: {
-        type: 'boolean',
-        label: 'Include Directory Tree',
-        category: 'Context',
-        requiresRestart: false,
+        type: 'boolean' as const,
+        get label() {
+          return getStrings().settingsLabelIncludeDirectoryTree;
+        },
+        get category() { return getStrings().settingsLabelCategoryContext; },
+        requiresRestart: false as const,
         default: true,
-        description:
-          'Whether to include the directory tree of the current working directory in the initial request to the model.',
-        showInDialog: false,
+        get description() {
+          return getStrings().settingsDescDisplayModelThinkingInline;
+        },
+        showInDialog: false as const,
       },
       discoveryMaxDirs: {
-        type: 'number',
-        label: 'Memory Discovery Max Dirs',
-        category: 'Context',
-        requiresRestart: false,
+        type: 'number' as const,
+        get label() {
+          return getStrings().settingsLabelDiscoveryMaxDirs;
+        },
+        get category() { return getStrings().settingsLabelCategoryContext; },
+        requiresRestart: false as const,
         default: 200,
-        description: 'Maximum number of directories to search for memory.',
-        showInDialog: true,
+        get description() {
+          return getStrings().settingsDescMaximumNumberOfDirectories;
+        },
+        showInDialog: true as const,
       },
       includeDirectories: {
-        type: 'array',
-        label: 'Include Directories',
-        category: 'Context',
-        requiresRestart: false,
+        type: 'array' as const,
+        get label() {
+          return getStrings().settingsLabelIncludeDirectories;
+        },
+        get category() { return getStrings().settingsLabelCategoryContext; },
+        requiresRestart: false as const,
         default: [] as string[],
-        description: oneLine`
-          Additional directories to include in the workspace context.
-          Missing directories will be skipped with a warning.
-        `,
-        showInDialog: false,
-        items: { type: 'string' },
+        get description() {
+          return getStrings().settingsDescAdditionalDirectoriesToIncl;
+        },
+        showInDialog: false as const,
+        items: { type: 'string' as const },
         mergeStrategy: MergeStrategy.CONCAT,
       },
       loadMemoryFromIncludeDirectories: {
-        type: 'boolean',
-        label: 'Load Memory From Include Directories',
-        category: 'Context',
-        requiresRestart: false,
+        type: 'boolean' as const,
+        get label() {
+          return getStrings().settingsLabelLoadMemoryFromIncludeDirectories;
+        },
+        get category() { return getStrings().settingsLabelCategoryContext; },
+        requiresRestart: false as const,
         default: false,
-        description: oneLine`
-          Controls how /memory refresh loads GEMINI.md files.
-          When true, include directories are scanned; when false, only the current directory is used.
-        `,
-        showInDialog: true,
+        get description() {
+          return getStrings().settingsDescControlsHowMemoryRefreshL;
+        },
+        showInDialog: true as const,
       },
       fileFiltering: {
-        type: 'object',
-        label: 'File Filtering',
-        category: 'Context',
-        requiresRestart: true,
+        type: 'object' as const,
+        get label() {
+          return getStrings().settingsLabelFileFiltering;
+        },
+        get category() { return getStrings().settingsLabelCategoryContext; },
+        requiresRestart: true as const,
         default: {},
-        description: 'Settings for git-aware file filtering.',
-        showInDialog: false,
+        get description() {
+          return getStrings().settingsDescSettingsForGitAwareFileFi;
+        },
+        showInDialog: false as const,
         properties: {
           respectGitIgnore: {
-            type: 'boolean',
-            label: 'Respect .gitignore',
-            category: 'Context',
-            requiresRestart: true,
+            type: 'boolean' as const,
+            get label() {
+              return getStrings().settingsLabelRespectGitignore;
+            },
+            get category() { return getStrings().settingsLabelCategoryContext; },
+            requiresRestart: true as const,
             default: true,
-            description: 'Respect .gitignore files when searching.',
-            showInDialog: true,
+            get description() {
+              return getStrings().settingsDescRespect;
+            },
+            showInDialog: true as const,
           },
           respectGeminiIgnore: {
-            type: 'boolean',
-            label: 'Respect .geminiignore',
-            category: 'Context',
-            requiresRestart: true,
+            type: 'boolean' as const,
+            get label() {
+              return getStrings().settingsLabelRespectGeminiignore;
+            },
+            get category() { return getStrings().settingsLabelCategoryContext; },
+            requiresRestart: true as const,
             default: true,
-            description: 'Respect .geminiignore files when searching.',
-            showInDialog: true,
+            get description() {
+              return getStrings().settingsDescRespect;
+            },
+            showInDialog: true as const,
           },
           enableRecursiveFileSearch: {
-            type: 'boolean',
-            label: 'Enable Recursive File Search',
-            category: 'Context',
-            requiresRestart: true,
+            type: 'boolean' as const,
+            get label() {
+              return getStrings().settingsLabelEnableRecursiveFileSearch;
+            },
+            get category() { return getStrings().settingsLabelCategoryContext; },
+            requiresRestart: true as const,
             default: true,
-            description: oneLine`
-              Enable recursive file search functionality when completing @ references in the prompt.
-            `,
-            showInDialog: true,
+            get description() {
+              return getStrings().settingsDescEnableRecursiveFileSearchF;
+            },
+            showInDialog: true as const,
           },
           enableFuzzySearch: {
-            type: 'boolean',
-            label: 'Enable Fuzzy Search',
-            category: 'Context',
-            requiresRestart: true,
+            type: 'boolean' as const,
+            get label() {
+              return getStrings().settingsLabelEnableFuzzySearch;
+            },
+            get category() { return getStrings().settingsLabelCategoryContext; },
+            requiresRestart: true as const,
             default: true,
-            description: 'Enable fuzzy search when searching for files.',
-            showInDialog: true,
+            get description() {
+              return getStrings().settingsDescEnableFuzzySearchWhenSearc;
+            },
+            showInDialog: true as const,
           },
           customIgnoreFilePaths: {
-            type: 'array',
-            label: 'Custom Ignore File Paths',
-            category: 'Context',
-            requiresRestart: true,
+            type: 'array' as const,
+            get label() {
+              return getStrings().settingsLabelCustomIgnoreFilePaths;
+            },
+            get category() { return getStrings().settingsLabelCategoryContext; },
+            requiresRestart: true as const,
             default: [] as string[],
-            description:
-              'Additional ignore file paths to respect. These files take precedence over .geminiignore and .gitignore. Files earlier in the array take precedence over files later in the array, e.g. the first file takes precedence over the second one.',
-            showInDialog: true,
-            items: { type: 'string' },
+            get description() {
+              return getStrings().settingsDescTheFormatToUseWhenImporti;
+            },
+            showInDialog: true as const,
+            items: { type: 'string' as const },
             mergeStrategy: MergeStrategy.UNION,
           },
         },
@@ -1072,379 +1417,494 @@ const SETTINGS_SCHEMA = {
   },
 
   tools: {
-    type: 'object',
-    label: 'Tools',
-    category: 'Tools',
-    requiresRestart: true,
+    type: 'object' as const,
+    get label() {
+      return getStrings().settingsLabelTools;
+    },
+    get category() { return getStrings().settingsLabelCategoryTools; },
+    requiresRestart: true as const,
     default: {},
-    description: 'Settings for built-in and custom tools.',
-    showInDialog: false,
+    get description() {
+      return getStrings().settingsDescSettingsForBuiltInAndCust;
+    },
+    showInDialog: false as const,
     properties: {
       sandbox: {
-        type: 'string',
-        label: 'Sandbox',
-        category: 'Tools',
-        requiresRestart: true,
+        type: 'string' as const,
+        get label() {
+          return getStrings().settingsLabelSandbox;
+        },
+        get category() { return getStrings().settingsLabelCategoryTools; },
+        requiresRestart: true as const,
         default: undefined as boolean | string | undefined,
-        ref: 'BooleanOrString',
-        description: oneLine`
-          Sandbox execution environment.
-          Set to a boolean to enable or disable the sandbox, or provide a string path to a sandbox profile.
-        `,
-        showInDialog: false,
+        ref: 'BooleanOrString' as const,
+        get description() {
+          return getStrings().settingsDescSandboxExecutionEnvironment;
+        },
+        showInDialog: false as const,
       },
       shell: {
-        type: 'object',
-        label: 'Shell',
-        category: 'Tools',
-        requiresRestart: false,
+        type: 'object' as const,
+        get label() {
+          return getStrings().settingsLabelShell;
+        },
+        get category() { return getStrings().settingsLabelCategoryTools; },
+        requiresRestart: false as const,
         default: {},
-        description: 'Settings for shell execution.',
-        showInDialog: false,
+        get description() {
+          return getStrings().settingsDescSettingsForShellExecution;
+        },
+        showInDialog: false as const,
         properties: {
           enableInteractiveShell: {
-            type: 'boolean',
-            label: 'Enable Interactive Shell',
-            category: 'Tools',
-            requiresRestart: true,
+            type: 'boolean' as const,
+            get label() {
+              return getStrings().settingsLabelEnableInteractiveShell;
+            },
+            get category() { return getStrings().settingsLabelCategoryTools; },
+            requiresRestart: true as const,
             default: true,
-            description: oneLine`
-              Use node-pty for an interactive shell experience.
-              Fallback to child_process still applies.
-            `,
-            showInDialog: true,
+            get description() {
+              return getStrings().settingsDescUseNodePtyForAnInteractiv;
+            },
+            showInDialog: true as const,
           },
           pager: {
-            type: 'string',
-            label: 'Pager',
-            category: 'Tools',
-            requiresRestart: false,
+            type: 'string' as const,
+            get label() {
+              return getStrings().settingsLabelPager;
+            },
+            get category() { return getStrings().settingsLabelCategoryTools; },
+            requiresRestart: false as const,
             default: 'cat' as string | undefined,
-            description:
-              'The pager command to use for shell output. Defaults to `cat`.',
-            showInDialog: false,
+            get description() {
+              return getStrings().settingsDescTheFormatToUseWhenImporti;
+            },
+            showInDialog: false as const,
           },
           showColor: {
-            type: 'boolean',
-            label: 'Show Color',
-            category: 'Tools',
-            requiresRestart: false,
+            type: 'boolean' as const,
+            get label() {
+              return getStrings().settingsLabelShowColor;
+            },
+            get category() { return getStrings().settingsLabelCategoryTools; },
+            requiresRestart: false as const,
             default: false,
-            description: 'Show color in shell output.',
-            showInDialog: true,
+            get description() {
+              return getStrings().settingsDescShowColorInShellOutput;
+            },
+            showInDialog: true as const,
           },
           inactivityTimeout: {
-            type: 'number',
-            label: 'Inactivity Timeout',
-            category: 'Tools',
-            requiresRestart: false,
+            type: 'number' as const,
+            get label() {
+              return getStrings().settingsLabelInactivityTimeout;
+            },
+            get category() { return getStrings().settingsLabelCategoryTools; },
+            requiresRestart: false as const,
             default: 300,
-            description:
-              'The maximum time in seconds allowed without output from the shell command. Defaults to 5 minutes.',
-            showInDialog: false,
+            get description() {
+              return getStrings().settingsDescTimeoutInMillisecondsForMc;
+            },
+            showInDialog: false as const,
           },
           enableShellOutputEfficiency: {
-            type: 'boolean',
-            label: 'Enable Shell Output Efficiency',
-            category: 'Tools',
-            requiresRestart: false,
+            type: 'boolean' as const,
+            get label() {
+              return getStrings().settingsLabelEnableShellOutputEfficiency;
+            },
+            get category() { return getStrings().settingsLabelCategoryTools; },
+            requiresRestart: false as const,
             default: true,
-            description:
-              'Enable shell output efficiency optimizations for better performance.',
-            showInDialog: false,
+            get description() {
+              return getStrings().settingsDescEnablesToolOutputMaskingTo;
+            },
+            showInDialog: false as const,
           },
         },
       },
 
       core: {
-        type: 'array',
-        label: 'Core Tools',
-        category: 'Tools',
-        requiresRestart: true,
+        type: 'array' as const,
+        get label() {
+          return getStrings().settingsLabelCoreTools;
+        },
+        get category() { return getStrings().settingsLabelCategoryTools; },
+        requiresRestart: true as const,
         default: undefined as string[] | undefined,
-        description: oneLine`
-          Restrict the set of built-in tools with an allowlist.
-          Match semantics mirror tools.allowed; see the built-in tools documentation for available names.
-        `,
-        showInDialog: false,
-        items: { type: 'string' },
+        get description() {
+          return getStrings().settingsDescRestrictTheSetOfBuiltInT;
+        },
+        showInDialog: false as const,
+        items: { type: 'string' as const },
       },
       allowed: {
-        type: 'array',
-        label: 'Allowed Tools',
-        category: 'Advanced',
-        requiresRestart: true,
+        type: 'array' as const,
+        get label() {
+          return getStrings().settingsLabelAllowedTools;
+        },
+        get category() { return getStrings().settingsLabelCategoryAdvanced; },
+        requiresRestart: true as const,
         default: undefined as string[] | undefined,
-        description: oneLine`
-          Tool names that bypass the confirmation dialog.
-          Useful for trusted commands (for example ["run_shell_command(git)", "run_shell_command(npm test)"]).
-          See shell tool command restrictions for matching details.
-        `,
-        showInDialog: false,
-        items: { type: 'string' },
+        get description() {
+          return getStrings().settingsDescToolNamesThatBypassTheCon;
+        },
+        showInDialog: false as const,
+        items: { type: 'string' as const },
       },
       exclude: {
-        type: 'array',
-        label: 'Exclude Tools',
-        category: 'Tools',
-        requiresRestart: true,
+        type: 'array' as const,
+        get label() {
+          return getStrings().settingsLabelExcludeTools;
+        },
+        get category() { return getStrings().settingsLabelCategoryTools; },
+        requiresRestart: true as const,
         default: undefined as string[] | undefined,
-        description: 'Tool names to exclude from discovery.',
-        showInDialog: false,
-        items: { type: 'string' },
+        get description() {
+          return getStrings().settingsDescToolNamesToExcludeFromDis;
+        },
+        showInDialog: false as const,
+        items: { type: 'string' as const },
         mergeStrategy: MergeStrategy.UNION,
       },
       discoveryCommand: {
-        type: 'string',
-        label: 'Tool Discovery Command',
-        category: 'Tools',
-        requiresRestart: true,
+        type: 'string' as const,
+        get label() {
+          return getStrings().settingsLabelToolDiscoveryCommand;
+        },
+        get category() { return getStrings().settingsLabelCategoryTools; },
+        requiresRestart: true as const,
         default: undefined as string | undefined,
-        description: 'Command to run for tool discovery.',
-        showInDialog: false,
+        get description() {
+          return getStrings().settingsDescCommandToRunForToolDiscov;
+        },
+        showInDialog: false as const,
       },
       callCommand: {
-        type: 'string',
-        label: 'Tool Call Command',
-        category: 'Tools',
-        requiresRestart: true,
+        type: 'string' as const,
+        get label() {
+          return getStrings().settingsLabelToolCallCommand;
+        },
+        get category() { return getStrings().settingsLabelCategoryTools; },
+        requiresRestart: true as const,
         default: undefined as string | undefined,
-        description: oneLine`
-          Defines a custom shell command for invoking discovered tools.
-          The command must take the tool name as the first argument, read JSON arguments from stdin, and emit JSON results on stdout.
-        `,
-        showInDialog: false,
+        get description() {
+          return getStrings().settingsDescDefinesACustomShellCommand;
+        },
+        showInDialog: false as const,
       },
       useRipgrep: {
-        type: 'boolean',
-        label: 'Use Ripgrep',
-        category: 'Tools',
-        requiresRestart: false,
+        type: 'boolean' as const,
+        get label() {
+          return getStrings().settingsLabelUseRipgrep;
+        },
+        get category() { return getStrings().settingsLabelCategoryTools; },
+        requiresRestart: false as const,
         default: true,
-        description:
-          'Use ripgrep for file content search instead of the fallback implementation. Provides faster search performance.',
-        showInDialog: true,
+        get description() {
+          return getStrings().settingsDescEnableFuzzySearchWhenSearc;
+        },
+        showInDialog: true as const,
       },
       truncateToolOutputThreshold: {
-        type: 'number',
-        label: 'Tool Output Truncation Threshold',
-        category: 'General',
-        requiresRestart: true,
+        type: 'number' as const,
+        get label() {
+          return getStrings().settingsLabelTruncateToolOutputThreshold;
+        },
+        get category() { return getStrings().settingsLabelCategoryGeneral; },
+        requiresRestart: true as const,
         default: DEFAULT_TRUNCATE_TOOL_OUTPUT_THRESHOLD,
-        description:
-          'Maximum characters to show when truncating large tool outputs. Set to 0 or negative to disable truncation.',
-        showInDialog: true,
+        get description() {
+          return getStrings().settingsDescTheFormatToUseWhenImporti;
+        },
+        showInDialog: true as const,
       },
       disableLLMCorrection: {
-        type: 'boolean',
-        label: 'Disable LLM Correction',
-        category: 'Tools',
-        requiresRestart: true,
+        type: 'boolean' as const,
+        get label() {
+          return getStrings().settingsLabelDisableLlmCorrection;
+        },
+        get category() { return getStrings().settingsLabelCategoryTools; },
+        requiresRestart: true as const,
         default: true,
-        description: oneLine`
-          Disable LLM-based error correction for edit tools.
-          When enabled, tools will fail immediately if exact string matches are not found, instead of attempting to self-correct.
-        `,
-        showInDialog: true,
+        get description() {
+          return getStrings().settingsDescDisableLlmBasedErrorCorrec;
+        },
+        showInDialog: true as const,
       },
     },
   },
 
   mcp: {
-    type: 'object',
-    label: 'MCP',
-    category: 'MCP',
-    requiresRestart: true,
+    type: 'object' as const,
+    get label() {
+      return getStrings().settingsLabelMcp;
+    },
+    get category() { return getStrings().settingsLabelCategoryMCP; },
+    requiresRestart: true as const,
     default: {},
-    description: 'Settings for Model Context Protocol (MCP) servers.',
-    showInDialog: false,
+    get description() {
+      return getStrings().settingsDescSettingsForModelContextPro;
+    },
+    showInDialog: false as const,
     properties: {
       serverCommand: {
-        type: 'string',
-        label: 'MCP Server Command',
-        category: 'MCP',
-        requiresRestart: true,
+        type: 'string' as const,
+        get label() {
+          return getStrings().settingsLabelMcpServerCommand;
+        },
+        get category() { return getStrings().settingsLabelCategoryMCP; },
+        requiresRestart: true as const,
         default: undefined as string | undefined,
-        description: 'Command to start an MCP server.',
-        showInDialog: false,
+        get description() {
+          return getStrings().settingsDescCommandToStartAnMcpServer;
+        },
+        showInDialog: false as const,
       },
       allowed: {
-        type: 'array',
-        label: 'Allow MCP Servers',
-        category: 'MCP',
-        requiresRestart: true,
+        type: 'array' as const,
+        get label() {
+          return getStrings().settingsLabelAllowMcpServers;
+        },
+        get category() { return getStrings().settingsLabelCategoryMCP; },
+        requiresRestart: true as const,
         default: undefined as string[] | undefined,
-        description: 'A list of MCP servers to allow.',
-        showInDialog: false,
-        items: { type: 'string' },
+        get description() {
+          return getStrings().settingsDescAListOfMcpServersToAllow;
+        },
+        showInDialog: false as const,
+        items: { type: 'string' as const },
       },
       excluded: {
-        type: 'array',
-        label: 'Exclude MCP Servers',
-        category: 'MCP',
-        requiresRestart: true,
+        type: 'array' as const,
+        get label() {
+          return getStrings().settingsLabelExcludeMcpServers;
+        },
+        get category() { return getStrings().settingsLabelCategoryMCP; },
+        requiresRestart: true as const,
         default: undefined as string[] | undefined,
-        description: 'A list of MCP servers to exclude.',
-        showInDialog: false,
-        items: { type: 'string' },
+        get description() {
+          return getStrings().settingsDescAListOfMcpServersToExclu;
+        },
+        showInDialog: false as const,
+        items: { type: 'string' as const },
       },
     },
   },
   useWriteTodos: {
-    type: 'boolean',
-    label: 'Use WriteTodos',
-    category: 'Advanced',
-    requiresRestart: false,
+    type: 'boolean' as const,
+    get label() {
+      return getStrings().settingsLabelUseWritetodos;
+    },
+    get category() { return getStrings().settingsLabelCategoryAdvanced; },
+    requiresRestart: false as const,
     default: true,
-    description: 'Enable the write_todos tool.',
-    showInDialog: false,
+    get description() {
+      return getStrings().settingsDescEnableTheWriteTodosTool;
+    },
+    showInDialog: false as const,
   },
   security: {
-    type: 'object',
-    label: 'Security',
-    category: 'Security',
-    requiresRestart: true,
+    type: 'object' as const,
+    get label() {
+      return getStrings().settingsLabelSecurity;
+    },
+    get category() { return getStrings().settingsLabelCategorySecurity; },
+    requiresRestart: true as const,
     default: {},
-    description: 'Security-related settings.',
-    showInDialog: false,
+    get description() {
+      return getStrings().settingsDescSecurityRelatedSettings;
+    },
+    showInDialog: false as const,
     properties: {
       disableYoloMode: {
-        type: 'boolean',
-        label: 'Disable YOLO Mode',
-        category: 'Security',
-        requiresRestart: true,
+        type: 'boolean' as const,
+        get label() {
+          return getStrings().settingsLabelDisableYoloMode;
+        },
+        get category() { return getStrings().settingsLabelCategorySecurity; },
+        requiresRestart: true as const,
         default: false,
-        description: 'Disable YOLO mode, even if enabled by a flag.',
-        showInDialog: true,
+        get description() {
+          return getStrings().settingsDescDisableYoloMode;
+        },
+        showInDialog: true as const,
       },
       enablePermanentToolApproval: {
-        type: 'boolean',
-        label: 'Allow Permanent Tool Approval',
-        category: 'Security',
-        requiresRestart: false,
+        type: 'boolean' as const,
+        get label() {
+          return getStrings().settingsLabelAllowPermanentToolApproval;
+        },
+        get category() { return getStrings().settingsLabelCategorySecurity; },
+        requiresRestart: false as const,
         default: false,
-        description:
-          'Enable the "Allow for all future sessions" option in tool confirmation dialogs.',
-        showInDialog: true,
+        get description() {
+          return getStrings().settingsDescToolNamesThatBypassTheCon;
+        },
+        showInDialog: true as const,
       },
       blockGitExtensions: {
-        type: 'boolean',
-        label: 'Blocks extensions from Git',
-        category: 'Security',
-        requiresRestart: true,
+        type: 'boolean' as const,
+        get label() {
+          return getStrings().settingsLabelBlocksExtensionsFromGit;
+        },
+        get category() { return getStrings().settingsLabelCategorySecurity; },
+        requiresRestart: true as const,
         default: false,
-        description: 'Blocks installing and loading extensions from Git.',
-        showInDialog: true,
+        get description() {
+          return getStrings().settingsDescBlocksInstallingAndLoading;
+        },
+        showInDialog: true as const,
       },
       allowedExtensions: {
-        type: 'array',
-        label: 'Extension Source Regex Allowlist',
-        category: 'Security',
-        requiresRestart: true,
+        type: 'array' as const,
+        get label() {
+          return getStrings().settingsLabelAllowedExtensions;
+        },
+        get category() { return getStrings().settingsLabelCategorySecurity; },
+        requiresRestart: true as const,
         default: [] as string[],
-        description:
-          'List of Regex patterns for allowed extensions. If nonempty, only extensions that match the patterns in this list are allowed. Overrides the blockGitExtensions setting.',
-        showInDialog: true,
-        items: { type: 'string' },
+        get description() {
+          return getStrings().settingsDescEnableExtensionManagementFe;
+        },
+        showInDialog: true as const,
+        items: { type: 'string' as const },
       },
       folderTrust: {
-        type: 'object',
-        label: 'Folder Trust',
-        category: 'Security',
-        requiresRestart: false,
+        type: 'object' as const,
+        get label() {
+          return getStrings().settingsLabelFolderTrust;
+        },
+        get category() { return getStrings().settingsLabelCategorySecurity; },
+        requiresRestart: false as const,
         default: {},
-        description: 'Settings for folder trust.',
-        showInDialog: false,
+        get description() {
+          return getStrings().settingsDescSettingsForFolderTrust;
+        },
+        showInDialog: false as const,
         properties: {
           enabled: {
-            type: 'boolean',
-            label: 'Folder Trust',
-            category: 'Security',
-            requiresRestart: true,
+            type: 'boolean' as const,
+            get label() {
+              return getStrings().settingsLabelFolderTrust;
+            },
+            get category() { return getStrings().settingsLabelCategorySecurity; },
+            requiresRestart: true as const,
             default: true,
-            description: 'Setting to track whether Folder trust is enabled.',
-            showInDialog: true,
+            get description() {
+              return getStrings().settingsDescSettingToTrackWhetherFolde;
+            },
+            showInDialog: true as const,
           },
         },
       },
       environmentVariableRedaction: {
-        type: 'object',
-        label: 'Environment Variable Redaction',
-        category: 'Security',
-        requiresRestart: false,
+        type: 'object' as const,
+        get label() {
+          return getStrings().settingsLabelEnvironmentVariableRedaction;
+        },
+        get category() { return getStrings().settingsLabelCategorySecurity; },
+        requiresRestart: false as const,
         default: {},
-        description: 'Settings for environment variable redaction.',
-        showInDialog: false,
+        get description() {
+          return getStrings().settingsDescSettingsForEnvironmentVaria;
+        },
+        showInDialog: false as const,
         properties: {
           allowed: {
-            type: 'array',
-            label: 'Allowed Environment Variables',
-            category: 'Security',
-            requiresRestart: true,
+            type: 'array' as const,
+            get label() {
+              return getStrings().settingsLabelAllowedEnvironmentVariables;
+            },
+            get category() { return getStrings().settingsLabelCategorySecurity; },
+            requiresRestart: true as const,
             default: [] as string[],
-            description:
-              'Environment variables to always allow (bypass redaction).',
-            showInDialog: false,
-            items: { type: 'string' },
+            get description() {
+              return getStrings().settingsDescEnvironmentVariablesToAlway;
+            },
+            showInDialog: false as const,
+            items: { type: 'string' as const },
           },
           blocked: {
-            type: 'array',
-            label: 'Blocked Environment Variables',
-            category: 'Security',
-            requiresRestart: true,
+            type: 'array' as const,
+            get label() {
+              return getStrings().settingsLabelBlockedEnvironmentVariables;
+            },
+            get category() { return getStrings().settingsLabelCategorySecurity; },
+            requiresRestart: true as const,
             default: [] as string[],
-            description: 'Environment variables to always redact.',
-            showInDialog: false,
-            items: { type: 'string' },
+            get description() {
+              return getStrings().settingsDescEnvironmentVariablesToAlway;
+            },
+            showInDialog: false as const,
+            items: { type: 'string' as const },
           },
           enabled: {
-            type: 'boolean',
-            label: 'Enable Environment Variable Redaction',
-            category: 'Security',
-            requiresRestart: true,
+            type: 'boolean' as const,
+            get label() {
+              return getStrings().settingsLabelEnableEnvironmentVariableRedaction;
+            },
+            get category() { return getStrings().settingsLabelCategorySecurity; },
+            requiresRestart: true as const,
             default: false,
-            description:
-              'Enable redaction of environment variables that may contain secrets.',
-            showInDialog: true,
+            get description() {
+              return getStrings().settingsDescEnableExtensionManagementFe;
+            },
+            showInDialog: true as const,
           },
         },
       },
       auth: {
-        type: 'object',
-        label: 'Authentication',
-        category: 'Security',
-        requiresRestart: true,
+        type: 'object' as const,
+        get label() {
+          return getStrings().settingsLabelAuth;
+        },
+        get category() { return getStrings().settingsLabelCategorySecurity; },
+        requiresRestart: true as const,
         default: {},
-        description: 'Authentication settings.',
-        showInDialog: false,
+        get description() {
+          return getStrings().settingsDescAuthenticationSettings;
+        },
+        showInDialog: false as const,
         properties: {
           selectedType: {
-            type: 'string',
-            label: 'Selected Auth Type',
-            category: 'Security',
-            requiresRestart: true,
+            type: 'string' as const,
+            get label() {
+              return getStrings().settingsLabelSelectedAuthType;
+            },
+            get category() { return getStrings().settingsLabelCategorySecurity; },
+            requiresRestart: true as const,
             default: undefined as AuthType | undefined,
-            description: 'The currently selected authentication type.',
-            showInDialog: false,
+            get description() {
+              return getStrings().settingsDescTheCurrentlySelectedAuthent;
+            },
+            showInDialog: false as const,
           },
           enforcedType: {
-            type: 'string',
-            label: 'Enforced Auth Type',
-            category: 'Advanced',
-            requiresRestart: true,
+            type: 'string' as const,
+            get label() {
+              return getStrings().settingsLabelEnforcedAuthType;
+            },
+            get category() { return getStrings().settingsLabelCategoryAdvanced; },
+            requiresRestart: true as const,
             default: undefined as AuthType | undefined,
-            description:
-              'The required auth type. If this does not match the selected auth type, the user will be prompted to re-authenticate.',
-            showInDialog: false,
+            get description() {
+              return getStrings().settingsDescTheGeminiModelToUseForCo;
+            },
+            showInDialog: false as const,
           },
           useExternal: {
-            type: 'boolean',
-            label: 'Use External Auth',
-            category: 'Security',
-            requiresRestart: true,
+            type: 'boolean' as const,
+            get label() {
+              return getStrings().settingsLabelUseExternalAuth;
+            },
+            get category() { return getStrings().settingsLabelCategorySecurity; },
+            requiresRestart: true as const,
             default: undefined as boolean | undefined,
-            description: 'Whether to use an external authentication flow.',
-            showInDialog: false,
+            get description() {
+              return getStrings().settingsDescWhetherToUseAnExternalAut;
+            },
+            showInDialog: false as const,
           },
         },
       },
@@ -1452,563 +1912,743 @@ const SETTINGS_SCHEMA = {
   },
 
   advanced: {
-    type: 'object',
-    label: 'Advanced',
-    category: 'Advanced',
-    requiresRestart: true,
+    type: 'object' as const,
+    get label() {
+      return getStrings().settingsLabelAdvanced;
+    },
+    get category() { return getStrings().settingsLabelCategoryAdvanced; },
+    requiresRestart: true as const,
     default: {},
-    description: 'Advanced settings for power users.',
-    showInDialog: false,
+    get description() {
+      return getStrings().settingsDescAdvancedSettingsForPowerUs;
+    },
+    showInDialog: false as const,
     properties: {
       autoConfigureMemory: {
-        type: 'boolean',
-        label: 'Auto Configure Max Old Space Size',
-        category: 'Advanced',
-        requiresRestart: true,
+        type: 'boolean' as const,
+        get label() {
+          return getStrings().settingsLabelAutoConfigureMaxOldSpaceSize;
+        },
+        get category() { return getStrings().settingsLabelCategoryAdvanced; },
+        requiresRestart: true as const,
         default: false,
-        description: 'Automatically configure Node.js memory limits',
-        showInDialog: true,
+        get description() {
+          return getStrings().settingsDescAutomaticallyConfigureNode;
+        },
+        showInDialog: true as const,
       },
       dnsResolutionOrder: {
-        type: 'string',
-        label: 'DNS Resolution Order',
-        category: 'Advanced',
-        requiresRestart: true,
+        type: 'string' as const,
+        get label() {
+          return getStrings().settingsLabelDnsResolutionOrder;
+        },
+        get category() { return getStrings().settingsLabelCategoryAdvanced; },
+        requiresRestart: true as const,
         default: undefined as DnsResolutionOrder | undefined,
-        description: 'The DNS resolution order.',
-        showInDialog: false,
+        get description() {
+          return getStrings().settingsDescTheDnsResolutionOrder;
+        },
+        showInDialog: false as const,
       },
       excludedEnvVars: {
-        type: 'array',
-        label: 'Excluded Project Environment Variables',
-        category: 'Advanced',
-        requiresRestart: false,
+        type: 'array' as const,
+        get label() {
+          return getStrings().settingsLabelExcludedProjectEnvironmentVariables;
+        },
+        get category() { return getStrings().settingsLabelCategoryAdvanced; },
+        requiresRestart: false as const,
         default: ['DEBUG', 'DEBUG_MODE'] as string[],
-        description: 'Environment variables to exclude from project context.',
-        showInDialog: false,
-        items: { type: 'string' },
+        get description() {
+          return getStrings().settingsDescEnvironmentVariablesToExclu;
+        },
+        showInDialog: false as const,
+        items: { type: 'string' as const },
         mergeStrategy: MergeStrategy.UNION,
       },
       bugCommand: {
-        type: 'object',
-        label: 'Bug Command',
-        category: 'Advanced',
-        requiresRestart: false,
+        type: 'object' as const,
+        get label() {
+          return getStrings().settingsLabelBugCommand;
+        },
+        get category() { return getStrings().settingsLabelCategoryAdvanced; },
+        requiresRestart: false as const,
         default: undefined as BugCommandSettings | undefined,
-        description: 'Configuration for the bug report command.',
-        showInDialog: false,
-        ref: 'BugCommandSettings',
+        get description() {
+          return getStrings().settingsDescConfigurationForTheBugRepo;
+        },
+        showInDialog: false as const,
+        ref: 'BugCommandSettings' as const,
       },
     },
   },
 
   experimental: {
-    type: 'object',
-    label: 'Experimental',
-    category: 'Experimental',
-    requiresRestart: true,
+    type: 'object' as const,
+    get label() {
+      return getStrings().settingsLabelExperimental;
+    },
+    get category() { return getStrings().settingsLabelCategoryExperimental; },
+    requiresRestart: true as const,
     default: {},
-    description: 'Setting to enable experimental features',
-    showInDialog: false,
+    get description() {
+      return getStrings().settingsDescSettingToEnableExperimental;
+    },
+    showInDialog: false as const,
     properties: {
       toolOutputMasking: {
-        type: 'object',
-        label: 'Tool Output Masking',
-        category: 'Experimental',
-        requiresRestart: true,
+        type: 'object' as const,
+        get label() {
+          return getStrings().settingsLabelToolOutputMasking;
+        },
+        get category() { return getStrings().settingsLabelCategoryExperimental; },
+        requiresRestart: true as const,
         ignoreInDocs: false,
         default: {},
-        description:
-          'Advanced settings for tool output masking to manage context window efficiency.',
-        showInDialog: false,
+        get description() {
+          return getStrings().settingsDescEnablesToolOutputMaskingTo;
+        },
+        showInDialog: false as const,
         properties: {
           enabled: {
-            type: 'boolean',
-            label: 'Enable Tool Output Masking',
-            category: 'Experimental',
-            requiresRestart: true,
+            type: 'boolean' as const,
+            get label() {
+              return getStrings().settingsLabelEnableToolOutputMasking;
+            },
+            get category() { return getStrings().settingsLabelCategoryExperimental; },
+            requiresRestart: true as const,
             default: true,
-            description: 'Enables tool output masking to save tokens.',
-            showInDialog: true,
+            get description() {
+              return getStrings().settingsDescEnablesToolOutputMaskingTo;
+            },
+            showInDialog: true as const,
           },
           toolProtectionThreshold: {
-            type: 'number',
-            label: 'Tool Protection Threshold',
-            category: 'Experimental',
-            requiresRestart: true,
+            type: 'number' as const,
+            get label() {
+              return getStrings().settingsLabelToolProtectionThreshold;
+            },
+            get category() { return getStrings().settingsLabelCategoryExperimental; },
+            requiresRestart: true as const,
             default: 50000,
-            description:
-              'Minimum number of tokens to protect from masking (most recent tool outputs).',
-            showInDialog: false,
+            get description() {
+              return getStrings().settingsDescTimeoutInMillisecondsForMc;
+            },
+            showInDialog: false as const,
           },
           minPrunableTokensThreshold: {
-            type: 'number',
-            label: 'Min Prunable Tokens Threshold',
-            category: 'Experimental',
-            requiresRestart: true,
+            type: 'number' as const,
+            get label() {
+              return getStrings().settingsLabelMinPrunableTokensThreshold;
+            },
+            get category() { return getStrings().settingsLabelCategoryExperimental; },
+            requiresRestart: true as const,
             default: 30000,
-            description:
-              'Minimum prunable tokens required to trigger a masking pass.',
-            showInDialog: false,
+            get description() {
+              return getStrings().settingsDescTimeoutInMillisecondsForMc;
+            },
+            showInDialog: false as const,
           },
           protectLatestTurn: {
-            type: 'boolean',
-            label: 'Protect Latest Turn',
-            category: 'Experimental',
-            requiresRestart: true,
+            type: 'boolean' as const,
+            get label() {
+              return getStrings().settingsLabelProtectLatestTurn;
+            },
+            get category() { return getStrings().settingsLabelCategoryExperimental; },
+            requiresRestart: true as const,
             default: true,
-            description:
-              'Ensures the absolute latest turn is never masked, regardless of token count.',
-            showInDialog: false,
+            get description() {
+              return getStrings().settingsDescWhetherPromptsAreLoggedIn;
+            },
+            showInDialog: false as const,
           },
         },
       },
       enableAgents: {
-        type: 'boolean',
-        label: 'Enable Agents',
-        category: 'Experimental',
-        requiresRestart: true,
+        type: 'boolean' as const,
+        get label() {
+          return getStrings().settingsLabelEnableAgents;
+        },
+        get category() { return getStrings().settingsLabelCategoryExperimental; },
+        requiresRestart: true as const,
         default: false,
-        description:
-          'Enable local and remote subagents. Warning: Experimental feature, uses YOLO mode for subagents',
-        showInDialog: false,
+        get description() {
+          return getStrings().settingsDescEnableAgentSkills;
+        },
+        showInDialog: false as const,
       },
       extensionManagement: {
-        type: 'boolean',
-        label: 'Extension Management',
-        category: 'Experimental',
-        requiresRestart: true,
+        type: 'boolean' as const,
+        get label() {
+          return getStrings().settingsLabelExtensionManagement;
+        },
+        get category() { return getStrings().settingsLabelCategoryExperimental; },
+        requiresRestart: true as const,
         default: true,
-        description: 'Enable extension management features.',
-        showInDialog: false,
+        get description() {
+          return getStrings().settingsDescEnableExtensionManagementFe;
+        },
+        showInDialog: false as const,
       },
       extensionConfig: {
-        type: 'boolean',
-        label: 'Extension Configuration',
-        category: 'Experimental',
-        requiresRestart: true,
+        type: 'boolean' as const,
+        get label() {
+          return getStrings().settingsLabelExtensionConfiguration;
+        },
+        get category() { return getStrings().settingsLabelCategoryExperimental; },
+        requiresRestart: true as const,
         default: true,
-        description: 'Enable requesting and fetching of extension settings.',
-        showInDialog: false,
+        get description() {
+          return getStrings().settingsDescEnableRequestingAndFetching;
+        },
+        showInDialog: false as const,
       },
       extensionRegistry: {
-        type: 'boolean',
-        label: 'Extension Registry Explore UI',
-        category: 'Experimental',
-        requiresRestart: true,
+        type: 'boolean' as const,
+        get label() {
+          return getStrings().settingsLabelExtensionRegistryExploreUi;
+        },
+        get category() { return getStrings().settingsLabelCategoryExperimental; },
+        requiresRestart: true as const,
         default: false,
-        description: 'Enable extension registry explore UI.',
-        showInDialog: false,
+        get description() {
+          return getStrings().settingsDescEnableExtensionRegistryExpl;
+        },
+        showInDialog: false as const,
       },
       extensionReloading: {
-        type: 'boolean',
-        label: 'Extension Reloading',
-        category: 'Experimental',
-        requiresRestart: true,
+        type: 'boolean' as const,
+        get label() {
+          return getStrings().settingsLabelExtensionReloading;
+        },
+        get category() { return getStrings().settingsLabelCategoryExperimental; },
+        requiresRestart: true as const,
         default: false,
-        description:
-          'Enables extension loading/unloading within the CLI session.',
-        showInDialog: false,
+        get description() {
+          return getStrings().settingsDescEnableExtensionManagementFe;
+        },
+        showInDialog: false as const,
       },
       jitContext: {
-        type: 'boolean',
-        label: 'JIT Context Loading',
-        category: 'Experimental',
-        requiresRestart: true,
+        type: 'boolean' as const,
+        get label() {
+          return getStrings().settingsLabelJitContextLoading;
+        },
+        get category() { return getStrings().settingsLabelCategoryExperimental; },
+        requiresRestart: true as const,
         default: false,
-        description: 'Enable Just-In-Time (JIT) context loading.',
-        showInDialog: false,
+        get description() {
+          return getStrings().settingsDescEnableJustInTime;
+        },
+        showInDialog: false as const,
       },
       useOSC52Paste: {
-        type: 'boolean',
-        label: 'Use OSC 52 Paste',
-        category: 'Experimental',
-        requiresRestart: false,
+        type: 'boolean' as const,
+        get label() {
+          return getStrings().settingsLabelUseOsc52Paste;
+        },
+        get category() { return getStrings().settingsLabelCategoryExperimental; },
+        requiresRestart: false as const,
         default: false,
-        description:
-          'Use OSC 52 sequence for pasting instead of clipboardy (useful for remote sessions).',
-        showInDialog: true,
+        get description() {
+          return getStrings().settingsDescWhetherToUseAnExternalAut;
+        },
+        showInDialog: true as const,
       },
       plan: {
-        type: 'boolean',
-        label: 'Plan',
-        category: 'Experimental',
-        requiresRestart: true,
+        type: 'boolean' as const,
+        get label() {
+          return getStrings().settingsLabelPlan;
+        },
+        get category() { return getStrings().settingsLabelCategoryExperimental; },
+        requiresRestart: true as const,
         default: false,
-        description: 'Enable planning features (Plan Mode and tools).',
-        showInDialog: true,
+        get description() {
+          return getStrings().settingsDescEnablePlanningFeatures;
+        },
+        showInDialog: true as const,
       },
     },
   },
 
   extensions: {
-    type: 'object',
-    label: 'Extensions',
-    category: 'Extensions',
-    requiresRestart: true,
+    type: 'object' as const,
+    get label() {
+      return getStrings().settingsLabelExtensions;
+    },
+    get category() { return getStrings().settingsLabelCategoryExtensions; },
+    requiresRestart: true as const,
     default: {},
-    description: 'Settings for extensions.',
-    showInDialog: false,
+    get description() {
+      return getStrings().settingsDescSettingsForExtensions;
+    },
+    showInDialog: false as const,
     properties: {
       disabled: {
-        type: 'array',
-        label: 'Disabled Extensions',
-        category: 'Extensions',
-        requiresRestart: true,
+        type: 'array' as const,
+        get label() {
+          return getStrings().settingsLabelDisabledExtensions;
+        },
+        get category() { return getStrings().settingsLabelCategoryExtensions; },
+        requiresRestart: true as const,
         default: [] as string[],
-        description: 'List of disabled extensions.',
-        showInDialog: false,
-        items: { type: 'string' },
+        get description() {
+          return getStrings().settingsDescListOfDisabledExtensions;
+        },
+        showInDialog: false as const,
+        items: { type: 'string' as const },
         mergeStrategy: MergeStrategy.UNION,
       },
       workspacesWithMigrationNudge: {
-        type: 'array',
-        label: 'Workspaces with Migration Nudge',
-        category: 'Extensions',
-        requiresRestart: false,
+        type: 'array' as const,
+        get label() {
+          return getStrings().settingsLabelWorkspacesWithMigrationNudge;
+        },
+        get category() { return getStrings().settingsLabelCategoryExtensions; },
+        requiresRestart: false as const,
         default: [] as string[],
-        description:
-          'List of workspaces for which the migration nudge has been shown.',
-        showInDialog: false,
-        items: { type: 'string' },
+        get description() {
+          return getStrings().settingsDescSettingsForExtensions;
+        },
+        showInDialog: false as const,
+        items: { type: 'string' as const },
         mergeStrategy: MergeStrategy.UNION,
       },
     },
   },
 
   skills: {
-    type: 'object',
-    label: 'Skills',
-    category: 'Advanced',
-    requiresRestart: true,
+    type: 'object' as const,
+    get label() {
+      return getStrings().settingsLabelSkills;
+    },
+    get category() { return getStrings().settingsLabelCategoryAdvanced; },
+    requiresRestart: true as const,
     default: {},
-    description: 'Settings for agent skills.',
-    showInDialog: false,
+    get description() {
+      return getStrings().settingsDescSettingsForAgentSkills;
+    },
+    showInDialog: false as const,
     properties: {
       enabled: {
-        type: 'boolean',
-        label: 'Enable Agent Skills',
-        category: 'Advanced',
-        requiresRestart: true,
+        type: 'boolean' as const,
+        get label() {
+          return getStrings().settingsLabelEnableAgentSkills;
+        },
+        get category() { return getStrings().settingsLabelCategoryAdvanced; },
+        requiresRestart: true as const,
         default: true,
-        description: 'Enable Agent Skills.',
-        showInDialog: true,
+        get description() {
+          return getStrings().settingsDescEnableAgentSkills;
+        },
+        showInDialog: true as const,
       },
       disabled: {
-        type: 'array',
-        label: 'Disabled Skills',
-        category: 'Advanced',
-        requiresRestart: true,
+        type: 'array' as const,
+        get label() {
+          return getStrings().settingsLabelDisabledSkills;
+        },
+        get category() { return getStrings().settingsLabelCategoryAdvanced; },
+        requiresRestart: true as const,
         default: [] as string[],
-        description: 'List of disabled skills.',
-        showInDialog: false,
-        items: { type: 'string' },
+        get description() {
+          return getStrings().settingsDescListOfDisabledSkills;
+        },
+        showInDialog: false as const,
+        items: { type: 'string' as const },
         mergeStrategy: MergeStrategy.UNION,
       },
     },
   },
 
   hooksConfig: {
-    type: 'object',
-    label: 'HooksConfig',
-    category: 'Advanced',
-    requiresRestart: false,
+    type: 'object' as const,
+    get label() {
+      return getStrings().settingsLabelHooksconfig;
+    },
+    get category() { return getStrings().settingsLabelCategoryAdvanced; },
+    requiresRestart: false as const,
     default: {},
-    description:
-      'Hook configurations for intercepting and customizing agent behavior.',
-    showInDialog: false,
+    get description() {
+      return getStrings().settingsDescDefinesACustomShellCommand;
+    },
+    showInDialog: false as const,
     properties: {
       enabled: {
-        type: 'boolean',
-        label: 'Enable Hooks',
-        category: 'Advanced',
-        requiresRestart: true,
+        type: 'boolean' as const,
+        get label() {
+          return getStrings().settingsLabelEnableHooks;
+        },
+        get category() { return getStrings().settingsLabelCategoryAdvanced; },
+        requiresRestart: true as const,
         default: true,
-        description:
-          'Canonical toggle for the hooks system. When disabled, no hooks will be executed.',
-        showInDialog: true,
+        get description() {
+          return getStrings().settingsDescShowVisualIndicatorsWhenHo;
+        },
+        showInDialog: true as const,
       },
       disabled: {
-        type: 'array',
-        label: 'Disabled Hooks',
-        category: 'Advanced',
-        requiresRestart: false,
+        type: 'array' as const,
+        get label() {
+          return getStrings().settingsLabelDisabledHooks;
+        },
+        get category() { return getStrings().settingsLabelCategoryAdvanced; },
+        requiresRestart: false as const,
         default: [] as string[],
-        description:
-          'List of hook names (commands) that should be disabled. Hooks in this list will not execute even if configured.',
-        showInDialog: false,
+        get description() {
+          return getStrings().settingsDescHookCommandName;
+        },
+        showInDialog: false as const,
         items: {
-          type: 'string',
-          description: 'Hook command name',
+          type: 'string' as const,
+          get description() {
+            return getStrings().settingsDescHookCommandName;
+          },
         },
         mergeStrategy: MergeStrategy.UNION,
       },
       notifications: {
-        type: 'boolean',
-        label: 'Hook Notifications',
-        category: 'Advanced',
-        requiresRestart: false,
+        type: 'boolean' as const,
+        get label() {
+          return getStrings().settingsLabelHookNotifications;
+        },
+        get category() { return getStrings().settingsLabelCategoryAdvanced; },
+        requiresRestart: false as const,
         default: true,
-        description: 'Show visual indicators when hooks are executing.',
-        showInDialog: true,
+        get description() {
+          return getStrings().settingsDescShowVisualIndicatorsWhenHo;
+        },
+        showInDialog: true as const,
       },
     },
   },
 
   hooks: {
-    type: 'object',
-    label: 'Hook Events',
-    category: 'Advanced',
-    requiresRestart: false,
+    type: 'object' as const,
+    get label() {
+      return getStrings().settingsLabelHookEvents;
+    },
+    get category() { return getStrings().settingsLabelCategoryAdvanced; },
+    requiresRestart: false as const,
     default: {},
-    description: 'Event-specific hook configurations.',
-    showInDialog: false,
+    get description() {
+      return getStrings().settingsDescEventSpecificHookConfigurat;
+    },
+    showInDialog: false as const,
     properties: {
       BeforeTool: {
-        type: 'array',
-        label: 'Before Tool Hooks',
-        category: 'Advanced',
-        requiresRestart: false,
+        type: 'array' as const,
+        get label() {
+          return getStrings().settingsLabelBeforeToolHooks;
+        },
+        get category() { return getStrings().settingsLabelCategoryAdvanced; },
+        requiresRestart: false as const,
         default: [],
-        description:
-          'Hooks that execute before tool execution. Can intercept, validate, or modify tool calls.',
-        showInDialog: false,
-        ref: 'HookDefinitionArray',
+        get description() {
+          return getStrings().settingsDescDefinesACustomShellCommand;
+        },
+        showInDialog: false as const,
+        ref: 'HookDefinitionArray' as const,
         mergeStrategy: MergeStrategy.CONCAT,
       },
       AfterTool: {
-        type: 'array',
-        label: 'After Tool Hooks',
-        category: 'Advanced',
-        requiresRestart: false,
+        type: 'array' as const,
+        get label() {
+          return getStrings().settingsLabelAfterToolHooks;
+        },
+        get category() { return getStrings().settingsLabelCategoryAdvanced; },
+        requiresRestart: false as const,
         default: [],
-        description:
-          'Hooks that execute after tool execution. Can process results, log outputs, or trigger follow-up actions.',
-        showInDialog: false,
-        ref: 'HookDefinitionArray',
+        get description() {
+          return getStrings().settingsDescDefinesACustomShellCommand;
+        },
+        showInDialog: false as const,
+        ref: 'HookDefinitionArray' as const,
         mergeStrategy: MergeStrategy.CONCAT,
       },
       BeforeAgent: {
-        type: 'array',
-        label: 'Before Agent Hooks',
-        category: 'Advanced',
-        requiresRestart: false,
+        type: 'array' as const,
+        get label() {
+          return getStrings().settingsLabelBeforeAgentHooks;
+        },
+        get category() { return getStrings().settingsLabelCategoryAdvanced; },
+        requiresRestart: false as const,
         default: [],
-        description:
-          'Hooks that execute before agent loop starts. Can set up context or initialize resources.',
-        showInDialog: false,
-        ref: 'HookDefinitionArray',
+        get description() {
+          return getStrings().settingsDescDefinesACustomShellCommand;
+        },
+        showInDialog: false as const,
+        ref: 'HookDefinitionArray' as const,
         mergeStrategy: MergeStrategy.CONCAT,
       },
       AfterAgent: {
-        type: 'array',
-        label: 'After Agent Hooks',
-        category: 'Advanced',
-        requiresRestart: false,
+        type: 'array' as const,
+        get label() {
+          return getStrings().settingsLabelAfterAgentHooks;
+        },
+        get category() { return getStrings().settingsLabelCategoryAdvanced; },
+        requiresRestart: false as const,
         default: [],
-        description:
-          'Hooks that execute after agent loop completes. Can perform cleanup or summarize results.',
-        showInDialog: false,
-        ref: 'HookDefinitionArray',
+        get description() {
+          return getStrings().settingsDescDefinesACustomShellCommand;
+        },
+        showInDialog: false as const,
+        ref: 'HookDefinitionArray' as const,
         mergeStrategy: MergeStrategy.CONCAT,
       },
       Notification: {
-        type: 'array',
-        label: 'Notification Hooks',
-        category: 'Advanced',
-        requiresRestart: false,
+        type: 'array' as const,
+        get label() {
+          return getStrings().settingsLabelNotificationHooks;
+        },
+        get category() { return getStrings().settingsLabelCategoryAdvanced; },
+        requiresRestart: false as const,
         default: [],
-        description:
-          'Hooks that execute on notification events (errors, warnings, info). Can log or alert on specific conditions.',
-        showInDialog: false,
-        ref: 'HookDefinitionArray',
+        get description() {
+          return getStrings().settingsDescDefinesACustomShellCommand;
+        },
+        showInDialog: false as const,
+        ref: 'HookDefinitionArray' as const,
         mergeStrategy: MergeStrategy.CONCAT,
       },
       SessionStart: {
-        type: 'array',
-        label: 'Session Start Hooks',
-        category: 'Advanced',
-        requiresRestart: false,
+        type: 'array' as const,
+        get label() {
+          return getStrings().settingsLabelSessionStartHooks;
+        },
+        get category() { return getStrings().settingsLabelCategoryAdvanced; },
+        requiresRestart: false as const,
         default: [],
-        description:
-          'Hooks that execute when a session starts. Can initialize session-specific resources or state.',
-        showInDialog: false,
-        ref: 'HookDefinitionArray',
+        get description() {
+          return getStrings().settingsDescDefinesACustomShellCommand;
+        },
+        showInDialog: false as const,
+        ref: 'HookDefinitionArray' as const,
         mergeStrategy: MergeStrategy.CONCAT,
       },
       SessionEnd: {
-        type: 'array',
-        label: 'Session End Hooks',
-        category: 'Advanced',
-        requiresRestart: false,
+        type: 'array' as const,
+        get label() {
+          return getStrings().settingsLabelSessionEndHooks;
+        },
+        get category() { return getStrings().settingsLabelCategoryAdvanced; },
+        requiresRestart: false as const,
         default: [],
-        description:
-          'Hooks that execute when a session ends. Can perform cleanup or persist session data.',
-        showInDialog: false,
-        ref: 'HookDefinitionArray',
+        get description() {
+          return getStrings().settingsDescDefinesACustomShellCommand;
+        },
+        showInDialog: false as const,
+        ref: 'HookDefinitionArray' as const,
         mergeStrategy: MergeStrategy.CONCAT,
       },
       PreCompress: {
-        type: 'array',
-        label: 'Pre-Compress Hooks',
-        category: 'Advanced',
-        requiresRestart: false,
+        type: 'array' as const,
+        get label() {
+          return getStrings().settingsLabelPreCompressHooks;
+        },
+        get category() { return getStrings().settingsLabelCategoryAdvanced; },
+        requiresRestart: false as const,
         default: [],
-        description:
-          'Hooks that execute before chat history compression. Can back up or analyze conversation before compression.',
-        showInDialog: false,
-        ref: 'HookDefinitionArray',
+        get description() {
+          return getStrings().settingsDescDefinesACustomShellCommand;
+        },
+        showInDialog: false as const,
+        ref: 'HookDefinitionArray' as const,
         mergeStrategy: MergeStrategy.CONCAT,
       },
       BeforeModel: {
-        type: 'array',
-        label: 'Before Model Hooks',
-        category: 'Advanced',
-        requiresRestart: false,
+        type: 'array' as const,
+        get label() {
+          return getStrings().settingsLabelBeforeModelHooks;
+        },
+        get category() { return getStrings().settingsLabelCategoryAdvanced; },
+        requiresRestart: false as const,
         default: [],
-        description:
-          'Hooks that execute before LLM requests. Can modify prompts, inject context, or control model parameters.',
-        showInDialog: false,
-        ref: 'HookDefinitionArray',
+        get description() {
+          return getStrings().settingsDescDefinesACustomShellCommand;
+        },
+        showInDialog: false as const,
+        ref: 'HookDefinitionArray' as const,
         mergeStrategy: MergeStrategy.CONCAT,
       },
       AfterModel: {
-        type: 'array',
-        label: 'After Model Hooks',
-        category: 'Advanced',
-        requiresRestart: false,
+        type: 'array' as const,
+        get label() {
+          return getStrings().settingsLabelAfterModelHooks;
+        },
+        get category() { return getStrings().settingsLabelCategoryAdvanced; },
+        requiresRestart: false as const,
         default: [],
-        description:
-          'Hooks that execute after LLM responses. Can process outputs, extract information, or log interactions.',
-        showInDialog: false,
-        ref: 'HookDefinitionArray',
+        get description() {
+          return getStrings().settingsDescDefinesACustomShellCommand;
+        },
+        showInDialog: false as const,
+        ref: 'HookDefinitionArray' as const,
         mergeStrategy: MergeStrategy.CONCAT,
       },
       BeforeToolSelection: {
-        type: 'array',
-        label: 'Before Tool Selection Hooks',
-        category: 'Advanced',
-        requiresRestart: false,
+        type: 'array' as const,
+        get label() {
+          return getStrings().settingsLabelBeforeToolSelectionHooks;
+        },
+        get category() { return getStrings().settingsLabelCategoryAdvanced; },
+        requiresRestart: false as const,
         default: [],
-        description:
-          'Hooks that execute before tool selection. Can filter or prioritize available tools dynamically.',
-        showInDialog: false,
-        ref: 'HookDefinitionArray',
+        get description() {
+          return getStrings().settingsDescDefinesACustomShellCommand;
+        },
+        showInDialog: false as const,
+        ref: 'HookDefinitionArray' as const,
         mergeStrategy: MergeStrategy.CONCAT,
       },
     },
     additionalProperties: {
-      type: 'array',
-      description:
-        'Custom hook event arrays that contain hook definitions for user-defined events',
+      type: 'array' as const,
+      get description() {
+        return getStrings().settingsDescCustomThemeDefinitions;
+      },
       mergeStrategy: MergeStrategy.CONCAT,
     },
   },
 
   admin: {
-    type: 'object',
-    label: 'Admin',
-    category: 'Admin',
-    requiresRestart: false,
+    type: 'object' as const,
+    get label() {
+      return getStrings().settingsLabelAdmin;
+    },
+    get category() { return getStrings().settingsLabelCategoryAdmin; },
+    requiresRestart: false as const,
     default: {},
-    description: 'Settings configured remotely by enterprise admins.',
-    showInDialog: false,
+    get description() {
+      return getStrings().settingsDescSettingsConfiguredRemotelyB;
+    },
+    showInDialog: false as const,
     mergeStrategy: MergeStrategy.REPLACE,
     properties: {
       secureModeEnabled: {
-        type: 'boolean',
-        label: 'Secure Mode Enabled',
-        category: 'Admin',
-        requiresRestart: false,
+        type: 'boolean' as const,
+        get label() {
+          return getStrings().settingsLabelSecureModeEnabled;
+        },
+        get category() { return getStrings().settingsLabelCategoryAdmin; },
+        requiresRestart: false as const,
         default: false,
-        description: 'If true, disallows yolo mode from being used.',
-        showInDialog: false,
+        get description() {
+          return getStrings().settingsDescIfTrue;
+        },
+        showInDialog: false as const,
         mergeStrategy: MergeStrategy.REPLACE,
       },
       extensions: {
-        type: 'object',
-        label: 'Extensions Settings',
-        category: 'Admin',
-        requiresRestart: false,
+        type: 'object' as const,
+        get label() {
+          return getStrings().settingsLabelExtensionsSettings;
+        },
+        get category() { return getStrings().settingsLabelCategoryAdmin; },
+        requiresRestart: false as const,
         default: {},
-        description: 'Extensions-specific admin settings.',
-        showInDialog: false,
+        get description() {
+          return getStrings().settingsDescExtensionsSpecificAdminSett;
+        },
+        showInDialog: false as const,
         mergeStrategy: MergeStrategy.REPLACE,
         properties: {
           enabled: {
-            type: 'boolean',
-            label: 'Extensions Enabled',
-            category: 'Admin',
-            requiresRestart: false,
+            type: 'boolean' as const,
+            get label() {
+              return getStrings().settingsLabelExtensionsEnabled;
+            },
+            get category() { return getStrings().settingsLabelCategoryAdmin; },
+            requiresRestart: false as const,
             default: true,
-            description:
-              'If false, disallows extensions from being installed or used.',
-            showInDialog: false,
+            get description() {
+              return getStrings().settingsDescIfFalse;
+            },
+            showInDialog: false as const,
             mergeStrategy: MergeStrategy.REPLACE,
           },
         },
       },
       mcp: {
-        type: 'object',
-        label: 'MCP Settings',
-        category: 'Admin',
-        requiresRestart: false,
+        type: 'object' as const,
+        get label() {
+          return getStrings().settingsLabelMcpSettings;
+        },
+        get category() { return getStrings().settingsLabelCategoryAdmin; },
+        requiresRestart: false as const,
         default: {},
-        description: 'MCP-specific admin settings.',
-        showInDialog: false,
+        get description() {
+          return getStrings().settingsDescMcpSpecificAdminSettings;
+        },
+        showInDialog: false as const,
         mergeStrategy: MergeStrategy.REPLACE,
         properties: {
           enabled: {
-            type: 'boolean',
-            label: 'MCP Enabled',
-            category: 'Admin',
-            requiresRestart: false,
+            type: 'boolean' as const,
+            get label() {
+              return getStrings().settingsLabelMcpEnabled;
+            },
+            get category() { return getStrings().settingsLabelCategoryAdmin; },
+            requiresRestart: false as const,
             default: true,
-            description: 'If false, disallows MCP servers from being used.',
-            showInDialog: false,
+            get description() {
+              return getStrings().settingsDescIfFalse;
+            },
+            showInDialog: false as const,
             mergeStrategy: MergeStrategy.REPLACE,
           },
           config: {
-            type: 'object',
-            label: 'MCP Config',
-            category: 'Admin',
-            requiresRestart: false,
+            type: 'object' as const,
+            get label() {
+              return getStrings().settingsLabelMcpConfig;
+            },
+            get category() { return getStrings().settingsLabelCategoryAdmin; },
+            requiresRestart: false as const,
             default: {} as Record<string, MCPServerConfig>,
-            description: 'Admin-configured MCP servers.',
-            showInDialog: false,
+            get description() {
+              return getStrings().settingsDescAdminConfiguredMcpServers;
+            },
+            showInDialog: false as const,
             mergeStrategy: MergeStrategy.REPLACE,
             additionalProperties: {
-              type: 'object',
-              ref: 'MCPServerConfig',
+              type: 'object' as const,
+              ref: 'MCPServerConfig' as const,
             },
           },
         },
       },
       skills: {
-        type: 'object',
-        label: 'Skills Settings',
-        category: 'Admin',
-        requiresRestart: false,
+        type: 'object' as const,
+        get label() {
+          return getStrings().settingsLabelSkillsSettings;
+        },
+        get category() { return getStrings().settingsLabelCategoryAdmin; },
+        requiresRestart: false as const,
         default: {},
-        description: 'Agent Skills-specific admin settings.',
-        showInDialog: false,
+        get description() {
+          return getStrings().settingsDescAgentSkillsSpecificAdminSe;
+        },
+        showInDialog: false as const,
         mergeStrategy: MergeStrategy.REPLACE,
         properties: {
           enabled: {
-            type: 'boolean',
-            label: 'Skills Enabled',
-            category: 'Admin',
-            requiresRestart: false,
+            type: 'boolean' as const,
+            get label() {
+              return getStrings().settingsLabelSkillsEnabled;
+            },
+            get category() { return getStrings().settingsLabelCategoryAdmin; },
+            requiresRestart: false as const,
             default: true,
-            description: 'If false, disallows agent skills from being used.',
-            showInDialog: false,
+            get description() {
+              return getStrings().settingsDescIfFalse;
+            },
+            showInDialog: false as const,
             mergeStrategy: MergeStrategy.REPLACE,
           },
         },
       },
     },
   },
-} as const satisfies SettingsSchema;
+} satisfies SettingsSchema;
 
 export type SettingsSchemaType = typeof SETTINGS_SCHEMA;
 

@@ -22,6 +22,7 @@ import { stripReferenceContent } from '../utils/formatters.js';
 import { keyMatchers, Command } from '../keyMatchers.js';
 import { CliSpinner } from './CliSpinner.js';
 import { ExpandableText } from './shared/ExpandableText.js';
+import { strings } from '../../i18n.js';
 
 interface RewindViewerProps {
   conversation: ConversationRecord;
@@ -85,7 +86,7 @@ export const RewindViewer: React.FC<RewindViewerProps> = ({
         value: {
           id: 'current-position',
           type: 'user',
-          content: 'Stay at current position',
+          content: strings.rewind.stayCurrent,
           timestamp: new Date().toISOString(),
         } as MessageRecord,
         index: interactionItems.length,
@@ -144,7 +145,7 @@ export const RewindViewer: React.FC<RewindViewerProps> = ({
           <Box>
             <CliSpinner />
           </Box>
-          <Text>Rewinding...</Text>
+          <Text>{strings.rewind.rewinding}</Text>
         </Box>
       );
     }
@@ -190,7 +191,7 @@ export const RewindViewer: React.FC<RewindViewerProps> = ({
       paddingY={1}
     >
       <Box marginBottom={1}>
-        <Text bold>{'> '}Rewind</Text>
+        <Text bold>{'> '}{strings.rewind.title}</Text>
       </Box>
 
       <Box flexDirection="column" flexGrow={1}>
@@ -234,7 +235,7 @@ export const RewindViewer: React.FC<RewindViewerProps> = ({
                     )}
                   </Text>
                   <Text color={theme.text.secondary}>
-                    Cancel rewind and stay here
+                    {strings.rewind.cancelStay}
                   </Text>
                 </Box>
               );
@@ -263,8 +264,8 @@ export const RewindViewer: React.FC<RewindViewerProps> = ({
                       {stats.fileCount === 1
                         ? firstFileName
                           ? firstFileName
-                          : '1 file changed'
-                        : `${stats.fileCount} files changed`}{' '}
+                          : strings.rewind.fileChanged
+                        : strings.rewind.filesChanged.replace('{count}', String(stats.fileCount))}{' '}
                     </Text>
                     {stats.addedLines > 0 && (
                       <Text color="green">+{stats.addedLines} </Text>
@@ -275,7 +276,7 @@ export const RewindViewer: React.FC<RewindViewerProps> = ({
                   </Box>
                 ) : (
                   <Text color={theme.text.secondary}>
-                    No files have been changed
+                    {strings.rewind.noFilesChanged}
                   </Text>
                 )}
               </Box>
@@ -286,8 +287,7 @@ export const RewindViewer: React.FC<RewindViewerProps> = ({
 
       <Box marginTop={1}>
         <Text color={theme.text.secondary}>
-          (Use Enter to select a message, Esc to close, Right/Left to
-          expand/collapse)
+          {strings.rewind.controls}
         </Text>
       </Box>
     </Box>

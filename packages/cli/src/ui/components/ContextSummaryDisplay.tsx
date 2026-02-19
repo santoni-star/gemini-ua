@@ -64,8 +64,8 @@ export const ContextSummaryDisplay: React.FC<ContextSummaryDisplayProps> = ({
     const allNamesTheSame = new Set(contextFileNames).size < 2;
     const name = allNamesTheSame ? contextFileNames[0] : strings.summaryFile;
     const label =
-      geminiMdFileCount === 1 ? strings.summaryFiles : strings.summaryFile;
-    return `${geminiMdFileCount} ${label} ${name}`;
+      geminiMdFileCount === 1 ? strings.summaryFile : strings.summaryFiles;
+    return `${geminiMdFileCount} ${label} ${allNamesTheSame ? name : ''}`;
   })();
 
   const mcpText = (() => {

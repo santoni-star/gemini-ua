@@ -10,6 +10,7 @@ import {
   type EditorType,
   EDITOR_DISPLAY_NAMES,
 } from '@google/gemini-cli-core';
+import { strings } from '../../i18n.js';
 
 export interface EditorDisplay {
   name: string;
@@ -27,7 +28,7 @@ class EditorSettingsManager {
     ).sort() as EditorType[];
     this.availableEditors = [
       {
-        name: 'None',
+        name: strings.editorNone,
         type: 'not_set',
         disabled: false,
       },
@@ -36,9 +37,9 @@ class EditorSettingsManager {
         const isAllowedInSandbox = allowEditorTypeInSandbox(type);
 
         let labelSuffix = !isAllowedInSandbox
-          ? ' (Not available in sandbox)'
+          ? strings.editorNotAvailableInSandbox
           : '';
-        labelSuffix = !hasEditor ? ' (Not installed)' : labelSuffix;
+        labelSuffix = !hasEditor ? strings.editorNotInstalled : labelSuffix;
 
         return {
           name: EDITOR_DISPLAY_NAMES[type] + labelSuffix,

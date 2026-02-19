@@ -10,6 +10,7 @@ import { theme } from '../semantic-colors.js';
 import { isNarrowWidth } from '../utils/isNarrowWidth.js';
 import { SectionHeader } from './shared/SectionHeader.js';
 import { useUIState } from '../contexts/UIStateContext.js';
+import { strings } from '../../i18n.js';
 
 type ShortcutItem = {
   key: string;
@@ -21,16 +22,16 @@ const buildShortcutItems = (): ShortcutItem[] => {
   const altLabel = isMac ? 'Option' : 'Alt';
 
   return [
-    { key: '!', description: 'shell mode' },
-    { key: '@', description: 'select file or folder' },
-    { key: 'Esc Esc', description: 'clear & rewind' },
-    { key: 'Tab Tab', description: 'focus UI' },
-    { key: 'Ctrl+Y', description: 'YOLO mode' },
-    { key: 'Shift+Tab', description: 'cycle mode' },
-    { key: 'Ctrl+V', description: 'paste images' },
-    { key: `${altLabel}+M`, description: 'raw markdown mode' },
-    { key: 'Ctrl+R', description: 'reverse-search history' },
-    { key: 'Ctrl+X', description: 'open external editor' },
+    { key: '!', description: strings.shortcuts.shellMode },
+    { key: '@', description: strings.shortcuts.selectFile },
+    { key: 'Esc Esc', description: strings.shortcuts.clearRewind },
+    { key: 'Tab Tab', description: strings.shortcuts.focusUi },
+    { key: 'Ctrl+Y', description: strings.shortcuts.yoloMode },
+    { key: 'Shift+Tab', description: strings.shortcuts.cycleMode },
+    { key: 'Ctrl+V', description: strings.shortcuts.pasteImages },
+    { key: `${altLabel}+M`, description: strings.shortcuts.rawMarkdown },
+    { key: 'Ctrl+R', description: strings.shortcuts.reverseSearch },
+    { key: 'Ctrl+X', description: strings.shortcuts.externalEditor },
   ];
 };
 
@@ -67,7 +68,7 @@ export const ShortcutsHelp: React.FC = () => {
 
   return (
     <Box flexDirection="column" width="100%">
-      <SectionHeader title="Shortcuts (for more, see /help)" />
+      <SectionHeader title={strings.shortcuts.title} />
       <Box flexDirection="row" flexWrap="wrap" paddingLeft={1} paddingRight={2}>
         {itemsForDisplay.map((item, index) => (
           <Box

@@ -18,6 +18,7 @@ import {
   formatRelativeTime,
   getSessionFiles,
 } from '../../utils/sessionUtils.js';
+import { strings } from '../../i18n.js';
 
 /**
  * Props for the main SessionBrowser component.
@@ -121,7 +122,7 @@ const Kbd = ({ name, shortcut }: { name: string; shortcut: string }) => (
  */
 const SessionBrowserLoading = (): React.JSX.Element => (
   <Box flexDirection="column" paddingX={1}>
-    <Text color={Colors.Gray}>Loading sessions…</Text>
+    <Text color={Colors.Gray}>{strings.sessionBrowserLoading}</Text>
   </Box>
 );
 
@@ -134,8 +135,8 @@ const SessionBrowserError = ({
   state: SessionBrowserState;
 }): React.JSX.Element => (
   <Box flexDirection="column" paddingX={1}>
-    <Text color={Colors.AccentRed}>Error: {state.error}</Text>
-    <Text color={Colors.Gray}>Press q to exit</Text>
+    <Text color={Colors.AccentRed}>{strings.sessionBrowserError} {state.error}</Text>
+    <Text color={Colors.Gray}>{strings.sessionBrowserPressQ}</Text>
   </Box>
 );
 
@@ -144,8 +145,8 @@ const SessionBrowserError = ({
  */
 const SessionBrowserEmpty = (): React.JSX.Element => (
   <Box flexDirection="column" paddingX={1}>
-    <Text color={Colors.Gray}>No auto-saved conversations found.</Text>
-    <Text color={Colors.Gray}>Press q to exit</Text>
+    <Text color={Colors.Gray}>{strings.sessionBrowserNoSessions}</Text>
+    <Text color={Colors.Gray}>{strings.sessionBrowserPressQ}</Text>
   </Box>
 );
 
@@ -277,9 +278,9 @@ const SearchModeDisplay = ({
   state: SessionBrowserState;
 }): React.JSX.Element => (
   <Box marginTop={1}>
-    <Text color={Colors.Gray}>Search: </Text>
+    <Text color={Colors.Gray}>{strings.sessionBrowserSearch}</Text>
     <Text color={Colors.AccentPurple}>{state.searchQuery}</Text>
-    <Text color={Colors.Gray}> (Esc to cancel)</Text>
+    <Text color={Colors.Gray}>{strings.sessionBrowserEscToCancel}</Text>
   </Box>
 );
 
@@ -293,11 +294,11 @@ const SessionListHeader = ({
 }): React.JSX.Element => (
   <Box flexDirection="row" justifyContent="space-between">
     <Text color={Colors.AccentPurple}>
-      Chat Sessions ({state.totalSessions} total
-      {state.searchQuery ? `, filtered` : ''})
+      {strings.sessionBrowserHeader} ({state.totalSessions} {strings.statsReqs.toLowerCase()}
+      {state.searchQuery ? strings.sessionBrowserFiltered : ''})
     </Text>
     <Text color={Colors.Gray}>
-      sorted by {state.sortOrder} {state.sortReverse ? 'asc' : 'desc'}
+      {strings.sessionBrowserSortedBy} {state.sortOrder} {state.sortReverse ? 'asc' : 'desc'}
     </Text>
   </Box>
 );
@@ -308,22 +309,22 @@ const SessionListHeader = ({
 const NavigationHelp = (): React.JSX.Element => (
   <Box flexDirection="column">
     <Text color={Colors.Gray}>
-      <Kbd name="Navigate" shortcut="↑/↓" />
+      <Kbd name={strings.sessionBrowserNavigate} shortcut="↑/↓" />
       {'   '}
-      <Kbd name="Resume" shortcut="Enter" />
+      <Kbd name={strings.sessionBrowserResume} shortcut="Enter" />
       {'   '}
-      <Kbd name="Search" shortcut="/" />
+      <Kbd name={strings.sessionBrowserSearchShort} shortcut="/" />
       {'   '}
-      <Kbd name="Delete" shortcut="x" />
+      <Kbd name={strings.sessionBrowserDelete} shortcut="x" />
       {'   '}
-      <Kbd name="Quit" shortcut="q" />
+      <Kbd name={strings.sessionBrowserQuit} shortcut="q" />
     </Text>
     <Text color={Colors.Gray}>
-      <Kbd name="Sort" shortcut="s" />
+      <Kbd name={strings.sessionBrowserSort} shortcut="s" />
       {'         '}
-      <Kbd name="Reverse" shortcut="r" />
+      <Kbd name={strings.sessionBrowserReverse} shortcut="r" />
       {'      '}
-      <Kbd name="First/Last" shortcut="g/G" />
+      <Kbd name={strings.sessionBrowserFirstLast} shortcut="g/G" />
     </Text>
   </Box>
 );
@@ -341,25 +342,25 @@ const SessionTableHeader = ({
 
     <Box width={5} flexShrink={0}>
       <Text color={Colors.Gray} bold>
-        Index
+        {strings.sessionBrowserHeaderIndex}
       </Text>
     </Box>
     <Text color={Colors.Gray}> │ </Text>
     <Box width={4} flexShrink={0}>
       <Text color={Colors.Gray} bold>
-        Msgs
+        {strings.sessionBrowserHeaderMsgs}
       </Text>
     </Box>
     <Text color={Colors.Gray}> │ </Text>
     <Box width={4} flexShrink={0}>
       <Text color={Colors.Gray} bold>
-        Age
+        {strings.sessionBrowserHeaderAge}
       </Text>
     </Box>
     <Text color={Colors.Gray}> │ </Text>
     <Box flexShrink={0}>
       <Text color={Colors.Gray} bold>
-        {state.searchQuery ? 'Match' : 'Name'}
+        {state.searchQuery ? strings.sessionBrowserHeaderMatch : strings.sessionBrowserHeaderName}
       </Text>
     </Box>
   </Box>
@@ -375,7 +376,7 @@ const NoResultsDisplay = ({
 }): React.JSX.Element => (
   <Box marginTop={1}>
     <Text color={Colors.Gray} dimColor>
-      No sessions found matching &apos;{state.searchQuery}&apos;.
+      {strings.sessionBrowserNoMatches.replace('{query}', state.searchQuery)}
     </Text>
   </Box>
 );
@@ -395,7 +396,7 @@ const MatchSnippetDisplay = ({
   }
 
   const firstMatch = session.matchSnippets[0];
-  const rolePrefix = firstMatch.role === 'user' ? 'You:   ' : 'Gemini:';
+  const rolePrefix = firstMatch.role === 'user' ? strings.sessionBrowserYou : strings.sessionBrowserGemini;
   const roleColor = textColor(
     firstMatch.role === 'user' ? Colors.AccentGreen : Colors.AccentBlue,
   );
@@ -445,7 +446,7 @@ const SessionItem = ({
 
   // Add "(current)" label for the current session
   if (session.isCurrentSession) {
-    additionalInfo = ' (current)';
+    additionalInfo = strings.sessionBrowserCurrent;
   }
 
   // Show match snippets if searching and matches exist
@@ -459,7 +460,7 @@ const SessionItem = ({
     );
 
     if (session.matchCount && session.matchCount > 1) {
-      additionalInfo += ` (+${session.matchCount - 1} more)`;
+      additionalInfo += strings.sessionBrowserMore.replace('{count}', String(session.matchCount - 1));
     }
   }
 
@@ -474,7 +475,7 @@ const SessionItem = ({
     matchDisplay ||
     (session.displayName.length === 0 ? (
       <Text color={textColor(Colors.Gray)} dimColor>
-        (No messages)
+        {strings.sessionBrowserNoMessages}
       </Text>
     ) : session.displayName.length > availableMessageWidth ? (
       session.displayName.slice(0, availableMessageWidth - 1) + '…'

@@ -8,6 +8,7 @@ import type React from 'react';
 import { Box, Text } from 'ink';
 import { theme } from '../semantic-colors.js';
 import { checkExhaustive } from '@google/gemini-cli-core';
+import { strings } from '../../i18n.js';
 
 export type ChecklistStatus =
   | 'pending'
@@ -26,25 +27,25 @@ const ChecklistStatusDisplay: React.FC<{ status: ChecklistStatus }> = ({
   switch (status) {
     case 'completed':
       return (
-        <Text color={theme.status.success} aria-label="Completed">
+        <Text color={theme.status.success} aria-label={strings.todoStatusCompleted}>
           ✓
         </Text>
       );
     case 'in_progress':
       return (
-        <Text color={theme.text.accent} aria-label="In Progress">
+        <Text color={theme.text.accent} aria-label={strings.todoStatusInProgress}>
           »
         </Text>
       );
     case 'pending':
       return (
-        <Text color={theme.text.secondary} aria-label="Pending">
+        <Text color={theme.text.secondary} aria-label={strings.todoStatusPending}>
           ☐
         </Text>
       );
     case 'cancelled':
       return (
-        <Text color={theme.status.error} aria-label="Cancelled">
+        <Text color={theme.status.error} aria-label={strings.todoStatusCancelled}>
           ✗
         </Text>
       );

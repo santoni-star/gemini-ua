@@ -7,6 +7,7 @@
 import { Text } from 'ink';
 import { theme } from '../semantic-colors.js';
 import { getContextUsagePercentage } from '../utils/contextUsage.js';
+import { strings } from '../../i18n.js';
 
 export const ContextUsageDisplay = ({
   promptTokenCount,
@@ -20,7 +21,7 @@ export const ContextUsageDisplay = ({
   const percentage = getContextUsagePercentage(promptTokenCount, model);
   const percentageLeft = ((1 - percentage) * 100).toFixed(0);
 
-  const label = terminalWidth < 100 ? '%' : '% context left';
+  const label = terminalWidth < 100 ? '%' : strings.usageContextLeft;
 
   return (
     <Text color={theme.text.secondary}>

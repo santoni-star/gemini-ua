@@ -17,6 +17,7 @@ import { ShowMoreLines } from './ShowMoreLines.js';
 import { StickyHeader } from './StickyHeader.js';
 import { useAlternateBuffer } from '../hooks/useAlternateBuffer.js';
 import type { SerializableConfirmationDetails } from '@google/gemini-cli-core';
+import { strings } from '../../i18n.js';
 
 function getConfirmationHeader(
   details: SerializableConfirmationDetails | undefined,
@@ -24,13 +25,13 @@ function getConfirmationHeader(
   const headers: Partial<
     Record<SerializableConfirmationDetails['type'], string>
   > = {
-    ask_user: 'Answer Questions',
-    exit_plan_mode: 'Ready to start implementation?',
+    ask_user: strings.toolConfirmation.headerAnswerQuestions,
+    exit_plan_mode: strings.toolConfirmation.headerReadyImplementation,
   };
   if (!details?.type) {
-    return 'Action Required';
+    return strings.toolConfirmation.headerActionRequired;
   }
-  return headers[details.type] ?? 'Action Required';
+  return headers[details.type] ?? strings.toolConfirmation.headerActionRequired;
 }
 
 interface ToolConfirmationQueueProps {
@@ -96,7 +97,9 @@ export const ToolConfirmationQueue: React.FC<ToolConfirmationQueueProps> = ({
               </Text>
               {total > 1 && (
                 <Text color={theme.text.secondary}>
-                  {index} of {total}
+                  {strings.toolConfirmation.indexLabel
+                    .replace('{index}', String(index))
+                    .replace('{total}', String(total))}
                 </Text>
               )}
             </Box>

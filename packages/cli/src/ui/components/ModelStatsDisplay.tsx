@@ -26,6 +26,7 @@ import {
 } from '@google/gemini-cli-core';
 import type { QuotaStats } from '../types.js';
 import { QuotaStatsInfo } from './QuotaStatsInfo.js';
+import { strings } from '../../i18n.js';
 
 interface StatRowData {
   metric: string;
@@ -74,7 +75,7 @@ export const ModelStatsDisplay: React.FC<ModelStatsDisplayProps> = ({
         paddingX={2}
       >
         <Text color={theme.text.primary}>
-          No API calls have been made in this session.
+          {strings.toolStatsNoCalls}
         </Text>
       </Box>
     );
@@ -129,9 +130,9 @@ export const ModelStatsDisplay: React.FC<ModelStatsDisplayProps> = ({
 
   // API Section
   rows.push({ metric: 'API', isSection: true });
-  rows.push(createRow('Requests', (m) => m.api.totalRequests.toLocaleString()));
+  rows.push(createRow(strings.modelUsageRequests, (m) => m.api.totalRequests.toLocaleString()));
   rows.push(
-    createRow('Errors', (m) => {
+    createRow(strings.modelUsageErrors, (m) => {
       const errorRate = calculateErrorRate(m);
       return (
         <Text
@@ -145,7 +146,7 @@ export const ModelStatsDisplay: React.FC<ModelStatsDisplayProps> = ({
     }),
   );
   rows.push(
-    createRow('Avg Latency', (m) => formatDuration(calculateAverageLatency(m))),
+    createRow(strings.modelUsageLatency, (m) => formatDuration(calculateAverageLatency(m))),
   );
 
   // Spacer
@@ -154,7 +155,7 @@ export const ModelStatsDisplay: React.FC<ModelStatsDisplayProps> = ({
   // Tokens Section
   rows.push({ metric: 'Tokens', isSection: true });
   rows.push(
-    createRow('Total', (m) => (
+    createRow(strings.modelUsageTotal, (m) => (
       <Text color={theme.text.secondary}>
         {m.tokens.total.toLocaleString()}
       </Text>
@@ -162,7 +163,7 @@ export const ModelStatsDisplay: React.FC<ModelStatsDisplayProps> = ({
   );
   rows.push(
     createRow(
-      'Input',
+      strings.modelUsageInput,
       (m) => (
         <Text color={theme.text.primary}>
           {m.tokens.input.toLocaleString()}
@@ -175,7 +176,7 @@ export const ModelStatsDisplay: React.FC<ModelStatsDisplayProps> = ({
   if (hasCached) {
     rows.push(
       createRow(
-        'Cache Reads',
+        strings.statsCacheReads,
         (m) => {
           const cacheHitRate = calculateCacheHitRate(m);
           return (
@@ -192,7 +193,7 @@ export const ModelStatsDisplay: React.FC<ModelStatsDisplayProps> = ({
   if (hasThoughts) {
     rows.push(
       createRow(
-        'Thoughts',
+        strings.modelUsageThoughts,
         (m) => (
           <Text color={theme.text.primary}>
             {m.tokens.thoughts.toLocaleString()}
@@ -206,7 +207,7 @@ export const ModelStatsDisplay: React.FC<ModelStatsDisplayProps> = ({
   if (hasTool) {
     rows.push(
       createRow(
-        'Tool',
+        strings.modelUsageTool,
         (m) => (
           <Text color={theme.text.primary}>
             {m.tokens.tool.toLocaleString()}
@@ -219,7 +220,7 @@ export const ModelStatsDisplay: React.FC<ModelStatsDisplayProps> = ({
 
   rows.push(
     createRow(
-      'Output',
+      strings.modelUsageOutput,
       (m) => (
         <Text color={theme.text.primary}>
           {m.tokens.candidates.toLocaleString()}
@@ -233,7 +234,7 @@ export const ModelStatsDisplay: React.FC<ModelStatsDisplayProps> = ({
   if (allRoles.length > 0) {
     // Spacer
     rows.push({ metric: '' });
-    rows.push({ metric: 'Roles', isSection: true });
+    rows.push({ metric: strings.modelUsageRoles, isSection: true });
 
     allRoles.forEach((role) => {
       // Role Header Row
@@ -264,18 +265,18 @@ export const ModelStatsDisplay: React.FC<ModelStatsDisplayProps> = ({
         rows.push(row);
       };
 
-      addRoleMetric('Requests', (r) => r.totalRequests.toLocaleString());
-      addRoleMetric('Input', (r) => (
+      addRoleMetric(strings.modelUsageRequests, (r) => r.totalRequests.toLocaleString());
+      addRoleMetric(strings.modelUsageInput, (r) => (
         <Text color={theme.text.primary}>
           {r.tokens.input.toLocaleString()}
         </Text>
       ));
-      addRoleMetric('Output', (r) => (
+      addRoleMetric(strings.modelUsageOutput, (r) => (
         <Text color={theme.text.primary}>
           {r.tokens.candidates.toLocaleString()}
         </Text>
       ));
-      addRoleMetric('Cache Reads', (r) => (
+      addRoleMetric(strings.statsCacheReads, (r) => (
         <Text color={theme.text.secondary}>
           {r.tokens.cached.toLocaleString()}
         </Text>
@@ -286,7 +287,7 @@ export const ModelStatsDisplay: React.FC<ModelStatsDisplayProps> = ({
   const columns: Array<Column<StatRowData>> = [
     {
       key: 'metric',
-      header: 'Metric',
+      header: strings.metricLabel,
       width: 28,
       renderCell: (row) => (
         <Text
@@ -316,8 +317,8 @@ export const ModelStatsDisplay: React.FC<ModelStatsDisplayProps> = ({
 
   const isAuto = currentModel && isAutoModel(currentModel);
   const statsTitle = isAuto
-    ? `${getDisplayString(currentModel)} Stats For Nerds`
-    : 'Model Stats For Nerds';
+    ? `${getDisplayString(currentModel)} ${strings.statsForNerds.toLowerCase()}`
+    : strings.statsForNerds;
 
   return (
     <Box
@@ -335,7 +336,7 @@ export const ModelStatsDisplay: React.FC<ModelStatsDisplayProps> = ({
       {showUserIdentity && selectedAuthType && (
         <Box>
           <Box width={28}>
-            <Text color={theme.text.link}>Auth Method:</Text>
+            <Text color={theme.text.link}>{strings.aboutAuthMethod}:</Text>
           </Box>
           <Text color={theme.text.primary}>
             {selectedAuthType.startsWith('oauth')
@@ -349,7 +350,7 @@ export const ModelStatsDisplay: React.FC<ModelStatsDisplayProps> = ({
       {showUserIdentity && tier && (
         <Box>
           <Box width={28}>
-            <Text color={theme.text.link}>Tier:</Text>
+            <Text color={theme.text.link}>{strings.userIdentity.authPlanLabel}</Text>
           </Box>
           <Text color={theme.text.primary}>{tier}</Text>
         </Box>
