@@ -34,13 +34,13 @@ Gemini CLI — це інструмент штучного інтелекту з 
 
 ```bash
 # Використання npx (встановлення не потрібне)
-npx @santoni/gemini-ua
+npx santoni-star/gemini-ua
 ```
 
 #### Глобальне встановлення через npm
 
 ```bash
-npm install -g @santoni/gemini-ua
+npm install -g santoni-star/gemini-ua
 ```
 
 #### Глобальне встановлення через Homebrew (macOS/Linux)
