@@ -6,7 +6,7 @@
 [![License](https://img.shields.io/github/license/google-gemini/gemini-cli)](https://github.com/google-gemini/gemini-cli/blob/main/LICENSE)
 [![View Code Wiki](https://assets.codewiki.google/readme-badge/static.svg)](https://codewiki.google/github.com/google-gemini/gemini-cli?utm_source=badge&utm_medium=github&utm_campaign=github.com/google-gemini/gemini-cli)
 
-![Gemini CLI Screenshot](./docs/assets/gemini-screenshot.png)
+![Скріншот Gemini CLI (UA)](./docs/assets/gemin_uk.jpg)
 
 Gemini CLI — це інструмент штучного інтелекту з відкритим вихідним кодом, який надає можливості Gemini безпосередньо у вашому терміналі. Він забезпечує легкий доступ до Gemini, надаючи вам найпряміший шлях від вашого запиту до нашої моделі.
 
