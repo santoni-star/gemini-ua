@@ -1,154 +1,152 @@
-# Frequently asked questions (FAQ)
+# Поширені запитання (FAQ)
 
-This page provides answers to common questions and solutions to frequent
-problems encountered while using Gemini CLI.
+Ця сторінка надає відповіді на поширені запитання та рішення частих
+проблем, які виникають під час використання Gemini CLI.
 
-## General issues
+## Загальні проблеми
 
-### Why am I getting an `API error: 429 - Resource exhausted`?
+### Чому я отримую помилку `API error: 429 - Resource exhausted`?
 
-This error indicates that you have exceeded your API request limit. The Gemini
-API has rate limits to prevent abuse and ensure fair usage.
+Ця помилка вказує на те, що ви перевищили ліміт запитів API. Gemini
+API має обмеження швидкості для запобігання зловживанням і забезпечення справедливого використання.
 
-To resolve this, you can:
+Для вирішення цієї проблеми ви можете:
 
-- **Check your usage:** Review your API usage in the Google AI Studio or your
-  Google Cloud project dashboard.
-- **Optimize your prompts:** If you are making many requests in a short period,
-  try to batch your prompts or introduce delays between requests.
-- **Request a quota increase:** If you consistently need a higher limit, you can
-  request a quota increase from Google.
+- **Перевірити своє використання:** Перегляньте використання API в Google AI Studio або на панелі керування проєктом Google Cloud.
+- **Оптимізувати свої запити:** Якщо ви робите багато запитів за короткий період,
+  спробуйте об'єднати свої запити або додати затримки між запитами.
+- **Запросити збільшення квоти:** Якщо вам постійно потрібен вищий ліміт, ви можете
+  запросити збільшення квоти в Google.
 
-### Why am I getting an `ERR_REQUIRE_ESM` error when running `npm run start`?
+### Чому я отримую помилку `ERR_REQUIRE_ESM` під час виконання `npm run start`?
 
-This error typically occurs in Node.js projects when there is a mismatch between
-CommonJS and ES Modules.
+Ця помилка зазвичай виникає в проєктах Node.js, коли є невідповідність між
+CommonJS і ES Modules.
 
-This is often due to a misconfiguration in your `package.json` or
-`tsconfig.json`. Ensure that:
+Це часто спричинено неправильною конфігурацією у вашому `package.json` або
+`tsconfig.json`. Переконайтеся, що:
 
-1.  Your `package.json` has `"type": "module"`.
-2.  Your `tsconfig.json` has `"module": "NodeNext"` or a compatible setting in
-    the `compilerOptions`.
+1.  Ваш `package.json` має `"type": "module"`.
+2.  Ваш `tsconfig.json` має `"module": "NodeNext"` або сумісне налаштування в
+    `compilerOptions`.
 
-If the problem persists, try deleting your `node_modules` directory and
-`package-lock.json` file, and then run `npm install` again.
+Якщо проблема не зникне, спробуйте видалити каталог `node_modules` і
+файл `package-lock.json`, а потім знову виконайте `npm install`.
 
-### Why don't I see cached token counts in my stats output?
+### Чому я не бачу кількості кешованих токенів у своєму виводі статистики?
 
-Cached token information is only displayed when cached tokens are being used.
-This feature is available for API key users (Gemini API key or Google Cloud
-Vertex AI) but not for OAuth users (such as Google Personal/Enterprise accounts
-like Google Gmail or Google Workspace, respectively). This is because the Gemini
-Code Assist API does not support cached content creation. You can still view
-your total token usage using the `/stats` command in Gemini CLI.
+Інформація про кешовані токени відображається лише тоді, коли використовуються кешовані токени.
+Ця функція доступна для користувачів API-ключів (ключ API Gemini або Google Cloud
+Vertex AI), але не для користувачів OAuth (наприклад, особисті/корпоративні облікові записи Google,
+такі як Google Gmail або Google Workspace відповідно). Це тому, що Gemini
+Code Assist API не підтримує створення кешованого вмісту. Ви все ще можете переглядати
+загальне використання токенів за допомогою команди `/stats` у Gemini CLI.
 
-## Installation and updates
+## Встановлення та оновлення
 
-### How do I update Gemini CLI to the latest version?
+### Як оновити Gemini CLI до останньої версії?
 
-If you installed it globally via `npm`, update it using the command
-`npm install -g @google/gemini-cli@latest`. If you compiled it from source, pull
-the latest changes from the repository, and then rebuild using the command
+Якщо ви встановили його глобально через `npm`, оновіть його за допомогою команди
+`npm install -g @google/gemini-cli@latest`. Якщо ви скомпілювали його з вихідного коду, отримайте
+останні зміни з репозиторію, а потім зберіть за допомогою команди
 `npm run build`.
 
-## Platform-specific issues
+## Проблеми, специфічні для платформи
 
-### Why does the CLI crash on Windows when I run a command like `chmod +x`?
+### Чому CLI завершує роботу в Windows, коли я виконую команду на кшталт `chmod +x`?
 
-Commands like `chmod` are specific to Unix-like operating systems (Linux,
-macOS). They are not available on Windows by default.
+Команди на кшталт `chmod` є специфічними для Unix-подібних операційних систем (Linux,
+macOS). Вони не доступні у Windows за замовчуванням.
 
-To resolve this, you can:
+Для вирішення цієї проблеми ви можете:
 
-- **Use Windows-equivalent commands:** Instead of `chmod`, you can use `icacls`
-  to modify file permissions on Windows.
-- **Use a compatibility layer:** Tools like Git Bash or Windows Subsystem for
-  Linux (WSL) provide a Unix-like environment on Windows where these commands
-  will work.
+- **Використовувати еквівалентні команди Windows:** Замість `chmod` ви можете використовувати `icacls`
+  для зміни дозволів файлів у Windows.
+- **Використовувати шар сумісності:** Такі інструменти, як Git Bash або Windows Subsystem for
+  Linux (WSL), надають Unix-подібне середовище у Windows, де ці команди
+  працюватимуть.
 
-## Configuration
+## Конфігурація
 
-### How do I configure my `GOOGLE_CLOUD_PROJECT`?
+### Як налаштувати свій `GOOGLE_CLOUD_PROJECT`?
 
-You can configure your Google Cloud Project ID using an environment variable.
+Ви можете налаштувати ID проєкту Google Cloud за допомогою змінної середовища.
 
-Set the `GOOGLE_CLOUD_PROJECT` environment variable in your shell:
+Встановіть змінну середовища `GOOGLE_CLOUD_PROJECT` у своїй оболонці:
 
 ```bash
 export GOOGLE_CLOUD_PROJECT="your-project-id"
 ```
 
-To make this setting permanent, add this line to your shell's startup file
-(e.g., `~/.bashrc`, `~/.zshrc`).
+Щоб зробити це налаштування постійним, додайте цей рядок до файлу запуску вашої оболонки
+(наприклад, `~/.bashrc`, `~/.zshrc`).
 
-### What is the best way to store my API keys securely?
+### Який найкращий спосіб безпечно зберігати свої API-ключі?
 
-Exposing API keys in scripts or checking them into source control is a security
-risk.
+Розкриття API-ключів у скриптах або їх зберігання в системі контролю версій є ризиком для
+безпеки.
 
-To store your API keys securely, you can:
+Для безпечного зберігання API-ключів ви можете:
 
-- **Use a `.env` file:** Create a `.env` file in your project's `.gemini`
-  directory (`.gemini/.env`) and store your keys there. Gemini CLI will
-  automatically load these variables.
-- **Use your system's keyring:** For the most secure storage, use your operating
-  system's secret management tool (like macOS Keychain, Windows Credential
-  Manager, or a secret manager on Linux). You can then have your scripts or
-  environment load the key from the secure storage at runtime.
+- **Використовувати файл `.env`:** Створіть файл `.env` у каталозі `.gemini` вашого проєкту
+  (`.gemini/.env`) і зберігайте свої ключі там. Gemini CLI автоматично
+  завантажить ці змінні.
+- **Використовувати системне сховище ключів:** Для найбільш безпечного зберігання використовуйте інструмент
+  керування секретами вашої операційної системи (наприклад, macOS Keychain, Windows Credential
+  Manager або secret manager у Linux). Потім ви можете мати свої скрипти або
+  середовище, яке завантажує ключ із безпечного сховища під час виконання.
 
-### Where are the Gemini CLI configuration and settings files stored?
+### Де зберігаються файли конфігурації та налаштувань Gemini CLI?
 
-The Gemini CLI configuration is stored in two `settings.json` files:
+Конфігурація Gemini CLI зберігається у двох файлах `settings.json`:
 
-1.  In your home directory: `~/.gemini/settings.json`.
-2.  In your project's root directory: `./.gemini/settings.json`.
+1.  У вашому домашньому каталозі: `~/.gemini/settings.json`.
+2.  У кореневому каталозі вашого проєкту: `./.gemini/settings.json`.
 
-Refer to [Gemini CLI Configuration](./get-started/configuration.md) for more
-details.
+Додаткові відомості див. у розділі [Конфігурація Gemini CLI](./get-started/configuration.md).
 
-## Google AI Pro/Ultra and subscription FAQs
+## Поширені запитання щодо Google AI Pro/Ultra та підписки
 
-### Where can I learn more about my Google AI Pro or Google AI Ultra subscription?
+### Де я можу дізнатися більше про свою підписку Google AI Pro або Google AI Ultra?
 
-To learn more about your Google AI Pro or Google AI Ultra subscription, visit
-**Manage subscription** in your [subscription settings](https://one.google.com).
+Щоб дізнатися більше про свою підписку Google AI Pro або Google AI Ultra, відвідайте
+розділ **Керування підпискою** у своїх [налаштуваннях підписки](https://one.google.com).
 
-### How do I know if I have higher limits for Google AI Pro or Ultra?
+### Як дізнатися, чи є у мене вищі ліміти для Google AI Pro або Ultra?
 
-If you're subscribed to Google AI Pro or Ultra, you automatically have higher
-limits to Gemini Code Assist and Gemini CLI. These are shared across Gemini CLI
-and agent mode in the IDE. You can confirm you have higher limits by checking if
-you are still subscribed to Google AI Pro or Ultra in your
-[subscription settings](https://one.google.com).
+Якщо ви маєте підписку Google AI Pro або Ultra, ви автоматично маєте вищі
+ліміти для Gemini Code Assist і Gemini CLI. Вони є спільними для Gemini CLI
+та режиму агента в IDE. Ви можете підтвердити, що у вас є вищі ліміти, перевіривши,
+чи ви все ще маєте підписку Google AI Pro або Ultra у своїх
+[налаштуваннях підписки](https://one.google.com).
 
-### What is the privacy policy for using Gemini Code Assist or Gemini CLI if I've subscribed to Google AI Pro or Ultra?
+### Яка політика конфіденційності для використання Gemini Code Assist або Gemini CLI, якщо я маю підписку Google AI Pro або Ultra?
 
-To learn more about your privacy policy and terms of service governed by your
-subscription, visit
-[Gemini Code Assist: Terms of Service and Privacy Policies](https://developers.google.com/gemini-code-assist/resources/privacy-notices).
+Щоб дізнатися більше про свою політику конфіденційності та умови надання послуг, які регулюються вашою
+підпискою, відвідайте
+[Gemini Code Assist: Умови надання послуг і політики конфіденційності](https://developers.google.com/gemini-code-assist/resources/privacy-notices).
 
-### I've upgraded to Google AI Pro or Ultra but it still says I am hitting quota limits. Is this a bug?
+### Я оновився до Google AI Pro або Ultra, але все одно повідомляється, що я впираюся в обмеження квоти. Це помилка?
 
-The higher limits in your Google AI Pro or Ultra subscription are for Gemini 2.5
-across both Gemini 2.5 Pro and Flash. They are shared quota across Gemini CLI
-and agent mode in Gemini Code Assist IDE extensions. You can learn more about
-quota limits for Gemini CLI, Gemini Code Assist and agent mode in Gemini Code
-Assist at
-[Quotas and limits](https://developers.google.com/gemini-code-assist/resources/quotas).
+Вищі ліміти у вашій підписці Google AI Pro або Ultra стосуються Gemini 2.5
+як для Gemini 2.5 Pro, так і для Flash. Це спільна квота для Gemini CLI
+та режиму агента в розширеннях IDE Gemini Code Assist. Ви можете дізнатися більше про
+обмеження квот для Gemini CLI, Gemini Code Assist і режиму агента в Gemini Code
+Assist за адресою
+[Квоти та обмеження](https://developers.google.com/gemini-code-assist/resources/quotas).
 
-### If I upgrade to higher limits for Gemini CLI and Gemini Code Assist by purchasing a Google AI Pro or Ultra subscription, will Gemini start using my data to improve its machine learning models?
+### Якщо я оновлюся до вищих лімітів для Gemini CLI і Gemini Code Assist, придбавши підписку Google AI Pro або Ultra, чи почне Gemini використовувати мої дані для покращення своїх моделей машинного навчання?
 
-Google does not use your data to improve Google's machine learning models if you
-purchase a paid plan. Note: If you decide to remain on the free version of
-Gemini Code Assist, Gemini Code Assist for individuals, you can also opt out of
-using your data to improve Google's machine learning models. See the
-[Gemini Code Assist for individuals privacy notice](https://developers.google.com/gemini-code-assist/resources/privacy-notice-gemini-code-assist-individuals)
-for more information.
+Google не використовує ваші дані для покращення моделей машинного навчання Google, якщо ви
+придбаєте платний план. Примітка: Якщо ви вирішите залишитися на безкоштовній версії
+Gemini Code Assist, Gemini Code Assist для приватних осіб, ви також можете відмовитися
+від використання ваших даних для покращення моделей машинного навчання Google. Див.
+[Повідомлення про конфіденційність Gemini Code Assist для приватних осіб](https://developers.google.com/gemini-code-assist/resources/privacy-notice-gemini-code-assist-individuals)
+для отримання додаткової інформації.
 
-## Not seeing your question?
+## Не бачите свого запитання?
 
-Search the
-[Gemini CLI Q&A discussions on GitHub](https://github.com/google-gemini/gemini-cli/discussions/categories/q-a)
-or
-[start a new discussion on GitHub](https://github.com/google-gemini/gemini-cli/discussions/new?category=q-a)
+Знайдіть
+[обговорення запитань і відповідей Gemini CLI на GitHub](https://github.com/google-gemini/gemini-cli/discussions/categories/q-a)
+або
+[розпочніть нове обговорення на GitHub](https://github.com/google-gemini/gemini-cli/discussions/new?category=q-a)

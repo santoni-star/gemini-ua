@@ -1,146 +1,138 @@
-# Gemini CLI documentation
+# Документація Gemini CLI
 
-Gemini CLI brings the power of Gemini models directly into your terminal. Use it
-to understand code, automate tasks, and build workflows with your local project
-context.
+Gemini CLI надає потужність моделей Gemini безпосередньо у ваш термінал. Використовуйте його
+для аналізу коду, автоматизації завдань і створення робочих процесів із контекстом локального проєкту.
 
-## Install
+## Встановлення
 
 ```bash
 npm install -g @google/gemini-cli
 ```
 
-## Get started
+## Початок роботи
 
-Jump in to Gemini CLI.
+Приступайте до роботи з Gemini CLI.
 
-- **[Quickstart](./get-started/index.md):** Your first session with Gemini CLI.
-- **[Installation](./get-started/installation.md):** How to install Gemini CLI
-  on your system.
-- **[Authentication](./get-started/authentication.md):** Setup instructions for
-  personal and enterprise accounts.
-- **[Examples](./get-started/examples.md):** Practical examples of Gemini CLI in
-  action.
-- **[Cheatsheet](./cli/cli-reference.md):** A quick reference for common
-  commands and options.
+- **[Швидкий старт](./get-started/index.md):** Ваш перший сеанс із Gemini CLI.
+- **[Встановлення](./get-started/installation.md):** Як встановити Gemini CLI
+  на вашій системі.
+- **[Автентифікація](./get-started/authentication.md):** Інструкції з налаштування для
+  особистих і корпоративних облікових записів.
+- **[Приклади](./get-started/examples.md):** Практичні приклади використання Gemini CLI.
+- **[Шпаргалка](./cli/cli-reference.md):** Швидка довідка з основних команд і параметрів.
 
-## Use Gemini CLI
+## Використання Gemini CLI
 
-User-focused guides and tutorials for daily development workflows.
+Орієнтовані на користувача посібники та навчальні матеріали для щоденних робочих процесів розробки.
 
-- **[File management](./cli/tutorials/file-management.md):** How to work with
-  local files and directories.
-- **[Manage context and memory](./cli/tutorials/memory-management.md):**
-  Managing persistent instructions and facts.
-- **[Execute shell commands](./cli/tutorials/shell-commands.md):** Executing
-  system commands safely.
-- **[Manage sessions and history](./cli/tutorials/session-management.md):**
-  Resuming, managing, and rewinding conversations.
-- **[Plan tasks with todos](./cli/tutorials/task-planning.md):** Using todos for
-  complex workflows.
-- **[Web search and fetch](./cli/tutorials/web-tools.md):** Searching and
-  fetching content from the web.
-- **[Get started with skills](./cli/tutorials/skills-getting-started.md):**
-  Getting started with specialized expertise.
+- **[Керування файлами](./cli/tutorials/file-management.md):** Як працювати з
+  локальними файлами та каталогами.
+- **[Керування контекстом і пам'яттю](./cli/tutorials/memory-management.md):**
+  Керування постійними інструкціями та фактами.
+- **[Виконання команд оболонки](./cli/tutorials/shell-commands.md):** Безпечне виконання
+  системних команд.
+- **[Керування сеансами та історією](./cli/tutorials/session-management.md):**
+  Відновлення, керування та перемотування розмов.
+- **[Планування завдань із todos](./cli/tutorials/task-planning.md):** Використання todos для
+  складних робочих процесів.
+- **[Вебпошук і отримання даних](./cli/tutorials/web-tools.md):** Пошук і
+  отримання вмісту з вебу.
+- **[Початок роботи з навичками](./cli/tutorials/skills-getting-started.md):**
+  Початок роботи зі спеціалізованою експертизою.
 
-## Features
+## Функції
 
-Technical reference documentation for each capability of Gemini CLI.
+Технічна довідкова документація для кожної можливості Gemini CLI.
 
-- **[/about](./cli/commands.md#about):** About Gemini CLI.
-- **[/auth](./get-started/authentication.md):** Authentication.
-- **[/bug](./cli/commands.md#bug):** Report a bug.
-- **[/chat](./cli/commands.md#chat):** Chat history.
-- **[/clear](./cli/commands.md#clear):** Clear screen.
-- **[/compress](./cli/commands.md#compress):** Compress context.
-- **[/copy](./cli/commands.md#copy):** Copy output.
-- **[/directory](./cli/commands.md#directory-or-dir):** Manage workspace.
-- **[/docs](./cli/commands.md#docs):** Open documentation.
-- **[/editor](./cli/commands.md#editor):** Select editor.
-- **[/extensions](./extensions/index.md):** Manage extensions.
-- **[/help](./cli/commands.md#help-or):** Show help.
-- **[/hooks](./hooks/index.md):** Hooks.
-- **[/ide](./ide-integration/index.md):** IDE integration.
-- **[/init](./cli/commands.md#init):** Initialize context.
-- **[/mcp](./tools/mcp-server.md):** MCP servers.
-- **[/memory](./cli/commands.md#memory):** Manage memory.
-- **[/model](./cli/model.md):** Model selection.
-- **[/policies](./cli/commands.md#policies):** Manage policies.
-- **[/privacy](./cli/commands.md#privacy):** Privacy notice.
-- **[/quit](./cli/commands.md#quit-or-exit):** Exit CLI.
-- **[/restore](./cli/checkpointing.md):** Restore files.
-- **[/resume](./cli/commands.md#resume):** Resume session.
-- **[/rewind](./cli/rewind.md):** Rewind.
-- **[/settings](./cli/settings.md):** Settings.
-- **[/setup-github](./cli/commands.md#setup-github):** GitHub setup.
-- **[/shells](./cli/commands.md#shells-or-bashes):** Manage processes.
-- **[/skills](./cli/skills.md):** Agent skills.
-- **[/stats](./cli/commands.md#stats):** Session statistics.
-- **[/terminal-setup](./cli/commands.md#terminal-setup):** Terminal keybindings.
-- **[/theme](./cli/themes.md):** Themes.
-- **[/tools](./cli/commands.md#tools):** List tools.
-- **[/vim](./cli/commands.md#vim):** Vim mode.
-- **[Activate skill (tool)](./tools/activate-skill.md):** Internal mechanism for
-  loading expert procedures.
-- **[Ask user (tool)](./tools/ask-user.md):** Internal dialog system for
-  clarification.
-- **[Checkpointing](./cli/checkpointing.md):** Automatic session snapshots.
-- **[File system (tool)](./tools/file-system.md):** Technical details for local
-  file operations.
-- **[Headless mode](./cli/headless.md):** Programmatic and scripting interface.
-- **[Internal documentation (tool)](./tools/internal-docs.md):** Technical
-  lookup for CLI features.
-- **[Memory (tool)](./tools/memory.md):** Storage details for persistent facts.
-- **[Model routing](./cli/model-routing.md):** Automatic fallback resilience.
-- **[Plan mode (experimental)](./cli/plan-mode.md):** Use a safe, read-only mode
-  for planning complex changes.
-- **[Sandboxing](./cli/sandbox.md):** Isolate tool execution.
-- **[Shell (tool)](./tools/shell.md):** Detailed system execution parameters.
-- **[Telemetry](./cli/telemetry.md):** Usage and performance metric details.
-- **[Todo (tool)](./tools/todos.md):** Progress tracking specification.
-- **[Token caching](./cli/token-caching.md):** Performance optimization.
-- **[Web fetch (tool)](./tools/web-fetch.md):** URL retrieval and extraction
-  details.
-- **[Web search (tool)](./tools/web-search.md):** Google Search integration
-  technicals.
+- **[/about](./cli/commands.md#about):** Про Gemini CLI.
+- **[/auth](./get-started/authentication.md):** Автентифікація.
+- **[/bug](./cli/commands.md#bug):** Повідомити про помилку.
+- **[/chat](./cli/commands.md#chat):** Історія чату.
+- **[/clear](./cli/commands.md#clear):** Очистити екран.
+- **[/compress](./cli/commands.md#compress):** Стиснути контекст.
+- **[/copy](./cli/commands.md#copy):** Копіювати вивід.
+- **[/directory](./cli/commands.md#directory-or-dir):** Керування робочим простором.
+- **[/docs](./cli/commands.md#docs):** Відкрити документацію.
+- **[/editor](./cli/commands.md#editor):** Вибрати редактор.
+- **[/extensions](./extensions/index.md):** Керування розширеннями.
+- **[/help](./cli/commands.md#help-or):** Показати довідку.
+- **[/hooks](./hooks/index.md):** Хуки.
+- **[/ide](./ide-integration/index.md):** Інтеграція з IDE.
+- **[/init](./cli/commands.md#init):** Ініціалізувати контекст.
+- **[/mcp](./tools/mcp-server.md):** MCP-сервери.
+- **[/memory](./cli/commands.md#memory):** Керування пам'яттю.
+- **[/model](./cli/model.md):** Вибір моделі.
+- **[/policies](./cli/commands.md#policies):** Керування політиками.
+- **[/privacy](./cli/commands.md#privacy):** Повідомлення про конфіденційність.
+- **[/quit](./cli/commands.md#quit-or-exit):** Вийти з CLI.
+- **[/restore](./cli/checkpointing.md):** Відновити файли.
+- **[/resume](./cli/commands.md#resume):** Відновити сеанс.
+- **[/rewind](./cli/rewind.md):** Перемотування.
+- **[/settings](./cli/settings.md):** Налаштування.
+- **[/setup-github](./cli/commands.md#setup-github):** Налаштування GitHub.
+- **[/shells](./cli/commands.md#shells-or-bashes):** Керування процесами.
+- **[/skills](./cli/skills.md):** Навички агента.
+- **[/stats](./cli/commands.md#stats):** Статистика сеансу.
+- **[/terminal-setup](./cli/commands.md#terminal-setup):** Комбінації клавіш термінала.
+- **[/theme](./cli/themes.md):** Теми.
+- **[/tools](./cli/commands.md#tools):** Список інструментів.
+- **[/vim](./cli/commands.md#vim):** Режим Vim.
+- **[Activate skill (інструмент)](./tools/activate-skill.md):** Внутрішній механізм для
+  завантаження експертних процедур.
+- **[Ask user (інструмент)](./tools/ask-user.md):** Внутрішня діалогова система для
+  уточнення.
+- **[Checkpointing](./cli/checkpointing.md):** Автоматичні знімки сеансу.
+- **[File system (інструмент)](./tools/file-system.md):** Технічні деталі для локальних
+  файлових операцій.
+- **[Headless mode](./cli/headless.md):** Програмний і скриптовий інтерфейс.
+- **[Internal documentation (інструмент)](./tools/internal-docs.md):** Технічний
+  довідник з функцій CLI.
+- **[Memory (інструмент)](./tools/memory.md):** Деталі зберігання для постійних фактів.
+- **[Model routing](./cli/model-routing.md):** Автоматичне резервне перемикання.
+- **[Plan mode (експериментально)](./cli/plan-mode.md):** Використання безпечного режиму
+  тільки для читання для планування складних змін.
+- **[Sandboxing](./cli/sandbox.md):** Ізоляція виконання інструментів.
+- **[Shell (інструмент)](./tools/shell.md):** Детальні параметри системного виконання.
+- **[Telemetry](./cli/telemetry.md):** Деталі метрик використання та продуктивності.
+- **[Todo (інструмент)](./tools/todos.md):** Специфікація відстеження прогресу.
+- **[Token caching](./cli/token-caching.md):** Оптимізація продуктивності.
+- **[Web fetch (інструмент)](./tools/web-fetch.md):** Деталі отримання та вилучення URL.
+- **[Web search (інструмент)](./tools/web-search.md):** Технічні деталі інтеграції
+  з Пошуком Google.
 
-## Configuration
+## Конфігурація
 
-Settings and customization options for Gemini CLI.
+Налаштування та параметри кастомізації для Gemini CLI.
 
-- **[Custom commands](./cli/custom-commands.md):** Personalized shortcuts.
-- **[Enterprise configuration](./cli/enterprise.md):** Professional environment
-  controls.
-- **[Ignore files (.geminiignore)](./cli/gemini-ignore.md):** Exclusion pattern
-  reference.
-- **[Model configuration](./cli/generation-settings.md):** Fine-tune generation
-  parameters like temperature and thinking budget.
-- **[Project context (GEMINI.md)](./cli/gemini-md.md):** Technical hierarchy of
-  context files.
-- **[Settings](./cli/settings.md):** Full configuration reference.
-- **[System prompt override](./cli/system-prompt.md):** Instruction replacement
-  logic.
-- **[Themes](./cli/themes.md):** UI personalization technical guide.
-- **[Trusted folders](./cli/trusted-folders.md):** Security permission logic.
+- **[Користувацькі команди](./cli/custom-commands.md):** Персоналізовані скорочення.
+- **[Корпоративна конфігурація](./cli/enterprise.md):** Контроль професійного середовища.
+- **[Файли ігнорування (.geminiignore)](./cli/gemini-ignore.md):** Довідник шаблонів виключень.
+- **[Конфігурація моделі](./cli/generation-settings.md):** Точне налаштування параметрів генерації,
+  таких як температура та бюджет мислення.
+- **[Контекст проєкту (GEMINI.md)](./cli/gemini-md.md):** Технічна ієрархія файлів контексту.
+- **[Налаштування](./cli/settings.md):** Повний довідник з конфігурації.
+- **[Перевизначення системного запиту](./cli/system-prompt.md):** Логіка заміни інструкцій.
+- **[Теми](./cli/themes.md):** Технічний посібник з персоналізації UI.
+- **[Довірені теки](./cli/trusted-folders.md):** Логіка дозволів безпеки.
 
-## Reference
+## Довідка
 
-Deep technical documentation and API specifications.
+Глибока технічна документація та специфікації API.
 
-- **[Architecture overview](./architecture.md):** System design and components.
-- **[Command reference](./cli/commands.md):** Detailed slash command guide.
-- **[Configuration reference](./get-started/configuration.md):** Settings and
-  environment variables.
-- **[Core concepts](./core/concepts.md):** Fundamental terminology and
-  definitions.
-- **[Keyboard shortcuts](./cli/keyboard-shortcuts.md):** Productivity tips.
-- **[Policy engine](./core/policy-engine.md):** Fine-grained execution control.
+- **[Огляд архітектури](./architecture.md):** Системний дизайн і компоненти.
+- **[Довідник команд](./cli/commands.md):** Детальний посібник з slash-команд.
+- **[Довідник з конфігурації](./get-started/configuration.md):** Налаштування та
+  змінні середовища.
+- **[Основні поняття](./core/concepts.md):** Фундаментальна термінологія та
+  визначення.
+- **[Комбінації клавіш](./cli/keyboard-shortcuts.md):** Поради щодо продуктивності.
+- **[Механізм політик](./core/policy-engine.md):** Тонке керування виконанням.
 
-## Resources
+## Ресурси
 
-Support, release history, and legal information.
+Підтримка, історія випусків і юридична інформація.
 
-- **[FAQ](./faq.md):** Answers to frequently asked questions.
-- **[Changelogs](./changelogs/index.md):** Highlights and notable changes.
-- **[Quota and pricing](./quota-and-pricing.md):** Limits and billing details.
-- **[Terms and privacy](./tos-privacy.md):** Official notices and terms.
+- **[Поширені запитання](./faq.md):** Відповіді на поширені запитання.
+- **[Журнали змін](./changelogs/index.md):** Основні та помітні зміни.
+- **[Квоти та ціни](./quota-and-pricing.md):** Деталі обмежень і білінгу.
+- **[Умови та конфіденційність](./tos-privacy.md):** Офіційні повідомлення та умови.

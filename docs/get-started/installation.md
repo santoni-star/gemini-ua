@@ -1,162 +1,161 @@
-# Gemini CLI installation, execution, and releases
+# Встановлення, виконання та випуски Gemini CLI
 
-This document provides an overview of Gemini CLI's sytem requriements,
-installation methods, and release types.
+Цей документ надає огляд системних вимог Gemini CLI,
+методів встановлення та типів випусків.
 
-## Recommended system specifications
+## Рекомендовані системні вимоги
 
-- **Operating System:**
+- **Операційна система:**
   - macOS 15+
   - Windows 11 24H2+
   - Ubuntu 20.04+
-- **Hardware:**
-  - "Casual" usage: 4GB+ RAM (short sessions, common tasks and edits)
-  - "Power" usage: 16GB+ RAM (long sessions, large codebases, deep context)
-- **Runtime:** Node.js 20.0.0+
-- **Shell:** Bash or Zsh
-- **Location:**
-  [Gemini Code Assist supported locations](https://developers.google.com/gemini-code-assist/resources/available-locations#americas)
-- **Internet connection required**
+- **Апаратне забезпечення:**
+  - "Звичайне" використання: 4 ГБ+ ОЗП (короткі сеанси, поширені завдання та редагування)
+  - "Інтенсивне" використання: 16 ГБ+ ОЗП (тривалі сеанси, великі кодові бази, глибокий контекст)
+- **Середовище виконання:** Node.js 20.0.0+
+- **Оболонка:** Bash або Zsh
+- **Розташування:**
+  [Підтримувані розташування Gemini Code Assist](https://developers.google.com/gemini-code-assist/resources/available-locations#americas)
+- **Потрібне підключення до Інтернету**
 
-## Install Gemini CLI
+## Встановлення Gemini CLI
 
-We recommend most users install Gemini CLI using one of the following
-installation methods:
+Ми рекомендуємо більшості користувачів встановлювати Gemini CLI за допомогою одного з таких
+методів встановлення:
 
 - npm
 - Homebrew
 - MacPorts
 - Anaconda
 
-Note that Gemini CLI comes pre-installed on
-[**Cloud Shell**](https://docs.cloud.google.com/shell/docs) and
+Зауважте, що Gemini CLI постачається з попередньо встановленим
+[**Cloud Shell**](https://docs.cloud.google.com/shell/docs) та
 [**Cloud Workstations**](https://cloud.google.com/workstations).
 
-### Install globally with npm
+### Встановити глобально за допомогою npm
 
 ```bash
 npm install -g @google/gemini-cli
 ```
 
-### Install globally with Homebrew (macOS/Linux)
+### Встановити глобально за допомогою Homebrew (macOS/Linux)
 
 ```bash
 brew install gemini-cli
 ```
 
-### Install globally with MacPorts (macOS)
+### Встановити глобально за допомогою MacPorts (macOS)
 
 ```bash
 sudo port install gemini-cli
 ```
 
-### Install with Anaconda (for restricted environments)
+### Встановити за допомогою Anaconda (для обмежених середовищ)
 
 ```bash
-# Create and activate a new environment
+# Створити та активувати нове середовище
 conda create -y -n gemini_env -c conda-forge nodejs
 conda activate gemini_env
 
-# Install Gemini CLI globally via npm (inside the environment)
+# Встановити Gemini CLI глобально через npm (всередині середовища)
 npm install -g @google/gemini-cli
 ```
 
-## Run Gemini CLI
+## Запуск Gemini CLI
 
-For most users, we recommend running Gemini CLI with the `gemini` command:
+Для більшості користувачів ми рекомендуємо запускати Gemini CLI за допомогою команди `gemini`:
 
 ```bash
 gemini
 ```
 
-For a list of options and additional commands, see the
-[CLI cheatsheet](/docs/cli/cli-reference.md).
+Список параметрів і додаткових команд див. у
+[шпаргалці CLI](/docs/cli/cli-reference.md).
 
-You can also run Gemini CLI using one of the following advanced methods:
+Ви також можете запустити Gemini CLI за допомогою одного з таких розширених методів:
 
-- Run instantly with npx. You can run Gemini CLI without permanent installation.
-- In a sandbox. This method offers increased security and isolation.
-- From the source. This is recommended for contributors to the project.
+- Миттєвий запуск за допомогою npx. Ви можете запустити Gemini CLI без постійного встановлення.
+- У пісочниці. Цей метод забезпечує підвищену безпеку та ізоляцію.
+- З вихідного коду. Це рекомендується для учасників проєкту.
 
-### Run instantly with npx
+### Миттєвий запуск за допомогою npx
 
 ```bash
-# Using npx (no installation required)
+# Використання npx (встановлення не потрібне)
 npx @google/gemini-cli
 ```
 
-You can also execute the CLI directly from the main branch on GitHub, which is
-helpful for testing features still in development:
+Ви також можете виконати CLI безпосередньо з головної гілки на GitHub, що є
+корисним для тестування функцій, які все ще розробляються:
 
 ```bash
 npx https://github.com/google-gemini/gemini-cli
 ```
 
-### Run in a sandbox (Docker/Podman)
+### Запуск у пісочниці (Docker/Podman)
 
-For security and isolation, Gemini CLI can be run inside a container. This is
-the default way that the CLI executes tools that might have side effects.
+Для безпеки та ізоляції Gemini CLI можна запускати всередині контейнера. Це є
+способом за замовчуванням, яким CLI виконує інструменти, які можуть мати побічні ефекти.
 
-- **Directly from the registry:** You can run the published sandbox image
-  directly. This is useful for environments where you only have Docker and want
-  to run the CLI.
+- **Безпосередньо з реєстру:** Ви можете запустити опублікований образ пісочниці
+  безпосередньо. Це корисно для середовищ, де у вас є тільки Docker і ви хочете
+  запустити CLI.
   ```bash
-  # Run the published sandbox image
+  # Запустити опублікований образ пісочниці
   docker run --rm -it us-docker.pkg.dev/gemini-code-dev/gemini-cli/sandbox:0.1.1
   ```
-- **Using the `--sandbox` flag:** If you have Gemini CLI installed locally
-  (using the standard installation described above), you can instruct it to run
-  inside the sandbox container.
+- **Використання прапорця `--sandbox`:** Якщо у вас встановлено Gemini CLI локально
+  (за допомогою стандартного встановлення, описаного вище), ви можете наказати йому запускатися
+  всередині контейнера пісочниці.
   ```bash
   gemini --sandbox -y -p "your prompt here"
   ```
 
-### Run from source (recommended for Gemini CLI contributors)
+### Запуск з вихідного коду (рекомендовано для учасників проєкту Gemini CLI)
 
-Contributors to the project will want to run the CLI directly from the source
-code.
+Учасники проєкту захочуть запускати CLI безпосередньо з вихідного коду.
 
-- **Development mode:** This method provides hot-reloading and is useful for
-  active development.
+- **Режим розробки:** Цей метод забезпечує гаряче перезавантаження і корисний для
+  активної розробки.
   ```bash
-  # From the root of the repository
+  # З кореня репозиторію
   npm run start
   ```
-- **Production-like mode (linked package):** This method simulates a global
-  installation by linking your local package. It's useful for testing a local
-  build in a production workflow.
+- **Режим, подібний до виробничого (пов'язаний пакет):** Цей метод імітує глобальне
+  встановлення шляхом пов'язування вашого локального пакета. Це корисно для тестування локальної
+  збірки у виробничому робочому процесі.
 
   ```bash
-  # Link the local cli package to your global node_modules
+  # Пов'язати локальний пакет cli з вашим глобальним node_modules
   npm link packages/cli
 
-  # Now you can run your local version using the `gemini` command
+  # Тепер ви можете запустити свою локальну версію за допомогою команди `gemini`
   gemini
   ```
 
-## Releases
+## Випуски
 
-Gemini CLI has three release channels: nightly, preview, and stable. For most
-users, we recommend the stable release, which is the default installation.
+Gemini CLI має три канали випусків: nightly, preview і stable. Для більшості
+користувачів ми рекомендуємо стабільний випуск, який є випуском за замовчуванням.
 
 ### Stable
 
-New stable releases are published each week. The stable release is the promotion
-of last week's `preview` release along with any bug fixes. The stable release
-uses `latest` tag, but omitting the tag also installs the latest stable release
-by default:
+Нові стабільні випуски публікуються щотижня. Стабільний випуск є просуванням
+попереднього тижня `preview` випуску разом із будь-якими виправленнями помилок. Стабільний випуск
+використовує тег `latest`, але пропуск тега також встановлює останній стабільний випуск
+за замовчуванням:
 
 ```bash
-# Both commands install the latest stable release.
+# Обидві команди встановлюють останній стабільний випуск.
 npm install -g @google/gemini-cli
 npm install -g @google/gemini-cli@latest
 ```
 
 ### Preview
 
-New preview releases will be published each week. These releases are not fully
-vetted and may contain regressions or other outstanding issues. Try out the
-preview release by using the `preview` tag:
+Нові попередні випуски публікуватимуться щотижня. Ці випуски не є повністю
+перевіреними і можуть містити регресії або інші наявні проблеми. Спробуйте
+попередній випуск за допомогою тега `preview`:
 
 ```bash
 npm install -g @google/gemini-cli@preview
@@ -164,10 +163,10 @@ npm install -g @google/gemini-cli@preview
 
 ### Nightly
 
-Nightly releases are published every day. The nightly release includes all
-changes from the main branch at time of release. It should be assumed there are
-pending validations and issues. You can help test the latest changes by
-installing with the `nightly` tag:
+Нічні випуски публікуються щодня. Нічний випуск включає всі
+зміни з головної гілки на момент випуску. Слід припускати, що є
+очікувані перевірки та проблеми. Ви можете допомогти протестувати останні зміни,
+встановивши за допомогою тега `nightly`:
 
 ```bash
 npm install -g @google/gemini-cli@nightly

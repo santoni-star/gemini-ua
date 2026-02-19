@@ -8,386 +8,378 @@
 
 ![Gemini CLI Screenshot](./docs/assets/gemini-screenshot.png)
 
-Gemini CLI is an open-source AI agent that brings the power of Gemini directly
-into your terminal. It provides lightweight access to Gemini, giving you the
-most direct path from your prompt to our model.
+Gemini CLI — це інструмент штучного інтелекту з відкритим вихідним кодом, який надає можливості Gemini безпосередньо у вашому терміналі. Він забезпечує легкий доступ до Gemini, надаючи вам найпряміший шлях від вашого запиту до нашої моделі.
 
-Learn all about Gemini CLI in our [documentation](https://geminicli.com/docs/).
+Дізнайтеся все про Gemini CLI у нашій [документації](https://geminicli.com/docs/).
 
-## 🚀 Why Gemini CLI?
+## 🚀 Чому Gemini CLI?
 
-- **🎯 Free tier**: 60 requests/min and 1,000 requests/day with personal Google
-  account.
-- **🧠 Powerful Gemini 3 models**: Access to improved reasoning and 1M token
-  context window.
-- **🔧 Built-in tools**: Google Search grounding, file operations, shell
-  commands, web fetching.
-- **🔌 Extensible**: MCP (Model Context Protocol) support for custom
-  integrations.
-- **💻 Terminal-first**: Designed for developers who live in the command line.
-- **🛡️ Open source**: Apache 2.0 licensed.
-- **🇺🇦 Ukrainian Localization**: Fully localized UI and messages for Ukrainian users.
+- **🎯 Безкоштовний рівень**: 60 запитів/хв і 1000 запитів/день з особистим обліковим записом Google.
+- **🧠 Потужні моделі Gemini 3**: Доступ до покращеного міркування та контекстного вікна на 1 мільйон токенів.
+- **🔧 Вбудовані інструменти**: Інтеграція з Google Search, операції з файлами, команди оболонки, отримання веб-вмісту.
+- **🔌 Розширюваність**: Підтримка MCP (Model Context Protocol) для користувацьких інтеграцій.
+- **💻 Орієнтований на термінал**: Розроблений для розробників, які працюють у командному рядку.
+- **🛡️ Відкритий вихідний код**: Ліцензія Apache 2.0.
+- **🇺🇦 Українська локалізація**: Повністю локалізований інтерфейс та повідомлення для українських користувачів.
 
-## 📦 Installation
+## 📦 Встановлення
 
-See
-[Gemini CLI installation, execution, and releases](./docs/get-started/installation.md)
-for recommended system specifications and a detailed installation guide.
+Дивіться розділ
+[Встановлення, запуск та релізи Gemini CLI](./docs/get-started/installation.md),
+щоб дізнатися про рекомендовані системні вимоги та детальний посібник зі встановлення.
 
-### Quick Install
+### Швидке встановлення
 
-#### Run instantly with npx
+#### Миттєвий запуск через npx
 
 ```bash
-# Using npx (no installation required)
+# Використання npx (встановлення не потрібне)
 npx @santoni/gemini-ua
 ```
 
-#### Install globally with npm
+#### Глобальне встановлення через npm
 
 ```bash
 npm install -g @santoni/gemini-ua
 ```
 
-#### Install globally with Homebrew (macOS/Linux)
+#### Глобальне встановлення через Homebrew (macOS/Linux)
 
 ```bash
 brew install gemini-cli
 ```
 
-#### Install globally with MacPorts (macOS)
+#### Глобальне встановлення через MacPorts (macOS)
 
 ```bash
 sudo port install gemini-cli
 ```
 
-#### Install with Anaconda (for restricted environments)
+#### Встановлення через Anaconda (для обмежених середовищ)
 
 ```bash
-# Create and activate a new environment
+# Створіть і активуйте нове середовище
 conda create -y -n gemini_env -c conda-forge nodejs
 conda activate gemini_env
 
-# Install Gemini CLI globally via npm (inside the environment)
+# Встановіть Gemini CLI глобально через npm (всередині середовища)
 npm install -g @google/gemini-cli
 ```
 
-## Release Cadence and Tags
+## Графік випуску та теги
 
-See [Releases](./docs/releases.md) for more details.
+Дивіться розділ [Релізи](./docs/releases.md) для отримання додаткової інформації.
 
-### Preview
+### Preview (Попередній перегляд)
 
-New preview releases will be published each week at UTC 2359 on Tuesdays. These
-releases will not have been fully vetted and may contain regressions or other
-outstanding issues. Please help us test and install with `preview` tag.
+Нові попередні релізи публікуються щотижня о 23:59 UTC у вівторок. Ці релізи
+можуть не бути повністю протестовані та можуть містити регресії або інші
+відомі проблеми. Будь ласка, допоможіть нам протестувати та встановіть тег `preview`.
 
 ```bash
 npm install -g @google/gemini-cli@preview
 ```
 
-### Stable
+### Stable (Стабільна версія)
 
-- New stable releases will be published each week at UTC 2000 on Tuesdays, this
-  will be the full promotion of last week's `preview` release + any bug fixes
-  and validations. Use `latest` tag.
+- Нові стабільні релізи публікуються щотижня о 20:00 UTC у вівторок, це
+  буде повна промоція минулого тижня `preview` релізу + будь-які виправлення помилок
+  та перевірки. Використовуйте тег `latest`.
 
 ```bash
 npm install -g @google/gemini-cli@latest
 ```
 
-### Nightly
+### Nightly (Нічна збірка)
 
-- New releases will be published each day at UTC 0000. This will be all changes
-  from the main branch as represented at time of release. It should be assumed
-  there are pending validations and issues. Use `nightly` tag.
+- Нові релізи публікуються щодня о 00:00 UTC. Це будуть усі зміни
+  з головної гілки станом на момент випуску. Слід вважати, що є
+  очікувані перевірки та проблеми. Використовуйте тег `nightly`.
 
 ```bash
 npm install -g @google/gemini-cli@nightly
 ```
 
-## 📋 Key Features
+## 📋 Ключові можливості
 
-### Code Understanding & Generation
+### Розуміння та генерація коду
 
-- Query and edit large codebases
-- Generate new apps from PDFs, images, or sketches using multimodal capabilities
-- Debug issues and troubleshoot with natural language
+- Аналіз та редагування великих кодових баз
+- Генерація нових додатків з PDF, зображень або ескізів за допомогою мультимодальних можливостей
+- Виправлення помилок та усунення несправностей природною мовою
 
-### Automation & Integration
+### Автоматизація та інтеграція
 
-- Automate operational tasks like querying pull requests or handling complex
-  rebases
-- Use MCP servers to connect new capabilities, including
-  [media generation with Imagen, Veo or Lyria](https://github.com/GoogleCloudPlatform/vertex-ai-creative-studio/tree/main/experiments/mcp-genmedia)
-- Run non-interactively in scripts for workflow automation
+- Автоматизація операційних завдань, таких як запити pull request або обробка складних
+  ребазів
+- Використання MCP-серверів для підключення нових можливостей, включаючи
+  [генерацію медіа за допомогою Imagen, Veo або Lyria](https://github.com/GoogleCloudPlatform/vertex-ai-creative-studio/tree/main/experiments/mcp-genmedia)
+- Запуск у неінтерактивному режимі в скриптах для автоматизації робочих процесів
 
-### Advanced Capabilities
+### Розширені можливості
 
-- Ground your queries with built-in
-  [Google Search](https://ai.google.dev/gemini-api/docs/grounding) for real-time
-  information
-- Conversation checkpointing to save and resume complex sessions
-- Custom context files (GEMINI.md) to tailor behavior for your projects
+- Підтримка актуальності запитів за допомогою вбудованого
+  [Google Search](https://ai.google.dev/gemini-api/docs/grounding) для отримання
+  інформації в режимі реального часу
+- Збереження контрольних точок розмови для збереження та відновлення складних сесій
+- Користувацькі файли контексту (GEMINI.md) для налаштування поведінки для ваших проєктів
 
-### GitHub Integration
+### Інтеграція з GitHub
 
-Integrate Gemini CLI directly into your GitHub workflows with
+Інтегруйте Gemini CLI безпосередньо у ваші робочі процеси GitHub за допомогою
 [**Gemini CLI GitHub Action**](https://github.com/google-github-actions/run-gemini-cli):
 
-- **Pull Request Reviews**: Automated code review with contextual feedback and
-  suggestions
-- **Issue Triage**: Automated labeling and prioritization of GitHub issues based
-  on content analysis
-- **On-demand Assistance**: Mention `@gemini-cli` in issues and pull requests
-  for help with debugging, explanations, or task delegation
-- **Custom Workflows**: Build automated, scheduled and on-demand workflows
-  tailored to your team's needs
+- **Огляди Pull Request**: Автоматизований огляд коду з контекстними відгуками та
+  пропозиціями
+- **Сортування Issues**: Автоматичне маркування та пріоритезація Issues на GitHub на основі
+  аналізу вмісту
+- **Допомога на вимогу**: Згадайте `@gemini-cli` в issues та pull requests
+  для допомоги з налагодженням, поясненнями або делегуванням завдань
+- **Користувацькі робочі процеси**: Створюйте автоматизовані, заплановані та на вимогу робочі процеси,
+  адаптовані до потреб вашої команди
 
-## 🔐 Authentication Options
+## 🔐 Варіанти автентифікації
 
-Choose the authentication method that best fits your needs:
+Виберіть метод автентифікації, який найкраще відповідає вашим потребам:
 
-### Option 1: Login with Google (OAuth login using your Google Account)
+### Варіант 1: Вхід через Google (OAuth-вхід з вашим обліковим записом Google)
 
-**✨ Best for:** Individual developers as well as anyone who has a Gemini Code
-Assist License. (see
-[quota limits and terms of service](https://cloud.google.com/gemini/docs/quotas)
-for details)
+**✨ Найкраще для:** Індивідуальних розробників, а також будь-кого, хто має ліцензію
+Gemini Code Assist. (див.
+[обмеження квоти та умови надання послуг](https://cloud.google.com/gemini/docs/quotas)
+для деталей)
 
-**Benefits:**
+**Переваги:**
 
-- **Free tier**: 60 requests/min and 1,000 requests/day
-- **Gemini 3 models** with 1M token context window
-- **No API key management** - just sign in with your Google account
-- **Automatic updates** to latest models
+- **Безкоштовний рівень**: 60 запитів/хв і 1000 запитів/день
+- **Моделі Gemini 3** з контекстним вікном на 1 мільйон токенів
+- **Немає необхідності керувати API-ключами** — просто увійдіть за допомогою свого облікового запису Google
+- **Автоматичні оновлення** до останніх версій моделей
 
-#### Start Gemini CLI, then choose _Login with Google_ and follow the browser authentication flow when prompted
+#### Запустіть Gemini CLI, потім виберіть _Вхід через Google_ і дотримуйтесь потоку автентифікації в браузері, коли буде запропоновано
 
 ```bash
 gemini
 ```
 
-#### If you are using a paid Code Assist License from your organization, remember to set the Google Cloud Project
+#### Якщо ви використовуєте платну ліцензію Code Assist від вашої організації, не забудьте встановити проєкт Google Cloud
 
 ```bash
-# Set your Google Cloud Project
+# Встановіть ваш проєкт Google Cloud
 export GOOGLE_CLOUD_PROJECT="YOUR_PROJECT_ID"
 gemini
 ```
 
-### Option 2: Gemini API Key
+### Варіант 2: Ключ API Gemini
 
-**✨ Best for:** Developers who need specific model control or paid tier access
+**✨ Найкраще для:** Розробників, яким потрібен конкретний контроль моделей або доступ до платного рівня
 
-**Benefits:**
+**Переваги:**
 
-- **Free tier**: 1000 requests/day with Gemini 3 (mix of flash and pro)
-- **Model selection**: Choose specific Gemini models
-- **Usage-based billing**: Upgrade for higher limits when needed
+- **Безкоштовний рівень**: 1000 запитів/день з Gemini 3 (суміш flash та pro)
+- **Вибір моделі**: Виберіть конкретні моделі Gemini
+- **Оплата за використання**: Підвищте рівень для більших лімітів, коли це потрібно
 
 ```bash
-# Get your key from https://aistudio.google.com/apikey
+# Отримайте свій ключ за адресою https://aistudio.google.com/apikey
 export GEMINI_API_KEY="YOUR_API_KEY"
 gemini
 ```
 
-### Option 3: Vertex AI
+### Варіант 3: Vertex AI
 
-**✨ Best for:** Enterprise teams and production workloads
+**✨ Найкраще для:** Корпоративних команд та робочих навантажень production
 
-**Benefits:**
+**Переваги:**
 
-- **Enterprise features**: Advanced security and compliance
-- **Scalable**: Higher rate limits with billing account
-- **Integration**: Works with existing Google Cloud infrastructure
+- **Корпоративні можливості**: Розширена безпека та відповідність вимогам
+- **Масштабованість**: Більші обмеження швидкості з обліковим записом для виставлення рахунків
+- **Інтеграція**: Працює з існуючою інфраструктурою Google Cloud
 
 ```bash
-# Get your key from Google Cloud Console
+# Отримайте свій ключ з Google Cloud Console
 export GOOGLE_API_KEY="YOUR_API_KEY"
 export GOOGLE_GENAI_USE_VERTEXAI=true
 gemini
 ```
 
-For Google Workspace accounts and other authentication methods, see the
-[authentication guide](./docs/get-started/authentication.md).
+Для облікових записів Google Workspace та інших методів автентифікації дивіться
+[посібник з автентифікації](./docs/get-started/authentication.md).
 
-## 🚀 Getting Started
+## 🚀 Початок роботи
 
-### Basic Usage
+### Базове використання
 
-#### Start in current directory
+#### Запуск у поточній директорії
 
 ```bash
 gemini
 ```
 
-#### Include multiple directories
+#### Включення кількох директорій
 
 ```bash
 gemini --include-directories ../lib,../docs
 ```
 
-#### Use specific model
+#### Використання конкретної моделі
 
 ```bash
 gemini -m gemini-2.5-flash
 ```
 
-#### Non-interactive mode for scripts
+#### Неінтерактивний режим для скриптів
 
-Get a simple text response:
-
-```bash
-gemini -p "Explain the architecture of this codebase"
-```
-
-For more advanced scripting, including how to parse JSON and handle errors, use
-the `--output-format json` flag to get structured output:
+Отримайте просту текстову відповідь:
 
 ```bash
-gemini -p "Explain the architecture of this codebase" --output-format json
+gemini -p "Поясніть архітектуру цієї кодової бази"
 ```
 
-For real-time event streaming (useful for monitoring long-running operations),
-use `--output-format stream-json` to get newline-delimited JSON events:
+Для більш просунутого скриптингу, включаючи аналіз JSON та обробку помилок, використовуйте
+прапорець `--output-format json` для отримання структурованого виводу:
 
 ```bash
-gemini -p "Run tests and deploy" --output-format stream-json
+gemini -p "Поясніть архітектуру цієї кодової бази" --output-format json
 ```
 
-### Quick Examples
+Для потокової передачі подій у режимі реального часу (корисно для моніторингу тривалих операцій)
+використовуйте `--output-format stream-json` для отримання JSON-подій, розділених новими рядками:
 
-#### Start a new project
+```bash
+gemini -p "Запустіть тести та розгорніть" --output-format stream-json
+```
+
+### Швидкі приклади
+
+#### Створення нового проєкту
 
 ```bash
 cd new-project/
 gemini
-> Write me a Discord bot that answers questions using a FAQ.md file I will provide
+> Напишіть мені Discord-бот, який відповідає на запитання, використовуючи файл FAQ.md, який я надам
 ```
 
-#### Analyze existing code
+#### Аналіз наявного коду
 
 ```bash
 git clone https://github.com/google-gemini/gemini-cli
 cd gemini-cli
 gemini
-> Give me a summary of all of the changes that went in yesterday
+> Надайте мені резюме всіх змін, які були внесені вчора
 ```
 
-## 📚 Documentation
+## 📚 Документація
 
-### Getting Started
+### Початок роботи
 
-- [**Quickstart Guide**](./docs/get-started/index.md) - Get up and running
-  quickly.
-- [**Authentication Setup**](./docs/get-started/authentication.md) - Detailed
-  auth configuration.
-- [**Configuration Guide**](./docs/get-started/configuration.md) - Settings and
-  customization.
-- [**Keyboard Shortcuts**](./docs/cli/keyboard-shortcuts.md) - Productivity
-  tips.
+- [**Посібник з швидкого старту**](./docs/get-started/index.md) — Швидко почніть роботу.
+- [**Налаштування автентифікації**](./docs/get-started/authentication.md) — Детальна
+  конфігурація автентифікації.
+- [**Посібник з конфігурації**](./docs/get-started/configuration.md) — Налаштування та
+  кастомізація.
+- [**Клавіатурні скорочення**](./docs/cli/keyboard-shortcuts.md) — Поради щодо продуктивності.
 
-### Core Features
+### Основні можливості
 
-- [**Commands Reference**](./docs/cli/commands.md) - All slash commands
-  (`/help`, `/chat`, etc).
-- [**Custom Commands**](./docs/cli/custom-commands.md) - Create your own
-  reusable commands.
-- [**Context Files (GEMINI.md)**](./docs/cli/gemini-md.md) - Provide persistent
-  context to Gemini CLI.
-- [**Checkpointing**](./docs/cli/checkpointing.md) - Save and resume
-  conversations.
-- [**Token Caching**](./docs/cli/token-caching.md) - Optimize token usage.
+- [**Довідник команд**](./docs/cli/commands.md) — Усі слеш-команди
+  (`/help`, `/chat` тощо).
+- [**Користувацькі команди**](./docs/cli/custom-commands.md) — Створіть власні
+  команди для повторного використання.
+- [**Файли контексту (GEMINI.md)**](./docs/cli/gemini-md.md) — Надайте постійний
+  контекст для Gemini CLI.
+- [**Контрольні точки**](./docs/cli/checkpointing.md) — Збереження та відновлення
+  розмов.
+- [**Кешування токенів**](./docs/cli/token-caching.md) — Оптимізація використання токенів.
 
-### Tools & Extensions
+### Інструменти та розширення
 
-- [**Built-in Tools Overview**](./docs/tools/index.md)
-  - [File System Operations](./docs/tools/file-system.md)
-  - [Shell Commands](./docs/tools/shell.md)
-  - [Web Fetch & Search](./docs/tools/web-fetch.md)
-- [**MCP Server Integration**](./docs/tools/mcp-server.md) - Extend with custom
-  tools.
-- [**Custom Extensions**](./docs/extensions/index.md) - Build and share your own
-  commands.
+- [**Огляд вбудованих інструментів**](./docs/tools/index.md)
+  - [Операції з файловою системою](./docs/tools/file-system.md)
+  - [Команди оболонки](./docs/tools/shell.md)
+  - [Отримання та пошук у веб](./docs/tools/web-fetch.md)
+- [**Інтеграція з MCP-сервером**](./docs/tools/mcp-server.md) — Розширення за допомогою користувацьких
+  інструментів.
+- [**Користувацькі розширення**](./docs/extensions/index.md) — Створюйте та діліться власними
+  командами.
 
-### Advanced Topics
+### Розширені теми
 
-- [**Headless Mode (Scripting)**](./docs/cli/headless.md) - Use Gemini CLI in
-  automated workflows.
-- [**Architecture Overview**](./docs/architecture.md) - How Gemini CLI works.
-- [**IDE Integration**](./docs/ide-integration/index.md) - VS Code companion.
-- [**Sandboxing & Security**](./docs/cli/sandbox.md) - Safe execution
-  environments.
-- [**Trusted Folders**](./docs/cli/trusted-folders.md) - Control execution
-  policies by folder.
-- [**Enterprise Guide**](./docs/cli/enterprise.md) - Deploy and manage in a
-  corporate environment.
-- [**Telemetry & Monitoring**](./docs/cli/telemetry.md) - Usage tracking.
-- [**Tools API Development**](./docs/core/tools-api.md) - Create custom tools.
-- [**Local development**](./docs/local-development.md) - Local development
-  tooling.
+- [**Режим без інтерфейсу (скриптинг)**](./docs/cli/headless.md) — Використання Gemini CLI в
+  автоматизованих робочих процесах.
+- [**Огляд архітектури**](./docs/architecture.md) — Як працює Gemini CLI.
+- [**Інтеграція з IDE**](./docs/ide-integration/index.md) — Супутник для VS Code.
+- [**Пісочниця та безпека**](./docs/cli/sandbox.md) — Безпечні середовища
+  виконання.
+- [**Надійні папки**](./docs/cli/trusted-folders.md) — Контроль виконання
+  політик за папками.
+- [**Посібник для корпоративних клієнтів**](./docs/cli/enterprise.md) — Розгортання та управління в
+  корпоративному середовищі.
+- [**Телеметрія та моніторинг**](./docs/cli/telemetry.md) — Відстеження використання.
+- [**Розробка API інструментів**](./docs/core/tools-api.md) — Створення користувацьких інструментів.
+- [**Локальна розробка**](./docs/local-development.md) — Інструменти для локальної
+  розробки.
 
-### Troubleshooting & Support
+### Усунення несправностей та підтримка
 
-- [**Troubleshooting Guide**](./docs/troubleshooting.md) - Common issues and
-  solutions.
-- [**FAQ**](./docs/faq.md) - Frequently asked questions.
-- Use `/bug` command to report issues directly from the CLI.
+- [**Посібник з усунення несправностей**](./docs/troubleshooting.md) — Поширені проблеми та
+  рішення.
+- [**ЧаП**](./docs/faq.md) — Часті запитання.
+- Використовуйте команду `/bug` для повідомлення про проблеми безпосередньо з CLI.
 
-### Using MCP Servers
+### Використання MCP-серверів
 
-Configure MCP servers in `~/.gemini/settings.json` to extend Gemini CLI with
-custom tools:
+Налаштуйте MCP-сервери у `~/.gemini/settings.json`, щоб розширити Gemini CLI
+користувацькими інструментами:
 
 ```text
-> @github List my open pull requests
-> @slack Send a summary of today's commits to #dev channel
-> @database Run a query to find inactive users
+> @github Перелічити мої відкриті pull requests
+> @slack Надіслати резюме сьогоднішніх змін до каналу #dev
+> @database Виконати запит для пошуку неактивних користувачів
 ```
 
-See the [MCP Server Integration guide](./docs/tools/mcp-server.md) for setup
-instructions.
+Дивіться [посібник з інтеграції MCP-серверів](./docs/tools/mcp-server.md) для отримання
+інструкцій з налаштування.
 
-## 🤝 Contributing
+## 🤝 Внесок
 
-We welcome contributions! Gemini CLI is fully open source (Apache 2.0), and we
-encourage the community to:
+Ми вітаємо внесок! Gemini CLI має повністю відкритий вихідний код (Apache 2.0), і ми
+заохочуємо спільноту до:
 
-- Report bugs and suggest features.
-- Improve documentation.
-- Submit code improvements.
-- Share your MCP servers and extensions.
+- Повідомлення про помилки та пропозиції щодо функцій.
+- Покращення документації.
+- Подання покращень коду.
+- Обміну своїми MCP-серверами та розширеннями.
 
-See our [Contributing Guide](./CONTRIBUTING.md) for development setup, coding
-standards, and how to submit pull requests.
+Дивіться наш [Посібник з внеску](./CONTRIBUTING.md) для налаштування розробки,
+стандартів кодування та того, як надсилати pull-реквести.
 
-Check our [Official Roadmap](https://github.com/orgs/google-gemini/projects/11)
-for planned features and priorities.
+Перегляньте наш [Офіційний план](https://github.com/orgs/google-gemini/projects/11),
+щоб дізнатися про заплановані функції та пріоритети.
 
-## 📖 Resources
+## 📖 Ресурси
 
-- **[Official Roadmap](./ROADMAP.md)** - See what's coming next.
-- **[Changelog](./docs/changelogs/index.md)** - See recent notable updates.
-- **[NPM Package](https://www.npmjs.com/package/@google/gemini-cli)** - Package
-  registry.
-- **[GitHub Issues](https://github.com/google-gemini/gemini-cli/issues)** -
-  Report bugs or request features.
-- **[Security Advisories](https://github.com/google-gemini/gemini-cli/security/advisories)** -
-  Security updates.
+- **[Офіційний план](./ROADMAP.md)** — Дізнайтеся, що очікується далі.
+- **[Журнал змін](./docs/changelogs/index.md)** — Перегляньте останні значущі оновлення.
+- **[NPM-пакет](https://www.npmjs.com/package/@google/gemini-cli)** — Реєстр
+  пакетів.
+- **[GitHub Issues](https://github.com/google-gemini/gemini-cli/issues)** —
+  Повідомлення про помилки або запити функцій.
+- **[Бюлетені з безпеки](https://github.com/google-gemini/gemini-cli/security/advisories)** —
+  Оновлення безпеки.
 
-### Uninstall
+### Видалення
 
-See the [Uninstall Guide](docs/cli/uninstall.md) for removal instructions.
+Дивіться [Посібник з видалення](docs/cli/uninstall.md) для отримання інструкцій щодо видалення.
 
-## 📄 Legal
+## 📄 Юридична інформація
 
-- **License**: [Apache License 2.0](LICENSE)
-- **Terms of Service**: [Terms & Privacy](./docs/tos-privacy.md)
-- **Security**: [Security Policy](SECURITY.md)
+- **Ліцензія**: [Apache License 2.0](LICENSE)
+- **Умови надання послуг**: [Умови та конфіденційність](./docs/tos-privacy.md)
+- **Безпека**: [Політика безпеки](SECURITY.md)
 
 ---
 
 <p align="center">
-  Built with ❤️ by Google and the open source community
+  Створено з ❤️ компанією Google та спільнотою відкритого вихідного коду
 </p>

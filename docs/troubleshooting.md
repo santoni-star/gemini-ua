@@ -1,173 +1,164 @@
-# Troubleshooting guide
+# Посібник із усунення несправностей
 
-This guide provides solutions to common issues and debugging tips, including
-topics on:
+Цей посібник надає рішення поширених проблем і поради щодо налагодження, включаючи
+теми про:
 
-- Authentication or login errors
-- Frequently asked questions (FAQs)
-- Debugging tips
-- Existing GitHub Issues similar to yours or creating new Issues
+- Помилки автентифікації або входу
+- Поширені запитання (FAQ)
+- Поради щодо налагодження
+- Існуючі проблеми на GitHub, схожі на вашу, або створення нових Issues
 
-## Authentication or login errors
+## Помилки автентифікації або входу
 
-- **Error:
+- **Помилка:
   `You must be a named user on your organization's Gemini Code Assist Standard edition subscription to use this service. Please contact your administrator to request an entitlement to Gemini Code Assist Standard edition.`**
-  - **Cause:** This error might occur if Gemini CLI detects the
-    `GOOGLE_CLOUD_PROJECT` or `GOOGLE_CLOUD_PROJECT_ID` environment variable is
-    defined. Setting these variables forces an organization subscription check.
-    This might be an issue if you are using an individual Google account not
-    linked to an organizational subscription.
+  - **Причина:** Ця помилка може виникнути, якщо Gemini CLI виявляє, що
+    змінна середовища `GOOGLE_CLOUD_PROJECT` або `GOOGLE_CLOUD_PROJECT_ID` визначена. Встановлення цих змінних
+    примусово виконує перевірку підписки організації.
+    Це може бути проблемою, якщо ви використовуєте особистий обліковий запис Google, не
+    пов'язаний з підпискою організації.
 
-  - **Solution:**
-    - **Individual Users:** Unset the `GOOGLE_CLOUD_PROJECT` and
-      `GOOGLE_CLOUD_PROJECT_ID` environment variables. Check and remove these
-      variables from your shell configuration files (for example, `.bashrc`,
-      `.zshrc`) and any `.env` files. If this doesn't resolve the issue, try
-      using a different Google account.
+  - **Рішення:**
+    - **Приватні користувачі:** Скасуйте встановлення змінних середовища `GOOGLE_CLOUD_PROJECT` і
+      `GOOGLE_CLOUD_PROJECT_ID`. Перевірте та видаліть ці змінні з файлів конфігурації вашої оболонки (наприклад, `.bashrc`,
+      `.zshrc`) і будь-яких файлів `.env`. Якщо це не вирішить проблему, спробуйте
+      використовувати інший обліковий запис Google.
 
-    - **Organizational Users:** Contact your Google Cloud administrator to be
-      added to your organization's Gemini Code Assist subscription.
+    - **Корпоративні користувачі:** Зверніться до адміністратора Google Cloud, щоб вас
+      додали до підписки Gemini Code Assist вашої організації.
 
-- **Error:
+- **Помилка:
   `Failed to login. Message: Your current account is not eligible... because it is not currently available in your location.`**
-  - **Cause:** Gemini CLI does not currently support your location. For a full
-    list of supported locations, see the following pages:
-    - Gemini Code Assist for individuals:
-      [Available locations](https://developers.google.com/gemini-code-assist/resources/available-locations#americas)
+  - **Причина:** Gemini CLI наразі не підтримує ваше розташування. Повний
+    список підтримуваних розташувань див. на таких сторінках:
+    - Gemini Code Assist для приватних осіб:
+      [Доступні розташування](https://developers.google.com/gemini-code-assist/resources/available-locations#americas)
 
-- **Error: `Failed to login. Message: Request contains an invalid argument`**
-  - **Cause:** Users with Google Workspace accounts or Google Cloud accounts
-    associated with their Gmail accounts may not be able to activate the free
-    tier of the Google Code Assist plan.
-  - **Solution:** For Google Cloud accounts, you can work around this by setting
-    `GOOGLE_CLOUD_PROJECT` to your project ID. Alternatively, you can obtain the
-    Gemini API key from
-    [Google AI Studio](http://aistudio.google.com/app/apikey), which also
-    includes a separate free tier.
+- **Помилка: `Failed to login. Message: Request contains an invalid argument`**
+  - **Причина:** Користувачі з обліковими записами Google Workspace або обліковими записами Google Cloud,
+    пов'язаними з їхніми обліковими записами Gmail, можуть не мати змоги активувати безкоштовний
+  рівень плану Google Code Assist.
+  - **Рішення:** Для облікових записів Google Cloud ви можете обійти це, встановивши
+    `GOOGLE_CLOUD_PROJECT` на ID свого проєкту. Або ви можете отримати
+    API-ключ Gemini з
+    [Google AI Studio](http://aistudio.google.com/app/apikey), який також
+    включає окремий безкоштовний рівень.
 
-- **Error: `UNABLE_TO_GET_ISSUER_CERT_LOCALLY` or
+- **Помилка: `UNABLE_TO_GET_ISSUER_CERT_LOCALLY` або
   `unable to get local issuer certificate`**
-  - **Cause:** You may be on a corporate network with a firewall that intercepts
-    and inspects SSL/TLS traffic. This often requires a custom root CA
-    certificate to be trusted by Node.js.
-  - **Solution:** First try setting `NODE_USE_SYSTEM_CA`; if that does not
-    resolve the issue, set `NODE_EXTRA_CA_CERTS`.
-    - Set the `NODE_USE_SYSTEM_CA=1` environment variable to tell Node.js to use
-      the operating system's native certificate store (where corporate
-      certificates are typically already installed).
-      - Example: `export NODE_USE_SYSTEM_CA=1`
-    - Set the `NODE_EXTRA_CA_CERTS` environment variable to the absolute path of
-      your corporate root CA certificate file.
-      - Example: `export NODE_EXTRA_CA_CERTS=/path/to/your/corporate-ca.crt`
+  - **Причина:** Ви можете перебувати в корпоративній мережі з брандмауером, який перехоплює
+    та перевіряє трафік SSL/TLS. Це часто вимагає, щоб Node.js довіряв
+    спеціальному кореневому CA-сертификату.
+  - **Рішення:** Спочатку спробуйте встановити `NODE_USE_SYSTEM_CA`; якщо це не
+    вирішить проблему, встановіть `NODE_EXTRA_CA_CERTS`.
+    - Встановіть змінну середовища `NODE_USE_SYSTEM_CA=1`, щоб наказати Node.js використовувати
+      нативне сховище сертифікатів операційної системи (де корпоративні
+      сертифікати зазвичай уже встановлені).
+      - Приклад: `export NODE_USE_SYSTEM_CA=1`
+    - Встановіть змінну середовища `NODE_EXTRA_CA_CERTS` на абсолютний шлях
+      до файлу корневого CA-сертификата вашої корпорації.
+      - Приклад: `export NODE_EXTRA_CA_CERTS=/path/to/your/corporate-ca.crt`
 
-## Common error messages and solutions
+## Поширені повідомлення про помилки та рішення
 
-- **Error: `EADDRINUSE` (Address already in use) when starting an MCP server.**
-  - **Cause:** Another process is already using the port that the MCP server is
-    trying to bind to.
-  - **Solution:** Either stop the other process that is using the port or
-    configure the MCP server to use a different port.
+- **Помилка: `EADDRINUSE` (Адреса вже використовується) під час запуску MCP-сервера.**
+  - **Причина:** Інший процес вже використовує порт, до якого намагається прив'язатися MCP-сервер.
+  - **Рішення:** Або зупиніть інший процес, який використовує порт, або
+    налаштуйте MCP-сервер на використання іншого порту.
 
-- **Error: Command not found (when attempting to run Gemini CLI with
+- **Помилка: Команда не знайдена (під час спроби запустити Gemini CLI з
   `gemini`).**
-  - **Cause:** Gemini CLI is not correctly installed or it is not in your
-    system's `PATH`.
-  - **Solution:** The update depends on how you installed Gemini CLI:
-    - If you installed `gemini` globally, check that your `npm` global binary
-      directory is in your `PATH`. You can update Gemini CLI using the command
+  - **Причина:** Gemini CLI встановлено неправильно або його немає в
+    системному `PATH`.
+  - **Рішення:** Оновлення залежить від того, як ви встановили Gemini CLI:
+    - Якщо ви встановили `gemini` глобально, перевірте, чи ваш глобальний каталог бінарних файлів `npm`
+      є у вашому `PATH`. Ви можете оновити Gemini CLI за допомогою команди
       `npm install -g @google/gemini-cli@latest`.
-    - If you are running `gemini` from source, ensure you are using the correct
-      command to invoke it (e.g., `node packages/cli/dist/index.js ...`). To
-      update Gemini CLI, pull the latest changes from the repository, and then
-      rebuild using the command `npm run build`.
+    - Якщо ви запускаєте `gemini` з вихідного коду, переконайтеся, що використовуєте правильну
+      команду для його виклику (наприклад, `node packages/cli/dist/index.js ...`). Для
+      оновлення Gemini CLI отримайте останні зміни з репозиторію, а потім
+      зберіть за допомогою команди `npm run build`.
 
-- **Error: `MODULE_NOT_FOUND` or import errors.**
-  - **Cause:** Dependencies are not installed correctly, or the project hasn't
-    been built.
-  - **Solution:**
-    1.  Run `npm install` to ensure all dependencies are present.
-    2.  Run `npm run build` to compile the project.
-    3.  Verify that the build completed successfully with `npm run start`.
+- **Помилка: `MODULE_NOT_FOUND` або помилки імпорту.**
+  - **Причина:** Залежності встановлено неправильно або проєкт не зібрано.
+  - **Рішення:**
+    1.  Виконайте `npm install`, щоб переконатися, що всі залежності присутні.
+    2.  Виконайте `npm run build`, щоб скомпілювати проєкт.
+    3.  Переконайтеся, що збирання завершилося успішно, за допомогою `npm run start`.
 
-- **Error: "Operation not permitted", "Permission denied", or similar.**
-  - **Cause:** When sandboxing is enabled, Gemini CLI may attempt operations
-    that are restricted by your sandbox configuration, such as writing outside
-    the project directory or system temp directory.
-  - **Solution:** Refer to the [Configuration: Sandboxing](./cli/sandbox.md)
-    documentation for more information, including how to customize your sandbox
-    configuration.
+- **Помилка: "Operation not permitted", "Permission denied" або подібні.**
+  - **Причина:** Коли пісочниця увімкнена, Gemini CLI може намагатися виконувати операції,
+    які обмежені вашою конфігурацією пісочниці, наприклад запис за межі
+    каталогу проєкту або системного тимчасового каталогу.
+  - **Рішення:** Додаткову інформацію див. у документації [Конфігурація: Пісочниця](./cli/sandbox.md),
+    включаючи те, як налаштувати конфігурацію пісочниці.
 
-- **Gemini CLI is not running in interactive mode in "CI" environments**
-  - **Issue:** The Gemini CLI does not enter interactive mode (no prompt
-    appears) if an environment variable starting with `CI_` (e.g., `CI_TOKEN`)
-    is set. This is because the `is-in-ci` package, used by the underlying UI
-    framework, detects these variables and assumes a non-interactive CI
-    environment.
-  - **Cause:** The `is-in-ci` package checks for the presence of `CI`,
-    `CONTINUOUS_INTEGRATION`, or any environment variable with a `CI_` prefix.
-    When any of these are found, it signals that the environment is
-    non-interactive, which prevents the Gemini CLI from starting in its
-    interactive mode.
-  - **Solution:** If the `CI_` prefixed variable is not needed for the CLI to
-    function, you can temporarily unset it for the command. e.g.,
+- **Gemini CLI не працює в інтерактивному режимі в середовищах "CI"**
+  - **Проблема:** Gemini CLI не переходить в інтерактивний режим (не з'являється запит),
+    якщо встановлено змінну середовища, яка починається з `CI_` (наприклад, `CI_TOKEN`). Це тому, що пакет `is-in-ci`, який використовується базовим
+    UI-фреймворком, виявляє ці змінні та припускає, що середовище є неінтерактивним CI.
+  - **Причина:** Пакет `is-in-ci` перевіряє наявність `CI`,
+    `CONTINUOUS_INTEGRATION` або будь-якої змінної середовища з префіксом `CI_`.
+    Коли будь-яка з них знайдена, це сигналізує, що середовище є
+    неінтерактивним, що заважає Gemini CLI запускатися в інтерактивному режимі.
+  - **Рішення:** Якщо змінна середовища з префіксом `CI_` не потрібна для роботи CLI,
+    ви можете тимчасово скасувати її для команди. Наприклад,
     `env -u CI_TOKEN gemini`
 
-- **DEBUG mode not working from project .env file**
-  - **Issue:** Setting `DEBUG=true` in a project's `.env` file doesn't enable
-    debug mode for gemini-cli.
-  - **Cause:** The `DEBUG` and `DEBUG_MODE` variables are automatically excluded
-    from project `.env` files to prevent interference with gemini-cli behavior.
-  - **Solution:** Use a `.gemini/.env` file instead, or configure the
-    `advanced.excludedEnvVars` setting in your `settings.json` to exclude fewer
-    variables.
+- **Режим DEBUG не працює з файлу .env проєкту**
+  - **Проблема:** Встановлення `DEBUG=true` у файлі `.env` проєкту не вмикає
+    режим налагодження для gemini-cli.
+  - **Причина:** Змінні `DEBUG` і `DEBUG_MODE` автоматично виключаються
+    з файлів `.env` проєкту, щоб запобігти втручанню в поведінку gemini-cli.
+  - **Рішення:** Натомість використовуйте файл `.gemini/.env` або налаштуйте
+    параметр `advanced.excludedEnvVars` у своєму `settings.json`, щоб виключати менше
+    змінних.
 
-## Exit codes
+## Коди виходу
 
-The Gemini CLI uses specific exit codes to indicate the reason for termination.
-This is especially useful for scripting and automation.
+Gemini CLI використовує спеціальні коди виходу для вказівки причини завершення.
+Це особливо корисно для скриптів і автоматизації.
 
-| Exit Code | Error Type                 | Description                                                                                         |
-| --------- | -------------------------- | --------------------------------------------------------------------------------------------------- |
-| 41        | `FatalAuthenticationError` | An error occurred during the authentication process.                                                |
-| 42        | `FatalInputError`          | Invalid or missing input was provided to the CLI. (non-interactive mode only)                       |
-| 44        | `FatalSandboxError`        | An error occurred with the sandboxing environment (e.g., Docker, Podman, or Seatbelt).              |
-| 52        | `FatalConfigError`         | A configuration file (`settings.json`) is invalid or contains errors.                               |
-| 53        | `FatalTurnLimitedError`    | The maximum number of conversational turns for the session was reached. (non-interactive mode only) |
+| Код виходу | Тип помилки                | Опис                                                                                         |
+| --------- | -------------------------- | -------------------------------------------------------------------------------------------- |
+| 41        | `FatalAuthenticationError` | Під час автентифікації сталася помилка.                                                |
+| 42        | `FatalInputError`          | Надано недійсні або відсутні вхідні дані для CLI. (тільки для неінтерактивного режиму)                       |
+| 44        | `FatalSandboxError`        | Сталася помилка з середовищем пісочниці (наприклад, Docker, Podman або Seatbelt).              |
+| 52        | `FatalConfigError`         | Файл конфігурації (`settings.json`) є недійсним або містить помилки.                               |
+| 53        | `FatalTurnLimitedError`    | Досягнуто максимальної кількості розмовових ходів для сеансу. (тільки для неінтерактивного режиму) |
 
-## Debugging tips
+## Поради щодо налагодження
 
-- **CLI debugging:**
-  - Use the `--debug` flag for more detailed output. In interactive mode, press
-    F12 to view the debug console.
-  - Check the CLI logs, often found in a user-specific configuration or cache
-    directory.
+- **Налагодження CLI:**
+  - Використовуйте прапорець `--debug` для більш детального виводу. В інтерактивному режимі натисніть
+    F12, щоб переглянути консоль налагодження.
+  - Перевірте журнали CLI, які часто знаходяться в каталозі конфігурації або кешу користувача.
 
-- **Core debugging:**
-  - Check the server console output for error messages or stack traces.
-  - Increase log verbosity if configurable. For example, set the `DEBUG_MODE`
-    environment variable to `true` or `1`.
-  - Use Node.js debugging tools (e.g., `node --inspect`) if you need to step
-    through server-side code.
+- **Налагодження ядра:**
+  - Перевірте вивід консолі сервера на наявність повідомлень про помилки або трасувань стека.
+  - Збільште детальність журналювання, якщо це можливо. Наприклад, встановіть змінну середовища `DEBUG_MODE`
+    на `true` або `1`.
+  - Використовуйте інструменти налагодження Node.js (наприклад, `node --inspect`), якщо потрібно покроково
+    пройти серверний код.
 
-- **Tool issues:**
-  - If a specific tool is failing, try to isolate the issue by running the
-    simplest possible version of the command or operation the tool performs.
-  - For `run_shell_command`, check that the command works directly in your shell
-    first.
-  - For _file system tools_, verify that paths are correct and check the
-    permissions.
+- **Проблеми з інструментами:**
+  - Якщо конкретний інструмент не працює, спробуйте ізолювати проблему, запустивши
+    найпростішу можливу версію команди або операції, яку виконує інструмент.
+  - Для `run_shell_command` спочатку перевірте, чи команда працює безпосередньо в вашій оболонці.
+  - Для _інструментів файлової системи_ переконайтеся, що шляхи є правильними та перевірте
+    дозволи.
 
-- **Pre-flight checks:**
-  - Always run `npm run preflight` before committing code. This can catch many
-    common issues related to formatting, linting, and type errors.
+- **Попередні перевірки:**
+  - Завжди виконуйте `npm run preflight` перед фіксацією коду. Це може виявити багато
+    поширених проблем, пов'язаних із форматуванням, лінтингом і помилками типів.
 
-## Existing GitHub issues similar to yours or creating new issues
+## Існуючі проблеми на GitHub, схожі на вашу, або створення нових Issues
 
-If you encounter an issue that was not covered here in this _Troubleshooting
-guide_, consider searching the Gemini CLI
-[Issue tracker on GitHub](https://github.com/google-gemini/gemini-cli/issues).
-If you can't find an issue similar to yours, consider creating a new GitHub
-Issue with a detailed description. Pull requests are also welcome!
+Якщо ви зіткнулися з проблемою, яка не розглянута тут у цьому _Посібнику з
+усунення несправностей_, спробуйте знайти
+[трекер Issues Gemini CLI на GitHub](https://github.com/google-gemini/gemini-cli/issues).
+Якщо ви не можете знайти проблему, схожу на вашу, спробуйте створити новий GitHub
+Issue з детальним описом. Pull requests також вітаються!
 
-> **Note:** Issues tagged as "🔒Maintainers only" are reserved for project
-> maintainers. We will not accept pull requests related to these issues.
+> **Примітка:** Issues з тегом "🔒Maintainers only" зарезервовані для
+> супроводжувачів проєкту. Ми не прийматимемо pull requests, пов'язані з цими Issues.
