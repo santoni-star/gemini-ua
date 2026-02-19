@@ -8,21 +8,12 @@ import type React from 'react';
 import { Box, Text } from 'ink';
 import { theme } from '../semantic-colors.js';
 import { ApprovalMode } from '@google/gemini-cli-core';
+import { strings } from '../../i18n.js';
 
 interface ApprovalModeIndicatorProps {
   approvalMode: ApprovalMode;
   allowPlanMode?: boolean;
 }
-
-export const APPROVAL_MODE_TEXT = {
-  AUTO_EDIT: 'auto-accept edits',
-  PLAN: 'plan',
-  YOLO: 'YOLO',
-  HINT_SWITCH_TO_PLAN_MODE: 'shift+tab to plan',
-  HINT_SWITCH_TO_MANUAL_MODE: 'shift+tab to manual',
-  HINT_SWITCH_TO_AUTO_EDIT_MODE: 'shift+tab to accept edits',
-  HINT_SWITCH_TO_YOLO_MODE: 'ctrl+y',
-};
 
 export const ApprovalModeIndicator: React.FC<ApprovalModeIndicatorProps> = ({
   approvalMode,
@@ -35,26 +26,26 @@ export const ApprovalModeIndicator: React.FC<ApprovalModeIndicatorProps> = ({
   switch (approvalMode) {
     case ApprovalMode.AUTO_EDIT:
       textColor = theme.status.warning;
-      textContent = APPROVAL_MODE_TEXT.AUTO_EDIT;
+      textContent = strings.indicatorAutoAcceptEdits;
       subText = allowPlanMode
-        ? APPROVAL_MODE_TEXT.HINT_SWITCH_TO_PLAN_MODE
-        : APPROVAL_MODE_TEXT.HINT_SWITCH_TO_MANUAL_MODE;
+        ? strings.indicatorHintPlan
+        : strings.indicatorHintManual;
       break;
     case ApprovalMode.PLAN:
       textColor = theme.status.success;
-      textContent = APPROVAL_MODE_TEXT.PLAN;
-      subText = APPROVAL_MODE_TEXT.HINT_SWITCH_TO_MANUAL_MODE;
+      textContent = strings.indicatorPlan;
+      subText = strings.indicatorHintManual;
       break;
     case ApprovalMode.YOLO:
       textColor = theme.status.error;
-      textContent = APPROVAL_MODE_TEXT.YOLO;
-      subText = APPROVAL_MODE_TEXT.HINT_SWITCH_TO_YOLO_MODE;
+      textContent = strings.indicatorYolo;
+      subText = strings.indicatorHintYolo;
       break;
     case ApprovalMode.DEFAULT:
     default:
       textColor = theme.text.accent;
       textContent = '';
-      subText = APPROVAL_MODE_TEXT.HINT_SWITCH_TO_AUTO_EDIT_MODE;
+      subText = strings.indicatorHintAutoEdit;
       break;
   }
 

@@ -383,6 +383,13 @@ export interface TranslationStrings {
   indicatorYoloToggleHint: string;
   indicatorRawMarkdown: string;
   indicatorRawMarkdownToggleHint: string;
+  indicatorAutoAcceptEdits: string;
+  indicatorPlan: string;
+  indicatorYolo: string;
+  indicatorHintPlan: string;
+  indicatorHintManual: string;
+  indicatorHintAutoEdit: string;
+  indicatorHintYolo: string;
   toolConfirmEditApply: string;
   toolConfirmAllowOnce: string;
   toolConfirmAllowSession: string;
@@ -528,5 +535,13 @@ export interface TranslationStrings {
     tip3GeminiMd: string;
     tip3GeminiMdPart2: string;
     tipHelp: string;
+  };
+  userIdentity: {
+    authLoggedInWithGoogle: string;
+    authPlanLabel: string;
+  };
+  shortcutsHint: {
+    pressTabForMore: string;
+    shortcutsHelp: string;
   };
 }

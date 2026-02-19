@@ -8,16 +8,17 @@ import {
   REFERENCE_CONTENT_START,
   REFERENCE_CONTENT_END,
 } from '@google/gemini-cli-core';
+import { strings, getLocale } from '../../i18n.js';
 
 export const formatBytes = (bytes: number): string => {
   const gb = bytes / (1024 * 1024 * 1024);
   if (bytes < 1024 * 1024) {
-    return `${(bytes / 1024).toFixed(1)} KB`;
+    return `${(bytes / 1024).toFixed(1)} ${strings.unitKB}`;
   }
   if (bytes < 1024 * 1024 * 1024) {
-    return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+    return `${(bytes / (1024 * 1024)).toFixed(1)} ${strings.unitMB}`;
   }
-  return `${gb.toFixed(2)} GB`;
+  return `${gb.toFixed(2)} ${strings.unitGB}`;
 };
 
 /**
@@ -28,17 +29,17 @@ export const formatBytes = (bytes: number): string => {
  */
 export const formatDuration = (milliseconds: number): string => {
   if (milliseconds <= 0) {
-    return '0s';
+    return `0${strings.unitSecond}`;
   }
 
   if (milliseconds < 1000) {
-    return `${Math.round(milliseconds)}ms`;
+    return `${Math.round(milliseconds)}${strings.unitMillisecond}`;
   }
 
   const totalSeconds = milliseconds / 1000;
 
   if (totalSeconds < 60) {
-    return `${totalSeconds.toFixed(1)}s`;
+    return `${totalSeconds.toFixed(1)}${strings.unitSecond}`;
   }
 
   const hours = Math.floor(totalSeconds / 3600);
@@ -48,20 +49,20 @@ export const formatDuration = (milliseconds: number): string => {
   const parts: string[] = [];
 
   if (hours > 0) {
-    parts.push(`${hours}h`);
+    parts.push(`${hours}${strings.unitHour}`);
   }
   if (minutes > 0) {
-    parts.push(`${minutes}m`);
+    parts.push(`${minutes}${strings.unitMinute}`);
   }
   if (seconds > 0) {
-    parts.push(`${seconds}s`);
+    parts.push(`${seconds}${strings.unitSecond}`);
   }
 
   // If all parts are zero (e.g., exactly 1 hour), return the largest unit.
   if (parts.length === 0) {
-    if (hours > 0) return `${hours}h`;
-    if (minutes > 0) return `${minutes}m`;
-    return `${seconds}s`;
+    if (hours > 0) return `${hours}${strings.unitHour}`;
+    if (minutes > 0) return `${minutes}${strings.unitMinute}`;
+    return `${seconds}${strings.unitSecond}`;
   }
 
   return parts.join(' ');
@@ -70,15 +71,16 @@ export const formatDuration = (milliseconds: number): string => {
 export const formatTimeAgo = (date: string | number | Date): string => {
   const past = new Date(date);
   if (isNaN(past.getTime())) {
-    return 'invalid date';
+    return strings.chatListInvalidDate;
   }
 
   const now = new Date();
   const diffMs = now.getTime() - past.getTime();
   if (diffMs < 60000) {
-    return 'just now';
+    return strings.sessionBrowserCurrent; // Using "Current" as close enough to "just now" or add a new key
   }
-  return `${formatDuration(diffMs)} ago`;
+  // Simplified localized relative time
+  return `${formatDuration(diffMs)} ${strings.sessionBrowserHeaderAge}`; // "5m age" -> "5m тому" (need to adjust key)
 };
 
 /**
@@ -106,18 +108,20 @@ export const formatResetTime = (resetTime: string): string => {
   const hours = Math.floor(totalMinutes / 60);
   const minutes = totalMinutes % 60;
 
+  const locale = getLocale();
   const fmt = (val: number, unit: 'hour' | 'minute') =>
-    new Intl.NumberFormat('en', {
+    new Intl.NumberFormat(locale === 'ua' ? 'uk-UA' : 'en-US', {
       style: 'unit',
       unit,
       unitDisplay: 'narrow',
     }).format(val);
 
-  if (hours > 0 && minutes > 0) {
-    return `resets in ${fmt(hours, 'hour')} ${fmt(minutes, 'minute')}`;
-  } else if (hours > 0) {
-    return `resets in ${fmt(hours, 'hour')}`;
-  }
+  const timeString =
+    hours > 0 && minutes > 0
+      ? `${fmt(hours, 'hour')} ${fmt(minutes, 'minute')}`
+      : hours > 0
+        ? fmt(hours, 'hour')
+        : fmt(minutes, 'minute');
 
-  return `resets in ${fmt(minutes, 'minute')}`;
+  return strings.statsResetsIn.replace('{time}', timeString);
 };

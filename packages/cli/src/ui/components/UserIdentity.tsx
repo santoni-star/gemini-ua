@@ -13,6 +13,7 @@ import {
   UserAccountManager,
   AuthType,
 } from '@google/gemini-cli-core';
+import { strings } from '../../i18n.js';
 
 interface UserIdentityProps {
   config: Config;
@@ -42,18 +43,18 @@ export const UserIdentity: React.FC<UserIdentityProps> = ({ config }) => {
         <Text color={theme.text.primary}>
           {authType === AuthType.LOGIN_WITH_GOOGLE ? (
             <Text>
-              <Text bold>Logged in with Google{email ? ':' : ''}</Text>
+              <Text bold>{strings.userIdentity.authLoggedInWithGoogle}{email ? ':' : ''}</Text>
               {email ? ` ${email}` : ''}
             </Text>
           ) : (
-            `Authenticated with ${authType}`
+            `${strings.userIdentity.authAuthenticatedWith} ${authType}`
           )}
         </Text>
         <Text color={theme.text.secondary}> /auth</Text>
       </Box>
       {tierName && (
         <Text color={theme.text.primary}>
-          <Text bold>Plan:</Text> {tierName}
+          <Text bold>{strings.userIdentity.authPlanLabel}</Text> {tierName}
         </Text>
       )}
     </Box>

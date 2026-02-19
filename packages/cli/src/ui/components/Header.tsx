@@ -12,6 +12,7 @@ import { getAsciiArtWidth } from '../utils/textUtils.js';
 import { useTerminalSize } from '../hooks/useTerminalSize.js';
 import { useSnowfall } from '../hooks/useSnowfall.js';
 import { strings } from '../../i18n.js';
+import { getTerminalProgram } from '../utils/terminalSetup.js';
 
 interface HeaderProps {
   customAsciiArt?: string; // For user-defined ASCII art
@@ -25,6 +26,7 @@ export const Header: React.FC<HeaderProps> = ({
   nightly,
 }) => {
   const { columns: terminalWidth } = useTerminalSize();
+  const terminalProgram = getTerminalProgram();
   let displayTitle;
   const widthOfLongLogo = getAsciiArtWidth(longAsciiLogo);
   const widthOfShortLogo = getAsciiArtWidth(shortAsciiLogo);
@@ -49,14 +51,12 @@ export const Header: React.FC<HeaderProps> = ({
       flexShrink={0}
       flexDirection="column"
     >
-      <ThemedGradient>{title}</ThemedGradient>
-      {nightly && (
-        <Box width="100%" flexDirection="row" justifyContent="flex-end">
-          <ThemedGradient>
-            {strings.headerVersion.replace('{version}', version)}
-          </ThemedGradient>
-        </Box>
-      )}
+      <ThemedGradient gradient="blue, yellow">{title}</ThemedGradient>
+      <Box width="100%" flexDirection="row" justifyContent="flex-end">
+        <ThemedGradient>
+          {strings.headerVersion.replace('{version}', version)}
+        </ThemedGradient>
+      </Box>
     </Box>
   );
 };

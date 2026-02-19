@@ -58,6 +58,7 @@ import { shellsCommand } from '../ui/commands/shellsCommand.js';
 import { vimCommand } from '../ui/commands/vimCommand.js';
 import { setupGithubCommand } from '../ui/commands/setupGithubCommand.js';
 import { terminalSetupCommand } from '../ui/commands/terminalSetupCommand.js';
+import { strings } from '../i18n.js';
 
 /**
  * Loads the core, hard-coded slash commands that are an integral part
@@ -187,6 +188,13 @@ export class BuiltinCommandLoader implements ICommandLoader {
       terminalSetupCommand,
     ];
     handle?.end();
-    return allDefinitions.filter((cmd): cmd is SlashCommand => cmd !== null);
+    
+    // Apply localized descriptions
+    const localized = allDefinitions.filter((cmd): cmd is SlashCommand => cmd !== null).map(cmd => ({
+      ...cmd,
+      description: (strings.commandDescriptions as any)[cmd.name] || cmd.description
+    }));
+
+    return localized;
   }
 }
