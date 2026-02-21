@@ -4,7 +4,7 @@
   "description": "Gemini CLI A2A Server",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/google-gemini/gemini-cli.git",
+    "url": "git+https://github.com/santoni-star/gemini-ua.git",
     "directory": "packages/a2a-server"
   },
   "type": "module",
