@@ -1,6 +1,6 @@
 {
   "name": "@santoni/gemini-ua",
-  "version": "0.30.0-ua.8",
+  "version": "0.30.0-ua.9",
   "engines": {
     "node": ">=20.0.0"
   },
@@ -72,10 +72,11 @@
     }
   },
   "bin": {
-    "gemini-ua": "bundle/gemini.js"
+    "gemini-ua": "gemini-bin.js"
   },
   "files": [
-    "bundle/",
+    "gemini-bin.js",
+    "policies-bin/",
     "README.md",
     "LICENSE"
   ],
