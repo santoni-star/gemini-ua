@@ -1,0 +1,1 @@
+C:/Users/F/Documents/gemini-ua/CONTRIBUTING.md
