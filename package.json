@@ -1,6 +1,6 @@
 {
   "name": "@santoni/gemini-ua",
-  "version": "0.30.0-ua.7",
+  "version": "0.30.0-ua.8",
   "engines": {
     "node": ">=20.0.0"
   },
