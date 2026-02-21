@@ -1,5 +1,5 @@
 {
-  "name": "@santoni/gemini-ua",
+  "name": "@santoni/gemini-ua-cli",
   "version": "0.30.0-nightly.20260210.a2174751d",
   "description": "Gemini CLI",
   "license": "Apache-2.0",
