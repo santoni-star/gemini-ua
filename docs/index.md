@@ -1,142 +1,106 @@
-# Gemini CLI documentation
+# Документація Gemini CLI
 
-Gemini CLI brings the power of Gemini models directly into your terminal. Use it
-to understand code, automate tasks, and build workflows with your local project
-context.
+Gemini CLI переносить потужність моделей Gemini прямо у ваш термінал. Використовуйте його
+для розуміння коду, автоматизації завдань та побудови робочих процесів з урахуванням
+контексту вашого локального проекту.
 
-## Install
+## Встановлення
 
 ```bash
-npm install -g @google/gemini-cli
+npm install -g santoni-star/gemini-ua
 ```
 
-## Get started
+## Початок роботи
 
-Jump in to Gemini CLI.
+Швидко поринайте у роботу з Gemini CLI.
 
-- **[Quickstart](./get-started/index.md):** Your first session with Gemini CLI.
-- **[Installation](./get-started/installation.md):** How to install Gemini CLI
-  on your system.
-- **[Authentication](./get-started/authentication.md):** Setup instructions for
-  personal and enterprise accounts.
-- **[Examples](./get-started/examples.md):** Practical examples of Gemini CLI in
-  action.
-- **[Cheatsheet](./cli/cli-reference.md):** A quick reference for common
-  commands and options.
+- **[Швидкий старт](./get-started/index.md):** Ваша перша сесія з Gemini CLI.
+- **[Встановлення](./get-started/installation.md):** Як встановити Gemini CLI у вашу систему.
+- **[Авторизація](./get-started/authentication.md):** Інструкції з налаштування для особистих та корпоративних облікових записів.
+- **[Приклади](./get-started/examples.md):** Практичні приклади використання Gemini CLI.
+- **[Шпаргалка](./cli/cli-reference.md):** Швидка довідка з основних команд та опцій.
 
-## Use Gemini CLI
+## Використання Gemini CLI
 
-User-focused guides and tutorials for daily development workflows.
+Посібники та підручники, орієнтовані на користувача, для повсякденних робочих процесів розробки.
 
-- **[File management](./cli/tutorials/file-management.md):** How to work with
-  local files and directories.
-- **[Get started with Agent skills](./cli/tutorials/skills-getting-started.md):**
-  Getting started with specialized expertise.
-- **[Manage context and memory](./cli/tutorials/memory-management.md):**
-  Managing persistent instructions and facts.
-- **[Execute shell commands](./cli/tutorials/shell-commands.md):** Executing
-  system commands safely.
-- **[Manage sessions and history](./cli/tutorials/session-management.md):**
-  Resuming, managing, and rewinding conversations.
-- **[Plan tasks with todos](./cli/tutorials/task-planning.md):** Using todos for
-  complex workflows.
-- **[Web search and fetch](./cli/tutorials/web-tools.md):** Searching and
-  fetching content from the web.
-- **[Set up an MCP server](./cli/tutorials/mcp-setup.md):** Set up an MCP
-  server.
-- **[Automate tasks](./cli/tutorials/automation.md):** Automate tasks.
+- **[Управління файлами](./cli/tutorials/file-management.md):** Як працювати з локальними файлами та директоріями.
+- **[Початок роботи з навичками Агента](./cli/tutorials/skills-getting-started.md):** Початок роботи зі спеціалізованими експертними знаннями.
+- **[Управління контекстом та пам'яттю](./cli/tutorials/memory-management.md):** Управління постійними інструкціями та фактами.
+- **[Виконання команд оболонки](./cli/tutorials/shell-commands.md):** Безпечне виконання системних команд.
+- **[Управління сесіями та історією](./cli/tutorials/session-management.md):** Відновлення, управління та перемотування розмов.
+- **[Планування завдань за допомогою todo](./cli/tutorials/task-planning.md):** Використання списків завдань для складних робочих процесів.
+- **[Веб-пошук та отримання даних](./cli/tutorials/web-tools.md):** Пошук та отримання вмісту з вебу.
+- **[Налаштування MCP-сервера](./cli/tutorials/mcp-setup.md):** Як налаштувати MCP-сервер.
+- **[Автоматизація завдань](./cli/tutorials/automation.md):** Автоматизація завдань.
 
-## Features
+## Функції
 
-Technical documentation for each capability of Gemini CLI.
+Технічна документація для кожної можливості Gemini CLI.
 
-- **[Activate skill (tool)](./tools/activate-skill.md):** Internal mechanism for
-  loading expert procedures.
-- **[Ask user (tool)](./tools/ask-user.md):** Internal dialog system for
-  clarification.
-- **[Checkpointing](./cli/checkpointing.md):** Automatic session snapshots.
-- **[File system (tool)](./tools/file-system.md):** Technical details for local
-  file operations.
-- **[Headless mode](./cli/headless.md):** Programmatic and scripting interface.
-- **[Internal documentation (tool)](./tools/internal-docs.md):** Technical
-  lookup for CLI features.
-- **[Memory (tool)](./tools/memory.md):** Storage details for persistent facts.
-- **[Model routing](./cli/model-routing.md):** Automatic fallback resilience.
-- **[Plan mode 🧪](./cli/plan-mode.md):** Use a safe, read-only mode for
-  planning complex changes.
-- **[Subagents 🧪](./core/subagents.md):** Using specialized agents for specific
-  tasks.
-- **[Remote subagents 🧪](./core/remote-agents.md):** Connecting to and using
-  remote agents.
-- **[Sandboxing](./cli/sandbox.md):** Isolate tool execution.
-- **[Shell (tool)](./tools/shell.md):** Detailed system execution parameters.
-- **[Telemetry](./cli/telemetry.md):** Usage and performance metric details.
-- **[Todo (tool)](./tools/todos.md):** Progress tracking specification.
-- **[Token caching](./cli/token-caching.md):** Performance optimization.
-- **[Web fetch (tool)](./tools/web-fetch.md):** URL retrieval and extraction
-  details.
-- **[Web search (tool)](./tools/web-search.md):** Google Search integration
-  technicals.
+- **[Активація навички (інструмент)](./tools/activate-skill.md):** Внутрішній механізм завантаження експертних процедур.
+- **[Запитати користувача (інструмент)](./tools/ask-user.md):** Внутрішня діалогова система для уточнення.
+- **[Чекпоінти](./cli/checkpointing.md):** Автоматичні знімки сесій.
+- **[Файлова система (інструмент)](./tools/file-system.md):** Технічні деталі операцій з локальними файлами.
+- **[Безголовий режим (Headless)](./cli/headless.md):** Програмний інтерфейс та інтерфейс для скриптів.
+- **[Внутрішня документація (інструмент)](./tools/internal-docs.md):** Технічний пошук функцій CLI.
+- **[Пам'ять (інструмент)](./tools/memory.md):** Деталі зберігання постійних фактів.
+- **[Маршрутизація моделей](./cli/model-routing.md):** Автоматична стійкість до збоїв.
+- **[Режим планування 🧪](./cli/plan-mode.md):** Безпечний режим лише для читання для планування складних змін.
+- **[Субагенти 🧪](./core/subagents.md):** Використання спеціалізованих агентів для конкретних завдань.
+- **[Віддалені субагенти 🧪](./core/remote-agents.md):** Підключення та використання віддалених агентів.
+- **[Пісочниця (Sandboxing)](./cli/sandbox.md):** Ізоляція виконання інструментів.
+- **[Оболонка (інструмент)](./tools/shell.md):** Детальні параметри виконання системних команд.
+- **[Телеметрія](./cli/telemetry.md):** Деталі метрик використання та продуктивності.
+- **[Todo (інструмент)](./tools/todos.md):** Специфікація відстеження прогресу.
+- **[Кешування токенів](./cli/token-caching.md):** Оптимізація продуктивності.
+- **[Веб-завантаження (інструмент)](./tools/web-fetch.md):** Деталі отримання та вилучення даних за URL.
+- **[Веб-пошук (інструмент)](./tools/web-search.md):** Технічні деталі інтеграції з Google Search.
 
-## Configuration
+## Конфігурація
 
-Settings and customization options for Gemini CLI.
+Налаштування та варіанти кастомізації Gemini CLI.
 
-- **[Custom commands](./cli/custom-commands.md):** Personalized shortcuts.
-- **[Enterprise configuration](./cli/enterprise.md):** Professional environment
-  controls.
-- **[Ignore files (.geminiignore)](./cli/gemini-ignore.md):** Exclusion pattern
-  reference.
-- **[Model configuration](./cli/generation-settings.md):** Fine-tune generation
-  parameters like temperature and thinking budget.
-- **[Project context (GEMINI.md)](./cli/gemini-md.md):** Technical hierarchy of
-  context files.
-- **[Settings](./cli/settings.md):** Full configuration reference.
-- **[System prompt override](./cli/system-prompt.md):** Instruction replacement
-  logic.
-- **[Themes](./cli/themes.md):** UI personalization technical guide.
-- **[Trusted folders](./cli/trusted-folders.md):** Security permission logic.
+- **[Власні команди](./cli/custom-commands.md):** Персоналізовані ярлики.
+- **[Корпоративна конфігурація](./cli/enterprise.md):** Елементи управління професійним середовищем.
+- **[Файли ігнорування (.geminiignore)](./cli/gemini-ignore.md):** Довідка за шаблонами виключення.
+- **[Конфігурація моделі](./cli/generation-settings.md):** Тонке налаштування параметрів генерації, таких як температура та бюджет на роздуми.
+- **[Контекст проекту (GEMINI.md)](./cli/gemini-md.md):** Технічна ієрархія контекстних файлів.
+- **[Налаштування](./cli/settings.md):** Повна довідка з конфігурації.
+- **[Перевизначення системного промпту](./cli/system-prompt.md):** Логіка заміни інструкцій.
+- **[Теми](./cli/themes.md):** Технічний посібник з персоналізації інтерфейсу.
+- **[Довірені папки](./cli/trusted-folders.md):** Логіка дозволів безпеки.
 
-## Reference
+## Довідка
 
-Deep technical documentation and API specifications.
+Глибока технічна документація та специфікації API.
 
-- **[Command reference](./reference/commands.md):** Detailed slash command
-  guide.
-- **[Configuration reference](./reference/configuration.md):** Settings and
-  environment variables.
-- **[Keyboard shortcuts](./reference/keyboard-shortcuts.md):** Productivity
-  tips.
-- **[Memory import processor](./reference/memport.md):** How Gemini CLI
-  processes memory from various sources.
-- **[Policy engine](./reference/policy-engine.md):** Fine-grained execution
-  control.
-- **[Tools API](./reference/tools-api.md):** The API for defining and using
-  tools.
+- **[Довідка з команд](./reference/commands.md):** Детальний посібник з кожної команди.
+- **[Довідка з конфігурації](./reference/configuration.md):** Налаштування та змінні середовища.
+- **[Гарячі клавіші](./reference/keyboard-shortcuts.md):** Поради для продуктивності.
+- **[Процесор імпорту пам'яті](./reference/memport.md):** Як Gemini CLI обробляє пам'ять з різних джерел.
+- **[Рушій політик](./reference/policy-engine.md):** Точне управління виконанням.
+- **[Tools API](./reference/tools-api.md):** API для визначення та використання інструментів.
 
-## Resources
+## Ресурси
 
-Support, release history, and legal information.
+Підтримка, історія випусків та юридична інформація.
 
-- **[FAQ](./resources/faq.md):** Answers to frequently asked questions.
-- **[Changelogs](./changelogs/index.md):** Highlights and notable changes.
-- **[Quota and pricing](./resources/quota-and-pricing.md):** Limits and billing
-  details.
-- **[Terms and privacy](./resources/tos-privacy.md):** Official notices and
-  terms.
+- **[FAQ](./resources/faq.md):** Відповіді на поширені запитання.
+- **[Журнали змін](./changelogs/index.md):** Основні моменти та помітні зміни.
+- **[Квоти та ціни](./resources/quota-and-pricing.md):** Ліміти та деталі оплати.
+- **[Умови та конфіденційність](./resources/tos-privacy.md):** Офіційні повідомлення та умови.
 
-## Development
+## Розробка
 
-- **[Contribution guide](/docs/contributing):** How to contribute to Gemini CLI.
-- **[Integration testing](./integration-tests.md):** Running integration tests.
-- **[Issue and PR automation](./issue-and-pr-automation.md):** Automation for
-  issues and pull requests.
-- **[Local development](./local-development.md):** Setting up a local
-  development environment.
-- **[NPM package structure](./npm.md):** The structure of the NPM packages.
+- **[Посібник з внесків](/docs/contributing):** Як зробити внесок у Gemini CLI.
+- **[Інтеграційне тестування](./integration-tests.md):** Запуск інтеграційних тестів.
+- **[Автоматизація задач та PR](./issue-and-pr-automation.md):** Автоматизація для задач та запитів на злиття.
+- **[Локальна розробка](./local-development.md):** Налаштування локального середовища розробки.
+- **[Структура NPM-пакета](./npm.md):** Структура пакетів NPM.
 
-## Releases
+## Випуски
 
-- **[Release notes](./changelogs/index.md):** Release notes for all versions.
-- **[Stable release](./changelogs/latest.md):** The latest stable release.
-- **[Preview release](./changelogs/preview.md):** The latest preview release.
+- **[Примітки до випусків](./changelogs/index.md):** Примітки до всіх версій.
+- **[Стабільний випуск](./changelogs/latest.md):** Останній стабільний випуск.
+- **[Попередній випуск](./changelogs/preview.md):** Останній попередній випуск.
