@@ -177,12 +177,11 @@ export function tryTogglePasteExpansion(buffer: TextBuffer): boolean {
     return true;
   }
 
-  // 3. Placeholders exist but cursor isn't on one — show hint
-  appEvents.emit(AppEvent.TransientMessage, {
-    message: 'Move cursor within placeholder to expand',
-    type: TransientMessageType.Hint,
-  });
-  return true;
+      // 3. Placeholders exist but cursor isn't on one — show hint
+      appEvents.emit(AppEvent.TransientMessage, {
+        message: 'Перемістіть курсор у заповнювач, щоб розгорнути',
+        type: TransientMessageType.Hint,
+      });  return true;
 }
 
 export const InputPrompt: React.FC<InputPromptProps> = ({
@@ -191,11 +190,10 @@ export const InputPrompt: React.FC<InputPromptProps> = ({
   userMessages,
   onClearScreen,
   config,
-  slashCommands,
-  commandContext,
-  placeholder = '  Type your message or @path/to/file',
-  focus = true,
-  inputWidth,
+      slashCommands,
+      commandContext,
+      placeholder = '  Введіть повідомлення або @шлях/до/файлу',
+      focus = true,  inputWidth,
   suggestionsWidth,
   shellModeActive,
   setShellModeActive,

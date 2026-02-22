@@ -11,7 +11,7 @@ import type { LoadingPhrasesMode } from '../../config/settings.js';
 
 export const PHRASE_CHANGE_INTERVAL_MS = 15000;
 export const INTERACTIVE_SHELL_WAITING_PHRASE =
-  'Interactive shell awaiting input... press tab to focus shell';
+  'Інтерактивна оболонка очікує на введення... натисніть tab, щоб сфокусуватися';
 
 /**
  * Custom hook to manage cycling through loading phrases.
@@ -49,7 +49,7 @@ export const usePhraseCycler = (
     }
 
     if (isWaiting) {
-      setCurrentLoadingPhrase('Waiting for user confirmation...');
+      setCurrentLoadingPhrase('Очікування підтвердження від користувача...');
       return;
     }
 

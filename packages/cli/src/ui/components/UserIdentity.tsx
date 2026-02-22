@@ -42,18 +42,18 @@ export const UserIdentity: React.FC<UserIdentityProps> = ({ config }) => {
         <Text color={theme.text.primary}>
           {authType === AuthType.LOGIN_WITH_GOOGLE ? (
             <Text>
-              <Text bold>Logged in with Google{email ? ':' : ''}</Text>
+              <Text bold>Увійшли через Google{email ? ':' : ''}</Text>
               {email ? ` ${email}` : ''}
             </Text>
           ) : (
-            `Authenticated with ${authType}`
+            `Авторизовано через ${authType}`
           )}
         </Text>
         <Text color={theme.text.secondary}> /auth</Text>
       </Box>
       {tierName && (
         <Text color={theme.text.primary}>
-          <Text bold>Plan:</Text> {tierName}
+          <Text bold>Тариф:</Text> {tierName}
         </Text>
       )}
     </Box>

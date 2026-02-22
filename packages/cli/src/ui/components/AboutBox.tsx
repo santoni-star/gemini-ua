@@ -48,13 +48,13 @@ export const AboutBox: React.FC<AboutBoxProps> = ({
     >
       <Box marginBottom={1}>
         <Text bold color={theme.text.accent}>
-          About Gemini CLI
+          Про Gemini CLI
         </Text>
       </Box>
       <Box flexDirection="row">
         <Box width="35%">
           <Text bold color={theme.text.link}>
-            CLI Version
+            Версія CLI
           </Text>
         </Box>
         <Box>
@@ -65,7 +65,7 @@ export const AboutBox: React.FC<AboutBoxProps> = ({
         <Box flexDirection="row">
           <Box width="35%">
             <Text bold color={theme.text.link}>
-              Git Commit
+              Git Коміт
             </Text>
           </Box>
           <Box>
@@ -76,7 +76,7 @@ export const AboutBox: React.FC<AboutBoxProps> = ({
       <Box flexDirection="row">
         <Box width="35%">
           <Text bold color={theme.text.link}>
-            Model
+            Модель
           </Text>
         </Box>
         <Box>
@@ -88,7 +88,7 @@ export const AboutBox: React.FC<AboutBoxProps> = ({
       <Box flexDirection="row">
         <Box width="35%">
           <Text bold color={theme.text.link}>
-            Sandbox
+            Пісочниця
           </Text>
         </Box>
         <Box>
@@ -98,7 +98,7 @@ export const AboutBox: React.FC<AboutBoxProps> = ({
       <Box flexDirection="row">
         <Box width="35%">
           <Text bold color={theme.text.link}>
-            OS
+            ОС
           </Text>
         </Box>
         <Box>
@@ -109,15 +109,15 @@ export const AboutBox: React.FC<AboutBoxProps> = ({
         <Box flexDirection="row">
           <Box width="35%">
             <Text bold color={theme.text.link}>
-              Auth Method
+              Метод авт.
             </Text>
           </Box>
           <Box>
             <Text color={theme.text.primary}>
               {selectedAuthType.startsWith('oauth')
                 ? userEmail
-                  ? `Logged in with Google (${userEmail})`
-                  : 'Logged in with Google'
+                  ? `Увійшли через Google (${userEmail})`
+                  : 'Увійшли через Google'
                 : selectedAuthType}
             </Text>
           </Box>
@@ -127,7 +127,7 @@ export const AboutBox: React.FC<AboutBoxProps> = ({
         <Box flexDirection="row">
           <Box width="35%">
             <Text bold color={theme.text.link}>
-              Tier
+              Тариф
             </Text>
           </Box>
           <Box>
@@ -139,7 +139,7 @@ export const AboutBox: React.FC<AboutBoxProps> = ({
         <Box flexDirection="row">
           <Box width="35%">
             <Text bold color={theme.text.link}>
-              GCP Project
+              Проект GCP
             </Text>
           </Box>
           <Box>
@@ -151,7 +151,7 @@ export const AboutBox: React.FC<AboutBoxProps> = ({
         <Box flexDirection="row">
           <Box width="35%">
             <Text bold color={theme.text.link}>
-              IDE Client
+              IDE Клієнт
             </Text>
           </Box>
           <Box>

@@ -221,7 +221,7 @@ export const Composer = ({ isFocused = true }: { isFocused?: boolean }) => {
                     : uiState.currentLoadingPhrase
                 }
                 thoughtLabel={
-                  inlineThinkingMode === 'full' ? 'Thinking ...' : undefined
+                  inlineThinkingMode === 'full' ? 'Думаю ...' : undefined
                 }
                 elapsedTime={uiState.elapsedTime}
               />
@@ -265,7 +265,7 @@ export const Composer = ({ isFocused = true }: { isFocused?: boolean }) => {
                       : uiState.currentLoadingPhrase
                   }
                   thoughtLabel={
-                    inlineThinkingMode === 'full' ? 'Thinking ...' : undefined
+                    inlineThinkingMode === 'full' ? 'Думаю ...' : undefined
                   }
                   elapsedTime={uiState.elapsedTime}
                 />

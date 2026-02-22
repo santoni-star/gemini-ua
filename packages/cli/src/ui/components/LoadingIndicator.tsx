@@ -63,7 +63,7 @@ export const LoadingIndicator: React.FC<LoadingIndicatorProps> = ({
   const cancelAndTimerContent =
     showCancelAndTimer &&
     streamingState !== StreamingState.WaitingForConfirmation
-      ? `(esc to cancel, ${elapsedTime < 60 ? `${elapsedTime}s` : formatDuration(elapsedTime * 1000)})`
+      ? `(esc для скасування, ${elapsedTime < 60 ? `${elapsedTime}с` : formatDuration(elapsedTime * 1000)})`
       : null;
 
   if (inline) {

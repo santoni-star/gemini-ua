@@ -59,19 +59,19 @@ export function computeTerminalTitle({
     isConfirming ||
     streamingState === StreamingState.WaitingForConfirmation
   ) {
-    const base = '✋  Action Required';
+    const base = '✋  Потрібна дія';
     // Max context length is 80 - base.length - 3 (for ' (' and ')')
     const maxContextLen = MAX_LEN - base.length - 3;
     const context = truncate(displayContext, maxContextLen);
     title = `${base}${getSuffix(context)}`;
   } else if (isSilentWorking) {
-    const base = '⏲  Working…';
+    const base = '⏲  Працюю…';
     // Max context length is 80 - base.length - 3 (for ' (' and ')')
     const maxContextLen = MAX_LEN - base.length - 3;
     const context = truncate(displayContext, maxContextLen);
     title = `${base}${getSuffix(context)}`;
   } else if (streamingState === StreamingState.Idle) {
-    const base = '◇  Ready';
+    const base = '◇  Готовий';
     // Max context length is 80 - base.length - 3 (for ' (' and ')')
     const maxContextLen = MAX_LEN - base.length - 3;
     const context = truncate(displayContext, maxContextLen);
@@ -100,7 +100,7 @@ export function computeTerminalTitle({
 
     const displayStatus = cleanSubject
       ? truncate(cleanSubject, maxStatusLen)
-      : 'Working…';
+      : 'Працюю…';
 
     title = `✦  ${displayStatus}${activeSuffix}`;
   }
