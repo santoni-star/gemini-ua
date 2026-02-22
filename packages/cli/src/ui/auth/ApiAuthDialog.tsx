@@ -109,7 +109,7 @@ export function ApiAuthDialog({
       <Box marginTop={1} flexDirection="column">
         <Text color={theme.text.primary}>
           Будь ласка, введіть ваш API ключ Gemini. Його буде надійно збережено
-          у системній в'язці ключів.
+          у системній в\'язці ключів.
         </Text>
         <Text color={theme.text.secondary}>
           Ви можете отримати API ключ тут:{' '}

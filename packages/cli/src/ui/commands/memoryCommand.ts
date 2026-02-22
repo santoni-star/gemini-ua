@@ -16,7 +16,7 @@ import { CommandKind } from './types.js';
 
 export const memoryCommand: SlashCommand = {
   name: 'memory',
-  description: 'Команди для взаємодії з пам'яттю',
+  description: 'Команди для взаємодії з пам\'яттю',
   kind: CommandKind.BUILT_IN,
   autoExecute: false,
   subCommands: [
