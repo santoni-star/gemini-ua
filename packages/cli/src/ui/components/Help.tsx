@@ -25,11 +25,11 @@ export const Help: React.FC<Help> = ({ commands }) => (
   >
     {/* Basics */}
     <Text bold color={theme.text.primary}>
-      Basics:
+      Основи:
     </Text>
     <Text color={theme.text.primary}>
       <Text bold color={theme.text.accent}>
-        Add context
+        Додати контекст
       </Text>
       : Use{' '}
       <Text bold color={theme.text.accent}>
@@ -39,13 +39,13 @@ export const Help: React.FC<Help> = ({ commands }) => (
       <Text bold color={theme.text.accent}>
         @src/myFile.ts
       </Text>
-      ) to target specific files or folders.
+      ) щоб націлити на конкретні файли або папки.
     </Text>
     <Text color={theme.text.primary}>
       <Text bold color={theme.text.accent}>
-        Shell mode
+        Режим оболонки
       </Text>
-      : Execute shell commands via{' '}
+      : Виконуйте команди оболонки через{' '}
       <Text bold color={theme.text.accent}>
         !
       </Text>{' '}

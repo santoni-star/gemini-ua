@@ -17,7 +17,7 @@ import {
 
 export const aboutCommand: SlashCommand = {
   name: 'about',
-  description: 'Show version info',
+  description: 'Показати інформацію про версію',
   kind: CommandKind.BUILT_IN,
   autoExecute: true,
   action: async (context) => {

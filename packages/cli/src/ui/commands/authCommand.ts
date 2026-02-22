@@ -15,7 +15,7 @@ import { SettingScope } from '../../config/settings.js';
 
 const authLoginCommand: SlashCommand = {
   name: 'login',
-  description: 'Login or change the auth method',
+  description: 'Увійти або змінити метод авторизації',
   kind: CommandKind.BUILT_IN,
   autoExecute: true,
   action: (_context, _args): OpenDialogActionReturn => ({
@@ -26,7 +26,7 @@ const authLoginCommand: SlashCommand = {
 
 const authLogoutCommand: SlashCommand = {
   name: 'logout',
-  description: 'Log out and clear all cached credentials',
+  description: 'Вийти та очистити збережені облікові дані',
   kind: CommandKind.BUILT_IN,
   action: async (context, _args): Promise<LogoutActionReturn> => {
     await clearCachedCredentialFile();
@@ -47,7 +47,7 @@ const authLogoutCommand: SlashCommand = {
 
 export const authCommand: SlashCommand = {
   name: 'auth',
-  description: 'Manage authentication',
+  description: 'Керування авторизацією',
   kind: CommandKind.BUILT_IN,
   subCommands: [authLoginCommand, authLogoutCommand],
   action: (context, args) =>

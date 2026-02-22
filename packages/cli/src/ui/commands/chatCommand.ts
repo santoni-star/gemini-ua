@@ -235,7 +235,7 @@ const resumeCommand: SlashCommand = {
 
 const deleteCommand: SlashCommand = {
   name: 'delete',
-  description: 'Delete a conversation checkpoint. Usage: /chat delete <tag>',
+  description: 'Видалити чекпоінт. Usage: /chat delete <tag>',
   kind: CommandKind.BUILT_IN,
   autoExecute: true,
   action: async (context, args): Promise<MessageActionReturn> => {

@@ -18,7 +18,7 @@ import { MessageType } from '../types.js';
 const setModelCommand: SlashCommand = {
   name: 'set',
   description:
-    'Set the model to use. Usage: /model set <model-name> [--persist]',
+    'Виберіть модель для використання. Використання: /model set <model-name> [--persist]',
   kind: CommandKind.BUILT_IN,
   autoExecute: false,
   action: async (context: CommandContext, args: string) => {
@@ -26,7 +26,7 @@ const setModelCommand: SlashCommand = {
     if (parts.length === 0) {
       context.ui.addItem({
         type: MessageType.ERROR,
-        text: 'Usage: /model set <model-name> [--persist]',
+        text: 'Використання: /model set <model-name> [--persist]',
       });
       return;
     }
@@ -41,7 +41,7 @@ const setModelCommand: SlashCommand = {
 
       context.ui.addItem({
         type: MessageType.INFO,
-        text: `Model set to ${modelName}${persist ? ' (persisted)' : ''}`,
+        text: `Модель змінено на ${modelName}${persist ? ' (збережено)' : ''}`,
       });
     }
   },
@@ -49,7 +49,7 @@ const setModelCommand: SlashCommand = {
 
 const manageModelCommand: SlashCommand = {
   name: 'manage',
-  description: 'Opens a dialog to configure the model',
+  description: 'Відкрити діалог налаштування моделі',
   kind: CommandKind.BUILT_IN,
   autoExecute: true,
   action: async (context: CommandContext) => {
@@ -65,7 +65,7 @@ const manageModelCommand: SlashCommand = {
 
 export const modelCommand: SlashCommand = {
   name: 'model',
-  description: 'Manage model configuration',
+  description: 'Керування налаштуваннями моделі',
   kind: CommandKind.BUILT_IN,
   autoExecute: false,
   subCommands: [manageModelCommand, setModelCommand],

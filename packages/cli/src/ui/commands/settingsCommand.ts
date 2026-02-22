@@ -9,7 +9,7 @@ import { CommandKind } from './types.js';
 
 export const settingsCommand: SlashCommand = {
   name: 'settings',
-  description: 'View and edit Gemini CLI settings',
+  description: 'Переглянути та редагувати налаштування Gemini CLI',
   kind: CommandKind.BUILT_IN,
   autoExecute: true,
   action: (_context, _args): OpenDialogActionReturn => ({
