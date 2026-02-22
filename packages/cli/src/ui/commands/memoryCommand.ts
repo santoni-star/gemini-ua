@@ -22,7 +22,7 @@ export const memoryCommand: SlashCommand = {
   subCommands: [
     {
       name: 'show',
-      description: 'Показати поточний вміст пам'яті',
+      description: "Показати поточний вміст пам'яті",
       kind: CommandKind.BUILT_IN,
       autoExecute: true,
       action: async (context) => {
@@ -41,7 +41,7 @@ export const memoryCommand: SlashCommand = {
     },
     {
       name: 'add',
-      description: 'Додати вміст до пам'яті',
+      description: "Додати вміст до пам'яті",
       kind: CommandKind.BUILT_IN,
       autoExecute: false,
       action: (context, args): SlashCommandActionReturn | void => {
