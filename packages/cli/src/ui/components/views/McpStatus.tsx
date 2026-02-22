@@ -51,13 +51,13 @@ export const McpStatus: React.FC<McpStatusProps> = ({
   if (serverNames.length === 0 && blockedServers.length === 0) {
     return (
       <Box flexDirection="column">
-        <Text>No MCP servers configured.</Text>
+        <Text>Немає налаштованих MCP-серверів.</Text>
         <Text>
-          Please view MCP documentation in your browser:{' '}
+          Будь ласка, перегляньте документацію MCP in your browser:{' '}
           <Text color={theme.text.link}>
             https://goo.gle/gemini-cli-docs-mcp
           </Text>{' '}
-          or use the cli /docs command
+          або скористайтеся командою /docs
         </Text>
       </Box>
     );
@@ -68,17 +68,17 @@ export const McpStatus: React.FC<McpStatusProps> = ({
       {discoveryInProgress && (
         <Box flexDirection="column" marginBottom={1}>
           <Text color={theme.status.warning}>
-            ⏳ MCP servers are starting up ({connectingServers.length}{' '}
+            ⏳ MCP сервери запускаються ({connectingServers.length}{' '}
             initializing)...
           </Text>
           <Text color={theme.text.primary}>
-            Note: First startup may take longer. Tool availability will update
+            Примітка: Перший запуск може тривати довше. Tool availability will update
             automatically.
           </Text>
         </Box>
       )}
 
-      <Text bold>Configured MCP servers:</Text>
+      <Text bold>Налаштовані MCP сервери:</Text>
       <Box height={1} />
 
       {serverNames.map((serverName) => {

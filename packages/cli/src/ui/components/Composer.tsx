@@ -181,7 +181,7 @@ export const Composer = ({ isFocused = true }: { isFocused?: boolean }) => {
         !uiState.isConfigInitialized ||
         uiState.isResuming) && (
         <ConfigInitDisplay
-          message={uiState.isResuming ? 'Resuming session...' : undefined}
+          message={uiState.isResuming ? 'Відновлення сесії...' : undefined}
         />
       )}
 
@@ -439,10 +439,10 @@ export const Composer = ({ isFocused = true }: { isFocused?: boolean }) => {
           placeholder={
             vimEnabled
               ? vimMode === 'INSERT'
-                ? "  Press 'Esc' for NORMAL mode."
-                : "  Press 'i' for INSERT mode."
+                ? "  Натисніть 'Esc' для режиму NORMAL."
+                : "  Натисніть 'i' для режиму INSERT."
               : uiState.shellModeActive
-                ? '  Type your shell command'
+                ? '  Введіть команду оболонки'
                 : '  Type your message or @path/to/file'
           }
           setQueueErrorMessage={uiActions.setQueueErrorMessage}

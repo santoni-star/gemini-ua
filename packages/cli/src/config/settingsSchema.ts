@@ -166,7 +166,7 @@ const SETTINGS_SCHEMA = {
 
   general: {
     type: 'object',
-    label: 'General',
+    label: 'Загальні',
     category: 'General',
     requiresRestart: false,
     default: {},
@@ -175,7 +175,7 @@ const SETTINGS_SCHEMA = {
     properties: {
       preferredEditor: {
         type: 'string',
-        label: 'Preferred Editor',
+        label: 'Улюблений редактор',
         category: 'General',
         requiresRestart: false,
         default: undefined as string | undefined,
@@ -184,7 +184,7 @@ const SETTINGS_SCHEMA = {
       },
       vimMode: {
         type: 'boolean',
-        label: 'Vim Mode',
+        label: 'Режим Vim',
         category: 'General',
         requiresRestart: false,
         default: false,
@@ -193,7 +193,7 @@ const SETTINGS_SCHEMA = {
       },
       defaultApprovalMode: {
         type: 'enum',
-        label: 'Default Approval Mode',
+        label: 'Режим схвалення за замовчуванням',
         category: 'General',
         requiresRestart: false,
         default: 'default',
@@ -404,7 +404,7 @@ const SETTINGS_SCHEMA = {
 
   ui: {
     type: 'object',
-    label: 'UI',
+    label: 'Інтерфейс',
     category: 'UI',
     requiresRestart: false,
     default: {},
@@ -413,7 +413,7 @@ const SETTINGS_SCHEMA = {
     properties: {
       theme: {
         type: 'string',
-        label: 'Theme',
+        label: 'Тема',
         category: 'UI',
         requiresRestart: false,
         default: undefined as string | undefined,
@@ -820,7 +820,7 @@ const SETTINGS_SCHEMA = {
 
   model: {
     type: 'object',
-    label: 'Model',
+    label: 'Модель',
     category: 'Model',
     requiresRestart: false,
     default: {},
@@ -829,7 +829,7 @@ const SETTINGS_SCHEMA = {
     properties: {
       name: {
         type: 'string',
-        label: 'Model',
+        label: 'Модель',
         category: 'Model',
         requiresRestart: false,
         default: undefined as string | undefined,
@@ -979,7 +979,7 @@ const SETTINGS_SCHEMA = {
 
   context: {
     type: 'object',
-    label: 'Context',
+    label: 'Контекст',
     category: 'Context',
     requiresRestart: false,
     default: {},
@@ -1117,7 +1117,7 @@ const SETTINGS_SCHEMA = {
 
   tools: {
     type: 'object',
-    label: 'Tools',
+    label: 'Інструменти',
     category: 'Tools',
     requiresRestart: true,
     default: {},
@@ -1346,7 +1346,7 @@ const SETTINGS_SCHEMA = {
   },
   security: {
     type: 'object',
-    label: 'Security',
+    label: 'Безпека',
     category: 'Security',
     requiresRestart: true,
     default: {},
@@ -1498,7 +1498,7 @@ const SETTINGS_SCHEMA = {
 
   advanced: {
     type: 'object',
-    label: 'Advanced',
+    label: 'Розширені',
     category: 'Advanced',
     requiresRestart: true,
     default: {},

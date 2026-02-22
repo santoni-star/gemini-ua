@@ -13,12 +13,12 @@ export const ShortcutsHint: React.FC = () => {
   const { cleanUiDetailsVisible, shortcutsHelpVisible } = useUIState();
 
   if (!cleanUiDetailsVisible) {
-    return <Text color={theme.text.secondary}> press tab twice for more </Text>;
+    return <Text color={theme.text.secondary}> натисніть tab двічі для довідки </Text>;
   }
 
   const highlightColor = shortcutsHelpVisible
     ? theme.text.accent
     : theme.text.secondary;
 
-  return <Text color={highlightColor}> ? for shortcuts </Text>;
+  return <Text color={highlightColor}> ? для гарячих клавіш </Text>;
 };

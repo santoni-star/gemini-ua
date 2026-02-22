@@ -15,12 +15,12 @@ interface ApprovalModeIndicatorProps {
 }
 
 export const APPROVAL_MODE_TEXT = {
-  AUTO_EDIT: 'auto-accept edits',
-  PLAN: 'plan',
+  AUTO_EDIT: 'авто-прийняття змін',
+  PLAN: 'план',
   YOLO: 'YOLO',
-  HINT_SWITCH_TO_PLAN_MODE: 'shift+tab to plan',
-  HINT_SWITCH_TO_MANUAL_MODE: 'shift+tab to manual',
-  HINT_SWITCH_TO_AUTO_EDIT_MODE: 'shift+tab to accept edits',
+  HINT_SWITCH_TO_PLAN_MODE: 'shift+tab для планування',
+  HINT_SWITCH_TO_MANUAL_MODE: 'shift+tab для ручного режиму',
+  HINT_SWITCH_TO_AUTO_EDIT_MODE: 'shift+tab для прийняття змін',
   HINT_SWITCH_TO_YOLO_MODE: 'ctrl+y',
 };
 

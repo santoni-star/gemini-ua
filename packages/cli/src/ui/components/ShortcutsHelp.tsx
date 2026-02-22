@@ -21,16 +21,16 @@ const buildShortcutItems = (): ShortcutItem[] => {
   const altLabel = isMac ? 'Option' : 'Alt';
 
   return [
-    { key: '!', description: 'shell mode' },
-    { key: '@', description: 'select file or folder' },
-    { key: 'Esc Esc', description: 'clear & rewind' },
-    { key: 'Tab Tab', description: 'focus UI' },
-    { key: 'Ctrl+Y', description: 'YOLO mode' },
-    { key: 'Shift+Tab', description: 'cycle mode' },
-    { key: 'Ctrl+V', description: 'paste images' },
-    { key: `${altLabel}+M`, description: 'raw markdown mode' },
-    { key: 'Ctrl+R', description: 'reverse-search history' },
-    { key: 'Ctrl+X', description: 'open external editor' },
+    { key: '!', description: 'режим оболонки' },
+    { key: '@', description: 'вибрати файл або папку' },
+    { key: 'Esc Esc', description: 'очистити та повернути' },
+    { key: 'Tab Tab', description: 'фокус на UI' },
+    { key: 'Ctrl+Y', description: 'режим YOLO' },
+    { key: 'Shift+Tab', description: 'цикл режимів' },
+    { key: 'Ctrl+V', description: 'вставити зображення' },
+    { key: `${altLabel}+M`, description: 'режим сирого markdown' },
+    { key: 'Ctrl+R', description: 'пошук в історії' },
+    { key: 'Ctrl+X', description: 'відкрити зовнішній редактор' },
   ];
 };
 
@@ -67,7 +67,7 @@ export const ShortcutsHelp: React.FC = () => {
 
   return (
     <Box flexDirection="column" width="100%">
-      <SectionHeader title="Shortcuts (for more, see /help)" />
+      <SectionHeader title="Гарячі клавіші (більше — /help)" />
       <Box flexDirection="row" flexWrap="wrap" paddingLeft={1} paddingRight={2}>
         {itemsForDisplay.map((item, index) => (
           <Box

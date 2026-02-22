@@ -27,7 +27,7 @@ export const ToastDisplay: React.FC = () => {
 
   if (uiState.ctrlCPressedOnce) {
     return (
-      <Text color={theme.status.warning}>Press Ctrl+C again to exit.</Text>
+      <Text color={theme.status.warning}>Натисніть Ctrl+C ще раз, щоб вийти.</Text>
     );
   }
 
@@ -42,7 +42,7 @@ export const ToastDisplay: React.FC = () => {
 
   if (uiState.ctrlDPressedOnce) {
     return (
-      <Text color={theme.status.warning}>Press Ctrl+D again to exit.</Text>
+      <Text color={theme.status.warning}>Натисніть Ctrl+D ще раз, щоб вийти.</Text>
     );
   }
 

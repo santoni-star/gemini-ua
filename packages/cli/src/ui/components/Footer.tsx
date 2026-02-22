@@ -112,7 +112,7 @@ export const Footer: React.FC = () => {
           display="flex"
         >
           {isTrustedFolder === false ? (
-            <Text color={theme.status.warning}>untrusted</Text>
+            <Text color={theme.status.warning}>недовірена</Text>
           ) : process.env['SANDBOX'] &&
             process.env['SANDBOX'] !== 'sandbox-exec' ? (
             <Text color="green">
@@ -129,7 +129,7 @@ export const Footer: React.FC = () => {
             <Text color={theme.status.error}>
               no sandbox
               {terminalWidth >= 100 && (
-                <Text color={theme.text.secondary}> (see /docs)</Text>
+                <Text color={theme.text.secondary}> (дивіться /docs)</Text>
               )}
             </Text>
           )}
