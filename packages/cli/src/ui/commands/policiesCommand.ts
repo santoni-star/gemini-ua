@@ -106,7 +106,7 @@ const listPoliciesCommand: SlashCommand = {
 
 export const policiesCommand: SlashCommand = {
   name: 'policies',
-  description: 'Manage policies',
+  description: 'Керування політиками',
   kind: CommandKind.BUILT_IN,
   autoExecute: false,
   subCommands: [listPoliciesCommand],

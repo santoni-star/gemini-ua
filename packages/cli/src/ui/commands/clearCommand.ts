@@ -17,7 +17,7 @@ import { randomUUID } from 'node:crypto';
 
 export const clearCommand: SlashCommand = {
   name: 'clear',
-  description: 'Clear the screen and conversation history',
+  description: 'Очистити екран та історію розмови',
   kind: CommandKind.BUILT_IN,
   autoExecute: true,
   action: async (context, _args) => {

@@ -63,7 +63,7 @@ async function reloadAction(
 
 export const commandsCommand: SlashCommand = {
   name: 'commands',
-  description: 'Manage custom slash commands. Usage: /commands [reload]',
+  description: 'Керування власними командами. Використання: /commands [reload]',
   kind: CommandKind.BUILT_IN,
   autoExecute: false,
   subCommands: [

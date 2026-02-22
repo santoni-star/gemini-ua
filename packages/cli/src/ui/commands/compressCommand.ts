@@ -12,7 +12,7 @@ import { CommandKind } from './types.js';
 export const compressCommand: SlashCommand = {
   name: 'compress',
   altNames: ['summarize'],
-  description: 'Compresses the context by replacing it with a summary',
+  description: 'Стиснути контекст, замінивши його резюме',
   kind: CommandKind.BUILT_IN,
   autoExecute: true,
   action: async (context) => {

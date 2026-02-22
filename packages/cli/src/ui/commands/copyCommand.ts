@@ -11,7 +11,7 @@ import { CommandKind } from './types.js';
 
 export const copyCommand: SlashCommand = {
   name: 'copy',
-  description: 'Copy the last result or code snippet to clipboard',
+  description: 'Копіювати останній результат або фрагмент коду в буфер обміну',
   kind: CommandKind.BUILT_IN,
   autoExecute: true,
   action: async (context, _args): Promise<SlashCommandActionReturn | void> => {
