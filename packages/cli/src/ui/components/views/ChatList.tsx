@@ -15,12 +15,12 @@ interface ChatListProps {
 
 export const ChatList: React.FC<ChatListProps> = ({ chats }) => {
   if (chats.length === 0) {
-    return <Text>No saved conversation checkpoints found.</Text>;
+    return <Text>Збережених розмов не знайдено.</Text>;
   }
 
   return (
     <Box flexDirection="column">
-      <Text>List of saved conversations:</Text>
+      <Text>Список збережених розмов:</Text>
       <Box height={1} />
       {chats.map((chat) => {
         const isoString = chat.mtime;
@@ -40,7 +40,7 @@ export const ChatList: React.FC<ChatListProps> = ({ chats }) => {
         );
       })}
       <Box height={1} />
-      <Text color={theme.text.secondary}>Note: Newest last, oldest first</Text>
+      <Text color={theme.text.secondary}>Примітка: Новіші внизу, старіші зверху</Text>
     </Box>
   );
 };

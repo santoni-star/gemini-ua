@@ -1,126 +1,45 @@
-# File system tools reference
+# Довідник інструментів файлової системи
 
-The Gemini CLI core provides a suite of tools for interacting with the local
-file system. These tools allow the model to explore and modify your codebase.
+Ядро Gemini CLI надає набір інструментів для взаємодії з локальною файловою системою. Ці інструменти дозволяють моделі досліджувати та змінювати ваш код.
 
-## Technical reference
+## Технічна довідка
 
-All file system tools operate within a `rootDirectory` (the current working
-directory or workspace root) for security.
+Усі інструменти файлової системи працюють у межах `rootDirectory` (поточна робоча директорія або корінь проекту) з міркувань безпеки.
 
 ### `list_directory` (ReadFolder)
 
-Lists the names of files and subdirectories directly within a specified path.
+Показує імена файлів та піддиректорій безпосередньо у вказаному шляху.
 
-- **Tool name:** `list_directory`
-- **Arguments:**
-  - `dir_path` (string, required): Absolute or relative path to the directory.
-  - `ignore` (array, optional): Glob patterns to exclude.
-  - `file_filtering_options` (object, optional): Configuration for `.gitignore`
-    and `.geminiignore` compliance.
+- **Назва інструменту:** `list_directory`
+- **Аргументи:**
+  - `dir_path` (рядок, обов'язково): Абсолютний або відносний шлях до директорії.
+  - `ignore` (масив, опціонально): Шаблони glob для виключення.
+  - `file_filtering_options` (об'єкт, опціонально): Налаштування для дотримання `.gitignore` та `.geminiignore`.
 
 ### `read_file` (ReadFile)
 
-Reads and returns the content of a specific file. Supports text, images, audio,
-and PDF.
+Читає та повертає вміст конкретного файлу. Підтримує текст, зображення, аудіо та PDF.
 
-- **Tool name:** `read_file`
-- **Arguments:**
-  - `file_path` (string, required): Path to the file.
-  - `offset` (number, optional): Start line for text files (0-based).
-  - `limit` (number, optional): Maximum lines to read.
+- **Назва інструменту:** `read_file`
+- **Аргументи:**
+  - `file_path` (рядок, обов'язково): Шлях до файлу.
+  - `offset` (число, опціонально): Початковий рядок для текстових файлів (починаючи з 0).
+  - `limit` (число, опціонально): Максимальна кількість рядків для читання.
 
 ### `write_file` (WriteFile)
 
-Writes content to a specified file, overwriting it if it exists or creating it
-if not.
+Записує вміст у вказаний файл, перезаписуючи його, якщо він існує, або створюючи новий.
 
-- **Tool name:** `write_file`
-- **Arguments:**
-  - `file_path` (string, required): Path to the file.
-  - `content` (string, required): Data to write.
-- **Confirmation:** Requires manual user approval.
+- **Назва інструменту:** `write_file`
+- **Аргументи:**
+  - `file_path` (рядок, обов'язково): Шлях до файлу.
+  - `content` (рядок, обов'язково): Дані для запису.
+- **Підтвердження:** Потребує ручного схвалення користувачем.
 
 ### `glob` (FindFiles)
 
-Finds files matching specific glob patterns across the workspace.
+Знаходить файли, що відповідають шаблонам glob у всьому проекті.
 
-- **Tool name:** `glob`
-- **Display name:** FindFiles
-- **File:** `glob.ts`
-- **Parameters:**
-  - `pattern` (string, required): The glob pattern to match against (e.g.,
-    `"*.py"`, `"src/**/*.js"`).
-  - `path` (string, optional): The absolute path to the directory to search
-    within. If omitted, searches the tool's root directory.
-  - `case_sensitive` (boolean, optional): Whether the search should be
-    case-sensitive. Defaults to `false`.
-  - `respect_git_ignore` (boolean, optional): Whether to respect .gitignore
-    patterns when finding files. Defaults to `true`.
-- **Behavior:**
-  - Searches for files matching the glob pattern within the specified directory.
-  - Returns a list of absolute paths, sorted with the most recently modified
-    files first.
-  - Ignores common nuisance directories like `node_modules` and `.git` by
-    default.
-- **Output (`llmContent`):** A message like:
-  `Found 5 file(s) matching "*.ts" within src, sorted by modification time (newest first):\nsrc/file1.ts\nsrc/subdir/file2.ts...`
-- **Confirmation:** No.
-
-## 5. `grep_search` (SearchText)
-
-`grep_search` searches for a regular expression pattern within the content of
-files in a specified directory. Can filter files by a glob pattern. Returns the
-lines containing matches, along with their file paths and line numbers.
-
-- **Tool name:** `grep_search`
-- **Display name:** SearchText
-- **File:** `grep.ts`
-- **Parameters:**
-  - `pattern` (string, required): The regular expression (regex) to search for
-    (e.g., `"function\s+myFunction"`).
-  - `path` (string, optional): The absolute path to the directory to search
-    within. Defaults to the current working directory.
-  - `include` (string, optional): A glob pattern to filter which files are
-    searched (e.g., `"*.js"`, `"src/**/*.{ts,tsx}"`). If omitted, searches most
-    files (respecting common ignores).
-- **Behavior:**
-  - Uses `git grep` if available in a Git repository for speed; otherwise, falls
-    back to system `grep` or a JavaScript-based search.
-  - Returns a list of matching lines, each prefixed with its file path (relative
-    to the search directory) and line number.
-- **Output (`llmContent`):** A formatted string of matches, e.g.:
-  ```
-  Found 3 matches for pattern "myFunction" in path "." (filter: "*.ts"):
-  ---
-  File: src/utils.ts
-  L15: export function myFunction() {
-  L22:   myFunction.call();
-  ---
-  File: src/index.ts
-  L5: import { myFunction } from './utils';
-  ---
-  ```
-- **Confirmation:** No.
-
-## 6. `replace` (Edit)
-
-`replace` replaces text within a file. By default, replaces a single occurrence,
-but can replace multiple occurrences when `expected_replacements` is specified.
-This tool is designed for precise, targeted changes and requires significant
-context around the `old_string` to ensure it modifies the correct location.
-
-- **Tool name:** `replace`
-- **Arguments:**
-  - `file_path` (string, required): Path to the file.
-  - `instruction` (string, required): Semantic description of the change.
-  - `old_string` (string, required): Exact literal text to find.
-  - `new_string` (string, required): Exact literal text to replace with.
-- **Confirmation:** Requires manual user approval.
-
-## Next steps
-
-- Follow the [File management tutorial](../cli/tutorials/file-management.md) for
-  practical examples.
-- Learn about [Trusted folders](../cli/trusted-folders.md) to manage access
-  permissions.
+- **Назва інструменту:** `glob`
+- **Аргументи:**
+  - `pattern` (рядок, обов'язково): Шаблон для пошуку (наприклад, `src/**/*.ts`).

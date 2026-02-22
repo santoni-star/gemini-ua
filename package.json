@@ -1,7 +1,7 @@
 {
-                                  "name": "@santoni/gemini-ua",
-                                  "version": "0.30.0-ua.16",
-                                  "engines": {      "node": ">=20.0.0"
+                                    "name": "@santoni/gemini-ua",
+                                    "version": "0.30.0-ua.17",
+                                    "engines": {      "node": ">=20.0.0"
     },
     "type": "module",
     "workspaces": [
