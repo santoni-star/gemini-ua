@@ -24,7 +24,7 @@ export interface DialogFooterProps {
 export const DialogFooter: React.FC<DialogFooterProps> = ({
   primaryAction,
   navigationActions,
-  cancelAction = 'Esc to cancel',
+  cancelAction = 'Esc для скасування',
 }) => {
   const parts = [primaryAction];
   if (navigationActions) {

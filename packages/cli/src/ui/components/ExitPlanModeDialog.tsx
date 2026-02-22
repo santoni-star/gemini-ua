@@ -41,8 +41,8 @@ interface PlanContentState {
 }
 
 enum ApprovalOption {
-  Auto = 'Yes, automatically accept edits',
-  Manual = 'Yes, manually accept edits',
+  Auto = 'Так, автоматично приймати зміни',
+  Manual = 'Так, вручну приймати зміни',
 }
 
 /**
@@ -97,14 +97,14 @@ function usePlanContent(planPath: string, config: Config): PlanContentState {
         if (typeof result.llmContent !== 'string') {
           setState({
             status: PlanStatus.Error,
-            error: 'Plan file format not supported (binary or image).',
+            error: 'Формат файлу плану не підтримується (бінарний або зображення).',
           });
           return;
         }
 
         const content = result.llmContent;
         if (!content) {
-          setState({ status: PlanStatus.Error, error: 'Plan file is empty.' });
+          setState({ status: PlanStatus.Error, error: 'Файл плану порожній.' });
           return;
         }
         setState({ status: PlanStatus.Loaded, content });
@@ -158,7 +158,7 @@ export const ExitPlanModeDialog: React.FC<ExitPlanModeDialogProps> = ({
     return (
       <StatusMessage>
         <Text color={theme.text.secondary} italic>
-          Loading plan...
+          Завантаження плану...
         </Text>
       </StatusMessage>
     );
@@ -168,7 +168,7 @@ export const ExitPlanModeDialog: React.FC<ExitPlanModeDialogProps> = ({
     return (
       <StatusMessage>
         <Text color={theme.status.error}>
-          Error reading plan: {planState.error}
+          Помилка читання плану: {planState.error}
         </Text>
       </StatusMessage>
     );
@@ -178,7 +178,7 @@ export const ExitPlanModeDialog: React.FC<ExitPlanModeDialogProps> = ({
   if (!planContent) {
     return (
       <StatusMessage>
-        <Text color={theme.status.error}>Error: Plan content is empty.</Text>
+        <Text color={theme.status.error}>Помилка: Зміст плану порожній.</Text>
       </StatusMessage>
     );
   }
@@ -189,21 +189,21 @@ export const ExitPlanModeDialog: React.FC<ExitPlanModeDialogProps> = ({
         questions={[
           {
             type: QuestionType.CHOICE,
-            header: 'Approval',
+            header: 'Підтвердження',
             question: planContent,
             options: [
               {
                 label: ApprovalOption.Auto,
                 description:
-                  'Approves plan and allows tools to run automatically',
+                  'Схвалює план і дозволяє інструментам працювати автоматично',
               },
               {
                 label: ApprovalOption.Manual,
                 description:
-                  'Approves plan but requires confirmation for each tool',
+                  'Схвалює план, але потребує підтвердження для кожного інструменту',
               },
             ],
-            placeholder: 'Type your feedback...',
+            placeholder: 'Введіть ваш відгук...',
             multiSelect: false,
           },
         ]}

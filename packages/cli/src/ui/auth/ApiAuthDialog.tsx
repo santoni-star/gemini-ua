@@ -104,15 +104,15 @@ export function ApiAuthDialog({
       width="100%"
     >
       <Text bold color={theme.text.primary}>
-        Enter Gemini API Key
+        Введіть API ключ Gemini
       </Text>
       <Box marginTop={1} flexDirection="column">
         <Text color={theme.text.primary}>
-          Please enter your Gemini API key. It will be securely stored in your
-          system keychain.
+          Будь ласка, введіть ваш API ключ Gemini. Його буде надійно збережено
+          у системній в'язці ключів.
         </Text>
         <Text color={theme.text.secondary}>
-          You can get an API key from{' '}
+          Ви можете отримати API ключ тут:{' '}
           <Text color={theme.text.link}>
             https://aistudio.google.com/app/apikey
           </Text>
@@ -129,7 +129,7 @@ export function ApiAuthDialog({
             buffer={buffer}
             onSubmit={handleSubmit}
             onCancel={onCancel}
-            placeholder="Paste your API key here"
+            placeholder="Вставте ваш API ключ тут"
           />
         </Box>
       </Box>
@@ -140,7 +140,7 @@ export function ApiAuthDialog({
       )}
       <Box marginTop={1}>
         <Text color={theme.text.secondary}>
-          (Press Enter to submit, Esc to cancel, Ctrl+C to clear stored key)
+          (Натисніть Enter щоб надіслати, Esc щоб скасувати, Ctrl+C щоб очистити збережений ключ)
         </Text>
       </Box>
     </Box>

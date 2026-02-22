@@ -145,21 +145,21 @@ export const ToolConfirmationMessage: React.FC<
     if (confirmationDetails.type === 'edit') {
       if (!confirmationDetails.isModifying) {
         options.push({
-          label: 'Allow once',
+          label: 'Дозволити один раз',
           value: ToolConfirmationOutcome.ProceedOnce,
-          key: 'Allow once',
+          key: 'Дозволити один раз',
         });
         if (isTrustedFolder) {
           options.push({
-            label: 'Allow for this session',
+            label: 'Дозволити для цієї сесії',
             value: ToolConfirmationOutcome.ProceedAlways,
-            key: 'Allow for this session',
+            key: 'Дозволити для цієї сесії',
           });
           if (allowPermanentApproval) {
             options.push({
-              label: 'Allow for all future sessions',
+              label: 'Дозволити для всіх майбутніх сесій',
               value: ToolConfirmationOutcome.ProceedAlwaysAndSave,
-              key: 'Allow for all future sessions',
+              key: 'Дозволити для всіх майбутніх сесій',
             });
           }
         }
@@ -167,23 +167,23 @@ export const ToolConfirmationMessage: React.FC<
         // the IDE is actually capable of showing a diff (connected).
         if (!config.getIdeMode() || !isDiffingEnabled) {
           options.push({
-            label: 'Modify with external editor',
+            label: 'Редагувати у зовнішньому редакторі',
             value: ToolConfirmationOutcome.ModifyWithEditor,
-            key: 'Modify with external editor',
+            key: 'Редагувати у зовнішньому редакторі',
           });
         }
 
         options.push({
-          label: 'No, suggest changes (esc)',
+          label: 'Ні, запропонувати зміни (esc)',
           value: ToolConfirmationOutcome.Cancel,
-          key: 'No, suggest changes (esc)',
+          key: 'Ні, запропонувати зміни (esc)',
         });
       }
     } else if (confirmationDetails.type === 'exec') {
       options.push({
-        label: 'Allow once',
+        label: 'Дозволити один раз',
         value: ToolConfirmationOutcome.ProceedOnce,
-        key: 'Allow once',
+        key: 'Дозволити один раз',
       });
       if (isTrustedFolder) {
         options.push({
@@ -200,65 +200,65 @@ export const ToolConfirmationMessage: React.FC<
         }
       }
       options.push({
-        label: 'No, suggest changes (esc)',
+        label: 'Ні, запропонувати зміни (esc)',
         value: ToolConfirmationOutcome.Cancel,
-        key: 'No, suggest changes (esc)',
+        key: 'Ні, запропонувати зміни (esc)',
       });
     } else if (confirmationDetails.type === 'info') {
       options.push({
-        label: 'Allow once',
+        label: 'Дозволити один раз',
         value: ToolConfirmationOutcome.ProceedOnce,
-        key: 'Allow once',
+        key: 'Дозволити один раз',
       });
       if (isTrustedFolder) {
         options.push({
-          label: 'Allow for this session',
+          label: 'Дозволити для цієї сесії',
           value: ToolConfirmationOutcome.ProceedAlways,
-          key: 'Allow for this session',
+          key: 'Дозволити для цієї сесії',
         });
         if (allowPermanentApproval) {
           options.push({
-            label: 'Allow for all future sessions',
+            label: 'Дозволити для всіх майбутніх сесій',
             value: ToolConfirmationOutcome.ProceedAlwaysAndSave,
-            key: 'Allow for all future sessions',
+            key: 'Дозволити для всіх майбутніх сесій',
           });
         }
       }
       options.push({
-        label: 'No, suggest changes (esc)',
+        label: 'Ні, запропонувати зміни (esc)',
         value: ToolConfirmationOutcome.Cancel,
-        key: 'No, suggest changes (esc)',
+        key: 'Ні, запропонувати зміни (esc)',
       });
     } else if (confirmationDetails.type === 'mcp') {
       // mcp tool confirmation
       options.push({
-        label: 'Allow once',
+        label: 'Дозволити один раз',
         value: ToolConfirmationOutcome.ProceedOnce,
-        key: 'Allow once',
+        key: 'Дозволити один раз',
       });
       if (isTrustedFolder) {
         options.push({
-          label: 'Allow tool for this session',
+          label: 'Дозволити інструмент для цієї сесії',
           value: ToolConfirmationOutcome.ProceedAlwaysTool,
-          key: 'Allow tool for this session',
+          key: 'Дозволити інструмент для цієї сесії',
         });
         options.push({
-          label: 'Allow all server tools for this session',
+          label: 'Дозволити всі інструменти сервера для цієї сесії',
           value: ToolConfirmationOutcome.ProceedAlwaysServer,
-          key: 'Allow all server tools for this session',
+          key: 'Дозволити всі інструменти сервера для цієї сесії',
         });
         if (allowPermanentApproval) {
           options.push({
-            label: 'Allow tool for all future sessions',
+            label: 'Дозволити інструмент для всіх майбутніх сесій',
             value: ToolConfirmationOutcome.ProceedAlwaysAndSave,
-            key: 'Allow tool for all future sessions',
+            key: 'Дозволити інструмент для всіх майбутніх сесій',
           });
         }
       }
       options.push({
-        label: 'No, suggest changes (esc)',
+        label: 'Ні, запропонувати зміни (esc)',
         value: ToolConfirmationOutcome.Cancel,
-        key: 'No, suggest changes (esc)',
+        key: 'Ні, запропонувати зміни (esc)',
       });
     }
     return options;

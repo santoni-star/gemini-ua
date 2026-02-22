@@ -332,7 +332,7 @@ const TextQuestionView: React.FC<TextQuestionViewProps> = ({
     };
   }, [onEditingCustomOption]);
 
-  const placeholder = question.placeholder || 'Enter your response';
+  const placeholder = question.placeholder || 'Введіть вашу відповідь';
 
   const HEADER_HEIGHT = progressHeader ? 2 : 0;
   const INPUT_HEIGHT = 2; // TextInput + margin
@@ -833,7 +833,7 @@ const ChoiceQuestionView: React.FC<ChoiceQuestionViewProps> = ({
 
           // Render inline text input for custom option
           if (optionItem.type === 'other') {
-            const placeholder = question.placeholder || 'Enter a custom value';
+            const placeholder = question.placeholder || 'Введіть власне значення';
             return (
               <Box flexDirection="row">
                 {showCheck && (
