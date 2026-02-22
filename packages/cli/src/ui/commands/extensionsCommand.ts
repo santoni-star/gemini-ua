@@ -46,7 +46,7 @@ function showMessageIfNoExtensions(
   if (extensions.length === 0) {
     context.ui.addItem({
       type: MessageType.INFO,
-      text: 'No extensions installed. Run `/extensions explore` to check out the gallery.',
+      text: 'Розширень не встановлено. Запустіть `/extensions explore` to check out the gallery.',
     });
     return true;
   }
@@ -753,7 +753,7 @@ const updateExtensionsCommand: SlashCommand = {
 
 const disableCommand: SlashCommand = {
   name: 'disable',
-  description: 'Disable an extension',
+  description: 'Вимкнути розширення',
   kind: CommandKind.BUILT_IN,
   autoExecute: false,
   action: disableAction,
@@ -762,7 +762,7 @@ const disableCommand: SlashCommand = {
 
 const enableCommand: SlashCommand = {
   name: 'enable',
-  description: 'Enable an extension',
+  description: 'Увімкнути розширення',
   kind: CommandKind.BUILT_IN,
   autoExecute: false,
   action: enableAction,
@@ -787,7 +787,7 @@ const linkCommand: SlashCommand = {
 
 const uninstallCommand: SlashCommand = {
   name: 'uninstall',
-  description: 'Uninstall an extension',
+  description: 'Видалити розширення',
   kind: CommandKind.BUILT_IN,
   autoExecute: false,
   action: uninstallAction,
@@ -834,7 +834,7 @@ export function extensionsCommand(
     : [];
   return {
     name: 'extensions',
-    description: 'Manage extensions',
+    description: 'Керування розширеннями',
     kind: CommandKind.BUILT_IN,
     autoExecute: false,
     subCommands: [

@@ -381,7 +381,7 @@ export const skillsCommand: SlashCommand = {
     },
     {
       name: 'disable',
-      description: 'Disable a skill by name. Usage: /skills disable <name>',
+      description: 'Вимкнути навичку by name. Usage: /skills disable <name>',
       kind: CommandKind.BUILT_IN,
       action: disableAction,
       completion: disableCompletion,

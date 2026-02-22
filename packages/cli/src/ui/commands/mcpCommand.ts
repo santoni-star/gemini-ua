@@ -34,7 +34,7 @@ import { loadSettings } from '../../config/settings.js';
 
 const authCommand: SlashCommand = {
   name: 'auth',
-  description: 'Authenticate with an OAuth-enabled MCP server',
+  description: 'Авторизуватися на MCP сервері з підтримкою OAuth',
   kind: CommandKind.BUILT_IN,
   autoExecute: true,
   action: async (
@@ -488,7 +488,7 @@ const enableCommand: SlashCommand = {
 
 const disableCommand: SlashCommand = {
   name: 'disable',
-  description: 'Disable an MCP server',
+  description: 'Вимкнути MCP сервер',
   kind: CommandKind.BUILT_IN,
   autoExecute: true,
   action: (ctx, args) => handleEnableDisable(ctx, args, false),

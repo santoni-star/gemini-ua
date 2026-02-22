@@ -27,7 +27,7 @@ import path from 'node:path';
 
 export const bugCommand: SlashCommand = {
   name: 'bug',
-  description: 'Submit a bug report',
+  description: 'Повідомити про помилку',
   kind: CommandKind.BUILT_IN,
   autoExecute: false,
   action: async (context: CommandContext, args?: string): Promise<void> => {
@@ -57,17 +57,17 @@ export const bugCommand: SlashCommand = {
     const authType = config?.getContentGeneratorConfig()?.authType || 'Unknown';
 
     let info = `
-* **CLI Version:** ${cliVersion}
-* **Git Commit:** ${GIT_COMMIT_INFO}
-* **Session ID:** ${sessionId}
-* **Operating System:** ${osVersion}
-* **Sandbox Environment:** ${sandboxEnv}
-* **Model Version:** ${modelVersion}
-* **Auth Type:** ${authType}
-* **Memory Usage:** ${memoryUsage}
-* **Terminal Name:** ${terminalName}
-* **Terminal Background:** ${terminalBgColor}
-* **Kitty Keyboard Protocol:** ${kittyProtocol}
+* **Версія CLI:** ${cliVersion}
+* **Git коміт:** ${GIT_COMMIT_INFO}
+* **ID сесії:** ${sessionId}
+* **Операційна система:** ${osVersion}
+* **Середовище пісочниці:** ${sandboxEnv}
+* **Версія моделі:** ${modelVersion}
+* **Тип авторизації:** ${authType}
+* **Використання пам'яті:** ${memoryUsage}
+* **Назва терміналу:** ${terminalName}
+* **Фон терміналу:** ${terminalBgColor}
+* **Протокол клавіатури Kitty:** ${kittyProtocol}
 `;
     if (ideClient) {
       info += `* **IDE Client:** ${ideClient}\n`;
@@ -85,8 +85,8 @@ export const bugCommand: SlashCommand = {
         const historyFilePath = path.join(tempDir, historyFileName);
         try {
           await exportHistoryToFile({ history, filePath: historyFilePath });
-          historyFileMessage = `\n\n--------------------------------------------------------------------------------\n\n📄 **Chat History Exported**\nTo help us debug, we've exported your current chat history to:\n${historyFilePath}\n\nPlease consider attaching this file to your GitHub issue if you feel comfortable doing so.\n\n**Privacy Disclaimer:** Please do not upload any logs containing sensitive or private information that you are not comfortable sharing publicly.`;
-          problemValue += `\n\n[ACTION REQUIRED] 📎 PLEASE ATTACH THE EXPORTED CHAT HISTORY JSON FILE TO THIS ISSUE IF YOU FEEL COMFORTABLE SHARING IT.`;
+          historyFileMessage = `\n\n--------------------------------------------------------------------------------\n\n📄 \*\*Історію чату експортовано\*\*\nTo help us debug, we've exported your current chat history to:\n${historyFilePath}\n\nБудь ласка, додайте цей файл до вашого звернення на GitHub if you feel comfortable doing so.\n\n**Відмова від відповідальності щодо конфіденційності:** Please do not upload any logs containing sensitive or private information that you are not comfortable sharing publicly.`;
+          problemValue += `\n\n[ACTION REQUIRED] 📎 БУДЬ ЛАСКА, ДОДАЙТЕ ЕКСПОРТОВАНУ ІСТОРІЮ ЧАТУ JSON FILE TO THIS ISSUE IF YOU FEEL COMFORTABLE SHARING IT.`;
         } catch (err) {
           const errorMessage = err instanceof Error ? err.message : String(err);
           debugLogger.error(

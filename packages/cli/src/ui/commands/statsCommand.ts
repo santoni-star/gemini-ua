@@ -71,7 +71,7 @@ async function defaultSessionView(context: CommandContext) {
 export const statsCommand: SlashCommand = {
   name: 'stats',
   altNames: ['usage'],
-  description: 'Check session stats. Usage: /stats [session|model|tools]',
+  description: 'Перевірити статистику сесії. Usage: /stats [session|model|tools]',
   kind: CommandKind.BUILT_IN,
   autoExecute: false,
   action: async (context: CommandContext) => {
@@ -80,7 +80,7 @@ export const statsCommand: SlashCommand = {
   subCommands: [
     {
       name: 'session',
-      description: 'Show session-specific usage statistics',
+      description: 'Показати статистику використання сесії',
       kind: CommandKind.BUILT_IN,
       autoExecute: true,
       action: async (context: CommandContext) => {
@@ -89,7 +89,7 @@ export const statsCommand: SlashCommand = {
     },
     {
       name: 'model',
-      description: 'Show model-specific usage statistics',
+      description: 'Показати статистику використання моделей',
       kind: CommandKind.BUILT_IN,
       autoExecute: true,
       action: (context: CommandContext) => {
@@ -112,7 +112,7 @@ export const statsCommand: SlashCommand = {
     },
     {
       name: 'tools',
-      description: 'Show tool-specific usage statistics',
+      description: 'Показати статистику використання інструментів',
       kind: CommandKind.BUILT_IN,
       autoExecute: true,
       action: (context: CommandContext) => {

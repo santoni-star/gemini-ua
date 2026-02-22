@@ -16,13 +16,13 @@ import { CommandKind } from './types.js';
 
 export const memoryCommand: SlashCommand = {
   name: 'memory',
-  description: 'Commands for interacting with memory',
+  description: 'Команди для взаємодії з пам'яттю',
   kind: CommandKind.BUILT_IN,
   autoExecute: false,
   subCommands: [
     {
       name: 'show',
-      description: 'Show the current memory contents',
+      description: 'Показати поточний вміст пам'яті',
       kind: CommandKind.BUILT_IN,
       autoExecute: true,
       action: async (context) => {
@@ -41,7 +41,7 @@ export const memoryCommand: SlashCommand = {
     },
     {
       name: 'add',
-      description: 'Add content to the memory',
+      description: 'Додати вміст до пам'яті',
       kind: CommandKind.BUILT_IN,
       autoExecute: false,
       action: (context, args): SlashCommandActionReturn | void => {
