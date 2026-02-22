@@ -37,12 +37,12 @@ export const LogoutConfirmationDialog: React.FC<
 
   const options: Array<RadioSelectItem<LogoutChoice>> = [
     {
-      label: 'Login',
+      label: 'Увійти',
       value: LogoutChoice.LOGIN,
       key: 'login',
     },
     {
-      label: 'Exit',
+      label: 'Вийти',
       value: LogoutChoice.EXIT,
       key: 'exit',
     },
@@ -61,10 +61,10 @@ export const LogoutConfirmationDialog: React.FC<
       >
         <Box flexDirection="column" marginBottom={1}>
           <Text bold color={theme.text.primary}>
-            You are now logged out.
+            Ви вийшли з системи.
           </Text>
           <Text color={theme.text.secondary}>
-            Login again to continue using Gemini CLI, or exit the application.
+            Увійдіть знову, щоб продовжити використання Gemini CLI, або вийдіть з програми.
           </Text>
         </Box>
 
@@ -72,7 +72,7 @@ export const LogoutConfirmationDialog: React.FC<
 
         <Box marginTop={1}>
           <Text color={theme.text.secondary}>
-            (Use Enter to select, Esc to close)
+            (Використовуйте Enter для вибору, Esc для закриття)
           </Text>
         </Box>
       </Box>

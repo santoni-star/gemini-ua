@@ -40,8 +40,8 @@ export const ConsentPrompt = (props: ConsentPromptProps) => {
       <Box marginTop={1}>
         <RadioButtonSelect
           items={[
-            { label: 'Yes', value: true, key: 'Yes' },
-            { label: 'No', value: false, key: 'No' },
+            { label: 'Так', value: true, key: 'Yes' },
+            { label: 'Ні', value: false, key: 'No' },
           ]}
           onSelect={onConfirm}
         />

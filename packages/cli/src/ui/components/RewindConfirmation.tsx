@@ -24,24 +24,24 @@ export enum RewindOutcome {
 
 const REWIND_OPTIONS: Array<RadioSelectItem<RewindOutcome>> = [
   {
-    label: 'Rewind conversation and revert code changes',
+    label: 'Повернути діалог та відмінити зміни коду',
     value: RewindOutcome.RewindAndRevert,
-    key: 'Rewind conversation and revert code changes',
+    key: 'Повернути діалог та відмінити зміни коду',
   },
   {
-    label: 'Rewind conversation',
+    label: 'Повернути діалог',
     value: RewindOutcome.RewindOnly,
-    key: 'Rewind conversation',
+    key: 'Повернути діалог',
   },
   {
-    label: 'Revert code changes',
+    label: 'Відмінити зміни коду',
     value: RewindOutcome.RevertOnly,
-    key: 'Revert code changes',
+    key: 'Відмінити зміни коду',
   },
   {
-    label: 'Do nothing (esc)',
+    label: 'Нічого не робити (esc)',
     value: RewindOutcome.Cancel,
-    key: 'Do nothing (esc)',
+    key: 'Нічого не робити (esc)',
   },
 ];
 
@@ -93,7 +93,7 @@ export const RewindConfirmation: React.FC<RewindConfirmationProps> = ({
       width={terminalWidth}
     >
       <Box marginBottom={1}>
-        <Text bold>Confirm Rewind</Text>
+        <Text bold>Підтвердження повернення</Text>
       </Box>
 
       {stats && (
@@ -107,14 +107,14 @@ export const RewindConfirmation: React.FC<RewindConfirmationProps> = ({
           <Text color={theme.text.primary}>
             {stats.fileCount === 1
               ? `File: ${stats.details?.at(0)?.fileName}`
-              : `${stats.fileCount} files affected`}
+              : `${stats.fileCount} файлів змінено`}
           </Text>
           <Box flexDirection="row">
             <Text color={theme.status.success}>
-              Lines added: {stats.addedLines}{' '}
+              Рядків додано: {stats.addedLines}{' '}
             </Text>
             <Text color={theme.status.error}>
-              Lines removed: {stats.removedLines}
+              Рядків видалено: {stats.removedLines}
             </Text>
             {timestamp && (
               <Text color={theme.text.secondary}>
@@ -145,7 +145,7 @@ export const RewindConfirmation: React.FC<RewindConfirmationProps> = ({
       )}
 
       <Box marginBottom={1}>
-        <Text>Select an action:</Text>
+        <Text>Виберіть дію:</Text>
       </Box>
 
       <RadioButtonSelect

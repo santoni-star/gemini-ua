@@ -112,7 +112,7 @@ export function BaseSettingsDialog({
   title,
   borderColor,
   searchEnabled = true,
-  searchPlaceholder = 'Search to filter',
+  searchPlaceholder = 'Пошук для фільтрації',
   searchBuffer,
   items,
   showScopeSelector = true,

@@ -113,8 +113,8 @@ export const McpStatus: React.FC<McpStatusProps> = ({
         if (isDisabled) {
           statusIndicator = '⏸️';
           statusText = serverEnablement.isSessionDisabled
-            ? 'Disabled (session)'
-            : 'Disabled';
+            ? 'Вимкнено (сесія)'
+            : 'Вимкнено';
           statusColor = theme.text.secondary;
         } else {
           switch (status) {

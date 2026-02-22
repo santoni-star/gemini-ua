@@ -16,7 +16,7 @@ import { GeminiSpinner } from './GeminiRespondingSpinner.js';
 import { theme } from '../semantic-colors.js';
 
 export const ConfigInitDisplay = ({
-  message: initialMessage = 'Initializing...',
+  message: initialMessage = 'Ініціалізація...',
 }: {
   message?: string;
 }) => {
@@ -42,17 +42,17 @@ export const ConfigInitDisplay = ({
         const maxDisplay = 3;
         const displayedServers = connecting.slice(0, maxDisplay).join(', ');
         const remaining = connecting.length - maxDisplay;
-        const suffix = remaining > 0 ? `, +${remaining} more` : '';
-        const mcpMessage = `Connecting to MCP servers... (${connected}/${clients.size}) - Waiting for: ${displayedServers}${suffix}`;
+        const suffix = remaining > 0 ? `, +${remaining} більше` : '';
+        const mcpMessage = `Підключення до MCP серверів... (${connected}/${clients.size}) - Очікування на: ${displayedServers}${suffix}`;
         setMessage(
-          initialMessage && initialMessage !== 'Initializing...'
+          initialMessage && initialMessage !== 'Ініціалізація...'
             ? `${initialMessage} (${mcpMessage})`
             : mcpMessage,
         );
       } else {
-        const mcpMessage = `Connecting to MCP servers... (${connected}/${clients.size})`;
+        const mcpMessage = `Підключення до MCP серверів... (${connected}/${clients.size})`;
         setMessage(
-          initialMessage && initialMessage !== 'Initializing...'
+          initialMessage && initialMessage !== 'Ініціалізація...'
             ? `${initialMessage} (${mcpMessage})`
             : mcpMessage,
         );
