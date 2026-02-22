@@ -1,0 +1,1 @@
+C:/Users/F/Documents/gemini-fresh/CONTRIBUTING.md
