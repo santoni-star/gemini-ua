@@ -1,102 +1,63 @@
-# Gemini CLI tools
+# Інструменти Gemini CLI
 
-Gemini CLI uses tools to interact with your local environment, access
-information, and perform actions on your behalf. These tools extend the model's
-capabilities beyond text generation, letting it read files, execute commands,
-and search the web.
+Gemini CLI використовує інструменти для взаємодії з вашим локальним середовищем, доступу до інформації та виконання дій від вашого імені. Ці інструменти розширюють можливості моделі за межі генерації тексту, дозволяючи їй читати файли, виконувати команди та шукати інформацію в мережі.
 
-## User-triggered tools
+## Інструменти, що активуються користувачем
 
-You can directly trigger these tools using special syntax in your prompts.
+Ви можете безпосередньо активувати ці інструменти, використовуючи спеціальний синтаксис у своїх запитах.
 
-- **[File access](./file-system.md#read_many_files) (`@`):** Use the `@` symbol
-  followed by a file or directory path to include its content in your prompt.
-  This triggers the `read_many_files` tool.
-- **[Shell commands](./shell.md) (`!`):** Use the `!` symbol followed by a
-  system command to execute it directly. This triggers the `run_shell_command`
-  tool.
+- **[Доступ до файлів](./file-system.md#read_many_files) (`@`):** Використовуйте символ `@`, після якого вкажіть шлях до файлу або директорії, щоб включити їхній вміст у ваш запит. Це активує інструмент `read_many_files`.
+- **[Команди оболонки](./shell.md) (`!`):** Використовуйте символ `!`, після якого вкажіть системну команду, щоб виконати її безпосередньо. Це активує інструмент `run_shell_command`.
 
-## Model-triggered tools
+## Інструменти, що активуються моделлю
 
-The Gemini model automatically requests these tools when it needs to perform
-specific actions or gather information to fulfill your requests. You do not call
-these tools manually.
+Модель Gemini автоматично запитує ці інструменти, коли їй потрібно виконати певні дії або зібрати інформацію для виконання ваших запитів. Ви не викликаєте ці інструменти вручну.
 
-### File management
+### Управління файлами
 
-These tools let the model explore and modify your local codebase.
+Ці інструменти дозволяють моделі досліджувати та змінювати вашу локальну кодову базу.
 
-- **[Directory listing](./file-system.md#list_directory) (`list_directory`):**
-  Lists files and subdirectories.
-- **[File reading](./file-system.md#read_file) (`read_file`):** Reads the
-  content of a specific file.
-- **[File writing](./file-system.md#write_file) (`write_file`):** Creates or
-  overwrites a file with new content.
-- **[File search](./file-system.md#glob) (`glob`):** Finds files matching a glob
-  pattern.
-- **[Text search](./file-system.md#search_file_content)
-  (`search_file_content`):** Searches for text within files using grep or
-  ripgrep.
-- **[Text replacement](./file-system.md#replace) (`replace`):** Performs precise
-  edits within a file.
+- **[Список файлів](./file-system.md#list_directory) (`list_directory`):** Показує список файлів та піддиректорій.
+- **[Читання файлу](./file-system.md#read_file) (`read_file`):** Читає вміст конкретного файлу.
+- **[Запис файлу](./file-system.md#write_file) (`write_file`):** Створює або перезаписує файл новим вмістом.
+- **[Пошук файлів](./file-system.md#glob) (`glob`):** Знаходить файли за шаблоном (glob).
+- **[Пошук тексту](./file-system.md#search_file_content) (`search_file_content`):** Шукає текст у файлах за допомогою grep або ripgrep.
+- **[Заміна тексту](./file-system.md#replace) (`replace`):** Виконує точне редагування всередині файлу.
 
-### Agent coordination
+### Координація агента
 
-These tools help the model manage its plan and interact with you.
+Ці інструменти допомагають моделі керувати своїм планом та взаємодіяти з вами.
 
-- **Ask user (`ask_user`):** Requests clarification or missing information from
-  you via an interactive dialog.
-- **[Memory](./memory.md) (`save_memory`):** Saves important facts to your
-  long-term memory (`GEMINI.md`).
-- **[Todos](./todos.md) (`write_todos`):** Manages a list of subtasks for
-  complex plans.
-- **[Agent Skills](../cli/skills.md) (`activate_skill`):** Loads specialized
-  procedural expertise when needed.
-- **Internal docs (`get_internal_docs`):** Accesses Gemini CLI's own
-  documentation to help answer your questions.
+- **Запитати користувача (`ask_user`):** Запитує у вас уточнення або відсутню інформацію через інтерактивний діалог.
+- **[Пам'ять](./memory.md) (`save_memory`):** Зберігає важливі факти у вашій довготривалій пам'яті (`GEMINI.md`).
+- **[Завдання (Todos)](./todos.md) (`write_todos`):** Керує списком підзавдань для складних планів.
+- **[Навички Агента](../cli/skills.md) (`activate_skill`):** Завантажує спеціалізовані експертні процедури за потреби.
+- **Внутрішня документація (`get_internal_docs`):** Звертається до власної документації Gemini CLI для відповіді на ваші запитання.
 
-### Information gathering
+### Збір інформації
 
-These tools provide the model with access to external data.
+Ці інструменти надають моделі доступ до зовнішніх даних.
 
-- **[Web fetch](./web-fetch.md) (`web_fetch`):** Retrieves and processes content
-  from specific URLs.
-- **[Web search](./web-search.md) (`google_web_search`):** Performs a Google
-  Search to find up-to-date information.
+- **[Веб-завантаження](./web-fetch.md) (`web_fetch`):** Отримує та обробляє вміст за вказаними URL.
+- **[Веб-пошук](./web-search.md) (`google_web_search`):** Виконує пошук у Google для отримання актуальної інформації.
 
-## How to use tools
+## Як працюють інструменти
 
-You use tools indirectly by providing natural language prompts to Gemini CLI.
+Ви використовуєте інструменти опосередковано, надаючи запити природною мовою.
 
-1.  **Prompt:** You enter a request or use syntax like `@` or `!`.
-2.  **Request:** The model analyzes your request and identifies if a tool is
-    required.
-3.  **Validation:** If a tool is needed, the CLI validates the parameters and
-    checks your security settings.
-4.  **Confirmation:** For sensitive operations (like writing files), the CLI
-    prompts you for approval.
-5.  **Execution:** The tool runs, and its output is sent back to the model.
-6.  **Response:** The model uses the results to generate a final, grounded
-    answer.
+1.  **Промпт:** Ви вводите запит або використовуєте синтаксис на кшталт `@` чи `!`.
+2.  **Запит:** Модель аналізує ваш запит і визначає, чи потрібен інструмент.
+3.  **Валідація:** Якщо інструмент потрібен, CLI перевіряє параметри та ваші налаштування безпеки.
+4.  **Підтвердження:** Для чутливих операцій (як-от запис файлів) CLI запитує ваше схвалення.
+5.  **Виконання:** Інструмент запускається, а його результат повертається моделі.
+6.  **Відповідь:** Модель використовує результати для створення фінальної обґрунтованої відповіді.
 
-## Security and confirmation
+## Безпека та підтвердження
 
-Safety is a core part of the tool system. To protect your system, Gemini CLI
-implements several safeguards.
+Безпека є основою системи інструментів. Для захисту вашої системи Gemini CLI впроваджує кілька запобіжних заходів.
 
-- **User confirmation:** You must manually approve tools that modify files or
-  execute shell commands. The CLI shows you a diff or the exact command before
-  you confirm.
-- **Sandboxing:** You can run tool executions in secure, containerized
-  environments to isolate changes from your host system. For more details, see
-  the [Sandboxing](../cli/sandbox.md) guide.
-- **Trusted folders:** You can configure which directories allow the model to
-  use system tools.
+- **Підтвердження користувачем:** Ви повинні вручну схвалювати використання інструментів, які змінюють файли або виконують системні команди. CLI покаже вам різницю (diff) або точну команду перед підтвердженням.
+- **Пісочниця (Sandboxing):** Ви можете запускати інструменти в безпечних контейнеризованих середовищах. Детальніше див. у посібнику з [Пісочниць](../cli/sandbox.md).
+- **Довірені папки:** Ви можете налаштувати, у яких директоріях моделі дозволено використовувати системні інструменти.
 
-Always review confirmation prompts carefully before allowing a tool to execute.
-
-## Next steps
-
-- Learn how to [Provide context](../cli/gemini-md.md) to guide tool use.
-- Explore the [Command reference](../reference/commands.md) for tool-related
-  slash commands.
+Завжди уважно переглядайте запити на підтвердження перед тим, як дозволити виконання інструменту.

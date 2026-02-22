@@ -65,7 +65,7 @@ export const DetailedMessagesDisplay: React.FC<
     >
       <Box marginBottom={1}>
         <Text bold color={theme.text.primary}>
-          Debug Console <Text color={theme.text.secondary}>(F12 to close)</Text>
+          Консоль налагодження <Text color={theme.text.secondary}>(F12 щоб закрити)</Text>
         </Text>
       </Box>
       <Box height={maxHeight} width={width - borderAndPadding}>

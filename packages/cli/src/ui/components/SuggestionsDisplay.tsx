@@ -45,7 +45,7 @@ export function SuggestionsDisplay({
   if (isLoading) {
     return (
       <Box paddingX={1} width={width}>
-        <Text color="gray">Loading suggestions...</Text>
+        <Text color="gray">Завантаження пропозицій...</Text>
       </Box>
     );
   }
