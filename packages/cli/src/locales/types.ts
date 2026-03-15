@@ -1,0 +1,29 @@
+export interface TranslationStrings {
+  promptPlaceholder: string;
+  searchPlaceholder: string;
+  searchFilterPlaceholder: string;
+  loading: string;
+  responding: string;
+  userPrefix: string;
+  modelPrefix: string;
+  moveCursorToExpand: string;
+  thinking: string;
+  working: string;
+  calculating: string;
+  error: string;
+  note: string;
+  tip: string;
+  redirectionWarning: string;
+  toggleAutoEditTip: string;
+  confirm: string;
+  cancel: string;
+  yes: string;
+  no: string;
+  copyToClipboard: string;
+  copied: string;
+  submitFeedback: string;
+  feedbackSuccess: string;
+  apiAuthPlaceholder: string;
+  enterResponse: string;
+  enterCustomValue: string;
+}

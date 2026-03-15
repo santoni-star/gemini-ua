@@ -5,8 +5,7 @@
  */
 
 import { en } from './locales/en.js';
-import { ua } from './locales/ua.ts'; // We'll make sure this is exported correctly
-import type { TranslationStrings } from './locales/types.ts';
+import { ua } from './locales/ua.js'; // We'll make sure this is exported correctly
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 import * as os from 'node:os';
