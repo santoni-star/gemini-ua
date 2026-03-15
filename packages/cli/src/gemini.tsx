@@ -109,6 +109,8 @@ import { profiler } from './ui/components/DebugProfiler.js';
 import { runDeferredCommand } from './deferred.js';
 import { SlashCommandConflictHandler } from './services/SlashCommandConflictHandler.js';
 
+import { getStrings } from './i18n.js';
+
 const SLOW_RENDER_MS = 200;
 
 export function validateDnsResolutionOrder(
@@ -160,11 +162,12 @@ export function getNodeMemoryArgs(isDebugMode: boolean): string[] {
 }
 
 export function setupUnhandledRejectionHandler() {
+  const strings = getStrings();
   let unhandledRejectionOccurred = false;
   process.on('unhandledRejection', (reason, _promise) => {
     const errorMessage = `=========================================
-This is an unexpected error. Please file a bug report using the /bug tool.
-CRITICAL: Unhandled Promise Rejection!
+${strings.criticalError}
+${strings.unhandledRejection}
 =========================================
 Reason: ${reason}${
       reason instanceof Error && reason.stack
@@ -398,9 +401,7 @@ export async function main() {
 
   // Check for invalid input combinations early to prevent crashes
   if (argv.promptInteractive && !process.stdin.isTTY) {
-    writeToStderr(
-      'Error: The --prompt-interactive flag cannot be used when input is piped from stdin.\n',
-    );
+    writeToStderr(getStrings().promptInteractiveError + '\n');
     await runExitCleanup();
     process.exit(ExitCodes.FATAL_INPUT_ERROR);
   }
@@ -602,7 +603,7 @@ export async function main() {
     }
 
     if (config.getListExtensions()) {
-      debugLogger.log('Installed extensions:');
+      debugLogger.log(getStrings().installedExtensions);
       for (const extension of config.getExtensions()) {
         debugLogger.log(`- ${extension.name}`);
       }
@@ -705,7 +706,7 @@ export async function main() {
       } catch (error) {
         coreEvents.emitFeedback(
           'error',
-          `Error resuming session: ${error instanceof Error ? error.message : 'Unknown error'}`,
+          `${getStrings().errorResumingSession} ${error instanceof Error ? error.message : 'Unknown error'}`,
         );
         await runExitCleanup();
         process.exit(ExitCodes.FATAL_INPUT_ERROR);
@@ -768,9 +769,7 @@ export async function main() {
     });
 
     if (!input) {
-      debugLogger.error(
-        `No input provided via stdin. Input can be provided by piping data into gemini or using the --prompt option.`,
-      );
+      debugLogger.error(getStrings().noInputProvided);
       await runExitCleanup();
       process.exit(ExitCodes.FATAL_INPUT_ERROR);
     }

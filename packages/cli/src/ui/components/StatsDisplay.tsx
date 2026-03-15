@@ -32,6 +32,7 @@ import { useSettings } from '../contexts/SettingsContext.js';
 import { useConfig } from '../contexts/ConfigContext.js';
 import type { QuotaStats } from '../types.js';
 import { QuotaStatsInfo } from './QuotaStatsInfo.js';
+import { getStrings } from '../../i18n.js';
 
 // A more flexible and powerful StatRow component
 interface StatRowProps {
@@ -155,6 +156,7 @@ const ModelUsageTable: React.FC<{
   useGemini3_1,
   useCustomToolModel,
 }) => {
+  const strings = getStrings();
   const rows = buildModelRows(models, quotas, useGemini3_1, useCustomToolModel);
 
   if (rows.length === 0) {
@@ -184,8 +186,8 @@ const ModelUsageTable: React.FC<{
 
   const isAuto = currentModel && isAutoModel(currentModel);
   const modelUsageTitle = isAuto
-    ? `${getDisplayString(currentModel)} Usage`
-    : `Model Usage`;
+    ? `${getDisplayString(currentModel)} ${strings.modelUsage}`
+    : strings.modelUsage;
 
   return (
     <Box flexDirection="column" marginBottom={1}>
@@ -209,16 +211,14 @@ const ModelUsageTable: React.FC<{
               limit={pooledLimit}
               resetTime={pooledResetTime}
             />
-            <Text color={theme.text.primary}>
-              For a full token breakdown, run `/stats model`.
-            </Text>
+            <Text color={theme.text.primary}>{strings.tokenBreakdownRun}</Text>
           </Box>
         )}
 
       <Box alignItems="flex-end">
         <Box width={nameWidth}>
           <Text bold color={theme.text.primary}>
-            Model
+            {strings.model}
           </Text>
         </Box>
         <Box
@@ -228,7 +228,7 @@ const ModelUsageTable: React.FC<{
           flexShrink={0}
         >
           <Text bold color={theme.text.primary}>
-            Reqs
+            {strings.requestsShort}
           </Text>
         </Box>
 
@@ -241,7 +241,7 @@ const ModelUsageTable: React.FC<{
               flexShrink={0}
             >
               <Text bold color={theme.text.primary}>
-                Input Tokens
+                {strings.inputTokens}
               </Text>
             </Box>
             <Box
@@ -251,7 +251,7 @@ const ModelUsageTable: React.FC<{
               flexShrink={0}
             >
               <Text bold color={theme.text.primary}>
-                Cache Reads
+                {strings.cacheReads}
               </Text>
             </Box>
             <Box
@@ -261,7 +261,7 @@ const ModelUsageTable: React.FC<{
               flexShrink={0}
             >
               <Text bold color={theme.text.primary}>
-                Output Tokens
+                {strings.outputTokens}
               </Text>
             </Box>
           </>
@@ -273,7 +273,7 @@ const ModelUsageTable: React.FC<{
             alignItems="flex-end"
           >
             <Text bold color={theme.text.primary}>
-              Usage remaining
+              {strings.usageRemaining}
             </Text>
           </Box>
         )}
@@ -372,12 +372,12 @@ const ModelUsageTable: React.FC<{
       {cacheEfficiency > 0 && !showQuotaColumn && (
         <Box flexDirection="column" marginTop={1}>
           <Text color={theme.text.primary}>
-            <Text color={theme.status.success}>Savings Highlight:</Text>{' '}
+            <Text color={theme.status.success}>{strings.savingsHighlight}</Text>{' '}
             {totalCachedTokens.toLocaleString()} (
             <Text color={cacheEfficiencyColor}>
               {cacheEfficiency.toFixed(1)}%
             </Text>
-            ) of input tokens were served from the cache, reducing costs.
+            ) {strings.savingsDescription}
           </Text>
         </Box>
       )}
@@ -408,6 +408,7 @@ export const StatsDisplay: React.FC<StatsDisplayProps> = ({
   currentModel,
   quotaStats,
 }) => {
+  const strings = getStrings();
   const { stats } = useSessionStats();
   const { metrics } = stats;
   const { models, tools, files } = metrics;
@@ -444,7 +445,7 @@ export const StatsDisplay: React.FC<StatsDisplayProps> = ({
     }
     return (
       <Text bold color={theme.text.accent}>
-        Session Stats
+        {strings.sessionStats}
       </Text>
     );
   };
@@ -454,6 +455,21 @@ export const StatsDisplay: React.FC<StatsDisplayProps> = ({
       return null;
     }
     return <ThemedGradient bold>{footer}</ThemedGradient>;
+  };
+
+  const renderAuthMethod = () => {
+    if (!selectedAuthType) return null;
+    let authText = selectedAuthType;
+    if (selectedAuthType.startsWith('oauth')) {
+      authText = userEmail
+        ? `${strings.loggedInWithGoogle} (${userEmail})`
+        : strings.loggedInWithGoogle;
+    }
+    return (
+      <StatRow title={strings.authMethod}>
+        <Text color={theme.text.primary}>{authText}</Text>
+      </StatRow>
+    );
   };
 
   return (
@@ -468,49 +484,39 @@ export const StatsDisplay: React.FC<StatsDisplayProps> = ({
       {renderTitle()}
       <Box height={1} />
 
-      <Section title="Interaction Summary">
-        <StatRow title="Session ID:">
+      <Section title={strings.interactionSummary}>
+        <StatRow title={strings.sessionId}>
           <Text color={theme.text.primary}>{stats.sessionId}</Text>
         </StatRow>
-        {showUserIdentity && selectedAuthType && (
-          <StatRow title="Auth Method:">
-            <Text color={theme.text.primary}>
-              {selectedAuthType.startsWith('oauth')
-                ? userEmail
-                  ? `Logged in with Google (${userEmail})`
-                  : 'Logged in with Google'
-                : selectedAuthType}
-            </Text>
-          </StatRow>
-        )}
+        {showUserIdentity && renderAuthMethod()}
         {showUserIdentity && tier && (
-          <StatRow title="Tier:">
+          <StatRow title={strings.tier}>
             <Text color={theme.text.primary}>{tier}</Text>
           </StatRow>
         )}
-        <StatRow title="Tool Calls:">
+        <StatRow title={strings.toolCalls}>
           <Text color={theme.text.primary}>
             {tools.totalCalls} ({' '}
             <Text color={theme.status.success}>✓ {tools.totalSuccess}</Text>{' '}
             <Text color={theme.status.error}>x {tools.totalFail}</Text> )
           </Text>
         </StatRow>
-        <StatRow title="Success Rate:">
+        <StatRow title={strings.successRate}>
           <Text color={successColor}>{computed.successRate.toFixed(1)}%</Text>
         </StatRow>
         {computed.totalDecisions > 0 && (
-          <StatRow title="User Agreement:">
+          <StatRow title={strings.userAgreement}>
             <Text color={agreementColor}>
               {computed.agreementRate.toFixed(1)}%{' '}
               <Text color={theme.text.secondary}>
-                ({computed.totalDecisions} reviewed)
+                ({computed.totalDecisions} {strings.reviewed})
               </Text>
             </Text>
           </StatRow>
         )}
         {files &&
           (files.totalLinesAdded > 0 || files.totalLinesRemoved > 0) && (
-            <StatRow title="Code Changes:">
+            <StatRow title={strings.codeChanges}>
               <Text color={theme.text.primary}>
                 <Text color={theme.status.success}>
                   +{files.totalLinesAdded}
@@ -523,16 +529,16 @@ export const StatsDisplay: React.FC<StatsDisplayProps> = ({
           )}
       </Section>
 
-      <Section title="Performance">
-        <StatRow title="Wall Time:">
+      <Section title={strings.performance}>
+        <StatRow title={strings.wallTime}>
           <Text color={theme.text.primary}>{duration}</Text>
         </StatRow>
-        <StatRow title="Agent Active:">
+        <StatRow title={strings.agentActive}>
           <Text color={theme.text.primary}>
             {formatDuration(computed.agentActiveTime)}
           </Text>
         </StatRow>
-        <SubStatRow title="API Time:">
+        <SubStatRow title={strings.apiTime}>
           <Text color={theme.text.primary}>
             {formatDuration(computed.totalApiTime)}{' '}
             <Text color={theme.text.secondary}>
@@ -540,7 +546,7 @@ export const StatsDisplay: React.FC<StatsDisplayProps> = ({
             </Text>
           </Text>
         </SubStatRow>
-        <SubStatRow title="Tool Time:">
+        <SubStatRow title={strings.toolTime}>
           <Text color={theme.text.primary}>
             {formatDuration(computed.totalToolTime)}{' '}
             <Text color={theme.text.secondary}>

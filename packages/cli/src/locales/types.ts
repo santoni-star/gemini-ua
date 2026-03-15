@@ -26,4 +26,40 @@ export interface TranslationStrings {
   apiAuthPlaceholder: string;
   enterResponse: string;
   enterCustomValue: string;
+  // Stats
+  sessionStats: string;
+  interactionSummary: string;
+  sessionId: string;
+  authMethod: string;
+  tier: string;
+  toolCalls: string;
+  successRate: string;
+  userAgreement: string;
+  reviewed: string;
+  codeChanges: string;
+  performance: string;
+  wallTime: string;
+  agentActive: string;
+  apiTime: string;
+  toolTime: string;
+  modelUsage: string;
+  usageRemaining: string;
+  savingsHighlight: string;
+  // System Messages
+  unexpectedError: string;
+  criticalError: string;
+  unhandledRejection: string;
+  loggedInWithGoogle: string;
+  promptInteractiveError: string;
+  installedExtensions: string;
+  errorResumingSession: string;
+  noInputProvided: string;
+  tokenBreakdownRun: string;
+  savingsDescription: string;
+  // Table headers
+  model: string;
+  requestsShort: string;
+  inputTokens: string;
+  cacheReads: string;
+  outputTokens: string;
 }

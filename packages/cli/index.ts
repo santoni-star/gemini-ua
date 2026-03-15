@@ -46,7 +46,7 @@ main().catch(async (error) => {
     writeToStderr(errorMessage + '\n');
     process.exit(error.exitCode);
   }
-  writeToStderr('An unexpected critical error occurred:');
+  writeToStderr('Сталася неочікувана критична помилка:');
   if (error instanceof Error) {
     writeToStderr(error.stack + '\n');
   } else {

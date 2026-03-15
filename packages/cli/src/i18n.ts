@@ -5,10 +5,13 @@
  */
 
 import { en } from './locales/en.js';
-import { ua } from './locales/ua.js'; // We'll make sure this is exported correctly
+import { ua } from './locales/ua.js';
+import type { TranslationStrings } from './locales/types.js';
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 import * as os from 'node:os';
+
+export type { TranslationStrings };
 
 const getLanguageFromSettings = (): string | undefined => {
   try {
@@ -54,10 +57,10 @@ export const getLocale = (): string => {
   return 'ua';
 };
 
-const translations: Record<string, any> = {
+const translations: Record<string, TranslationStrings> = {
   en,
   ua,
 };
 
-export const strings = translations[getLocale()] || en;
+export const strings: TranslationStrings = translations[getLocale()] || ua;
 export const getStrings = () => strings;

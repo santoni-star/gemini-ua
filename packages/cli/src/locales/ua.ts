@@ -4,7 +4,9 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-export const ua = {
+import type { TranslationStrings } from './types.js';
+
+export const ua: TranslationStrings = {
   promptPlaceholder: '  Введіть запит або @шлях/до/файлу',
   searchPlaceholder: 'Пошук...',
   searchFilterPlaceholder: 'Фільтрувати результати...',
@@ -32,4 +34,40 @@ export const ua = {
   apiAuthPlaceholder: 'Введіть або вставте ваш API-ключ',
   enterResponse: 'Введіть відповідь',
   enterCustomValue: 'Введіть власне значення',
+  // Stats
+  sessionStats: 'Статистика сесії',
+  interactionSummary: 'Підсумок взаємодії',
+  sessionId: 'ID сесії:',
+  authMethod: 'Метод авторизації:',
+  tier: 'Рівень (Tier):',
+  toolCalls: 'Виклики інструментів:',
+  successRate: 'Коефіцієнт успіху:',
+  userAgreement: 'Згода користувача:',
+  reviewed: 'переглянуто',
+  codeChanges: 'Зміни в коді:',
+  performance: 'Продуктивність',
+  wallTime: 'Загальний час:',
+  agentActive: 'Активність агента:',
+  apiTime: 'Час API:',
+  toolTime: 'Час інструментів:',
+  modelUsage: 'Використання моделі',
+  usageRemaining: 'Залишок використання',
+  savingsHighlight: 'Заощаджено завдяки кешу:',
+  // System Messages
+  unexpectedError: 'Сталася неочікувана критична помилка:',
+  criticalError: 'Ця помилка є неочікуваною. Будь ласка, надішліть звіт про помилку за допомогою інструменту /bug.',
+  unhandledRejection: 'КРИТИЧНО: Необроблене відхилення промісу (Unhandled Promise Rejection)!',
+  loggedInWithGoogle: 'Ви увійшли через Google',
+  promptInteractiveError: 'Помилка: прапорець --prompt-interactive не можна використовувати, коли вхідні дані передаються через конвеєр (stdin).',
+  installedExtensions: 'Встановлені розширення:',
+  errorResumingSession: 'Помилка під час відновлення сесії:',
+  noInputProvided: 'Вхідні дані не надані через stdin. Дані можна передати, спрямувавши їх у gemini або використовуючи параметр --prompt.',
+  tokenBreakdownRun: 'Для повного аналізу токенів виконайте `/stats model`.',
+  savingsDescription: 'вхідних токенів було отримано з кешу, що зменшило витрати.',
+  // Table headers
+  model: 'Модель',
+  requestsShort: 'Зап.',
+  inputTokens: 'Вхідні токени',
+  cacheReads: 'З кешу',
+  outputTokens: 'Вихідні токени',
 };
